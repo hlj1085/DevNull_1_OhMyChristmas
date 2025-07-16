@@ -1,0 +1,10 @@
+# Unity 기본 텍스트 처리
+* text=auto
+
+# C# 파일 줄바꿈 설정
+*.cs text eol=lf
+
+# Unity 리소스 줄바꿈 설정
+*.meta text eol=lf
+*.unity text eol=lf
+*.prefab text eol=lf

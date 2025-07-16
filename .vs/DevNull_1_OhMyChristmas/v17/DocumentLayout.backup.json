@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\hlj10\\DevNull_1_OhMyChristmas\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5E9429ED-5EF8-4470-271A-92DD731694C7}|Assembly-CSharp.csproj|c:\\users\\hlj10\\devnull_1_ohmychristmas\\assets\\hr\\playerroleselector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E9429ED-5EF8-4470-271A-92DD731694C7}|Assembly-CSharp.csproj|solutionrelative:assets\\hr\\playerroleselector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E9429ED-5EF8-4470-271A-92DD731694C7}|Assembly-CSharp.csproj|c:\\users\\hlj10\\devnull_1_ohmychristmas\\assets\\hr\\matchmaking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E9429ED-5EF8-4470-271A-92DD731694C7}|Assembly-CSharp.csproj|solutionrelative:assets\\hr\\matchmaking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MatchMaking.cs",
+              "DocumentMoniker": "C:\\Users\\hlj10\\DevNull_1_OhMyChristmas\\Assets\\HR\\MatchMaking.cs",
+              "RelativeDocumentMoniker": "Assets\\HR\\MatchMaking.cs",
+              "ToolTip": "C:\\Users\\hlj10\\DevNull_1_OhMyChristmas\\Assets\\HR\\MatchMaking.cs",
+              "RelativeToolTip": "Assets\\HR\\MatchMaking.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-15T08:44:31.611Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PlayerRoleSelector.cs",
+              "DocumentMoniker": "C:\\Users\\hlj10\\DevNull_1_OhMyChristmas\\Assets\\HR\\PlayerRoleSelector.cs",
+              "RelativeDocumentMoniker": "Assets\\HR\\PlayerRoleSelector.cs",
+              "ToolTip": "C:\\Users\\hlj10\\DevNull_1_OhMyChristmas\\Assets\\HR\\PlayerRoleSelector.cs",
+              "RelativeToolTip": "Assets\\HR\\PlayerRoleSelector.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAAAUwFQAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-15T08:40:25.437Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
