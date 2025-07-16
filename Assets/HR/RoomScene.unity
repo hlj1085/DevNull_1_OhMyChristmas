@@ -1036,7 +1036,7 @@ MonoBehaviour:
   santaButton: {fileID: 834574715}
   reindeerButton: {fileID: 96964106}
   statusText: {fileID: 1413672300}
-  playerListText: {fileID: 0}
+  playerListText: {fileID: 995262468}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
