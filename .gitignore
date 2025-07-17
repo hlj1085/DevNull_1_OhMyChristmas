@@ -1,0 +1,67 @@
+<<<<<<< HEAD
+# 유니티 불필요 폴더
+=======
+# ========== Unity 기본 무시 목록 ==========
+
+# Unity generated folders
+>>>>>>> 8952154d9f3b701003d9698e0d1615ef49e6599f
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+<<<<<<< HEAD
+[Ll]ogs/
+
+# 사용자 설정
+UserSettings/
+MemoryCaptures/
+
+# Visual Studio 파일
+.vs/
+*.csproj
+*.sln
+*.user
+*.suo
+
+# 유니티 메타파일 백업
+*.pidb
+*.booproj
+
+# 기타
+*.apk
+*.unitypackage
+=======
+UserSettings/
+MemoryCaptures/
+
+# Auto-generated VS/JetBrains files
+.vscode/
+.idea/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# OS 파일
+.DS_Store
+Thumbs.db
+
+# 빌드 결과물
+*.apk
+*.aab
+*.exe
+
+# Crash reports
+sysinfo.txt
+>>>>>>> 8952154d9f3b701003d9698e0d1615ef49e6599f
