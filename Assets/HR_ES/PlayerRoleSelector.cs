@@ -99,6 +99,12 @@ public class PlayerRoleSelector : MonoBehaviourPunCallbacks
     {
         UpdateRoleButtons();
         UpdatePlayerList();
+
+        if (PhotonNetwork.IsMasterClient && AllRolesSelected())
+        {
+            Debug.Log("모든 역할 선택 완료. 게임 씬으로 이동합니다.");
+            PhotonNetwork.LoadLevel("GameTest");
+        }
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -109,5 +115,25 @@ public class PlayerRoleSelector : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         UpdatePlayerList();
+    }
+
+    bool AllRolesSelected()
+    {
+        if (PhotonNetwork.CurrentRoom.PlayerCount != 5)
+            return false;
+
+        int santaCount = 0;
+        int reindeerCount = 0;
+
+        foreach (var player in PhotonNetwork.PlayerList)
+        {
+            if (player.CustomProperties.TryGetValue("Role", out object roleObj) && roleObj is string roleStr)
+            {
+                if (roleStr == "Santa") santaCount++;
+                else if (roleStr == "Reindeer") reindeerCount++;
+            }
+        }
+
+        return santaCount == 1 && reindeerCount == 4;
     }
 }
