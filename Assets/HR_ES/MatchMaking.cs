@@ -11,6 +11,11 @@ public class MatchMaking : MonoBehaviourPunCallbacks, ILobbyCallbacks
     public TextMeshProUGUI playerListText; // UI element to display the player list
 
     // Start is called before the first frame update
+    void Awake()
+    {
+        PhotonNetwork.AutomaticallySyncScene = true;
+    }
+
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings(); //서버 연결
@@ -20,7 +25,7 @@ public class MatchMaking : MonoBehaviourPunCallbacks, ILobbyCallbacks
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public override void OnConnectedToMaster()
