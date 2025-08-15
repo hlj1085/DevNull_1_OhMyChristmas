@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2748874076379946448
+--- !u!1 &8492953904950164957
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5149532632383619664}
-  - component: {fileID: 6457362100315334880}
-  - component: {fileID: 7953251761115869007}
-  - component: {fileID: 2190644806970907228}
+  - component: {fileID: 1172974679958569115}
+  - component: {fileID: 2662021593414900511}
+  - component: {fileID: 3095829012939039816}
+  - component: {fileID: 1620900994162318318}
+  - component: {fileID: 6572798497397656674}
   m_Layer: 0
-  m_Name: plr_cam
+  m_Name: Reindeer_cam
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5149532632383619664
+--- !u!4 &1172974679958569115
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2748874076379946448}
+  m_GameObject: {fileID: 8492953904950164957}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.7200003, y: 1.1500001, z: -7.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!20 &6457362100315334880
+--- !u!20 &2662021593414900511
 Camera:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2748874076379946448}
+  m_GameObject: {fileID: 8492953904950164957}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
@@ -52,7 +53,7 @@ Camera:
   m_ShutterSpeed: 0.005
   m_Aperture: 16
   m_FocusDistance: 10
-  m_FocalLength: 50
+  m_FocalLength: 20.78461
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
@@ -67,7 +68,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -85,36 +86,52 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &7953251761115869007
+--- !u!81 &3095829012939039816
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2748874076379946448}
+  m_GameObject: {fileID: 8492953904950164957}
   m_Enabled: 1
---- !u!114 &2190644806970907228
+--- !u!114 &1620900994162318318
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2748874076379946448}
+  m_GameObject: {fileID: 8492953904950164957}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fa63a7508c64dc46bc8b55df339c09a, type: 3}
+  m_Script: {fileID: 11500000, guid: c49b4cc203aa6414fae5c798d1d0e7d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 6402111053306770183, guid: d5d3b210620e44d44815b805f9990cb6, type: 3}
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
+--- !u!114 &6572798497397656674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8492953904950164957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb8685f72532ac449b968a13d1fab0d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  playerController: {fileID: 0}
   offset: {x: 0, y: 2, z: -4}
-  sensitivity: 3
+  sensitivity: 0.1
   pitchMin: -45
   pitchMax: 60
-  smoothTime: 0.07
+  rotationSmoothTime: 0.05
   minDistance: 1
-  maxDistance: 4
   collisionMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   shakeIntensity: 0.05
   shakeSpeed: 15
