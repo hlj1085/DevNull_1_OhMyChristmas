@@ -2,6 +2,7 @@
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
+using Photon.Pun;
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
@@ -110,6 +111,9 @@ namespace StarterAssets
 
         private bool _hasAnimator;
 
+        //HR: 멀티 플레이 코드
+        private PhotonView photonView;
+
         private bool IsCurrentDeviceMouse
         {
             get
@@ -150,10 +154,21 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+
+            //HR: 멀티 플레이 코드
+            photonView = GetComponent<PhotonView>(); // PhotonView 컴포넌트 가져오기
+            AudioListener listener = GetComponent<AudioListener>();
+            if (listener != null)
+            {
+                listener.enabled = photonView.IsMine;
+            }
         }
 
         private void Update()
         {
+            //HR: 내 플레이어만 조작
+            if (photonView != null && !photonView.IsMine) return;
+
             _hasAnimator = TryGetComponent(out _animator);
 
             JumpAndGravity();
@@ -163,6 +178,9 @@ namespace StarterAssets
 
         private void LateUpdate()
         {
+            // 내 플레이어만 카메라 회전
+            if (photonView != null && !photonView.IsMine) return;
+
             CameraRotation();
         }
 

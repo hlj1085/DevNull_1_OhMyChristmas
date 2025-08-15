@@ -22,6 +22,16 @@ public class PlayerRoleSelector : MonoBehaviourPunCallbacks
         UpdatePlayerList();
     }
 
+    void Update()
+    {
+        // 개발자용: P 키로 강제 게임 시작 (마스터 클라이언트만)
+        if (PhotonNetwork.IsMasterClient && Input.GetKeyDown(KeyCode.P))
+        {
+            Debug.Log("개발자 강제 게임 시작(P 키)");
+            PhotonNetwork.LoadLevel("Playground"); // 실제 게임 씬 이름에 맞게 수정
+        }
+    }
+
     void TrySelectRole(string role)
     {
         if (role == "Santa" && !IsSantaTaken())
@@ -103,7 +113,8 @@ public class PlayerRoleSelector : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient && AllRolesSelected())
         {
             Debug.Log("모든 역할 선택 완료. 게임 씬으로 이동합니다.");
-            PhotonNetwork.LoadLevel("GameTest");
+            //PhotonNetwork.LoadLevel("GameTest");
+            PhotonNetwork.LoadLevel("Playground");
         }
     }
 
