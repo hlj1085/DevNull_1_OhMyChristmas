@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8492953904950164957
+--- !u!1 &1467056747012005371
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,11 +8,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1172974679958569115}
-  - component: {fileID: 2662021593414900511}
-  - component: {fileID: 3095829012939039816}
-  - component: {fileID: 1620900994162318318}
-  - component: {fileID: 6572798497397656674}
+  - component: {fileID: 5865033333207405312}
+  - component: {fileID: 8164381100649348301}
+  - component: {fileID: 4921294375139002290}
+  - component: {fileID: 7291990408053471579}
+  - component: {fileID: 2511988185506998348}
   m_Layer: 0
   m_Name: Reindeer_cam
   m_TagString: MainCamera
@@ -20,28 +20,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1172974679958569115
+--- !u!4 &5865033333207405312
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8492953904950164957}
+  m_GameObject: {fileID: 1467056747012005371}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.7200003, y: 1.1500001, z: -7.18}
+  m_LocalPosition: {x: -10.155725, y: 8.052134, z: -30.826384}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!20 &2662021593414900511
+--- !u!20 &8164381100649348301
 Camera:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8492953904950164957}
+  m_GameObject: {fileID: 1467056747012005371}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
@@ -86,21 +86,21 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &3095829012939039816
+--- !u!81 &4921294375139002290
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8492953904950164957}
+  m_GameObject: {fileID: 1467056747012005371}
   m_Enabled: 1
---- !u!114 &1620900994162318318
+--- !u!114 &7291990408053471579
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8492953904950164957}
+  m_GameObject: {fileID: 1467056747012005371}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c49b4cc203aa6414fae5c798d1d0e7d6, type: 3}
@@ -110,13 +110,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
---- !u!114 &6572798497397656674
+--- !u!114 &2511988185506998348
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8492953904950164957}
+  m_GameObject: {fileID: 1467056747012005371}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb8685f72532ac449b968a13d1fab0d4, type: 3}
@@ -127,11 +127,11 @@ MonoBehaviour:
   offset: {x: 0, y: 2, z: -4}
   sensitivity: 0.1
   pitchMin: -45
-  pitchMax: 60
-  rotationSmoothTime: 0.05
+  pitchMax: 59
+  rotationSmoothTime: 0.15
   minDistance: 1
   collisionMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 72
   shakeIntensity: 0.05
-  shakeSpeed: 15
+  shakeSpeed: 5
