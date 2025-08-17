@@ -741,3 +741,8 @@ AssetImportParameters requested are different than current active one (requested
   custom:scripting/monoscript/fileName/ThirdPersonCamera.cs: e3029029dfdaf80d79da7f0cd503f7ca -> 559e98b455aa331e3dbbc4a3e05e36cf
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:scripting/precompiled-assembly-types:Assembly-CSharp: a7b8129866dddc86b631c8f0e66b1602 -> c687c8b61959b986a6080f3bc0cb9e97
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+TcpMessagingSession - receive error: operation aborted. errorcode: 995, details: 스레드 종료 또는 응용 프로그램 요청 때문에 I/O 작업이 취소되었습니다.
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0
