@@ -244,7 +244,49 @@ public class ReindeerController : MonoBehaviour
     private void HandleTimers() { if (jumpBufferTimer > 0f && (_isGrounded || Time.time - lastGroundedTime <= coyoteTime) && (Time.time - lastJumpTime >= jumpCooldownTime)) { PerformJump(); } jumpBufferTimer -= Time.deltaTime; }
     private void PerformJump() { if (interactionCoroutine != null || isDashing) return; rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); _isGrounded = false; animator.SetBool(hashIsGrounded, false); animator.SetTrigger(hashJump); jumpBufferTimer = 0f; lastJumpTime = Time.time; }
     private void TryDash() { if (!isDashing && Time.time >= lastDashTime + dashCooldown && _isGrounded) { StartCoroutine(DashCoroutine()); } }
-    private void ApplyMovement() { if (interactionCoroutine != null || isDashing) { return; } float targetSpeed = isRunning ? runSpeed : walkSpeed; Vector3 moveInput = new Vector3(moveInputVec2.x, 0, moveInputVec2.y); if (moveInput.magnitude >= 0.1f) { Vector3 desiredMoveDirection = cameraTransform.TransformDirection(moveInput).normalized; desiredMoveDirection.y = 0; if (desiredMoveDirection != Vector3.zero) { transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), turnSpeed * Time.fixedDeltaTime); } Vector3 targetHorizontalVelocity = desiredMoveDirection * targetSpeed; currentHorizontalVelocity = Vector3.SmoothDamp(currentHorizontalVelocity, targetHorizontalVelocity, ref smoothDampVelocity, moveSmoothTime); } else { currentHorizontalVelocity = Vector3.SmoothDamp(currentHorizontalVelocity, Vector3.zero, ref smoothDampVelocity, moveSmoothTime); } rb.velocity = new Vector3(currentHorizontalVelocity.x, rb.velocity.y, currentHorizontalVelocity.z); }
+    private void ApplyMovement()
+    {
+        if (interactionCoroutine != null || isDashing) { return; }
+
+        float targetSpeed = isRunning ? runSpeed : walkSpeed;
+
+        // [수정된 이동 방향 계산 로직]
+        if (moveInputVec2.magnitude >= 0.1f)
+        {
+            // 1. 카메라의 '앞쪽'과 '오른쪽' 방향을 기준으로 삼습니다.
+            Vector3 cameraForward = cameraTransform.forward;
+            Vector3 cameraRight = cameraTransform.right;
+
+            // 2. y축 값을 0으로 만들어, 땅에 평행한 방향 벡터로 만듭니다.
+            cameraForward.y = 0;
+            cameraRight.y = 0;
+
+            // 3. 길이를 1로 정규화하여 방향 순수성 유지
+            cameraForward.Normalize();
+            cameraRight.Normalize();
+
+            // 4. 이 두 방향과 키보드 입력을 조합하여 최종 이동 방향을 계산합니다.
+            // (moveInputVec2.y는 W/S, moveInputVec2.x는 A/D 입력값입니다)
+            Vector3 desiredMoveDirection = cameraForward * moveInputVec2.y + cameraRight * moveInputVec2.x;
+
+            // 캐릭터 회전 로직
+            if (desiredMoveDirection != Vector3.zero)
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), turnSpeed * Time.fixedDeltaTime);
+            }
+
+            // 속도 적용 로직
+            Vector3 targetHorizontalVelocity = desiredMoveDirection * targetSpeed;
+            currentHorizontalVelocity = Vector3.SmoothDamp(currentHorizontalVelocity, targetHorizontalVelocity, ref smoothDampVelocity, moveSmoothTime);
+        }
+        else
+        {
+            // 멈출 때의 로직
+            currentHorizontalVelocity = Vector3.SmoothDamp(currentHorizontalVelocity, Vector3.zero, ref smoothDampVelocity, moveSmoothTime);
+        }
+
+        rb.velocity = new Vector3(currentHorizontalVelocity.x, rb.velocity.y, currentHorizontalVelocity.z);
+    }
     private IEnumerator DashCoroutine() { isDashing = true; lastDashTime = Time.time; animator.SetTrigger(hashDash); Vector3 moveDirection = new Vector3(moveInputVec2.x, 0, moveInputVec2.y); Vector3 dashDirection = transform.forward; if (moveDirection.magnitude > 0.1f) { dashDirection = cameraTransform.TransformDirection(moveDirection).normalized; dashDirection.y = 0; } float startTime = Time.time; while (Time.time < startTime + dashDuration) { rb.velocity = new Vector3(dashDirection.x * dashSpeed, 0, dashDirection.z * dashSpeed); yield return new WaitForFixedUpdate(); } float slideStartTime = Time.time; Vector3 slideStartVelocity = rb.velocity; Vector3 finalVelocity = new Vector3(0, rb.velocity.y, 0); while (Time.time < slideStartTime + dashSlideDuration) { float t = (Time.time - slideStartTime) / dashSlideDuration; rb.velocity = Vector3.Lerp(slideStartVelocity, finalVelocity, t); yield return new WaitForFixedUpdate(); } isDashing = false; }
     private void GroundCheck() { CapsuleCollider capCol = GetComponent<CapsuleCollider>(); Vector3 sphereOrigin = transform.position + Vector3.up * (capCol.center.y - capCol.height / 2f + groundCheckOffset); _isGrounded = Physics.CheckSphere(sphereOrigin, groundCheckDistance, groundMask); if (_isGrounded) lastGroundedTime = Time.time; }
     private void ApplyBetterGravity() { if (rb.velocity.y < 0) { rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime; } else if (rb.velocity.y > 0) { rb.velocity += Vector3.up * Physics.gravity.y * (gravityMultiplier - 1) * Time.fixedDeltaTime; } }
