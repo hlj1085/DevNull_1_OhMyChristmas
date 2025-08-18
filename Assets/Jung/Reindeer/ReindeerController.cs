@@ -20,10 +20,19 @@ public class ReindeerController : MonoBehaviour, IPunObservable
         Captured   // 포획됨 (일정 시간 후 자동 탈출)
     }
 
+    [Header("포획 관련 참조")]
+    [Tooltip("순록의 모델, 파티클 등 시각적 요소를 모두 담고 있는 부모 오브젝트")]
+    public Transform sackTransform; // 카메라가 대신 바라볼 보따리
+    public GameObject reindeerVisuals;
+
     [Header("기절 및 포획 설정")]
-    public float recoveryTime = 10f;
-    public float mashSpeedupAmount = 0.5f;
-    public float capturedEscapeTime = 6f;
+    public float recoveryTime = 20f; // 회복에 필요한 총 진행도 (20초)
+    [Tooltip("기절 상태에서 F키 연타 시 추가되는 진행도")]
+    public float stunMashAmount = 0.5f; // F키 누를 때마다 0.5초 분량 추가
+    [Tooltip("포획 상태에서 F키 연타 시 추가되는 진행도")]
+    public float capturedMashAmount = 0.1f; // F키 누를 때마다 0.1초 분량 추가
+    [Tooltip("F키 연타 입력 사이의 최소 간격(쿨타임)")]
+    public float mashCooldown = 0.5f;
 
     [Header("이동 설정")]
     public float walkSpeed = 2.5f;
@@ -58,6 +67,10 @@ public class ReindeerController : MonoBehaviour, IPunObservable
     public LayerMask groundMask;
 
     [Header("참조")]
+    [Tooltip("순록 프리팹에 포함된 플레이어 전용 카메라 게임 오브젝트")]
+    public GameObject playerCameraObject;
+    [Tooltip("순록 카메라에 붙어있는 ThirdPersonCamera 스크립트")]
+    public ThirdPersonCamera thirdPersonCameraScript; // <<< 이 변수를 사용합니다.
     public Transform cameraTransform;
     public bool IsMoving => moveInputVec2.magnitude > 0.1f;
 
@@ -69,8 +82,14 @@ public class ReindeerController : MonoBehaviour, IPunObservable
     public Slider recoverySlider;
 
     // --- 비공개 변수 ---
+    private Transform currentSackTransform; // 현재 내가 잡혀있는 보따리의 Transform
+
     private PlayerState currentState = PlayerState.Normal;
+    public PlayerState CurrentState => currentState;
+
+    private float lastMashTime; // 마지막으로 F키를 누른 시간을 기록
     private float currentRecoveryTimer;
+
     private PhotonView photonView;
     private Rigidbody rb;
     private Animator animator;
@@ -91,6 +110,9 @@ public class ReindeerController : MonoBehaviour, IPunObservable
     private Vector3 currentHorizontalVelocity;
     private Vector3 smoothDampVelocity;
 
+
+
+
     // --- 애니메이터 해시 ---
     private static readonly int hashSpeed = Animator.StringToHash("Speed");
     private static readonly int hashIsGrounded = Animator.StringToHash("IsGrounded");
@@ -99,6 +121,7 @@ public class ReindeerController : MonoBehaviour, IPunObservable
     private static readonly int hashIsEating = Animator.StringToHash("IsEating");
     private static readonly int hashIdleTrigger = Animator.StringToHash("IdleTrigger");
     private static readonly int hashStun = Animator.StringToHash("Stun");
+    private static readonly int hashState = Animator.StringToHash("State");
 
     void Awake()
     {
@@ -117,6 +140,7 @@ public class ReindeerController : MonoBehaviour, IPunObservable
         animator = GetComponent<Animator>();
         inventory = GetComponent<Inventory>();
         rb.freezeRotation = true;
+
 
         if (cameraTransform == null && Camera.main != null)
         {
@@ -155,27 +179,22 @@ public class ReindeerController : MonoBehaviour, IPunObservable
     /// </summary>
     private void HandleDebugInput()
     {
-        // 숫자 '1' 키를 누르면 GetStunned RPC를 호출합니다.
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             Debug.Log("디버그: '1' 키 입력 - 기절(Stun) RPC를 호출합니다.");
-            // 모든 클라이언트에게 GetStunned 함수를 실행하도록 요청 (5초 지속)
-            photonView.RPC("GetStunned", RpcTarget.All, 5f);
+            photonView.RPC("GetStunned", RpcTarget.All);
         }
 
-        // 숫자 '2' 키를 누르면 GetCaptured RPC를 호출합니다.
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            // GetCaptured 함수는 기절 상태일 때만 작동하므로, 현재 상태를 확인합니다.
             if (currentState == PlayerState.Stunned)
             {
                 Debug.Log("디버그: '2' 키 입력 - 포획(Capture) RPC를 호출합니다.");
-                // 모든 클라이언트에게 GetCaptured 함수를 실행하도록 요청
                 photonView.RPC("GetCaptured", RpcTarget.All);
             }
             else
             {
-                Debug.LogWarning("디버그: '2' 키 입력 실패 - 포획은 '기절' 상태에서만 가능합니다. 먼저 '1' 키를 눌러 기절시켜주세요.");
+                Debug.LogWarning("디버그: 포획은 '기절' 상태에서만 가능합니다.");
             }
         }
     }
@@ -193,36 +212,81 @@ public class ReindeerController : MonoBehaviour, IPunObservable
     // --- 상태 관리 및 동기화 ---
 
     [PunRPC]
-    public void GetStunned(float duration)
+    public void GetStunned()
     {
         if (currentState != PlayerState.Normal) return;
+
         currentState = PlayerState.Stunned;
-        currentRecoveryTimer = duration;
+        currentRecoveryTimer = 0f; // 진행도를 0에서 시작
+        lastMashTime = -mashCooldown; // 즉시 첫 입력이 가능하도록 쿨타임 초기화
         animator.SetTrigger(hashStun);
     }
 
     [PunRPC]
-    public void GetCaptured()
+    public void GetCaptured(int sackPhotonViewID) // <<< 이 부분이 (int sackPhotonViewID) 인지 반드시 확인!
     {
         if (currentState != PlayerState.Stunned) return;
+
+        // 전달받은 ID로 씬에서 해당 보따리를 찾습니다.
+        PhotonView sackPhotonView = PhotonView.Find(sackPhotonViewID);
+        if (sackPhotonView == null)
+        {
+            Debug.LogError("포획 RPC 오류: 전달받은 ID의 보따리를 찾을 수 없습니다!");
+            return;
+        }
+
+        // 찾은 보따리의 Transform을 저장합니다.
+        currentSackTransform = sackPhotonView.transform;
+
         currentState = PlayerState.Captured;
-        currentRecoveryTimer = capturedEscapeTime;
+        currentRecoveryTimer = 0f;
+        lastMashTime = -mashCooldown;
+
+        // --- 포획 연출 로직 ---
+        if (reindeerVisuals != null)
+        {
+            reindeerVisuals.SetActive(false); // 순록 모델 숨기기
+        }
+
+        // 카메라 타겟을 내가 잡힌 바로 그 보따리로 변경
+        if (photonView.IsMine && thirdPersonCameraScript != null)
+        {
+            thirdPersonCameraScript.target = sackTransform;
+        }
     }
 
     private void HandleRecoveryMash()
     {
-        if (currentState == PlayerState.Stunned && inputActions.Player.Interact.triggered)
+        // 기절 또는 포획 상태가 아니면 실행하지 않음
+        if (currentState != PlayerState.Stunned && currentState != PlayerState.Captured) return;
+
+        // F키(상호작용 키)가 눌렸는지 확인
+        if (inputActions.Player.Recovery.triggered)
         {
-            photonView.RPC("ReduceRecoveryTime", RpcTarget.All, mashSpeedupAmount);
+            // 마지막 입력으로부터 쿨타임(0.5초)이 지났는지 확인
+            if (Time.time >= lastMashTime + mashCooldown)
+            {
+                // 마지막 입력 시간 갱신
+                lastMashTime = Time.time;
+
+                // 현재 상태에 따라 추가할 진행도를 결정
+                float amountToAdd = (currentState == PlayerState.Stunned) ? stunMashAmount : capturedMashAmount;
+
+                // 모든 클라이언트에게 진행도를 더하라고 RPC 전송
+                photonView.RPC("AddRecoveryProgress", RpcTarget.All, amountToAdd);
+            }
         }
     }
 
     [PunRPC]
-    public void ReduceRecoveryTime(float amount)
+    public void AddRecoveryProgress(float amount)
     {
-        if (currentState == PlayerState.Stunned)
+        // 기절 또는 포획 상태일 때만 진행도를 더함
+        if (currentState == PlayerState.Stunned || currentState == PlayerState.Captured)
         {
-            currentRecoveryTimer -= amount;
+            currentRecoveryTimer += amount;
+            // 진행도가 최대값(recoveryTime)을 넘지 않도록 제한
+            currentRecoveryTimer = Mathf.Clamp(currentRecoveryTimer, 0f, recoveryTime);
         }
     }
 
@@ -235,15 +299,65 @@ public class ReindeerController : MonoBehaviour, IPunObservable
 
         if (isRecovering)
         {
-            currentRecoveryTimer -= Time.deltaTime;
-            float maxTime = (currentState == PlayerState.Stunned) ? recoveryTime : capturedEscapeTime;
-            recoverySlider.value = currentRecoveryTimer / maxTime;
+            // 자동으로 진행도 증가 (시간이 흐름)
+            currentRecoveryTimer += Time.deltaTime;
 
-            if (currentRecoveryTimer <= 0)
+            // UI 슬라이더 업데이트 (0% -> 100%)
+            // 포획 상태일 때의 총 필요량은 recoveryTime을 그대로 사용. 
+            // 만약 다른 값을 쓰고 싶다면 capturedEscapeTime 변수 등을 활용하여 수정 가능
+            recoverySlider.value = currentRecoveryTimer / recoveryTime;
+
+            // 진행도가 100%에 도달하면 상태 변경
+            if (currentRecoveryTimer >= recoveryTime)
             {
+                // [변경] 포획 상태였다면, 탈출 RPC를 호출
+                if (currentState == PlayerState.Captured)
+                {
+                    photonView.RPC("ReleaseFromCapture", RpcTarget.All);
+                }
+
                 currentState = PlayerState.Normal;
             }
         }
+    }
+    [PunRPC]
+    public void ReleaseFromCapture()
+    {
+        if (currentSackTransform == null) return; // 현재 잡혀있는 보따리가 없으면 실행 안함
+
+        // --- 탈출 연출 로직 ---
+        // 1. 물리적 충돌을 막기 위해 속도를 0으로 초기화합니다.
+        if (rb != null)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+
+        // 2. Rigidbody를 통해 안전하게 위치를 보따리 위치로 이동시킵니다.
+        if (rb != null)
+        {
+            rb.MovePosition(currentSackTransform.position);
+        }
+        else // 혹시 Rigidbody가 없는 경우를 대비한 예비 코드
+        {
+            this.transform.position = currentSackTransform.position;
+        }
+
+
+        // 3. 순록 모델 다시 보이기
+        if (reindeerVisuals != null)
+        {
+            reindeerVisuals.SetActive(true);
+        }
+
+        // 4. 카메라 타겟을 다시 순록으로 변경
+        if (photonView.IsMine && thirdPersonCameraScript != null)
+        {
+            thirdPersonCameraScript.target = this.transform;
+        }
+
+        // 5. 보따리 참조를 비워서 정리
+        currentSackTransform = null;
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -543,6 +657,7 @@ public class ReindeerController : MonoBehaviour, IPunObservable
 
     private void UpdateAnimator()
     {
+        animator.SetInteger(hashState, (int)currentState);
         animator.SetBool(hashIsEating, interactionCoroutine != null);
         if (currentState != PlayerState.Normal || interactionCoroutine != null)
         {

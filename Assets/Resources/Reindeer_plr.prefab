@@ -3341,8 +3341,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4046c54aa1c3474b9ea109d80760a23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minIdleWaitTime: 3
-  maxIdleWaitTime: 7
+  sackTransform: {fileID: 0}
+  reindeerVisuals: {fileID: 0}
+  recoveryTime: 20
+  stunMashAmount: 0.5
+  capturedMashAmount: 0.1
+  mashCooldown: 0.5
   walkSpeed: 2.5
   runSpeed: 5.6
   turnSpeed: 8
@@ -3356,8 +3360,8 @@ MonoBehaviour:
   dashCooldown: 2
   dashSlideDuration: 0.5
   interactionHoldDuration: 3
-  interactionPromptUI: {fileID: 0}
-  interactionSlider: {fileID: 0}
+  minIdleWaitTime: 3
+  maxIdleWaitTime: 7
   gravityMultiplier: 2.5
   fallMultiplier: 5
   groundCheckDistance: 0.2
@@ -3366,6 +3370,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 72
   cameraTransform: {fileID: 3194576379969973452}
+  interactionUIGroup: {fileID: 0}
+  recoveryUIGroup: {fileID: 0}
+  interactionPromptUI: {fileID: 0}
+  interactionSlider: {fileID: 0}
+  recoverySlider: {fileID: 0}
 --- !u!95 &6182647360021730553
 Animator:
   serializedVersion: 5
