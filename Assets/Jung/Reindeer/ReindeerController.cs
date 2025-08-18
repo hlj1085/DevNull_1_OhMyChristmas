@@ -140,12 +140,44 @@ public class ReindeerController : MonoBehaviour, IPunObservable
     {
         if (!photonView.IsMine) return;
 
+        HandleDebugInput();
+
         HandleTimers();
         UpdateAnimator();
         UpdateInteractionUI();
         HandleRandomIdle();
         HandleRecoveryMash();
         UpdateRecoveryAndState();
+    }
+
+    /// <summary>
+    /// 디버깅 및 테스트를 위한 임시 입력 처리 함수입니다.
+    /// </summary>
+    private void HandleDebugInput()
+    {
+        // 숫자 '1' 키를 누르면 GetStunned RPC를 호출합니다.
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Debug.Log("디버그: '1' 키 입력 - 기절(Stun) RPC를 호출합니다.");
+            // 모든 클라이언트에게 GetStunned 함수를 실행하도록 요청 (5초 지속)
+            photonView.RPC("GetStunned", RpcTarget.All, 5f);
+        }
+
+        // 숫자 '2' 키를 누르면 GetCaptured RPC를 호출합니다.
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            // GetCaptured 함수는 기절 상태일 때만 작동하므로, 현재 상태를 확인합니다.
+            if (currentState == PlayerState.Stunned)
+            {
+                Debug.Log("디버그: '2' 키 입력 - 포획(Capture) RPC를 호출합니다.");
+                // 모든 클라이언트에게 GetCaptured 함수를 실행하도록 요청
+                photonView.RPC("GetCaptured", RpcTarget.All);
+            }
+            else
+            {
+                Debug.LogWarning("디버그: '2' 키 입력 실패 - 포획은 '기절' 상태에서만 가능합니다. 먼저 '1' 키를 눌러 기절시켜주세요.");
+            }
+        }
     }
 
     void FixedUpdate()
