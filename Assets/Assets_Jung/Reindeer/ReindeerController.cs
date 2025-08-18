@@ -3,16 +3,27 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using Photon.Pun;
 
+// 포톤 상태 동기화를 위해 IPunObservable 인터페이스를 추가합니다.
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Inventory))]
-public class ReindeerController : MonoBehaviour
+public class ReindeerController : MonoBehaviour, IPunObservable
 {
-    [Header("랜덤 Idle 설정")]
-    public float minIdleWaitTime = 3f; // Idle 애니메이션을 위한 최소 대기 시간
-    public float maxIdleWaitTime = 7f; // Idle 애니메이션을 위한 최대 대기 시간
+    // 순록의 현재 상태를 정의합니다.
+    public enum PlayerState
+    {
+        Normal,    // 정상
+        Stunned,   // 기절 (F키 연타로 회복 가능)
+        Captured   // 포획됨 (일정 시간 후 자동 탈출)
+    }
+
+    [Header("기절 및 포획 설정")]
+    public float recoveryTime = 10f;
+    public float mashSpeedupAmount = 0.5f;
+    public float capturedEscapeTime = 6f;
 
     [Header("이동 설정")]
     public float walkSpeed = 2.5f;
@@ -34,8 +45,10 @@ public class ReindeerController : MonoBehaviour
 
     [Header("상호작용 설정")]
     public float interactionHoldDuration = 3f;
-    public TextMeshProUGUI interactionPromptUI;
-    public Slider interactionSlider;
+
+    [Header("랜덤 Idle 설정")]
+    public float minIdleWaitTime = 3f;
+    public float maxIdleWaitTime = 7f;
 
     [Header("중력 및 지면 체크")]
     public float gravityMultiplier = 2.5f;
@@ -48,16 +61,25 @@ public class ReindeerController : MonoBehaviour
     public Transform cameraTransform;
     public bool IsMoving => moveInputVec2.magnitude > 0.1f;
 
+    [Header("UI 그룹 참조")]
+    public GameObject interactionUIGroup;
+    public GameObject recoveryUIGroup;
+    public TextMeshProUGUI interactionPromptUI;
+    public Slider interactionSlider;
+    public Slider recoverySlider;
+
+    // --- 비공개 변수 ---
+    private PlayerState currentState = PlayerState.Normal;
+    private float currentRecoveryTimer;
+    private PhotonView photonView;
     private Rigidbody rb;
     private Animator animator;
     private Reindeer_Input inputActions;
     private Inventory inventory;
     private IInteractable currentInteractable;
     private Coroutine interactionCoroutine;
-
-    private float idleTimer; // 멈춰있는 시간을 재는 타이머
-    private float randomIdleWaitTime; // 다음 Idle 애니메이션까지 기다릴 랜덤 시간
-
+    private float idleTimer;
+    private float randomIdleWaitTime;
     private Vector2 moveInputVec2;
     private bool isRunning;
     private bool _isGrounded;
@@ -69,17 +91,28 @@ public class ReindeerController : MonoBehaviour
     private Vector3 currentHorizontalVelocity;
     private Vector3 smoothDampVelocity;
 
+    // --- 애니메이터 해시 ---
     private static readonly int hashSpeed = Animator.StringToHash("Speed");
     private static readonly int hashIsGrounded = Animator.StringToHash("IsGrounded");
     private static readonly int hashJump = Animator.StringToHash("Jump");
     private static readonly int hashDash = Animator.StringToHash("Dash");
     private static readonly int hashIsEating = Animator.StringToHash("IsEating");
     private static readonly int hashIdleTrigger = Animator.StringToHash("IdleTrigger");
-
-
+    private static readonly int hashStun = Animator.StringToHash("Stun");
 
     void Awake()
     {
+        photonView = GetComponent<PhotonView>();
+
+        if (!photonView.IsMine)
+        {
+            this.enabled = false;
+            if (cameraTransform != null) cameraTransform.gameObject.SetActive(false);
+            var audioListener = GetComponentInChildren<AudioListener>();
+            if (audioListener != null) audioListener.enabled = false;
+            return;
+        }
+
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         inventory = GetComponent<Inventory>();
@@ -93,8 +126,10 @@ public class ReindeerController : MonoBehaviour
         inputActions = new Reindeer_Input();
         SetupInputCallbacks();
 
+        if (interactionUIGroup != null) interactionUIGroup.SetActive(false);
         if (interactionSlider != null) interactionSlider.gameObject.SetActive(false);
-        if (interactionPromptUI != null) interactionPromptUI.gameObject.SetActive(false);
+        if (recoveryUIGroup != null) recoveryUIGroup.SetActive(false);
+
         ResetIdleTimer();
     }
 
@@ -103,20 +138,97 @@ public class ReindeerController : MonoBehaviour
 
     void Update()
     {
+        if (!photonView.IsMine) return;
+
         HandleTimers();
         UpdateAnimator();
         UpdateInteractionUI();
-
         HandleRandomIdle();
+        HandleRecoveryMash();
+        UpdateRecoveryAndState();
     }
 
     void FixedUpdate()
     {
+        if (!photonView.IsMine) return;
+
         if (isDashing) return;
         GroundCheck();
         ApplyMovement();
         ApplyBetterGravity();
     }
+
+    // --- 상태 관리 및 동기화 ---
+
+    [PunRPC]
+    public void GetStunned(float duration)
+    {
+        if (currentState != PlayerState.Normal) return;
+        currentState = PlayerState.Stunned;
+        currentRecoveryTimer = duration;
+        animator.SetTrigger(hashStun);
+    }
+
+    [PunRPC]
+    public void GetCaptured()
+    {
+        if (currentState != PlayerState.Stunned) return;
+        currentState = PlayerState.Captured;
+        currentRecoveryTimer = capturedEscapeTime;
+    }
+
+    private void HandleRecoveryMash()
+    {
+        if (currentState == PlayerState.Stunned && inputActions.Player.Interact.triggered)
+        {
+            photonView.RPC("ReduceRecoveryTime", RpcTarget.All, mashSpeedupAmount);
+        }
+    }
+
+    [PunRPC]
+    public void ReduceRecoveryTime(float amount)
+    {
+        if (currentState == PlayerState.Stunned)
+        {
+            currentRecoveryTimer -= amount;
+        }
+    }
+
+    private void UpdateRecoveryAndState()
+    {
+        if (recoveryUIGroup == null || recoverySlider == null) return;
+
+        bool isRecovering = (currentState == PlayerState.Stunned || currentState == PlayerState.Captured);
+        recoveryUIGroup.SetActive(isRecovering);
+
+        if (isRecovering)
+        {
+            currentRecoveryTimer -= Time.deltaTime;
+            float maxTime = (currentState == PlayerState.Stunned) ? recoveryTime : capturedEscapeTime;
+            recoverySlider.value = currentRecoveryTimer / maxTime;
+
+            if (currentRecoveryTimer <= 0)
+            {
+                currentState = PlayerState.Normal;
+            }
+        }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(currentState);
+            stream.SendNext(currentRecoveryTimer);
+        }
+        else
+        {
+            this.currentState = (PlayerState)stream.ReceiveNext();
+            this.currentRecoveryTimer = (float)stream.ReceiveNext();
+        }
+    }
+
+    // --- 입력 및 상호작용 로직 ---
 
     private void SetupInputCallbacks()
     {
@@ -130,34 +242,49 @@ public class ReindeerController : MonoBehaviour
         inputActions.Player.Interact.canceled += _ => HandleInteractionCancel();
     }
 
+    // --- [핵심 수정] 상호작용 UI 로직 전체 수정 ---
     private void UpdateInteractionUI()
     {
-        if (interactionPromptUI != null)
+        if (interactionUIGroup == null || interactionPromptUI == null || interactionSlider == null) return;
+
+        // 1. 상호작용이 가능한 상태인지 먼저 확인
+        bool canInteract = (currentInteractable != null && currentInteractable.CanInteract && currentState == PlayerState.Normal);
+
+        // 2. 상호작용 가능 여부에 따라 UI 그룹(텍스트 배경 등) 활성화/비활성화
+        interactionUIGroup.SetActive(canInteract);
+
+        // 3. 상호작용이 불가능하면, 슬라이더도 확실히 끄고 함수 종료
+        if (!canInteract)
         {
-            // [수정] currentInteractable.CanInteract 조건을 추가
-            if (currentInteractable != null && currentInteractable.CanInteract && interactionCoroutine == null)
+            if (interactionSlider.gameObject.activeSelf)
             {
-                string message = currentInteractable.GetInteractMessage();
-                if (!string.IsNullOrEmpty(message))
-                {
-                    interactionPromptUI.text = message;
-                    interactionPromptUI.gameObject.SetActive(true);
-                }
-                else
-                {
-                    interactionPromptUI.gameObject.SetActive(false);
-                }
+                interactionSlider.gameObject.SetActive(false);
             }
-            else
-            {
-                interactionPromptUI.gameObject.SetActive(false);
-            }
+            return;
+        }
+
+        // 4. 상호작용이 가능하면, 프롬프트 텍스트 설정
+        interactionPromptUI.text = currentInteractable.GetInteractMessage();
+
+        // 5. 상호작용 타입을 확인하여 슬라이더 표시 여부 결정
+        bool isHoldType = currentInteractable.InteractionType == InteractionType.Hold;
+
+        // 홀드 타입이면 슬라이더를 활성화하고, 아니면 비활성화
+        if (interactionSlider.gameObject.activeSelf != isHoldType)
+        {
+            interactionSlider.gameObject.SetActive(isHoldType);
+        }
+
+        // 홀드 타입이고, 아직 홀드를 시작 안했다면 슬라이더 값을 0으로 초기화
+        if (isHoldType && interactionCoroutine == null)
+        {
+            interactionSlider.value = 0;
         }
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
-        // [수정] 'InteractableBox'가 아닌, 'IInteractable' 자격증을 가진 모든 것을 찾습니다.
         if (other.TryGetComponent<IInteractable>(out var interactable))
         {
             currentInteractable = interactable;
@@ -166,29 +293,25 @@ public class ReindeerController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        // [수정] 범위를 벗어난 대상이 현재 기억하고 있는 대상과 같은지 확인합니다.
         if (other.TryGetComponent<IInteractable>(out var interactable) && interactable == currentInteractable)
         {
-            HandleInteractionCancel(); // 꾹 누르던 중이었다면 취소
-            currentInteractable = null; // 대상을 잊어버립니다.
+            HandleInteractionCancel();
+            currentInteractable = null;
         }
     }
 
     private void HandleInteractionStart()
     {
-        // 상호작용 대상이 없거나, 상호작용이 불가능하거나, 대쉬 중이면 아무것도 하지 않습니다.
+        if (currentState != PlayerState.Normal) return;
         if (currentInteractable == null || !currentInteractable.CanInteract || isDashing) return;
 
-        // 대상의 타입에 따라 다른 행동을 합니다.
         if (currentInteractable.InteractionType == InteractionType.Instant)
         {
             currentInteractable.Interact(inventory);
         }
         else if (currentInteractable.InteractionType == InteractionType.Hold)
         {
-            // 움직이는 중에는 홀드 상호작용을 시작할 수 없습니다.
-            if (moveInputVec2.magnitude > 0.1f) return;
-
+            if (IsMoving) return;
             if (interactionCoroutine == null)
             {
                 interactionCoroutine = StartCoroutine(HoldInteractionCoroutine());
@@ -202,143 +325,222 @@ public class ReindeerController : MonoBehaviour
         {
             StopCoroutine(interactionCoroutine);
             interactionCoroutine = null;
+            // 홀드 취소 시, 슬라이더 값을 초기화 (슬라이더 자체는 UpdateInteractionUI가 관리)
             if (interactionSlider != null)
             {
-                interactionSlider.gameObject.SetActive(false);
                 interactionSlider.value = 0;
             }
         }
     }
 
-    // ReindeerController.cs
-
     private IEnumerator HoldInteractionCoroutine()
     {
-        if (interactionSlider == null)
-        {
-            Debug.LogError("Hold 상호작용을 위한 Slider UI가 없습니다!");
-            yield break;
-        }
-
-        interactionPromptUI?.gameObject.SetActive(false);
-        interactionSlider.gameObject.SetActive(true);
-        interactionSlider.value = 0;
+        if (interactionSlider == null) yield break;
+        // 이제 이 코루틴은 슬라이더를 켜는 대신, 값만 채워줌
 
         float timer = 0f;
         while (timer < interactionHoldDuration)
         {
-            // [삭제] 코루틴 내부의 이동 감지 로직은 이제 필요 없습니다.
-            // if (moveInputVec2.magnitude > 0.1f) { ... }
-
             timer += Time.deltaTime;
             interactionSlider.value = timer / interactionHoldDuration;
             yield return null;
         }
 
-        interactionSlider.gameObject.SetActive(false);
         currentInteractable?.Interact(inventory);
+
         interactionCoroutine = null;
 
+        // 홀드 성공 후, 슬라이더 값을 0으로 초기화
+        interactionSlider.value = 0;
     }
 
-    private void HandleTimers() { if (jumpBufferTimer > 0f && (_isGrounded || Time.time - lastGroundedTime <= coyoteTime) && (Time.time - lastJumpTime >= jumpCooldownTime)) { PerformJump(); } jumpBufferTimer -= Time.deltaTime; }
-    private void PerformJump() { if (interactionCoroutine != null || isDashing) return; rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); _isGrounded = false; animator.SetBool(hashIsGrounded, false); animator.SetTrigger(hashJump); jumpBufferTimer = 0f; lastJumpTime = Time.time; }
-    private void TryDash() { if (!isDashing && Time.time >= lastDashTime + dashCooldown && _isGrounded) { StartCoroutine(DashCoroutine()); } }
+    // --- 기본 행동 로직 (이전과 동일) ---
+
+    private void HandleTimers()
+    {
+        bool hasJumpBuffer = jumpBufferTimer > 0f;
+        bool canUseCoyoteTime = (Time.time - lastGroundedTime <= coyoteTime);
+        bool isReadyToJump = _isGrounded || canUseCoyoteTime;
+        bool isJumpCooledDown = (Time.time - lastJumpTime >= jumpCooldownTime);
+
+        if (hasJumpBuffer && isReadyToJump && isJumpCooledDown)
+        {
+            PerformJump();
+        }
+
+        jumpBufferTimer -= Time.deltaTime;
+    }
+
+    private void PerformJump()
+    {
+        if (currentState != PlayerState.Normal || interactionCoroutine != null || isDashing) return;
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        _isGrounded = false;
+        animator.SetBool(hashIsGrounded, false);
+        animator.SetTrigger(hashJump);
+        jumpBufferTimer = 0f;
+        lastJumpTime = Time.time;
+    }
+
+    private void TryDash()
+    {
+        bool canDash = (currentState == PlayerState.Normal);
+        bool isDashCooledDown = (Time.time >= lastDashTime + dashCooldown);
+
+        if (canDash && !isDashing && isDashCooledDown && _isGrounded)
+        {
+            StartCoroutine(DashCoroutine());
+        }
+    }
+
     private void ApplyMovement()
     {
-        if (interactionCoroutine != null || isDashing) { return; }
+        if (currentState != PlayerState.Normal || interactionCoroutine != null || isDashing)
+        {
+            Vector3 targetStopVelocity = Vector3.zero;
+            currentHorizontalVelocity = Vector3.SmoothDamp(
+                currentHorizontalVelocity,
+                targetStopVelocity,
+                ref smoothDampVelocity,
+                moveSmoothTime
+            );
+            rb.velocity = new Vector3(currentHorizontalVelocity.x, rb.velocity.y, currentHorizontalVelocity.z);
+            return;
+        }
 
         float targetSpeed = isRunning ? runSpeed : walkSpeed;
 
-        // [수정된 이동 방향 계산 로직]
         if (moveInputVec2.magnitude >= 0.1f)
         {
-            // 1. 카메라의 '앞쪽'과 '오른쪽' 방향을 기준으로 삼습니다.
             Vector3 cameraForward = cameraTransform.forward;
             Vector3 cameraRight = cameraTransform.right;
-
-            // 2. y축 값을 0으로 만들어, 땅에 평행한 방향 벡터로 만듭니다.
             cameraForward.y = 0;
             cameraRight.y = 0;
-
-            // 3. 길이를 1로 정규화하여 방향 순수성 유지
             cameraForward.Normalize();
             cameraRight.Normalize();
+            Vector3 desiredMoveDirection = (cameraForward * moveInputVec2.y + cameraRight * moveInputVec2.x).normalized;
 
-            // 4. 이 두 방향과 키보드 입력을 조합하여 최종 이동 방향을 계산합니다.
-            // (moveInputVec2.y는 W/S, moveInputVec2.x는 A/D 입력값입니다)
-            Vector3 desiredMoveDirection = cameraForward * moveInputVec2.y + cameraRight * moveInputVec2.x;
-
-            // 캐릭터 회전 로직
             if (desiredMoveDirection != Vector3.zero)
             {
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), turnSpeed * Time.fixedDeltaTime);
+                Quaternion targetRotation = Quaternion.LookRotation(desiredMoveDirection);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.fixedDeltaTime);
             }
 
-            // 속도 적용 로직
             Vector3 targetHorizontalVelocity = desiredMoveDirection * targetSpeed;
-            currentHorizontalVelocity = Vector3.SmoothDamp(currentHorizontalVelocity, targetHorizontalVelocity, ref smoothDampVelocity, moveSmoothTime);
+            currentHorizontalVelocity = Vector3.SmoothDamp(
+                currentHorizontalVelocity,
+                targetHorizontalVelocity,
+                ref smoothDampVelocity,
+                moveSmoothTime
+            );
         }
         else
         {
-            // 멈출 때의 로직
-            currentHorizontalVelocity = Vector3.SmoothDamp(currentHorizontalVelocity, Vector3.zero, ref smoothDampVelocity, moveSmoothTime);
+            Vector3 targetStopVelocity = Vector3.zero;
+            currentHorizontalVelocity = Vector3.SmoothDamp(
+                currentHorizontalVelocity,
+                targetStopVelocity,
+                ref smoothDampVelocity,
+                moveSmoothTime
+            );
         }
 
         rb.velocity = new Vector3(currentHorizontalVelocity.x, rb.velocity.y, currentHorizontalVelocity.z);
     }
-    private IEnumerator DashCoroutine() { isDashing = true; lastDashTime = Time.time; animator.SetTrigger(hashDash); Vector3 moveDirection = new Vector3(moveInputVec2.x, 0, moveInputVec2.y); Vector3 dashDirection = transform.forward; if (moveDirection.magnitude > 0.1f) { dashDirection = cameraTransform.TransformDirection(moveDirection).normalized; dashDirection.y = 0; } float startTime = Time.time; while (Time.time < startTime + dashDuration) { rb.velocity = new Vector3(dashDirection.x * dashSpeed, 0, dashDirection.z * dashSpeed); yield return new WaitForFixedUpdate(); } float slideStartTime = Time.time; Vector3 slideStartVelocity = rb.velocity; Vector3 finalVelocity = new Vector3(0, rb.velocity.y, 0); while (Time.time < slideStartTime + dashSlideDuration) { float t = (Time.time - slideStartTime) / dashSlideDuration; rb.velocity = Vector3.Lerp(slideStartVelocity, finalVelocity, t); yield return new WaitForFixedUpdate(); } isDashing = false; }
-    private void GroundCheck() { CapsuleCollider capCol = GetComponent<CapsuleCollider>(); Vector3 sphereOrigin = transform.position + Vector3.up * (capCol.center.y - capCol.height / 2f + groundCheckOffset); _isGrounded = Physics.CheckSphere(sphereOrigin, groundCheckDistance, groundMask); if (_isGrounded) lastGroundedTime = Time.time; }
-    private void ApplyBetterGravity() { if (rb.velocity.y < 0) { rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime; } else if (rb.velocity.y > 0) { rb.velocity += Vector3.up * Physics.gravity.y * (gravityMultiplier - 1) * Time.fixedDeltaTime; } }
-    private void UpdateAnimator()
+
+    private IEnumerator DashCoroutine()
     {
-        // [수정된 로직]
-        // 만약 '꾹 누르기' 상호작용 코루틴이 실행 중이라면,
-        if (interactionCoroutine != null)
+        isDashing = true;
+        lastDashTime = Time.time;
+        animator.SetTrigger(hashDash);
+
+        Vector3 moveDirection = new Vector3(moveInputVec2.x, 0, moveInputVec2.y);
+        Vector3 dashDirection = transform.forward;
+        if (moveDirection.magnitude > 0.1f)
         {
-            // 먹는 애니메이션을 켜고, 이동 애니메이션은 멈춥니다.
-            animator.SetBool(hashIsEating, true);
-            animator.SetFloat(hashSpeed, 0f, 0.1f, Time.deltaTime);
-            return; // 아래의 다른 애니메이션 로직은 실행하지 않고 함수를 종료합니다.
+            dashDirection = cameraTransform.TransformDirection(moveDirection).normalized;
+            dashDirection.y = 0;
         }
 
-        // '꾹 누르기' 중이 아닐 때는, 먹는 애니메이션을 끕니다.
-        animator.SetBool(hashIsEating, false);
+        float startTime = Time.time;
+        while (Time.time < startTime + dashDuration)
+        {
+            Vector3 dashVelocity = new Vector3(dashDirection.x * dashSpeed, 0, dashDirection.z * dashSpeed);
+            rb.velocity = dashVelocity;
+            yield return new WaitForFixedUpdate();
+        }
 
-        // --- 아래는 기존의 이동/달리기 애니메이션 로직 ---
+        float slideStartTime = Time.time;
+        Vector3 slideStartVelocity = rb.velocity;
+        Vector3 finalVelocity = new Vector3(0, rb.velocity.y, 0);
+        while (Time.time < slideStartTime + dashSlideDuration)
+        {
+            float t = (Time.time - slideStartTime) / dashSlideDuration;
+            rb.velocity = Vector3.Lerp(slideStartVelocity, finalVelocity, t);
+            yield return new WaitForFixedUpdate();
+        }
+
+        isDashing = false;
+    }
+
+    private void GroundCheck()
+    {
+        CapsuleCollider capCol = GetComponent<CapsuleCollider>();
+        float sphereRadius = groundCheckDistance;
+        Vector3 sphereOrigin = transform.position + Vector3.up * (capCol.center.y - capCol.height / 2f + sphereRadius - groundCheckOffset);
+        _isGrounded = Physics.CheckSphere(sphereOrigin, sphereRadius, groundMask);
+
+        if (_isGrounded)
+        {
+            lastGroundedTime = Time.time;
+        }
+    }
+
+    private void ApplyBetterGravity()
+    {
+        if (rb.velocity.y < 0)
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
+        }
+        else if (rb.velocity.y > 0)
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (gravityMultiplier - 1) * Time.fixedDeltaTime;
+        }
+    }
+
+    private void UpdateAnimator()
+    {
+        animator.SetBool(hashIsEating, interactionCoroutine != null);
+        if (currentState != PlayerState.Normal || interactionCoroutine != null)
+        {
+            animator.SetFloat(hashSpeed, 0f, 0.1f, Time.deltaTime);
+            return;
+        }
         float speedValue = new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude;
         float normalizedSpeed = (speedValue > 0.1f) ? (isRunning ? 2f : 1f) : 0f;
         animator.SetFloat(hashSpeed, normalizedSpeed, 0.1f, Time.deltaTime);
         animator.SetBool(hashIsGrounded, _isGrounded);
     }
+
     private void HandleRandomIdle()
     {
-        // [수정된 로직] 애니메이터의 현재 상태 정보를 가져옵니다.
-        AnimatorStateInfo currentState = animator.GetCurrentAnimatorStateInfo(0);
-
-        // [수정된 조건] 애니메이터가 'Stop' 상태일 때만 타이머를 작동시킵니다.
-        if (currentState.IsName("Stop"))
+        AnimatorStateInfo currentStateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        if (currentStateInfo.IsName("Stop"))
         {
-            // 멈춤 상태라면 타이머 시간을 증가시킴
             idleTimer += Time.deltaTime;
-
-            // 타이머가 지정된 랜덤 대기 시간을 초과했다면
             if (idleTimer >= randomIdleWaitTime)
             {
-                // IdleTrigger를 발동시키고 타이머를 리셋
                 animator.SetTrigger(hashIdleTrigger);
                 ResetIdleTimer();
             }
         }
         else
         {
-            // 'Stop' 상태가 아니라면 (움직이거나, 점프하거나, Idle 애니메이션 중이라면)
-            // 타이머를 계속 리셋합니다.
             ResetIdleTimer();
         }
     }
 
-    // [추가] Idle 타이머를 리셋하고 새로운 랜덤 시간을 뽑는 함수
     private void ResetIdleTimer()
     {
         idleTimer = 0f;
