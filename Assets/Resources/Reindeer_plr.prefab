@@ -3342,9 +3342,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sackTransform: {fileID: 0}
-  reindeerVisuals: {fileID: 0}
+  reindeerVisuals: {fileID: 6227130542453721724}
   recoveryTime: 20
-  stunMashAmount: 0.5
+  stunMashAmount: 2
   capturedMashAmount: 0.1
   mashCooldown: 0.5
   walkSpeed: 2.5
@@ -3369,6 +3369,8 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 72
+  playerCameraObject: {fileID: 8017482679944998323}
+  thirdPersonCameraScript: {fileID: 5377157092583600164}
   cameraTransform: {fileID: 3194576379969973452}
   interactionUIGroup: {fileID: 0}
   recoveryUIGroup: {fileID: 0}

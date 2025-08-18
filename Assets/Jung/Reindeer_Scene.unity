@@ -286,31 +286,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &866327133 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8017482679944998323, guid: 48f4bd3f20bb63444bf74c78f2524776, type: 3}
-  m_PrefabInstance: {fileID: 544744213028416357}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &866327135 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5377157092583600164, guid: 48f4bd3f20bb63444bf74c78f2524776, type: 3}
-  m_PrefabInstance: {fileID: 544744213028416357}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 866327133}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb8685f72532ac449b968a13d1fab0d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &979458528 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9206215976844138655, guid: 54508c7bebf2da149abe26be72bda872, type: 3}
   m_PrefabInstance: {fileID: 2643463799742375510}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1145126051 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6227130542453721724, guid: 48f4bd3f20bb63444bf74c78f2524776, type: 3}
-  m_PrefabInstance: {fileID: 544744213028416357}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1431813321 stripped
 MonoBehaviour:
@@ -782,17 +761,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 803721879}
     - target: {fileID: 4949323710949672781, guid: 48f4bd3f20bb63444bf74c78f2524776, type: 3}
-      propertyPath: stunMashAmount
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4949323710949672781, guid: 48f4bd3f20bb63444bf74c78f2524776, type: 3}
       propertyPath: recoveryUIGroup
       value: 
       objectReference: {fileID: 979458528}
-    - target: {fileID: 4949323710949672781, guid: 48f4bd3f20bb63444bf74c78f2524776, type: 3}
-      propertyPath: reindeerVisuals
-      value: 
-      objectReference: {fileID: 1145126051}
     - target: {fileID: 4949323710949672781, guid: 48f4bd3f20bb63444bf74c78f2524776, type: 3}
       propertyPath: interactionSlider
       value: 
@@ -802,17 +773,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21642411}
     - target: {fileID: 4949323710949672781, guid: 48f4bd3f20bb63444bf74c78f2524776, type: 3}
-      propertyPath: playerCameraObject
-      value: 
-      objectReference: {fileID: 866327133}
-    - target: {fileID: 4949323710949672781, guid: 48f4bd3f20bb63444bf74c78f2524776, type: 3}
       propertyPath: interactionPromptUI
       value: 
       objectReference: {fileID: 395135825043088235}
-    - target: {fileID: 4949323710949672781, guid: 48f4bd3f20bb63444bf74c78f2524776, type: 3}
-      propertyPath: thirdPersonCameraScript
-      value: 
-      objectReference: {fileID: 866327135}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
