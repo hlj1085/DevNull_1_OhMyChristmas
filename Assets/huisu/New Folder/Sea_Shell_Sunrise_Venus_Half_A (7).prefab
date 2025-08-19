@@ -1,0 +1,423 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8228819929364469424
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4056306289515946005}
+  - component: {fileID: 6427569368038933705}
+  - component: {fileID: 8694658113748283700}
+  - component: {fileID: 4223680771160563230}
+  m_Layer: 0
+  m_Name: Sea_Shell_Sunrise_Venus_Half_A (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4056306289515946005
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8228819929364469424}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.9999261, z: -0, w: -0.012160576}
+  m_LocalPosition: {x: 388.092, y: 0.514, z: 677.886}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 515447681040363490}
+  - {fileID: 3771678667891633680}
+  - {fileID: 7078153444409137043}
+  - {fileID: 7258672754651364999}
+  - {fileID: 298481130128816094}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 538.606, z: 0}
+--- !u!33 &6427569368038933705
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8228819929364469424}
+  m_Mesh: {fileID: 6890642764936502170, guid: fc1ec14ab21066f4fb0ace32e02e6b7d, type: 3}
+--- !u!23 &8694658113748283700
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8228819929364469424}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: ec7ae897721ac3547aa48bf2961d00c6, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4223680771160563230
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8228819929364469424}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6890642764936502170, guid: fc1ec14ab21066f4fb0ace32e02e6b7d, type: 3}
+--- !u!1001 &129082831360479006
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4056306289515946005}
+    m_Modifications:
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.041503906
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.10296631
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.040707424
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.99917114
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 175.334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4528080570684472244, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_Name
+      value: Sea_Shell_Sunrise_Venus_Half_A (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+--- !u!4 &3771678667891633680 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+  m_PrefabInstance: {fileID: 129082831360479006}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3582968529700427472
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4056306289515946005}
+    m_Modifications:
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.056518555
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.09698486
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.79717696
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.6037459
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 74.277
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4528080570684472244, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_Name
+      value: Sea_Shell_Sunrise_Venus_Half_A (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+--- !u!4 &298481130128816094 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+  m_PrefabInstance: {fileID: 3582968529700427472}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3655257180459437804
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4056306289515946005}
+    m_Modifications:
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.12750244
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.95996
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.28013733
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 32.537
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4528080570684472244, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_Name
+      value: Sea_Shell_Sunrise_Venus_Half_A (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+--- !u!4 &515447681040363490 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+  m_PrefabInstance: {fileID: 3655257180459437804}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5847595967125282697
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4056306289515946005}
+    m_Modifications:
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.084503174
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.028338015
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0020141602
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9132027
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.4075056
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 48.096
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4528080570684472244, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_Name
+      value: Sea_Shell_Sunrise_Venus_Half_A (5)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+--- !u!4 &7258672754651364999 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+  m_PrefabInstance: {fileID: 5847595967125282697}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6316174142462260893
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4056306289515946005}
+    m_Modifications:
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0960083
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.4050919
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.914276
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 132.206
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4528080570684472244, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+      propertyPath: m_Name
+      value: Sea_Shell_Sunrise_Venus_Half_A (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+--- !u!4 &7078153444409137043 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3863290120275665166, guid: 3cb2683e89ff8c74ab8dc546311728f8, type: 3}
+  m_PrefabInstance: {fileID: 6316174142462260893}
+  m_PrefabAsset: {fileID: 0}
