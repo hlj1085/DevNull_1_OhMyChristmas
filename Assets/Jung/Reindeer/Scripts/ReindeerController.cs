@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using Photon.Pun;
+using Unity.VisualScripting;
 
 // 포톤 상태 동기화를 위해 IPunObservable 인터페이스를 추가합니다.
 [RequireComponent(typeof(Rigidbody))]
@@ -358,6 +359,37 @@ public class ReindeerController : MonoBehaviour, IPunObservable
 
         // 5. 보따리 참조를 비워서 정리
         currentSackTransform = null;
+    }
+    // --- IInteractable 인터페이스 구현 (다른 플레이어가 구출용) ---
+
+    // 상호작용 타입은 '홀드'
+    public InteractionType InteractionType => InteractionType.Hold;
+
+    // 상호작용이 가능한 조건: 내가 '기절' 또는 '포획' 상태일 때만
+    public bool CanInteract => currentState == PlayerState.Stunned || currentState == PlayerState.Captured;
+
+    public string GetInteractMessage()
+    {
+        // 상태에 따라 다른 메시지 표시 (선택 사항)
+        if (currentState == PlayerState.Stunned)
+        {
+            return "도와주기";
+        }
+        else if (currentState == PlayerState.Captured)
+        {
+            return "길게 눌러 구출하기";
+        }
+        return ""; // Normal 상태에서는 메시지 없음
+    }
+
+    public void Interact(Inventory interactorInventory)
+    {
+        // 상호작용(홀드)에 성공하면, 나 자신에게 구출되었다고 RPC를 보냄
+        Debug.Log(this.name + " 구출 성공!");
+        if (photonView != null)
+        {
+            photonView.RPC("GetRescued", RpcTarget.All);
+        }
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
