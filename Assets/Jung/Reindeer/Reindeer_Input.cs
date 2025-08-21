@@ -15,10 +15,10 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public partial class @Reindeer_Input: IInputActionCollection2, IDisposable
+public partial class @Reindeer_Input_Beta: IInputActionCollection2, IDisposable
 {
     public InputActionAsset asset { get; }
-    public @Reindeer_Input()
+    public @Reindeer_Input_Beta()
     {
         asset = InputActionAsset.FromJson(@"{
     ""name"": ""Reindeer_Input"",
@@ -290,9 +290,9 @@ public partial class @Reindeer_Input: IInputActionCollection2, IDisposable
         m_Player_Recovery = m_Player.FindAction("Recovery", throwIfNotFound: true);
     }
 
-    ~@Reindeer_Input()
+    ~@Reindeer_Input_Beta()
     {
-        UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, Reindeer_Input.Player.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, Reindeer_Input_Beta.Player.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -363,8 +363,8 @@ public partial class @Reindeer_Input: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Recovery;
     public struct PlayerActions
     {
-        private @Reindeer_Input m_Wrapper;
-        public PlayerActions(@Reindeer_Input wrapper) { m_Wrapper = wrapper; }
+        private @Reindeer_Input_Beta m_Wrapper;
+        public PlayerActions(@Reindeer_Input_Beta wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
