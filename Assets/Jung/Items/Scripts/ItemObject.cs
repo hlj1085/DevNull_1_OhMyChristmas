@@ -1,61 +1,53 @@
 using UnityEngine;
+using Photon.Pun;
 
+// 상호작용이 가능하도록 IInteractable 인터페이스를 구현합니다.
+[RequireComponent(typeof(PhotonView))]
 public class ItemObject : MonoBehaviour, IInteractable
 {
-    [Header("아이템 정보")]
+    [Tooltip("이 아이템의 데이터 (ScriptableObject)")]
     public ItemData itemData;
 
-    [Header("효과")]
-    public float rotationSpeed = 50f;
-    public float floatSpeed = 0.5f;
-    public float floatHeight = 0.5f;
+    private PhotonView photonView;
 
-    private Vector3 startPosition;
+    void Awake()
+    {
+        photonView = GetComponent<PhotonView>();
+    }
 
-    // [추가] 현재 수집 절차가 진행 중인지 확인하는 상태 변수
-    private bool isBeingCollected = false;
+    // --- IInteractable 인터페이스 구현 ---
 
-    // [수정] 수집 중일 때는 상호작용이 불가능하도록 규칙 변경
-    public bool CanInteract => !isBeingCollected;
+    // 아이템 줍기는 즉시 발동
     public InteractionType InteractionType => InteractionType.Instant;
 
-    void Start()
-    {
-        startPosition = transform.position;
-    }
-
-    void Update()
-    {
-        transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
-        float newY = startPosition.y + Mathf.Sin(Time.time * floatSpeed) * floatHeight;
-        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
-    }
+    // 항상 상호작용 가능
+    public bool CanInteract => true;
 
     public string GetInteractMessage()
     {
-        return itemData != null ? $"Press [F] to pick up {itemData.itemName}" : "";
+        return "[F] to Get " + itemData.itemName;
     }
 
-    public void Interact(Inventory inventory)
+    // 플레이어가 상호작용했을 때 호출되는 함수
+    public void Interact(Inventory interactorInventory)
     {
-        // 이미 수집 절차가 시작됐으면, 중복 실행을 막습니다.
-        if (isBeingCollected) return;
-        if (itemData == null || inventory == null) return;
+        // 1. 상호작용한 플레이어의 인벤토리에 아이템을 추가해 봅니다.
+        bool success = interactorInventory.AddItem(itemData);
 
-        // 이제부터 수집 절차를 시작한다고 알립니다.
-        isBeingCollected = true;
+        // 2. 인벤토리에 아이템이 성공적으로 추가되었다면 (인벤토리가 꽉 차지 않았다면)
+        if (success)
+        {
+            // 3. 모든 클라이언트에게 이 아이템을 파괴하라는 RPC를 보냅니다.
+            photonView.RPC("DestroyItemRPC", RpcTarget.All);
+        }
+    }
 
-        // 인벤토리에 아이템 추가를 시도합니다.
-        if (inventory.AddItem(itemData))
-        {
-            // 성공했다면, 아이템 오브젝트를 파괴합니다.
-            Destroy(gameObject);
-        }
-        else
-        {
-            // [추가] 실패했다면 (인벤토리가 꽉 찼다면), 
-            // 다시 주울 수 있도록 상태를 원래대로 되돌립니다.
-            isBeingCollected = false;
-        }
+    // --- RPC 함수 ---
+
+    [PunRPC]
+    private void DestroyItemRPC()
+    {
+        // 이 신호를 받은 모든 클라이언트는 자신의 씬에 있는 이 아이템 오브젝트를 파괴합니다.
+        Destroy(this.gameObject);
     }
 }

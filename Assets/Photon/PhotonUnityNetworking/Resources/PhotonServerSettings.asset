@@ -44,6 +44,9 @@ MonoBehaviour:
   - ReduceRecoveryTime
   - AddRecoveryProgress
   - ReleaseFromCapture
+  - GetRescued
+  - OpenBoxRPC
+  - DestroyItemRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

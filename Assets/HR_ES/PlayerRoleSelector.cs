@@ -130,7 +130,7 @@ public class PlayerRoleSelector : MonoBehaviourPunCallbacks
 
     bool AllRolesSelected()
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount != 5)
+        if (PhotonNetwork.CurrentRoom.PlayerCount != 2)
             return false;
 
         int santaCount = 0;
@@ -145,6 +145,6 @@ public class PlayerRoleSelector : MonoBehaviourPunCallbacks
             }
         }
 
-        return santaCount == 1 && reindeerCount == 4;
+        return santaCount == 1 && reindeerCount == 1;
     }
 }

@@ -1,55 +1,45 @@
 using UnityEngine;
-using UnityEngine.UI;
-using System.Collections.Generic;
+using UnityEngine.UI; // UI 관련 기능을 사용하려면 추가해야 할 수 있습니다.
 
 public class InventoryUI : MonoBehaviour
 {
-    public Inventory targetInventory; // 플레이어의 인벤토리 정보를 가져올 대상
-    public Image[] slots;             // UI 슬롯 이미지들
+    // --- [핵심] --- 
+    // UIManager가 이 변수에 접근해서 값을 채워줄 수 있도록 public으로 선언해야 합니다.
+    public Inventory inventory;
+
+    // ... (인벤토리 슬롯, 아이템 이미지 등 다른 UI 관련 변수들)
+    public GameObject inventoryPanel;
+    public Image[] itemSlots; // 예시
 
     void Start()
     {
-        // 인벤토리의 'OnInventoryChanged' 방송을 구독(Subscribe)합니다.
-        // 즉, "인벤토리에 변화가 생기면 UpdateUI 함수를 실행해줘" 라고 등록하는 것입니다.
-        if (targetInventory != null)
+        // 처음에는 인벤토리 UI를 숨깁니다.
+        if (inventoryPanel != null)
         {
-            targetInventory.OnInventoryChanged += UpdateUI;
+            inventoryPanel.SetActive(false);
+        }
+    }
+
+    void Update()
+    {
+        // 인벤토리가 연결되었는지 확인하고 UI를 업데이트합니다.
+        if (inventory == null)
+        {
+            // 이 부분이 NullReferenceException을 발생시키던 원인입니다.
+            // 이제 inventory가 할당될 때까지 아무것도 하지 않으므로 안전합니다.
+            return;
         }
 
-        // 게임 시작 시 UI를 한 번 초기화합니다.
+        // 여기에 인벤토리 내용을 실제 UI에 표시하는 코드를 작성합니다.
+        // 예: for문으로 아이템 슬롯을 순회하며 이미지 변경 등
         UpdateUI();
     }
 
-    private void OnDestroy()
+    public void UpdateUI()
     {
-        // 이 UI 오브젝트가 파괴될 때, 구독을 해지해서 메모리 누수를 방지합니다.
-        if (targetInventory != null)
-        {
-            targetInventory.OnInventoryChanged -= UpdateUI;
-        }
-    }
-
-    // UI를 새로 그리는 함수
-    private void UpdateUI()
-    {
-        List<ItemData> items = targetInventory.GetItems();
-
-        // 모든 슬롯을 순회합니다.
-        for (int i = 0; i < slots.Length; i++)
-        {
-            // 만약 현재 슬롯 순서에 해당하는 아이템이 인벤토리에 있다면,
-            if (i < items.Count)
-            {
-                // 슬롯 이미지에 아이템 아이콘을 표시하고, 불투명하게 만듭니다.
-                slots[i].sprite = items[i].itemIcon;
-                slots[i].color = new Color(1, 1, 1, 1);
-            }
-            else
-            {
-                // 해당하는 아이템이 없다면, 아이콘을 없애고 투명하게 만듭니다.
-                slots[i].sprite = null;
-                slots[i].color = new Color(1, 1, 1, 0);
-            }
-        }
+        // 이 함수가 인벤토리의 실제 데이터를 UI에 표시하는 역할을 합니다.
+        // inventory 변수가 null이 아닐 때만 호출되어야 안전합니다.
+        if (inventory == null) return;
+        // 예시: for (int i = 0; i < itemSlots.Length; i++) { ... }
     }
 }
