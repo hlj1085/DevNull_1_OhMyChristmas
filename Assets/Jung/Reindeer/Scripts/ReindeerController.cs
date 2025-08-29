@@ -10,6 +10,8 @@ using Photon.Pun;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Inventory))]
+
+
 public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
 {
     // 플레이어의 현재 상태를 정의합니다.
@@ -38,6 +40,14 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     public float capturedMashAmount = 0.1f;
     [Tooltip("F키 연타 입력 사이의 최소 간격(쿨타임)")]
     public float mashCooldown = 0.5f;
+
+    [Header("아이템 장착")]
+    [Tooltip("아이템을 물었을 때 붙을 위치 (예: 입 주변의 빈 오브젝트)")]
+    public Transform mouthAttachPoint;
+
+    // --- 비공개 로직 변수 ---
+    private ItemData equippedItem; // 현재 장착한 아이템 데이터
+    private GameObject equippedItemObject; // 현재 장착해서 입에 물고 있는 아이템의 3D 모델
 
     [Header("이동 설정")]
     public float walkSpeed = 2.5f;
@@ -218,11 +228,11 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
 
     private void HandleDebugInput()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             photonView.RPC("GetStunned", RpcTarget.All);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && currentState == PlayerState.Stunned)
+        if (Input.GetKeyDown(KeyCode.Alpha5) && currentState == PlayerState.Stunned)
         {
             // 실제로는 산타가 보따리의 PhotonView ID를 담아서 호출해야 함
             // 테스트를 위해 임시로 sackTransform의 PhotonView ID를 사용 (없으면 0)
@@ -446,6 +456,7 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         }
     }
 
+
     // --- 입력 콜백 및 상호작용 로직 ---
     private void SetupInputCallbacks()
     {
@@ -458,6 +469,107 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         inputActions.Player.Interact.started += _ => HandleInteractionStart();
         inputActions.Player.Interact.canceled += _ => HandleInteractionCancel();
         inputActions.Player.Recovery.performed += _ => HandleRecoveryMash();
+        // --- [추가] 아이템 관련 입력 ---
+        inputActions.Player.Item1.performed += _ => EquipItemFromSlot(0); // 1번 키
+        inputActions.Player.Item2.performed += _ => EquipItemFromSlot(1); // 2번 키
+        inputActions.Player.Item3.performed += _ => EquipItemFromSlot(2); // 3번 키
+        inputActions.Player.UseItem.performed += _ => UseEquippedItem();   // 사용 키 (예: 마우스 좌클릭)
+    }
+    // 인벤토리 슬롯 번호에 해당하는 아이템을 장착합니다.
+    private void EquipItemFromSlot(int slotIndex)
+    {
+        var items = inventory.GetItems();
+        if (slotIndex < items.Count)
+        {
+            EquipItem(items[slotIndex]);
+        }
+    }
+
+    // 아이템을 입에 무는(장착) 함수
+    private void EquipItem(ItemData itemToEquip)
+    {
+        // 이미 다른 아이템을 물고 있으면 제거
+        if (equippedItemObject != null)
+        {
+            Destroy(equippedItemObject);
+        }
+
+        equippedItem = itemToEquip;
+
+        // 아이템의 3D 모델을 입 위치에 생성
+        if (equippedItem.itemPrefab != null)
+        {
+            equippedItemObject = Instantiate(equippedItem.itemPrefab, mouthAttachPoint);
+        }
+        Debug.Log(equippedItem.itemName + " 장착!");
+    }
+
+    // 장착한 아이템을 사용하는 함수
+    private void UseEquippedItem()
+    {
+        // 장착한 아이템이 없으면 아무것도 하지 않음
+        if (equippedItem == null) return;
+
+        Debug.Log(equippedItem.itemName + " 아이템 사용!");
+        
+        // 아이템 데이터에게 "너가 가진 모든 효과를 실행해!" 라고 명령합니다.
+        // ReindeerController는 아이템이 구체적으로 어떤 효과인지 알 필요가 없습니다.
+        equippedItem.Use(this);
+
+        // 사용한 아이템은 인벤토리에서 제거합니다.
+        inventory.RemoveItem(equippedItem);
+
+        // 입에 물고 있던 3D 모델을 파괴하고, 장착 상태를 해제합니다.
+        if (equippedItemObject != null)
+        {
+            Destroy(equippedItemObject);
+        }
+        equippedItem = null;
+        equippedItemObject = null;
+    }
+
+    // --- 아이템 효과 RPC 함수들 ---
+
+    [PunRPC]
+    public void ApplySpeedBoost(float newSpeed, float duration) // private -> public으로 변경
+    {
+        StartCoroutine(SpeedBoostCoroutine(newSpeed, duration));
+    }
+
+    public void ThrowItem(string prefabName, float force)
+    {
+        photonView.RPC("ThrowItemRPC", RpcTarget.All, prefabName, force);
+    }
+
+    private IEnumerator SpeedBoostCoroutine(float newSpeed, float duration)
+    {
+        float originalSpeed = runSpeed;
+        runSpeed = newSpeed;
+        Debug.Log("속도 증가! 현재 속도: " + runSpeed);
+
+        yield return new WaitForSeconds(duration);
+
+        runSpeed = originalSpeed;
+        Debug.Log("속도 원래대로 복귀. 현재 속도: " + runSpeed);
+    }
+
+    [PunRPC]
+    private void ThrowItemRPC(string projectilePrefabName, float force)
+    {
+        // 던지는 로직은 모든 클라이언트에서 실행되어야 모두에게 보임
+        // 카메라 방향은 로컬 플레이어 기준으로 계산
+        Vector3 throwDirection = thirdPersonCameraScript.transform.forward;
+        Vector3 spawnPosition = mouthAttachPoint.position + throwDirection * 0.5f;
+
+        // 마스터 클라이언트만 생성하여 중복 방지
+        if (PhotonNetwork.IsMasterClient)
+        {
+            GameObject projectile = PhotonNetwork.Instantiate(projectilePrefabName, spawnPosition, Quaternion.LookRotation(throwDirection));
+            if (projectile.GetComponent<Rigidbody>() != null)
+            {
+                projectile.GetComponent<Rigidbody>().AddForce(throwDirection * force, ForceMode.VelocityChange);
+            }
+        }
     }
     private void OnTriggerEnter(Collider other)
     {

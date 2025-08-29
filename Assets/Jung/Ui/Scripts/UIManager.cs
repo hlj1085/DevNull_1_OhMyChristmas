@@ -48,8 +48,7 @@ public class UIManager : MonoBehaviour
         if (inventoryUI != null)
         {
             // 인스펙터에서 연결된 inventoryUI에게 목표 인벤토리를 알려줍니다.
-            inventoryUI.inventory = targetInventory;
-        }
+            inventoryUI.inventory = targetInventory;        }
         else
         {
             Debug.LogError("UIManager에 InventoryUI가 연결되지 않아 인벤토리를 설정할 수 없습니다!");

@@ -15,10 +15,10 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public partial class @Reindeer_Input_Beta: IInputActionCollection2, IDisposable
+public partial class @Reindeer_Input: IInputActionCollection2, IDisposable
 {
     public InputActionAsset asset { get; }
-    public @Reindeer_Input_Beta()
+    public @Reindeer_Input()
     {
         asset = InputActionAsset.FromJson(@"{
     ""name"": ""Reindeer_Input"",
@@ -85,6 +85,42 @@ public partial class @Reindeer_Input_Beta: IInputActionCollection2, IDisposable
                     ""name"": ""Recovery"",
                     ""type"": ""Button"",
                     ""id"": ""aaad482e-cd2b-4eaa-b206-acb07538d225"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Item1"",
+                    ""type"": ""Button"",
+                    ""id"": ""96f39590-f146-4d8f-8f68-c876ed1d342e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Item2"",
+                    ""type"": ""Button"",
+                    ""id"": ""d3780c0f-6ea8-4de9-8239-02c5a8ad00d2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Item3"",
+                    ""type"": ""Button"",
+                    ""id"": ""ca099e81-ff66-46aa-a0dc-18f572240a9b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""bdd7a598-5063-486c-b2d9-eea3c6b7272a"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -212,6 +248,50 @@ public partial class @Reindeer_Input_Beta: IInputActionCollection2, IDisposable
                     ""action"": ""Recovery"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b02eec2c-2439-44dd-912c-02fbdc203fc1"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Item1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""69da47b9-04e9-412f-9559-994b19721f34"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Item2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""472bedb5-5a22-4037-bd42-e2566a5be5f3"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Item3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f21cf568-d36a-424a-b649-6b35fadff57e"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -288,11 +368,15 @@ public partial class @Reindeer_Input_Beta: IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Recovery = m_Player.FindAction("Recovery", throwIfNotFound: true);
+        m_Player_Item1 = m_Player.FindAction("Item1", throwIfNotFound: true);
+        m_Player_Item2 = m_Player.FindAction("Item2", throwIfNotFound: true);
+        m_Player_Item3 = m_Player.FindAction("Item3", throwIfNotFound: true);
+        m_Player_UseItem = m_Player.FindAction("UseItem", throwIfNotFound: true);
     }
 
-    ~@Reindeer_Input_Beta()
+    ~@Reindeer_Input()
     {
-        UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, Reindeer_Input_Beta.Player.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, Reindeer_Input.Player.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -361,10 +445,14 @@ public partial class @Reindeer_Input_Beta: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Recovery;
+    private readonly InputAction m_Player_Item1;
+    private readonly InputAction m_Player_Item2;
+    private readonly InputAction m_Player_Item3;
+    private readonly InputAction m_Player_UseItem;
     public struct PlayerActions
     {
-        private @Reindeer_Input_Beta m_Wrapper;
-        public PlayerActions(@Reindeer_Input_Beta wrapper) { m_Wrapper = wrapper; }
+        private @Reindeer_Input m_Wrapper;
+        public PlayerActions(@Reindeer_Input wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
@@ -372,6 +460,10 @@ public partial class @Reindeer_Input_Beta: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Recovery => m_Wrapper.m_Player_Recovery;
+        public InputAction @Item1 => m_Wrapper.m_Player_Item1;
+        public InputAction @Item2 => m_Wrapper.m_Player_Item2;
+        public InputAction @Item3 => m_Wrapper.m_Player_Item3;
+        public InputAction @UseItem => m_Wrapper.m_Player_UseItem;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -402,6 +494,18 @@ public partial class @Reindeer_Input_Beta: IInputActionCollection2, IDisposable
             @Recovery.started += instance.OnRecovery;
             @Recovery.performed += instance.OnRecovery;
             @Recovery.canceled += instance.OnRecovery;
+            @Item1.started += instance.OnItem1;
+            @Item1.performed += instance.OnItem1;
+            @Item1.canceled += instance.OnItem1;
+            @Item2.started += instance.OnItem2;
+            @Item2.performed += instance.OnItem2;
+            @Item2.canceled += instance.OnItem2;
+            @Item3.started += instance.OnItem3;
+            @Item3.performed += instance.OnItem3;
+            @Item3.canceled += instance.OnItem3;
+            @UseItem.started += instance.OnUseItem;
+            @UseItem.performed += instance.OnUseItem;
+            @UseItem.canceled += instance.OnUseItem;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -427,6 +531,18 @@ public partial class @Reindeer_Input_Beta: IInputActionCollection2, IDisposable
             @Recovery.started -= instance.OnRecovery;
             @Recovery.performed -= instance.OnRecovery;
             @Recovery.canceled -= instance.OnRecovery;
+            @Item1.started -= instance.OnItem1;
+            @Item1.performed -= instance.OnItem1;
+            @Item1.canceled -= instance.OnItem1;
+            @Item2.started -= instance.OnItem2;
+            @Item2.performed -= instance.OnItem2;
+            @Item2.canceled -= instance.OnItem2;
+            @Item3.started -= instance.OnItem3;
+            @Item3.performed -= instance.OnItem3;
+            @Item3.canceled -= instance.OnItem3;
+            @UseItem.started -= instance.OnUseItem;
+            @UseItem.performed -= instance.OnUseItem;
+            @UseItem.canceled -= instance.OnUseItem;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -498,5 +614,9 @@ public partial class @Reindeer_Input_Beta: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnRecovery(InputAction.CallbackContext context);
+        void OnItem1(InputAction.CallbackContext context);
+        void OnItem2(InputAction.CallbackContext context);
+        void OnItem3(InputAction.CallbackContext context);
+        void OnUseItem(InputAction.CallbackContext context);
     }
 }
