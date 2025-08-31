@@ -23,13 +23,13 @@ public class InteractableBox : MonoBehaviour, IInteractable, IPunObservable
         photonView = GetComponent<PhotonView>();
     }
 
-    public void Interact(Inventory inventory)
+    // Interact 함수의 반환 타입을 bool로 변경하고, true를 return
+    public bool Interact(Inventory inventory)
     {
-        // 이미 열려있으면 아무것도 하지 않음
-        if (isOpened) return;
+        if (isOpened) return false; // 이미 열렸으면 상호작용 실패
 
-        // 직접 상자를 열지 않고, 모든 클라이언트에게 열라는 RPC 신호를 보냄
         photonView.RPC("OpenBoxRPC", RpcTarget.All);
+        return true; // 상호작용 시작에 성공했으므로 true 반환
     }
 
     [PunRPC] // 이 함수는 RPC 신호를 받은 모든 클라이언트에서 실행됩니다.

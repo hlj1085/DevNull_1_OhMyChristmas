@@ -29,17 +29,15 @@ public class ItemObject : MonoBehaviour, IInteractable
     }
 
     // 플레이어가 상호작용했을 때 호출되는 함수
-    public void Interact(Inventory interactorInventory)
+    // Interact 함수의 반환 타입을 bool로 변경하고, 성공 여부를 return
+    public bool Interact(Inventory interactorInventory)
     {
-        // 1. 상호작용한 플레이어의 인벤토리에 아이템을 추가해 봅니다.
         bool success = interactorInventory.AddItem(itemData);
-
-        // 2. 인벤토리에 아이템이 성공적으로 추가되었다면 (인벤토리가 꽉 차지 않았다면)
         if (success)
         {
-            // 3. 모든 클라이언트에게 이 아이템을 파괴하라는 RPC를 보냅니다.
             photonView.RPC("DestroyItemRPC", RpcTarget.All);
         }
+        return success; // 성공했으면 true, 인벤토리가 꽉 찼으면 false 반환
     }
 
     // --- RPC 함수 ---

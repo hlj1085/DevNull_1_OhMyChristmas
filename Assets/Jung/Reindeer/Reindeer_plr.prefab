@@ -9018,7 +9018,7 @@ MonoBehaviour:
   stunMashAmount: 0.5
   capturedMashAmount: 0.1
   mashCooldown: 0.5
-  mouthAttachPoint: {fileID: 0}
+  mouthAttachPoint: {fileID: 4941256197810445425}
   walkSpeed: 2.5
   runSpeed: 5.6
   turnSpeed: 8
@@ -9034,10 +9034,10 @@ MonoBehaviour:
   interactionHoldDuration: 3
   minIdleWaitTime: 3
   maxIdleWaitTime: 7
+  groundCheckRadius: 0.4
+  groundCheckDistance: 0.6
   gravityMultiplier: 2.5
   fallMultiplier: 5
-  groundCheckDistance: 0.2
-  groundCheckOffset: 0.2
   groundMask:
     serializedVersion: 2
     m_Bits: 72

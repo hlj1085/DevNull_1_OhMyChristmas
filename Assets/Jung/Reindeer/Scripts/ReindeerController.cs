@@ -75,10 +75,12 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     public float maxIdleWaitTime = 7f;
 
     [Header("중력 및 지면 체크")]
+    [Tooltip("땅을 감지할 구체의 반지름입니다.")]
+    public float groundCheckRadius = 0.4f;
+    [Tooltip("캐릭터의 중심에서 아래로 스피어캐스트를 쏠 최대 거리입니다.")]
+    public float groundCheckDistance = 0.6f;
     public float gravityMultiplier = 2.5f;
     public float fallMultiplier = 5f;
-    public float groundCheckDistance = 0.2f;
-    public float groundCheckOffset = 0.1f;
     public LayerMask groundMask;
 
     // 외부에서 현재 상태를 읽기 위한 프로퍼티
@@ -88,11 +90,14 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     // --- UI 참조 변수 (UIManager를 통해 할당됨) ---
     private GameObject interactionUIGroup;
     private GameObject recoveryUIGroup;
+    private TextMeshProUGUI useItemPromptUI; // <<< [추가] 아이템 사용 안내 텍스트
     private TextMeshProUGUI interactionPromptUI;
     private Slider interactionSlider;
     private Slider recoverySlider;
 
     // --- 내부 로직 변수 ---
+    private int lastEquippedSlot = -1; // 마지막으로 장착한 아이템 슬롯 번호 (-1은 없음)
+
     private Transform currentSackTransform;
     private PlayerState currentState = PlayerState.Normal;
     private float lastMashTime;
@@ -166,10 +171,13 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
                 interactionPromptUI = UIManager.instance.interactionPromptUI;
                 interactionSlider = UIManager.instance.interactionSlider;
                 recoverySlider = UIManager.instance.recoverySlider;
+                useItemPromptUI = UIManager.instance.useItemPromptUI; // <<< [추가]
 
                 // 게임 시작 시 UI들을 확실하게 꺼줍니다.
                 if (interactionUIGroup != null) interactionUIGroup.SetActive(false);
                 if (recoveryUIGroup != null) recoveryUIGroup.SetActive(false);
+                if (useItemPromptUI != null) useItemPromptUI.gameObject.SetActive(false); // <<< [추가]
+
             }
             else
             {
@@ -220,8 +228,15 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     {
         if (!photonView.IsMine) return;
 
+        // --- [핵심 수정] ---
+        // 매 물리 프레임 시작 시, 일단 공중에 떠있다고 가정합니다.
+        // OnCollisionStay에서 땅과 닿는 것이 확인되면 이 값은 즉시 true로 바뀝니다.
+        _isGrounded = false;
+
+        // GroundCheck() 함수 호출은 삭제합니다.
+
         if (isDashing) return;
-        GroundCheck();
+
         ApplyMovement();
         ApplyBetterGravity();
     }
@@ -448,12 +463,14 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         if (currentState == PlayerState.Captured) return "Help2";
         return "";
     }
-    public void Interact(Inventory interactorInventory)
+    // Interact 함수의 반환 타입을 bool로 변경하고, true를 return
+    public bool Interact(Inventory interactorInventory)
     {
         if (photonView != null)
         {
             photonView.RPC("GetRescued", RpcTarget.All);
         }
+        return true; // 구출 시도에 성공했으므로 true 반환
     }
 
 
@@ -473,61 +490,111 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         inputActions.Player.Item1.performed += _ => EquipItemFromSlot(0); // 1번 키
         inputActions.Player.Item2.performed += _ => EquipItemFromSlot(1); // 2번 키
         inputActions.Player.Item3.performed += _ => EquipItemFromSlot(2); // 3번 키
-        inputActions.Player.UseItem.performed += _ => UseEquippedItem();   // 사용 키 (예: 마우스 좌클릭)
+        inputActions.Player.UseItem.performed += _ => UseEquippedItem();   // 사용 키
+
     }
-    // 인벤토리 슬롯 번호에 해당하는 아이템을 장착합니다.
+
     private void EquipItemFromSlot(int slotIndex)
     {
         var items = inventory.GetItems();
-        if (slotIndex < items.Count)
-        {
-            EquipItem(items[slotIndex]);
-        }
-    }
 
-    // 아이템을 입에 무는(장착) 함수
-    private void EquipItem(ItemData itemToEquip)
-    {
-        // 이미 다른 아이템을 물고 있으면 제거
+        // 1. 누른 슬롯이 비어있다면 -> 무조건 맨손으로
+        if (slotIndex >= items.Count || items[slotIndex] == null)
+        {
+            UnequipItem();
+            return;
+        }
+
+        // --- [핵심 수정] ---
+        // 2. 만약 현재 아이템을 들고 있고(맨손이 아니고), 방금 누른 슬롯이 그 아이템의 슬롯과 같다면 -> 맨손으로
+        if (equippedItem != null && slotIndex == lastEquippedSlot)
+        {
+            UnequipItem();
+            return;
+        }
+
+        // 3. 위 두 경우가 아니라면 (다른 아이템을 선택했거나, 맨손에서 아이템을 선택했다면) -> 새로운 아이템 장착/교체
+        ItemData newItem = items[slotIndex];
+
+        // 이전에 물고 있던 아이템 모델 제거
         if (equippedItemObject != null)
         {
             Destroy(equippedItemObject);
         }
 
-        equippedItem = itemToEquip;
+        // 새 아이템 정보로 업데이트
+        equippedItem = newItem;
+        lastEquippedSlot = slotIndex; // 마지막으로 장착한 슬롯 번호 기억
 
-        // 아이템의 3D 모델을 입 위치에 생성
+        // 새 아이템 모델 생성
         if (equippedItem.itemPrefab != null)
         {
             equippedItemObject = Instantiate(equippedItem.itemPrefab, mouthAttachPoint);
         }
-        Debug.Log(equippedItem.itemName + " 장착!");
+
+        // UI 업데이트
+        if (UIManager.instance != null)
+        {
+            UIManager.instance.inventoryUI.UpdateSelection(slotIndex);
+        }
+        if (useItemPromptUI != null)
+        {
+            useItemPromptUI.text = "E키를 눌러 사용하기";
+            useItemPromptUI.gameObject.SetActive(true);
+        }
     }
+
 
     // 장착한 아이템을 사용하는 함수
     private void UseEquippedItem()
     {
-        // 장착한 아이템이 없으면 아무것도 하지 않음
+        // 1. 장착한 아이템이 없으면 아무것도 하지 않음
         if (equippedItem == null) return;
 
         Debug.Log(equippedItem.itemName + " 아이템 사용!");
-        
-        // 아이템 데이터에게 "너가 가진 모든 효과를 실행해!" 라고 명령합니다.
-        // ReindeerController는 아이템이 구체적으로 어떤 효과인지 알 필요가 없습니다.
+
+        // 2. 아이템 데이터에게 효과를 실행하라고 먼저 명령
         equippedItem.Use(this);
 
-        // 사용한 아이템은 인벤토리에서 제거합니다.
+        // 3. 사용한 아이템은 인벤토리에서 제거
         inventory.RemoveItem(equippedItem);
 
-        // 입에 물고 있던 3D 모델을 파괴하고, 장착 상태를 해제합니다.
+        // 4. 아이템을 사용했으므로, 장착 해제 함수를 호출하여 모든 상태를 깔끔하게 정리
+        UnequipItem();
+    }
+    /// <summary>
+    /// 현재 장착한 아이템을 해제하고 맨손 상태로 돌아갑니다.
+    /// </summary>
+    private void UnequipItem()
+    {
+        // 이미 맨손 상태이면 아무것도 하지 않음
+        if (equippedItem == null) return;
+
+        Debug.Log("아이템 장착 해제 (맨손 상태)");
+
+        // 입에 물고 있던 3D 모델이 있다면 파괴
         if (equippedItemObject != null)
         {
             Destroy(equippedItemObject);
         }
+
+        // 모든 관련 변수를 깨끗하게 초기화
         equippedItem = null;
         equippedItemObject = null;
-    }
+        lastEquippedSlot = -1; // 마지막 슬롯 기록도 초기화
 
+        // UI 선택 테두리를 모두 끔
+        if (UIManager.instance != null && UIManager.instance.inventoryUI != null)
+        {
+            UIManager.instance.inventoryUI.UpdateSelection(-1);
+        }
+
+        // "사용하기" 안내 텍스트를 숨김
+        if (useItemPromptUI != null)
+        {
+            useItemPromptUI.gameObject.SetActive(false);
+        }
+    }
     // --- 아이템 효과 RPC 함수들 ---
 
     [PunRPC]
@@ -589,10 +656,20 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     private void HandleInteractionStart()
     {
         if (currentInteractable == null || !currentInteractable.CanInteract || CurrentState != PlayerState.Normal) return;
+
+        // 즉시 발동 아이템 (아이템 줍기 등)
         if (currentInteractable.InteractionType == InteractionType.Instant)
         {
-            currentInteractable.Interact(inventory);
+            // 상호작용을 시도하고, 그 결과를 'success' 변수에 저장
+            bool success = currentInteractable.Interact(inventory);
+
+            // [핵심] 상호작용에 성공했다면, 즉시 대상을 잊어버린다!
+            if (success)
+            {
+                currentInteractable = null;
+            }
         }
+        // 홀드 상호작용 (상자 열기, 구출 등)
         else if (currentInteractable.InteractionType == InteractionType.Hold)
         {
             if (IsMoving) return;
@@ -612,8 +689,22 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     private void TryDash() { if (currentState != PlayerState.Normal || isDashing || !(Time.time >= lastDashTime + dashCooldown) || !_isGrounded) return; StartCoroutine(DashCoroutine()); }
     private void ApplyMovement() { if (currentState != PlayerState.Normal || interactionCoroutine != null || isDashing) { currentHorizontalVelocity = Vector3.SmoothDamp(currentHorizontalVelocity, Vector3.zero, ref smoothDampVelocity, moveSmoothTime); rb.velocity = new Vector3(currentHorizontalVelocity.x, rb.velocity.y, currentHorizontalVelocity.z); return; } float targetSpeed = isRunning ? runSpeed : walkSpeed; if (moveInputVec2.magnitude >= 0.1f) { if (thirdPersonCameraScript == null) return; Vector3 cameraForward = thirdPersonCameraScript.transform.forward; Vector3 cameraRight = thirdPersonCameraScript.transform.right; cameraForward.y = 0; cameraRight.y = 0; cameraForward.Normalize(); cameraRight.Normalize(); Vector3 desiredMoveDirection = (cameraForward * moveInputVec2.y + cameraRight * moveInputVec2.x).normalized; if (desiredMoveDirection != Vector3.zero) { transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), turnSpeed * Time.fixedDeltaTime); } Vector3 targetHorizontalVelocity = desiredMoveDirection * targetSpeed; currentHorizontalVelocity = Vector3.SmoothDamp(currentHorizontalVelocity, targetHorizontalVelocity, ref smoothDampVelocity, moveSmoothTime); } else { currentHorizontalVelocity = Vector3.SmoothDamp(currentHorizontalVelocity, Vector3.zero, ref smoothDampVelocity, moveSmoothTime); } rb.velocity = new Vector3(currentHorizontalVelocity.x, rb.velocity.y, currentHorizontalVelocity.z); }
     private IEnumerator DashCoroutine() { isDashing = true; lastDashTime = Time.time; animator.SetTrigger(hashDash); Vector3 moveDirection = new Vector3(moveInputVec2.x, 0, moveInputVec2.y); Vector3 dashDirection = transform.forward; if (moveDirection.magnitude > 0.1f) { if (thirdPersonCameraScript == null) { isDashing = false; yield break; } dashDirection = thirdPersonCameraScript.transform.TransformDirection(moveDirection).normalized; dashDirection.y = 0; } float startTime = Time.time; while (Time.time < startTime + dashDuration) { rb.velocity = new Vector3(dashDirection.x * dashSpeed, 0, dashDirection.z * dashSpeed); yield return new WaitForFixedUpdate(); } float slideStartTime = Time.time; Vector3 slideStartVelocity = rb.velocity; Vector3 finalVelocity = new Vector3(0, rb.velocity.y, 0); while (Time.time < slideStartTime + dashSlideDuration) { float t = (Time.time - slideStartTime) / dashSlideDuration; rb.velocity = Vector3.Lerp(slideStartVelocity, finalVelocity, t); yield return new WaitForFixedUpdate(); } isDashing = false; }
-    private void GroundCheck() { if (rb == null) return; CapsuleCollider capCol = GetComponent<CapsuleCollider>(); Vector3 sphereOrigin = transform.position + Vector3.up * (capCol.center.y - capCol.height / 2f + capCol.radius); _isGrounded = Physics.CheckSphere(sphereOrigin, capCol.radius, groundMask); if (_isGrounded) { lastGroundedTime = Time.time; } }
     private void ApplyBetterGravity() { if (rb == null) return; if (rb.velocity.y < 0) { rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime; } else if (rb.velocity.y > 0) { rb.velocity += Vector3.up * Physics.gravity.y * (gravityMultiplier - 1) * Time.fixedDeltaTime; } }
     private void HandleRandomIdle() { if (animator == null) return; if (animator.GetCurrentAnimatorStateInfo(0).IsName("Stop")) { idleTimer += Time.deltaTime; if (idleTimer >= randomIdleWaitTime) { animator.SetTrigger(hashIdleTrigger); ResetIdleTimer(); } } else { ResetIdleTimer(); } }
     private void ResetIdleTimer() { idleTimer = 0f; randomIdleWaitTime = Random.Range(minIdleWaitTime, maxIdleWaitTime); }
+
+    /// <summary>
+    /// 이 캐릭터의 콜라이더가 다른 콜라이더와 닿아있는 동안 계속 호출되는 함수입니다.
+    /// </summary>
+    private void OnCollisionStay(Collision collision)
+    {
+        // 닿은 상대방의 레이어가 groundMask에 포함되어 있는지 확인합니다.
+        // (collision.gameObject.layer는 숫자, groundMask.value는 비트마스크 값이므로 비트 연산으로 확인)
+        if ((groundMask.value & (1 << collision.gameObject.layer)) > 0)
+        {
+            // 닿고 있다면 땅 위에 있는 것으로 판정합니다.
+            _isGrounded = true;
+            lastGroundedTime = Time.time;
+        }
+    }
 }

@@ -8,12 +8,15 @@ public class UIManager : MonoBehaviour
 
     [Header("UI Groups")]
     public GameObject interactionUIGroup;
+
     public GameObject recoveryUIGroup;
     public GameObject gameStatusUIGroup;
     public GameObject inventoryUIGroup;
 
     [Header("UI Elements")]
     public TextMeshProUGUI interactionPromptUI;
+    public TextMeshProUGUI useItemPromptUI; // <<< [Ãß°¡]
+
     public Slider interactionSlider;
     public Slider recoverySlider;
 

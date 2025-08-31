@@ -6,10 +6,10 @@ public enum InteractionType
 
 public interface IInteractable
 {
-    // [추가] 이 오브젝트와 현재 상호작용이 가능한지 여부를 반환합니다.
-    bool CanInteract { get; }
-
     InteractionType InteractionType { get; }
-    void Interact(Inventory inventory);
+    bool CanInteract { get; }
     string GetInteractMessage();
+    
+    // void에서 bool로 변경
+    bool Interact(Inventory interactorInventory); 
 }

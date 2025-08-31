@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365ff1c3f22749648a165c7c3beeea6d, type: 3}
   m_Name: Speed Boost Effect
   m_EditorClassIdentifier: 
-  speedBoostAmount: 5
+  speedBoostAmount: 10
   boostDuration: 10

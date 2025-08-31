@@ -50,6 +50,11 @@ MonoBehaviour:
   - ApplySpeedBoostRPC
   - ThrowItemRPC
   - ApplySpeedBoost
+  - GetCapturedRPC
+  - GetRescuedRPC
+  - GetStunnedRPC
+  - PerformDashRPC
+  - PerformJumpRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
