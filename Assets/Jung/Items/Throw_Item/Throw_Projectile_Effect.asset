@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 365ff1c3f22749648a165c7c3beeea6d, type: 3}
-  m_Name: Speed Boost Effect
+  m_Script: {fileID: 11500000, guid: 4e238c45c11c8284e9780c38b5749d38, type: 3}
+  m_Name: Throw_Projectile_Effect
   m_EditorClassIdentifier: 
-  speedBoostAmount: 10
-  boostDuration: 10
+  throwForce: 30
+  projectilePrefab: {fileID: 9167863618472538398, guid: a68cd9b8a31e0a64aa94a27f8aded0dd, type: 3}

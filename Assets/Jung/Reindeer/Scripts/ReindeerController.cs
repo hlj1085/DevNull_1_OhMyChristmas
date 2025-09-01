@@ -369,58 +369,75 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
 
     private void UpdateAllUI()
     {
-        if (recoveryUIGroup == null || interactionUIGroup == null) return;
+        // UI 컴포넌트가 없으면 즉시 종료 (안전장치)
+        if (recoveryUIGroup == null || interactionUIGroup == null || useItemPromptUI == null) return;
 
-        // --- 1. 기절 또는 포획 상태 처리 ---
+        // --- 1. 기절 또는 포획 상태일 때 ---
         if (currentState == PlayerState.Stunned || currentState == PlayerState.Captured)
         {
+            // 회복 UI만 켜고 나머지 UI는 모두 끈다.
             recoveryUIGroup.SetActive(true);
-            interactionUIGroup.SetActive(false); // 상호작용 UI는 확실히 끈다.
+            interactionUIGroup.SetActive(false);
+            useItemPromptUI.gameObject.SetActive(false);
+
             if (recoverySlider != null)
             {
                 recoverySlider.value = currentRecoveryTimer / recoveryTime;
             }
-            return; // 다른 UI 로직을 실행할 필요가 없으므로 여기서 종료
         }
-
-        // --- 2. 정상 상태 처리 ---
-
-        // 회복 UI는 반드시 끈다.
-        recoveryUIGroup.SetActive(false);
-
-        // --- [핵심 수정] ---
-        // 현재 상호작용 대상이 유효한지 먼저 확인합니다.
-        // 대상이 파괴되었거나(Unity의 null 체크), CanInteract가 false가 되었다면,
-        if (currentInteractable == null || !currentInteractable.CanInteract)
+        // --- 2. 정상 상태일 때 ---
+        else if (currentState == PlayerState.Normal)
         {
-            // UI를 끄고, 더 이상 상호작용 대상이 없다고 명확히 합니다.
-            if (interactionUIGroup.activeSelf)
+            // 회복 UI는 반드시 끈다.
+            recoveryUIGroup.SetActive(false);
+
+            // --- [핵심 수정] UI 우선순위 로직 ---
+
+            // 우선순위 1: 장착한 아이템이 있는지 먼저 확인
+            if (equippedItem != null)
             {
+                // 아이템을 들고 있다면, '사용' 안내 UI를 켜고,
+                useItemPromptUI.gameObject.SetActive(true);
+                useItemPromptUI.text = "E to Use";
+
+                // 일반 상호작용 UI는 반드시 끈다.
                 interactionUIGroup.SetActive(false);
             }
-            // OnTriggerExit이 호출되기 전이라도, 더 이상 유효하지 않으므로 참조를 제거합니다.
-            if (currentInteractable != null && !currentInteractable.CanInteract)
+            // 우선순위 2: 장착한 아이템이 없을 때만 주변 상호작용을 확인
+            else
             {
-                currentInteractable = null;
+                // '사용' 안내 UI는 반드시 끈다.
+                useItemPromptUI.gameObject.SetActive(false);
+
+                // 기존의 주변 상호작용 가능 여부를 체크하는 로직 실행
+                bool canInteract = (currentInteractable != null && currentInteractable.CanInteract);
+                interactionUIGroup.SetActive(canInteract);
+
+                if (canInteract)
+                {
+                    // 세부 UI 설정 (텍스트, 홀드 슬라이더 등)
+                    if (interactionPromptUI != null)
+                        interactionPromptUI.text = currentInteractable.GetInteractMessage();
+
+                    if (interactionSlider != null)
+                    {
+                        bool isHoldType = currentInteractable.InteractionType == InteractionType.Hold;
+                        interactionSlider.gameObject.SetActive(isHoldType);
+                        if (isHoldType && interactionCoroutine == null)
+                        {
+                            interactionSlider.value = 0;
+                        }
+                    }
+                }
             }
-            return; // UI를 껐으므로 더 이상 진행할 필요 없음
         }
-
-        // 위 관문을 통과했다면, 상호작용이 가능한 상태이므로 UI를 켭니다.
-        interactionUIGroup.SetActive(true);
-
-        // 세부 UI 설정 (텍스트, 홀드 슬라이더 등)
-        if (interactionPromptUI != null)
-            interactionPromptUI.text = currentInteractable.GetInteractMessage();
-
-        if (interactionSlider != null)
+        // --- 3. 그 외 모든 경우 ---
+        else
         {
-            bool isHoldType = currentInteractable.InteractionType == InteractionType.Hold;
-            interactionSlider.gameObject.SetActive(isHoldType);
-            if (isHoldType && interactionCoroutine == null)
-            {
-                interactionSlider.value = 0;
-            }
+            // 모든 UI를 끈다.
+            recoveryUIGroup.SetActive(false);
+            interactionUIGroup.SetActive(false);
+            useItemPromptUI.gameObject.SetActive(false);
         }
     }
 
@@ -530,6 +547,8 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         if (equippedItem.itemPrefab != null)
         {
             equippedItemObject = Instantiate(equippedItem.itemPrefab, mouthAttachPoint);
+            equippedItemObject.transform.localPosition = Vector3.zero;
+            equippedItemObject.transform.localRotation = Quaternion.identity;
         }
 
         // UI 업데이트
@@ -539,7 +558,7 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         }
         if (useItemPromptUI != null)
         {
-            useItemPromptUI.text = "E키를 눌러 사용하기";
+            useItemPromptUI.text = "E to Use Item";
             useItemPromptUI.gameObject.SetActive(true);
         }
     }

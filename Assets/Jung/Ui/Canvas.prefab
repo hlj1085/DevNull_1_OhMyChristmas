@@ -1180,13 +1180,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b26b70c66ace03449f842de903c22f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 0}
+  slotSelectionBorders: []
   inventoryPanel: {fileID: 0}
   itemSlots:
   - {fileID: 3800559310721506471}
   - {fileID: 7410028076671549892}
   - {fileID: 2103500408565767245}
-  slotSelectionBorders: []
 --- !u!1 &5836130043829890065
 GameObject:
   m_ObjectHideFlags: 0
@@ -1782,7 +1781,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'E to Use
+  m_text: 'E to Use Item
 
 '
   m_isRightToLeft: 0

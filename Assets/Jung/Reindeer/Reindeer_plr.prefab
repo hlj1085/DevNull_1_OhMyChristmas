@@ -6099,6 +6099,37 @@ Transform:
   - {fileID: 40460071669830271}
   m_Father: {fileID: 4475731781282707249}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4476618060398065395
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 664817985549743126}
+  m_Layer: 0
+  m_Name: Mouse
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &664817985549743126
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4476618060398065395}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.45819697, y: -0.5385681, z: -0.45819697, w: -0.5385681}
+  m_LocalPosition: {x: 0.28858122, y: 0.16285908, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3328588185947243821}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4503622925358927239
 GameObject:
   m_ObjectHideFlags: 0
@@ -9010,15 +9041,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4046c54aa1c3474b9ea109d80760a23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCameraObject: {fileID: 0}
-  thirdPersonCameraScript: {fileID: 0}
+  playerCameraObject: {fileID: 4233302074707381986}
+  thirdPersonCameraScript: {fileID: 9082676251068004710}
   sackTransform: {fileID: 0}
-  reindeerVisuals: {fileID: 0}
+  reindeerVisuals: {fileID: 4613024885907914236}
   recoveryTime: 20
   stunMashAmount: 0.5
   capturedMashAmount: 0.1
   mashCooldown: 0.5
-  mouthAttachPoint: {fileID: 4941256197810445425}
+  mouthAttachPoint: {fileID: 664817985549743126}
   walkSpeed: 2.5
   runSpeed: 5.6
   turnSpeed: 8
@@ -11309,6 +11340,7 @@ Transform:
   - {fileID: 6736913450973342052}
   - {fileID: 59335042345638955}
   - {fileID: 6120931832463605860}
+  - {fileID: 664817985549743126}
   m_Father: {fileID: 7250649411900138136}
   m_LocalEulerAnglesHint: {x: -0.0021873196, y: -0.0018478116, z: 59.760944}
 --- !u!1 &8454247838418827887
