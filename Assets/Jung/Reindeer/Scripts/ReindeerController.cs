@@ -19,7 +19,8 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     {
         Normal,
         Stunned,
-        Captured
+        Captured,
+        TiedToSleigh
     }
 
     [Header("참조")]
@@ -48,6 +49,11 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     // --- 비공개 로직 변수 ---
     private ItemData equippedItem; // 현재 장착한 아이템 데이터
     private GameObject equippedItemObject; // 현재 장착해서 입에 물고 있는 아이템의 3D 모델
+
+    private bool isAttachedToSleigh = false;
+
+    // 외부에서 isAttachedToSleigh 상태를 읽기 위한 public 프로퍼티
+    public bool IsAttachedToSleigh => isAttachedToSleigh;
 
     [Header("이동 설정")]
     public float walkSpeed = 2.5f;
@@ -227,6 +233,8 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     void FixedUpdate()
     {
         if (!photonView.IsMine) return;
+        if (isAttachedToSleigh) return;
+        if (currentState == PlayerState.TiedToSleigh) return;
 
         // --- [핵심 수정] ---
         // 매 물리 프레임 시작 시, 일단 공중에 떠있다고 가정합니다.
@@ -261,6 +269,11 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     [PunRPC]
     public void GetStunned()
     {
+        if (equippedItem != null)
+        {
+            // 즉시 장착을 해제합니다. (맨손으로 만듦)
+            UnequipItem();
+        }
         if (currentState != PlayerState.Normal) return;
         currentState = PlayerState.Stunned;
         currentRecoveryTimer = 0f;
@@ -312,6 +325,16 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     [PunRPC]
     public void ReleaseFromCapture()
     {
+                // 썰매에 묶여있었다면 연결을 해제합니다.
+        if (isAttachedToSleigh)
+        {
+            transform.SetParent(null);
+            if (rb != null)
+            {
+                rb.isKinematic = false;
+            }
+            isAttachedToSleigh = false;
+        }
         if (currentSackTransform == null) return;
 
         if (rb != null)
@@ -473,11 +496,11 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
 
     // --- IInteractable (다른 플레이어가 구출) ---
     public InteractionType InteractionType => InteractionType.Hold;
-    public bool CanInteract => currentState == PlayerState.Stunned || currentState == PlayerState.Captured;
-    public string GetInteractMessage()
+    // 상호작용이 가능한 조건: 내가 '기절' 또는 '포획' 또는 '썰매에 묶인' 상태일 때만
+    public bool CanInteract => currentState == PlayerState.Stunned || currentState == PlayerState.TiedToSleigh; public string GetInteractMessage()
     {
         if (currentState == PlayerState.Stunned) return "Help player";
-        if (currentState == PlayerState.Captured) return "Help2";
+        if (currentState == PlayerState.TiedToSleigh) return "Help Player";
         return "";
     }
     // Interact 함수의 반환 타입을 bool로 변경하고, true를 return
@@ -490,6 +513,83 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         return true; // 구출 시도에 성공했으므로 true 반환
     }
 
+    // 썰매, 묶기
+    [PunRPC]
+    public void TieToSleighRPC(int sleighViewID, int slotIndex)
+    {
+        // 포획된 상태가 아니면 묶일 수 없음
+        if (currentState != PlayerState.Captured) return;
+
+        PhotonView sleighPhotonView = PhotonView.Find(sleighViewID);
+        if (sleighPhotonView == null) return;
+
+        // 썰매의 특정 위치를 찾음 (썰매에 attachmentPoints 배열이 있다고 가정)
+        Transform[] attachmentPoints = sleighPhotonView.GetComponentsInChildren<Transform>(); // 임시방편, 실제로는 Sleigh 스크립트 필요
+        if (slotIndex >= attachmentPoints.Length) return;
+        Transform attachPoint = attachmentPoints[slotIndex];
+
+
+        // 1. 상태를 '썰매에 묶임'으로 변경
+        currentState = PlayerState.TiedToSleigh;
+
+        // 2. 보따리는 숨기고, 순록 모델은 다시 보이게 함
+        if (currentSackTransform != null) currentSackTransform.gameObject.SetActive(false);
+        if (reindeerVisuals != null) reindeerVisuals.SetActive(true);
+
+        // 3. 카메라 타겟을 다시 순록으로 변경
+        if (photonView.IsMine && thirdPersonCameraScript != null)
+        {
+            thirdPersonCameraScript.target = this.transform;
+        }
+
+        // 4. 물리엔진 방해를 막기 위해 Kinematic으로 변경
+        if (rb != null) rb.isKinematic = true;
+
+        // 5. 썰매의 지정된 위치로 이동하고 자식으로 만듦
+        transform.SetParent(attachPoint);
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+    }
+
+    [PunRPC]
+    public void AttachToSleigh(int sleighViewID, int slotIndex)
+    {
+        if (isAttachedToSleigh || currentState != PlayerState.Captured) return;
+
+        PhotonView sleighPhotonView = PhotonView.Find(sleighViewID);
+        Sleigh sleigh = sleighPhotonView.GetComponent<Sleigh>();
+        if (sleigh == null || slotIndex >= sleigh.attachmentPoints.Length) return;
+
+        // 상태를 '썰매에 묶임'으로 변경 (PlayerState Enum에 TiedToSleigh가 있어야 함)
+        // currentState = PlayerState.TiedToSleigh; 
+
+        if (currentSackTransform != null)
+        {
+            currentSackTransform.gameObject.SetActive(false);
+        }
+
+        if (reindeerVisuals != null)
+        {
+            reindeerVisuals.SetActive(true);
+        }
+
+        if (photonView.IsMine && thirdPersonCameraScript != null)
+        {
+            thirdPersonCameraScript.target = this.transform;
+        }
+
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+        }
+
+        Transform attachPoint = sleigh.attachmentPoints[slotIndex];
+        transform.SetParent(attachPoint);
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+
+        isAttachedToSleigh = true;
+    }
 
     // --- 입력 콜백 및 상호작용 로직 ---
     private void SetupInputCallbacks()
@@ -513,6 +613,8 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
 
     private void EquipItemFromSlot(int slotIndex)
     {
+        if (currentState != PlayerState.Normal) return;
+
         var items = inventory.GetItems();
 
         // 1. 누른 슬롯이 비어있다면 -> 무조건 맨손으로
@@ -567,6 +669,8 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     // 장착한 아이템을 사용하는 함수
     private void UseEquippedItem()
     {
+        if (currentState != PlayerState.Normal) return;
+
         // 1. 장착한 아이템이 없으면 아무것도 하지 않음
         if (equippedItem == null) return;
 
