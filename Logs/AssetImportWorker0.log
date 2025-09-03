@@ -219,3 +219,78 @@ Start importing Assets/huisu/폴더-20250831T123349Z-1-001.zip using Guid(7c15a8
  -> (artifact id: '61ff9849cb90c349da8b746fe44f6810') in 0.002217 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 415.083058 seconds.
+  path: Assets/huisu/Ui-20250831T123510Z-1-001.zip
+  artifactKey: Guid(df1fc4aa721acab4f96b771858770b6d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/Ui-20250831T123510Z-1-001.zip using Guid(df1fc4aa721acab4f96b771858770b6d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '803b2e9a0116fbf7044b7b0812c36557') in 0.002215 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 147.615097 seconds.
+  path: Assets/huisu/Ui-20250831T123510Z-1-001.zip
+  artifactKey: Guid(df1fc4aa721acab4f96b771858770b6d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/Ui-20250831T123510Z-1-001.zip using Guid(df1fc4aa721acab4f96b771858770b6d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '3096fc68f1b9332119a69f6d331d47b6') in 0.001455 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 27.556983 seconds.
+  path: Assets/huisu/KakaoTalk_20250902_221242408.png
+  artifactKey: Guid(5951b0a3d5f93624989c2c290da775eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/KakaoTalk_20250902_221242408.png using Guid(5951b0a3d5f93624989c2c290da775eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'e291ef7c93627d69bc9e5f7362aeb040') in 0.082651 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 84.843345 seconds.
+  path: Assets/huisu/in game map.png
+  artifactKey: Guid(1114c5a3ad225df4abdba94b5ea0c9ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/in game map.png using Guid(1114c5a3ad225df4abdba94b5ea0c9ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'b39d9fd23fde96fdc342f093187a578d') in 0.036592 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 112.023043 seconds.
+  path: Assets/Jung/Items
+  artifactKey: Guid(d4e660eb29259d045ae5883f0919d5fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Jung/Items using Guid(d4e660eb29259d045ae5883f0919d5fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'af51ef3e420061ad85e33c7897e4f273') in 0.001558 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 2.712347 seconds.
+  path: Assets/Jung/Reindeer/Reindeer_Input.inputactions
+  artifactKey: Guid(5b5ca19f7eaeb6742b369256231ac353) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Jung/Reindeer/Reindeer_Input.inputactions using Guid(5b5ca19f7eaeb6742b369256231ac353) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'f7a7f87065f98a08cda40763f32e4143') in 0.006969 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 12
+========================================================================
+Received Import Request.
+  Time since last request: 0.001871 seconds.
+  path: Assets/Jung/Reindeer/Reindeer_plr.prefab
+  artifactKey: Guid(2683c918cc071084d9d0fcdf9566e481) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Jung/Reindeer/Reindeer_plr.prefab using Guid(2683c918cc071084d9d0fcdf9566e481) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '9ce07b1268bf84dc9ed6758f34e7a506') in 0.332271 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 819
+========================================================================
+Received Import Request.
+  Time since last request: 2.687779 seconds.
+  path: Assets/Jung/Ui/Canvas.prefab
+  artifactKey: Guid(54508c7bebf2da149abe26be72bda872) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Jung/Ui/Canvas.prefab using Guid(54508c7bebf2da149abe26be72bda872) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'bc77e2b84456248ebb54bf1d69f5065c') in 0.211927 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 107
