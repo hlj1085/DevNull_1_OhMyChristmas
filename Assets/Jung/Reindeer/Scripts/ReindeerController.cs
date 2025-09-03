@@ -547,7 +547,7 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         }
 
         Transform attachPoint = sleigh.attachmentPoints[slotIndex];
-        transform.SetParent(attachPoint);
+        transform.SetParent(attachPoint, true);
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
 
