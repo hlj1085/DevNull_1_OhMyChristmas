@@ -14,7 +14,7 @@ using Photon.Pun;
 
 public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
 {
-    // 플레이어의 현재 상태를 정의합니다.
+    // 플레이어의 현재 상태를 정의합니다. 상태정의
     public enum PlayerState
     {
         Normal,
@@ -499,8 +499,8 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     // 상호작용이 가능한 조건: 내가 '기절' 또는 '포획' 또는 '썰매에 묶인' 상태일 때만
     public bool CanInteract => currentState == PlayerState.Stunned || currentState == PlayerState.TiedToSleigh; public string GetInteractMessage()
     {
-        if (currentState == PlayerState.Stunned) return "Help player";
-        if (currentState == PlayerState.TiedToSleigh) return "Help Player";
+        if (currentState == PlayerState.Stunned) return "F to Help player";
+        if (currentState == PlayerState.TiedToSleigh) return "F to Help Player";
         return "";
     }
     // Interact 함수의 반환 타입을 bool로 변경하고, true를 return
@@ -515,43 +515,6 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
 
     // 썰매, 묶기
     [PunRPC]
-    public void TieToSleighRPC(int sleighViewID, int slotIndex)
-    {
-        // 포획된 상태가 아니면 묶일 수 없음
-        if (currentState != PlayerState.Captured) return;
-
-        PhotonView sleighPhotonView = PhotonView.Find(sleighViewID);
-        if (sleighPhotonView == null) return;
-
-        // 썰매의 특정 위치를 찾음 (썰매에 attachmentPoints 배열이 있다고 가정)
-        Transform[] attachmentPoints = sleighPhotonView.GetComponentsInChildren<Transform>(); // 임시방편, 실제로는 Sleigh 스크립트 필요
-        if (slotIndex >= attachmentPoints.Length) return;
-        Transform attachPoint = attachmentPoints[slotIndex];
-
-
-        // 1. 상태를 '썰매에 묶임'으로 변경
-        currentState = PlayerState.TiedToSleigh;
-
-        // 2. 보따리는 숨기고, 순록 모델은 다시 보이게 함
-        if (currentSackTransform != null) currentSackTransform.gameObject.SetActive(false);
-        if (reindeerVisuals != null) reindeerVisuals.SetActive(true);
-
-        // 3. 카메라 타겟을 다시 순록으로 변경
-        if (photonView.IsMine && thirdPersonCameraScript != null)
-        {
-            thirdPersonCameraScript.target = this.transform;
-        }
-
-        // 4. 물리엔진 방해를 막기 위해 Kinematic으로 변경
-        if (rb != null) rb.isKinematic = true;
-
-        // 5. 썰매의 지정된 위치로 이동하고 자식으로 만듦
-        transform.SetParent(attachPoint);
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
-    }
-
-    [PunRPC]
     public void AttachToSleigh(int sleighViewID, int slotIndex)
     {
         if (isAttachedToSleigh || currentState != PlayerState.Captured) return;
@@ -560,8 +523,8 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         Sleigh sleigh = sleighPhotonView.GetComponent<Sleigh>();
         if (sleigh == null || slotIndex >= sleigh.attachmentPoints.Length) return;
 
-        // 상태를 '썰매에 묶임'으로 변경 (PlayerState Enum에 TiedToSleigh가 있어야 함)
-        // currentState = PlayerState.TiedToSleigh; 
+        // 상태를 '썰매에 묶임'으로 변경
+        currentState = PlayerState.TiedToSleigh; 
 
         if (currentSackTransform != null)
         {

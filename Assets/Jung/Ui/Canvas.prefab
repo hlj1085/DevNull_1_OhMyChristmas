@@ -1181,7 +1181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotSelectionBorders: []
-  inventoryPanel: {fileID: 0}
+  inventoryPanel: {fileID: 453907673846351214}
   itemSlots:
   - {fileID: 3800559310721506471}
   - {fileID: 7410028076671549892}

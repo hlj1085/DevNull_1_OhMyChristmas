@@ -45,8 +45,8 @@ public class SantaCapture : MonoBehaviour
             PhotonView reindeerView = capturedReindeer.GetComponent<PhotonView>();
             if (reindeerView != null)
             {
-                // ReindeerController의 TieToSleighRPC 함수를 호출
-                reindeerView.RPC("TieToSleighRPC", RpcTarget.All, sleighPhotonView.ViewID, 0); // 0번 자리에 묶기
+                // ReindeerController의 AttachToSleigh 함수를 호출
+                reindeerView.RPC("AttachToSleigh", RpcTarget.All, sleighPhotonView.ViewID, 0); // 0번 자리에 묶기
 
                 // 썰매에 묶었으므로, 더 이상 잡고 있는 상태가 아님
                 capturedReindeer = null;
