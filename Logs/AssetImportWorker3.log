@@ -9,13 +9,13 @@ C:\Program Files\Unity\Hub\Editor\2022.3.60f1\Editor\Unity.exe
 -batchMode
 -noUpm
 -name
-AssetImportWorker2
+AssetImportWorker3
 -projectPath
 C:/새 폴더
 -logFile
-Logs/AssetImportWorker2.log
+Logs/AssetImportWorker3.log
 -srvPort
-55585
+58011
 Successfully changed project path to: C:/새 폴더
 C:/새 폴더
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -49,15 +49,15 @@ C:/새 폴더
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [17432]  Target information:
+Player connection [8600]  Target information:
 
-Player connection [17432]  * "[IP] 192.168.0.15 [Port] 0 [Flags] 2 [Guid] 2469258101 [EditorId] 2469258101 [Version] 1048832 [Id] WindowsEditor(7,parkcom) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [8600]  * "[IP] 192.168.0.15 [Port] 0 [Flags] 2 [Guid] 4078058648 [EditorId] 4078058648 [Version] 1048832 [Id] WindowsEditor(7,parkcom) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [17432] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [17432] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [8600] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [8600] Host joined alternative multi-casting on [225.0.0.222:34997]...
 Input System module state changed to: Initialized.
 [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-Refreshing native plugins compatible for Editor in 37.59 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 49.75 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2022.3.60f1 (5f63fdee6d95)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/Resources/UnitySubsystems
@@ -73,7 +73,7 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56184
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56232
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
@@ -83,8 +83,8 @@ Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/MetroSupport/UnityEditor.UWP.Extensions.dll
-Registered in 0.041631 seconds.
-- Loaded All Assemblies, in  0.572 seconds
+Registered in 0.039493 seconds.
+- Loaded All Assemblies, in  0.530 seconds
 Native extension for UWP target not found
 Native extension for LinuxStandalone target not found
 Native extension for WindowsStandalone target not found
@@ -94,39 +94,39 @@ Native extension for AppleTV target not found
 Failed to load: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/VisionOSPlayer\x64\UnityEditor.VisionOS.Native.dll
 Native extension for VisionOS target not found
 Native extension for Android target not found
-Android Extension - Scanning For ADB Devices 543 ms
+Android Extension - Scanning For ADB Devices 456 ms
 Native extension for OSXStandalone target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.971 seconds
-Domain Reload Profiling: 1538ms
-	BeginReloadAssembly (182ms)
+- Finished resetting the current domain, in  0.805 seconds
+Domain Reload Profiling: 1333ms
+	BeginReloadAssembly (206ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (40ms)
-	RebuildNativeTypeToScriptingClass (11ms)
-	initialDomainReloadingComplete (119ms)
-	LoadAllAssembliesAndSetupDomain (215ms)
-		LoadAssemblies (179ms)
+	RebuildCommonClasses (35ms)
+	RebuildNativeTypeToScriptingClass (7ms)
+	initialDomainReloadingComplete (102ms)
+	LoadAllAssembliesAndSetupDomain (177ms)
+		LoadAssemblies (210ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (208ms)
-			TypeCache.Refresh (205ms)
-				TypeCache.ScanAssembly (184ms)
+		AnalyzeDomain (166ms)
+			TypeCache.Refresh (164ms)
+				TypeCache.ScanAssembly (150ms)
 			ScanForSourceGeneratedMonoScriptInfo (1ms)
 			ResolveRequiredComponents (1ms)
-	FinalizeReload (972ms)
+	FinalizeReload (806ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (913ms)
+		SetupLoadedEditorAssemblies (760ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (706ms)
+			InitializePlatformSupportModulesInManaged (593ms)
 			SetLoadedEditorAssemblies (5ms)
 			RefreshPlugins (0ms)
 			BeforeProcessingInitializeOnLoad (2ms)
-			ProcessInitializeOnLoadAttributes (140ms)
-			ProcessInitializeOnLoadMethodAttributes (60ms)
+			ProcessInitializeOnLoadAttributes (111ms)
+			ProcessInitializeOnLoadMethodAttributes (48ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -135,7 +135,7 @@ Domain Reload Profiling: 1538ms
 Worker process is ready to serve import requests
 Caller must complete domain reload
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  1.658 seconds
+- Loaded All Assemblies, in  2.129 seconds
 Native extension for UWP target not found
 Native extension for LinuxStandalone target not found
 Native extension for WindowsStandalone target not found
@@ -145,47 +145,47 @@ Native extension for VisionOS target not found
 Native extension for Android target not found
 Native extension for OSXStandalone target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.097 seconds
-Domain Reload Profiling: 2741ms
-	BeginReloadAssembly (317ms)
+- Finished resetting the current domain, in  1.972 seconds
+Domain Reload Profiling: 4091ms
+	BeginReloadAssembly (392ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (8ms)
+		DisableScriptedObjects (11ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (33ms)
-	RebuildCommonClasses (60ms)
+		CreateAndSetChildDomain (37ms)
+	RebuildCommonClasses (57ms)
 	RebuildNativeTypeToScriptingClass (11ms)
-	initialDomainReloadingComplete (91ms)
-	LoadAllAssembliesAndSetupDomain (1165ms)
-		LoadAssemblies (1054ms)
+	initialDomainReloadingComplete (111ms)
+	LoadAllAssembliesAndSetupDomain (1547ms)
+		LoadAssemblies (1353ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (334ms)
-			TypeCache.Refresh (289ms)
-				TypeCache.ScanAssembly (261ms)
-			ScanForSourceGeneratedMonoScriptInfo (31ms)
-			ResolveRequiredComponents (12ms)
-	FinalizeReload (1098ms)
+		AnalyzeDomain (477ms)
+			TypeCache.Refresh (412ms)
+				TypeCache.ScanAssembly (368ms)
+			ScanForSourceGeneratedMonoScriptInfo (44ms)
+			ResolveRequiredComponents (18ms)
+	FinalizeReload (1973ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (894ms)
+		SetupLoadedEditorAssemblies (1590ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (87ms)
-			SetLoadedEditorAssemblies (5ms)
+			InitializePlatformSupportModulesInManaged (170ms)
+			SetLoadedEditorAssemblies (10ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (109ms)
-			ProcessInitializeOnLoadAttributes (650ms)
-			ProcessInitializeOnLoadMethodAttributes (28ms)
-			AfterProcessingInitializeOnLoad (15ms)
+			BeforeProcessingInitializeOnLoad (197ms)
+			ProcessInitializeOnLoadAttributes (1133ms)
+			ProcessInitializeOnLoadMethodAttributes (43ms)
+			AfterProcessingInitializeOnLoad (37ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (14ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.10 seconds
-Refreshing native plugins compatible for Editor in 16.37 ms, found 3 plugins.
+		AwakeInstancesAfterBackupRestoration (23ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.13 seconds
+Refreshing native plugins compatible for Editor in 30.54 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4048 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 30 unused Assets / (58.0 KB). Loaded Objects now: 4543.
-Memory consumption went from 162.8 MB to 162.7 MB.
-Total: 5.490300 ms (FindLiveObjects: 0.448000 ms CreateObjectMapping: 0.234900 ms MarkObjects: 4.625100 ms  DeleteObjects: 0.181000 ms)
+Unloading 30 unused Assets / (57.9 KB). Loaded Objects now: 4543.
+Memory consumption went from 162.8 MB to 162.8 MB.
+Total: 6.727900 ms (FindLiveObjects: 0.586900 ms CreateObjectMapping: 0.475400 ms MarkObjects: 5.425000 ms  DeleteObjects: 0.238300 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
@@ -203,30 +203,41 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 1091888.070854 seconds.
-  path: Assets/huisu/Ui/ui 대기 및 선택/산타, 순록 선택.png
-  artifactKey: Guid(5428be82a4c491149ba0a1751e07081e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/huisu/Ui/ui 대기 및 선택/산타, 순록 선택.png using Guid(5428be82a4c491149ba0a1751e07081e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+  Time since last request: 1108732.558366 seconds.
+  path: Assets/huisu/New Folder/Assembly_Building_House_A_Fantasy (3).prefab
+  artifactKey: Guid(b37c83cccd8db394c9195a4c6df4a431) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Assembly_Building_House_A_Fantasy (3).prefab using Guid(b37c83cccd8db394c9195a4c6df4a431) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
 [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '60067113068aaa003b1d2d368acf7704') in 0.082137 seconds
+ -> (artifact id: 'c785d096df10559d1d40e6ecbf2c2ad6') in 0.797259 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
+Number of asset objects unloaded after import = 2714
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000030 seconds.
-  path: Assets/huisu/Ui/ui 대기 및 선택
-  artifactKey: Guid(873305396d8fbad438acb9605e71c9d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/huisu/Ui/ui 대기 및 선택 using Guid(873305396d8fbad438acb9605e71c9d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '6d84b8015a0acac756ec9012544323d4') in 0.000826 seconds
+  Time since last request: 0.000096 seconds.
+  path: Assets/huisu/New Folder/Assembly_Building_House_E_Fantasy (1).prefab
+  artifactKey: Guid(753e5feed0f952b42882cc0c8fef9395) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Assembly_Building_House_E_Fantasy (1).prefab using Guid(753e5feed0f952b42882cc0c8fef9395) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '1389868a5c6e449ea5f8fc21694dc5ee') in 0.495202 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
+Number of asset objects unloaded after import = 5175
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000123 seconds.
-  path: Assets/huisu/Ui/ui 대기 및 선택/순록산타대기.png
-  artifactKey: Guid(d2a1c081bfb40f84a822f4efd22d6e44) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/huisu/Ui/ui 대기 및 선택/순록산타대기.png using Guid(d2a1c081bfb40f84a822f4efd22d6e44) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+  Time since last request: 0.000056 seconds.
+  path: Assets/huisu/New Folder/Assembly_Building_House_B_Fantasy (2).prefab
+  artifactKey: Guid(28d3c73dea313834f9dd94a049a63303) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Assembly_Building_House_B_Fantasy (2).prefab using Guid(28d3c73dea313834f9dd94a049a63303) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
 [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '1bc16ba88a9bfc7f48b5e92e31ebace4') in 0.029206 seconds
+ -> (artifact id: '56004cde9621c22cbd00d368e3839dc6') in 0.327013 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
+Number of asset objects unloaded after import = 4405
+========================================================================
+Received Import Request.
+  Time since last request: 0.000046 seconds.
+  path: Assets/huisu/New Folder/Assembly_Building_House_E_Fantasy (4).prefab
+  artifactKey: Guid(a52c67a4ed4d03948ac4037f73725a42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Assembly_Building_House_E_Fantasy (4).prefab using Guid(a52c67a4ed4d03948ac4037f73725a42) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '76f07453a47134e9ce314e4bf146933d') in 0.290419 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 5175
