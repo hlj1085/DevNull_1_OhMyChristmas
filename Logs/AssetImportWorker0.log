@@ -221,3 +221,8 @@ Start importing Assets/huisu/Ui/ui ëŒ€ê¸° ë° ì„ íƒ/ì¸ê²Œìž„ UI, ì•„ì´í…œ ì°½
  -> (artifact id: 'fe2482c603f8993515fce5c8eefa108a') in 0.019374 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 2
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+TcpMessagingSession - receive error: operation aborted. errorcode: 995, details: ½º·¹µå Á¾·á ¶Ç´Â ÀÀ¿ë ÇÁ·Î±×·¥ ¿äÃ» ¶§¹®¿¡ I/O ÀÛ¾÷ÀÌ Ãë¼ÒµÇ¾ú½À´Ï´Ù.
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0
