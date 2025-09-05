@@ -1,6 +1,6 @@
 Using pre-set license
 Built from '2022.3/staging' branch; Version is '2022.3.60f1 (5f63fdee6d95) revision 6251517'; Using compiler version '192829333'; Build Type 'Release'
-OS: 'Windows 11  (10.0.26100) 64bit Professional' Language: 'ko' Physical Memory: 32610 MB
+OS: 'Windows 11  (10.0.26100) 64bit Professional' Language: 'ko' Physical Memory: 12011 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
 
 COMMAND LINE ARGUMENTS:
@@ -9,15 +9,15 @@ C:\Program Files\Unity\Hub\Editor\2022.3.60f1\Editor\Unity.exe
 -batchMode
 -noUpm
 -name
-AssetImportWorker11
+AssetImportWorker0
 -projectPath
-C:/Users/hlj10/DevNull_1_OhMyChristmas
+C:/새 폴더
 -logFile
-Logs/AssetImportWorker11.log
+Logs/AssetImportWorker0.log
 -srvPort
-51750
-Successfully changed project path to: C:/Users/hlj10/DevNull_1_OhMyChristmas
-C:/Users/hlj10/DevNull_1_OhMyChristmas
+58011
+Successfully changed project path to: C:/새 폴더
+C:/새 폴더
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
     "memorysetup-bucket-allocator-granularity=16"
     "memorysetup-bucket-allocator-bucket-count=8"
@@ -49,70 +49,84 @@ C:/Users/hlj10/DevNull_1_OhMyChristmas
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [34796]  Target information:
+Player connection [17004]  Target information:
 
-Player connection [34796]  * "[IP] 172.30.73.92 [Port] 0 [Flags] 2 [Guid] 3553236965 [EditorId] 3553236965 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-R06SEU4) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [17004]  * "[IP] 192.168.0.15 [Port] 0 [Flags] 2 [Guid] 1718378495 [EditorId] 1718378495 [Version] 1048832 [Id] WindowsEditor(7,parkcom) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [34796] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [34796] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [17004] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [17004] Host joined alternative multi-casting on [225.0.0.222:34997]...
 Input System module state changed to: Initialized.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-Refreshing native plugins compatible for Editor in 9.19 ms, found 3 plugins.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+Refreshing native plugins compatible for Editor in 36.97 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2022.3.60f1 (5f63fdee6d95)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/Resources/UnitySubsystems
-[Subsystems] Discovering subsystems at path C:/Users/hlj10/DevNull_1_OhMyChristmas/Assets
+[Subsystems] Discovering subsystems at path C:/새 폴더/Assets
 GfxDevice: creating device client; threaded=0; jobified=0
 Direct3D:
     Version:  Direct3D 11.0 [level 11.1]
-    Renderer: NVIDIA GeForce RTX 4060 Ti (ID=0x2803)
+    Renderer: NVIDIA GeForce RTX 4050 Laptop GPU (ID=0x28a1)
     Vendor:   NVIDIA
-    VRAM:     16109 MB
-    Driver:   32.0.15.8088
+    VRAM:     5921 MB
+    Driver:   32.0.15.6626
 Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56036
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56736
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/VisionOSPlayer/UnityEditor.VisionOS.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/AppleTVSupport/UnityEditor.AppleTV.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/MetroSupport/UnityEditor.UWP.Extensions.dll
-Registered in 0.005168 seconds.
-- Loaded All Assemblies, in  0.211 seconds
+Registered in 0.038797 seconds.
+- Loaded All Assemblies, in  0.537 seconds
 Native extension for UWP target not found
+Native extension for LinuxStandalone target not found
 Native extension for WindowsStandalone target not found
+[usbmuxd] Start listen thread
+[usbmuxd] Listen thread started
+Native extension for AppleTV target not found
+Failed to load: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/VisionOSPlayer\x64\UnityEditor.VisionOS.Native.dll
+Native extension for VisionOS target not found
+Native extension for Android target not found
+Android Extension - Scanning For ADB Devices 467 ms
+Native extension for OSXStandalone target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.156 seconds
-Domain Reload Profiling: 367ms
-	BeginReloadAssembly (67ms)
+- Finished resetting the current domain, in  0.860 seconds
+Domain Reload Profiling: 1392ms
+	BeginReloadAssembly (195ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (0ms)
-	RebuildCommonClasses (19ms)
-	RebuildNativeTypeToScriptingClass (6ms)
-	initialDomainReloadingComplete (35ms)
-	LoadAllAssembliesAndSetupDomain (83ms)
-		LoadAssemblies (66ms)
+		CreateAndSetChildDomain (1ms)
+	RebuildCommonClasses (42ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (107ms)
+	LoadAllAssembliesAndSetupDomain (178ms)
+		LoadAssemblies (196ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (81ms)
-			TypeCache.Refresh (80ms)
-				TypeCache.ScanAssembly (72ms)
+		AnalyzeDomain (168ms)
+			TypeCache.Refresh (167ms)
+				TypeCache.ScanAssembly (151ms)
 			ScanForSourceGeneratedMonoScriptInfo (0ms)
 			ResolveRequiredComponents (0ms)
-	FinalizeReload (157ms)
+	FinalizeReload (861ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (131ms)
+		SetupLoadedEditorAssemblies (812ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (7ms)
-			SetLoadedEditorAssemblies (3ms)
+			InitializePlatformSupportModulesInManaged (599ms)
+			SetLoadedEditorAssemblies (6ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (1ms)
-			ProcessInitializeOnLoadAttributes (87ms)
-			ProcessInitializeOnLoadMethodAttributes (32ms)
+			BeforeProcessingInitializeOnLoad (3ms)
+			ProcessInitializeOnLoadAttributes (142ms)
+			ProcessInitializeOnLoadMethodAttributes (61ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -121,51 +135,57 @@ Domain Reload Profiling: 367ms
 Worker process is ready to serve import requests
 Caller must complete domain reload
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.448 seconds
+- Loaded All Assemblies, in  1.339 seconds
 Native extension for UWP target not found
+Native extension for LinuxStandalone target not found
 Native extension for WindowsStandalone target not found
+Native extension for AppleTV target not found
+Failed to load: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/VisionOSPlayer\x64\UnityEditor.VisionOS.Native.dll
+Native extension for VisionOS target not found
+Native extension for Android target not found
+Native extension for OSXStandalone target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.406 seconds
-Domain Reload Profiling: 852ms
-	BeginReloadAssembly (91ms)
+- Finished resetting the current domain, in  1.252 seconds
+Domain Reload Profiling: 2581ms
+	BeginReloadAssembly (220ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (3ms)
+		DisableScriptedObjects (8ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (12ms)
-	RebuildCommonClasses (22ms)
-	RebuildNativeTypeToScriptingClass (6ms)
-	initialDomainReloadingComplete (26ms)
-	LoadAllAssembliesAndSetupDomain (301ms)
-		LoadAssemblies (234ms)
+		CreateAndSetChildDomain (28ms)
+	RebuildCommonClasses (39ms)
+	RebuildNativeTypeToScriptingClass (9ms)
+	initialDomainReloadingComplete (66ms)
+	LoadAllAssembliesAndSetupDomain (995ms)
+		LoadAssemblies (881ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (124ms)
-			TypeCache.Refresh (105ms)
-				TypeCache.ScanAssembly (95ms)
-			ScanForSourceGeneratedMonoScriptInfo (13ms)
-			ResolveRequiredComponents (5ms)
-	FinalizeReload (406ms)
+		AnalyzeDomain (253ms)
+			TypeCache.Refresh (222ms)
+				TypeCache.ScanAssembly (202ms)
+			ScanForSourceGeneratedMonoScriptInfo (24ms)
+			ResolveRequiredComponents (6ms)
+	FinalizeReload (1253ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (319ms)
+		SetupLoadedEditorAssemblies (1059ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (4ms)
-			SetLoadedEditorAssemblies (2ms)
+			InitializePlatformSupportModulesInManaged (83ms)
+			SetLoadedEditorAssemblies (5ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (42ms)
-			ProcessInitializeOnLoadAttributes (252ms)
-			ProcessInitializeOnLoadMethodAttributes (13ms)
-			AfterProcessingInitializeOnLoad (4ms)
+			BeforeProcessingInitializeOnLoad (99ms)
+			ProcessInitializeOnLoadAttributes (821ms)
+			ProcessInitializeOnLoadMethodAttributes (28ms)
+			AfterProcessingInitializeOnLoad (23ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (9ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
-Refreshing native plugins compatible for Editor in 4.45 ms, found 3 plugins.
+		AwakeInstancesAfterBackupRestoration (19ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.12 seconds
+Refreshing native plugins compatible for Editor in 15.65 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4048 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 30 unused Assets / (58.2 KB). Loaded Objects now: 4539.
-Memory consumption went from 160.5 MB to 160.4 MB.
-Total: 1.909000 ms (FindLiveObjects: 0.164800 ms CreateObjectMapping: 0.047500 ms MarkObjects: 1.627700 ms  DeleteObjects: 0.068200 ms)
+Unloading 30 unused Assets / (58.0 KB). Loaded Objects now: 4543.
+Memory consumption went from 162.8 MB to 162.7 MB.
+Total: 13.099300 ms (FindLiveObjects: 0.518300 ms CreateObjectMapping: 0.249800 ms MarkObjects: 11.960000 ms  DeleteObjects: 0.368000 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
@@ -183,36 +203,369 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 12838.499627 seconds.
-  path: Assets/huisu/Ui/ui 대기 및 선택/산타, 순록 선택.png
-  artifactKey: Guid(5428be82a4c491149ba0a1751e07081e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/huisu/Ui/ui 대기 및 선택/산타, 순록 선택.png using Guid(5428be82a4c491149ba0a1751e07081e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '5e9e852c94ad71bd147180c83bd69263') in 0.075540 seconds
+  Time since last request: 1108533.525722 seconds.
+  path: Assets/huisu/Ui/ui 대기 및 선택/순록산타대기 배경.png
+  artifactKey: Guid(d2a1c081bfb40f84a822f4efd22d6e44) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/Ui/ui 대기 및 선택/순록산타대기 배경.png using Guid(d2a1c081bfb40f84a822f4efd22d6e44) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '0398ebb315485dc5de3392014a6ac5e8') in 0.087110 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
+Number of asset objects unloaded after import = 2
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000023 seconds.
-  path: Assets/huisu/Ui/ui 대기 및 선택/순록 산타 대기 순록.png
-  artifactKey: Guid(be5aaab95ebd936488bb80b01a6795c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/huisu/Ui/ui 대기 및 선택/순록 산타 대기 순록.png using Guid(be5aaab95ebd936488bb80b01a6795c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '75a7d0ef2cc48aff959ab4dbba442de6') in 0.019396 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000023 seconds.
+  Time since last request: 22.458152 seconds.
   path: Assets/huisu/Ui/ui 대기 및 선택/순록, 산타 대기 책상.png
   artifactKey: Guid(20c79c5706d19fc4da6f8392ebf66965) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/huisu/Ui/ui 대기 및 선택/순록, 산타 대기 책상.png using Guid(20c79c5706d19fc4da6f8392ebf66965) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'c340fbf5417eadc7a2596c18e134f36d') in 0.031689 seconds
+Start importing Assets/huisu/Ui/ui 대기 및 선택/순록, 산타 대기 책상.png using Guid(20c79c5706d19fc4da6f8392ebf66965) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '60f165be65bfbe3d58090a7dba606949') in 0.012926 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
-TcpMessagingSession - receive error: operation aborted. errorcode: 995, details: ������ ���� �Ǵ� ���� ���α׷� ��û ������ I/O �۾��� ��ҵǾ����ϴ�.
-AssetImportWorker is now disconnected from the server
-Process exiting
-Exiting without the bug reporter. Application will terminate with return code 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 28.928088 seconds.
+  path: Assets/huisu/Ui/ui 대기 및 선택/순록 산타 대기 사나.png
+  artifactKey: Guid(f0050e0dc872f2647ad11bb327b64c6e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/Ui/ui 대기 및 선택/순록 산타 대기 사나.png using Guid(f0050e0dc872f2647ad11bb327b64c6e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '1fa37ed547f370eaa8ed5a3525c58c17') in 0.023699 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 12.662522 seconds.
+  path: Assets/huisu/Ui/ui 대기 및 선택/순록 산타 대기 순록.png
+  artifactKey: Guid(be5aaab95ebd936488bb80b01a6795c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/Ui/ui 대기 및 선택/순록 산타 대기 순록.png using Guid(be5aaab95ebd936488bb80b01a6795c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '0b483bdb83de92794e06551ec1ebdc7a') in 0.019759 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 7.283996 seconds.
+  path: Assets/huisu/Ui/ui 인게임
+  artifactKey: Guid(aa5be7fb05a7ced4d976a9b8bcc2f8b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/Ui/ui 인게임 using Guid(aa5be7fb05a7ced4d976a9b8bcc2f8b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '7d28b32408b72b11c15b9a4d7fff0b32') in 0.000846 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.031430 seconds.
+  path: Assets/huisu/Ui/ui 인게임/루돌프 ㅇ.png
+  artifactKey: Guid(1b3d8b9164aef7147b57321d2f0a9b07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/Ui/ui 인게임/루돌프 ㅇ.png using Guid(1b3d8b9164aef7147b57321d2f0a9b07) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'e4dd89db29b88d54b429de052610fc90') in 0.021675 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.008541 seconds.
+  path: Assets/huisu/Ui/ui 인게임/산타 ㅇ.png
+  artifactKey: Guid(5e8eb491e1130a140827552950ff19f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/Ui/ui 인게임/산타 ㅇ.png using Guid(5e8eb491e1130a140827552950ff19f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '2f104e83769e660cab1c91c0c11bfa0a') in 0.031450 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000055 seconds.
+  path: Assets/huisu/Ui/ui 인게임/스테미나, MAX.png
+  artifactKey: Guid(4a468e59f7136d647a04319fde48dee9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/Ui/ui 인게임/스테미나, MAX.png using Guid(4a468e59f7136d647a04319fde48dee9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'd512f915f49bf3aa98f86eda8add48a0') in 0.033400 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000050 seconds.
+  path: Assets/huisu/Ui/ui 인게임/식탁 ㅇ.png
+  artifactKey: Guid(4809e2bb61377ba4b80d173b1ba08844) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/Ui/ui 인게임/식탁 ㅇ.png using Guid(4809e2bb61377ba4b80d173b1ba08844) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'f3ac85430c7c61412e7a1e1eb56cbb58') in 0.027098 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/huisu/Ui/ui 인게임/인게임 루돌트 잡힘 ㅇ.png
+  artifactKey: Guid(a764952a75b9c3d4fa167b6aa08f8711) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/Ui/ui 인게임/인게임 루돌트 잡힘 ㅇ.png using Guid(a764952a75b9c3d4fa167b6aa08f8711) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '7c2ec2b34c83b8eb632a02ccc2bcdee1') in 0.033299 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/huisu/Ui/ui 인게임/요정가루 ㅇ.png
+  artifactKey: Guid(643321f2a5c1374479f5a11fd53044e5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/Ui/ui 인게임/요정가루 ㅇ.png using Guid(643321f2a5c1374479f5a11fd53044e5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '95291ea16e2841dd725c89656b3e12b0') in 0.028830 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 116.111047 seconds.
+  path: Assets/huisu/룰 설명/룰 설명, 산타, 순록 포획 1.png
+  artifactKey: Guid(a7f0f88b263c4104c85bf8a8abf1b1a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/룰 설명/룰 설명, 산타, 순록 포획 1.png using Guid(a7f0f88b263c4104c85bf8a8abf1b1a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '55a2adc5c1fcb34ff21978caa5096a81') in 0.022833 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.001477 seconds.
+  path: Assets/huisu/룰 설명/룰 설명, 산타, 순록 포획 2.png
+  artifactKey: Guid(979b1fc90088afc4ea541ee180e3f530) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/룰 설명/룰 설명, 산타, 순록 포획 2.png using Guid(979b1fc90088afc4ea541ee180e3f530) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '332f77b513e60d822c171313ca7d953b') in 0.039154 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000184 seconds.
+  path: Assets/huisu/룰 설명/룰 설명, 순록, 요정가루 2.png
+  artifactKey: Guid(64c0e95dc2d7a0d47a682a42f81e3fdc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/룰 설명/룰 설명, 순록, 요정가루 2.png using Guid(64c0e95dc2d7a0d47a682a42f81e3fdc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '82ade80cbaa66db57661835cc65bb152') in 0.032856 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000138 seconds.
+  path: Assets/huisu/룰 설명/룰 설명, 순록, 스노우볼 2.png
+  artifactKey: Guid(e9d55605595501c41b8a4e4829394358) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/룰 설명/룰 설명, 순록, 스노우볼 2.png using Guid(e9d55605595501c41b8a4e4829394358) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '80318576a1002049307257d88bfdf522') in 0.026634 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.906815 seconds.
+  path: Assets/huisu/배경사진/KakaoTalk_20250902_204201620.png
+  artifactKey: Guid(5415d706bc386d243aece78abec9735a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/배경사진/KakaoTalk_20250902_204201620.png using Guid(5415d706bc386d243aece78abec9735a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'ac67d6e8917589befad3c1e0e9a63b7d') in 0.030168 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.974640 seconds.
+  path: Assets/huisu/엔딩영상/엔딩, 산타 승리.mp4
+  artifactKey: Guid(93cd2141af16cef41aaea4645358e786) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/엔딩영상/엔딩, 산타 승리.mp4 using Guid(93cd2141af16cef41aaea4645358e786) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '8d54f8de671bbfab76be6480bf954e4f') in 0.003931 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 3.193147 seconds.
+  path: Assets/huisu/New Folder/Assembly_Building_House_A_Fantasy (1).prefab
+  artifactKey: Guid(193395e813e404a45b7be9ce14b40dd4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Assembly_Building_House_A_Fantasy (1).prefab using Guid(193395e813e404a45b7be9ce14b40dd4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '2ad265ea7a37743c166a679cf9906bf8') in 0.889338 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2714
+========================================================================
+Received Import Request.
+  Time since last request: 0.000071 seconds.
+  path: Assets/huisu/New Folder/Assembly_Building_House_F_Fantasy (1).prefab
+  artifactKey: Guid(ac56d6ffc72caa5438595146e6df2b9d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Assembly_Building_House_F_Fantasy (1).prefab using Guid(ac56d6ffc72caa5438595146e6df2b9d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '0b62af580075b1cf036664e9b8f6d87e') in 0.403933 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2254
+========================================================================
+Received Import Request.
+  Time since last request: 0.000076 seconds.
+  path: Assets/huisu/New Folder/Assembly_House_Base_A_Fantasy (5).prefab
+  artifactKey: Guid(a5630c1bd4c75bb43a6c8eeee9097e78) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Assembly_House_Base_A_Fantasy (5).prefab using Guid(a5630c1bd4c75bb43a6c8eeee9097e78) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'ec94ba8d6adbb5717f5cd178b413017f') in 0.263600 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1391
+========================================================================
+Received Import Request.
+  Time since last request: 0.000139 seconds.
+  path: Assets/huisu/New Folder/Assembly_Building_House_B_Fantasy (3).prefab
+  artifactKey: Guid(3d8652bd59163a7478a387d96dcf76a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Assembly_Building_House_B_Fantasy (3).prefab using Guid(3d8652bd59163a7478a387d96dcf76a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '8c0848f055ec635cc62e9eb06115ef57') in 0.433637 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4405
+========================================================================
+Received Import Request.
+  Time since last request: 0.000069 seconds.
+  path: Assets/huisu/New Folder/Assembly_House_Base_A_Fantasy.prefab
+  artifactKey: Guid(d7b18c1fd0c1b9f4293eb217761566e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Assembly_House_Base_A_Fantasy.prefab using Guid(d7b18c1fd0c1b9f4293eb217761566e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '2fdfb6cd698217ad94642a088bba31b0') in 0.300213 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1391
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/huisu/New Folder/Assembly_House_Annex_Bottom_D_Fantasy.prefab
+  artifactKey: Guid(8cf205ebc35712042bbef8ebb01d7ccc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Assembly_House_Annex_Bottom_D_Fantasy.prefab using Guid(8cf205ebc35712042bbef8ebb01d7ccc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '1370983399259fd91cc2e7a5b8c7347e') in 0.230144 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 221
+========================================================================
+Received Import Request.
+  Time since last request: 0.000117 seconds.
+  path: Assets/huisu/New Folder/Assembly_House_Base_B_Fantasy.prefab
+  artifactKey: Guid(359d307be20cb5445b01c6360ba8d6b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Assembly_House_Base_B_Fantasy.prefab using Guid(359d307be20cb5445b01c6360ba8d6b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '308f128bbd053e0b9fc98675c831e02c') in 0.320942 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1663
+========================================================================
+Received Import Request.
+  Time since last request: 0.000062 seconds.
+  path: Assets/huisu/New Folder/Assembly_Building_House_A_Fantasy (4).prefab
+  artifactKey: Guid(927c4525bb1ed8548988d239da42a33e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Assembly_Building_House_A_Fantasy (4).prefab using Guid(927c4525bb1ed8548988d239da42a33e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'fa0bdf53f5895a65eb08b2379209f064') in 0.508527 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2679
+========================================================================
+Received Import Request.
+  Time since last request: 0.000062 seconds.
+  path: Assets/huisu/New Folder/Assembly_House_Base_A_Fantasy (3).prefab
+  artifactKey: Guid(bc2af9d89d5f95d4e84119360483000b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Assembly_House_Base_A_Fantasy (3).prefab using Guid(bc2af9d89d5f95d4e84119360483000b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'dfda2a068e8b8ebf704adbf857376608') in 0.316511 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1386
+========================================================================
+Received Import Request.
+  Time since last request: 0.000067 seconds.
+  path: Assets/huisu/New Folder/Assembly_Building_House_E_Fantasy (2).prefab
+  artifactKey: Guid(99562df3c953fdd4382470358fe79035) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Assembly_Building_House_E_Fantasy (2).prefab using Guid(99562df3c953fdd4382470358fe79035) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'df516b90cf86927fdf6aaa60355605f0') in 0.453228 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 5175
+========================================================================
+Received Import Request.
+  Time since last request: 0.000259 seconds.
+  path: Assets/huisu/New Folder/Assembly_Building_House_B_Fantasy (1).prefab
+  artifactKey: Guid(4925319cc2ff20c4b835d1a906f47679) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Assembly_Building_House_B_Fantasy (1).prefab using Guid(4925319cc2ff20c4b835d1a906f47679) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '3436f05eb2789642903cb95c84b3d642') in 0.383924 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4405
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/huisu/New Folder/Assembly_Building_House_C_Fantasy.prefab
+  artifactKey: Guid(a4758b4739ef073478c97104f59bcba9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Assembly_Building_House_C_Fantasy.prefab using Guid(a4758b4739ef073478c97104f59bcba9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '00a1bd0482b9a7a6c706278acfc22be3') in 0.381830 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2782
+========================================================================
+Received Import Request.
+  Time since last request: 0.000088 seconds.
+  path: Assets/huisu/New Folder/Assembly_House_Annex_Bottom_C_Fantasy (2).prefab
+  artifactKey: Guid(e0473bbf9be772941b9ed102e5aa62ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Assembly_House_Annex_Bottom_C_Fantasy (2).prefab using Guid(e0473bbf9be772941b9ed102e5aa62ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'be934decacce2d21f79593b81e30241c') in 0.175910 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 394
+========================================================================
+Received Import Request.
+  Time since last request: 0.000139 seconds.
+  path: Assets/huisu/New Folder/Assembly_House_Base_A_Fantasy (6).prefab
+  artifactKey: Guid(da34e59493979d54cb10d0b2a3ce4ead) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Assembly_House_Base_A_Fantasy (6).prefab using Guid(da34e59493979d54cb10d0b2a3ce4ead) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '65e63805d3a8a6da066cc092439c6299') in 0.228034 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1381
+========================================================================
+Received Import Request.
+  Time since last request: 0.000041 seconds.
+  path: Assets/huisu/New Folder/Assembly_Building_House_B_Fantasy.prefab
+  artifactKey: Guid(df5865b08cd16864bb28f04b2308cd80) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Assembly_Building_House_B_Fantasy.prefab using Guid(df5865b08cd16864bb28f04b2308cd80) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '07830061f08640e7aaaeeea490e6131f') in 0.530921 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4412
+========================================================================
+Received Import Request.
+  Time since last request: 0.000090 seconds.
+  path: Assets/huisu/New Folder/Assembly_House_Base_A_Fantasy (1).prefab
+  artifactKey: Guid(9612b49fa91c82c43bf3c34f50c3ec69) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Assembly_House_Base_A_Fantasy (1).prefab using Guid(9612b49fa91c82c43bf3c34f50c3ec69) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'b9790bad2f891edc18517a0935517b47') in 0.257022 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1381
+========================================================================
+Received Import Request.
+  Time since last request: 0.000058 seconds.
+  path: Assets/huisu/New Folder/Assembly_House_Base_A_Fantasy (4).prefab
+  artifactKey: Guid(2dcc81c52d455e947b0825d9899ed640) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Assembly_House_Base_A_Fantasy (4).prefab using Guid(2dcc81c52d455e947b0825d9899ed640) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '15d094605ab85c7e34e455140aa8c3c6') in 0.301467 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1391
+========================================================================
+Received Import Request.
+  Time since last request: 0.000058 seconds.
+  path: Assets/huisu/New Folder/Assembly_House_Annex_Bottom_C_Fantasy (1).prefab
+  artifactKey: Guid(39b9960802f04554bbb3d9ae8a397ebf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Assembly_House_Annex_Bottom_C_Fantasy (1).prefab using Guid(39b9960802f04554bbb3d9ae8a397ebf) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '6c173dca483aae4d99675eab48281230') in 0.183670 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 404
+========================================================================
+Received Import Request.
+  Time since last request: 0.000047 seconds.
+  path: Assets/huisu/New Folder/Assembly_House_Base_B_Fantasy (1).prefab
+  artifactKey: Guid(3834c4744c94b4841a565e14e33f6f02) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Assembly_House_Base_B_Fantasy (1).prefab using Guid(3834c4744c94b4841a565e14e33f6f02) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '4c25f9f2f1b0740b6db051c76e1dc8ce') in 0.262199 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1658
+========================================================================
+Received Import Request.
+  Time since last request: 0.000046 seconds.
+  path: Assets/huisu/New Folder/Assembly_Building_House_B_Fantasy (7).prefab
+  artifactKey: Guid(12eb5bd9565be0849a40de8e30edd735) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Assembly_Building_House_B_Fantasy (7).prefab using Guid(12eb5bd9565be0849a40de8e30edd735) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '29c2c908f170c65c6d8f3ebc35e36c25') in 0.315807 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4405
