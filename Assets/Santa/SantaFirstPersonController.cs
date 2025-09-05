@@ -6,6 +6,9 @@ using System.Collections;
 [RequireComponent(typeof(Animator))]
 public class SantaFirstPersonController : MonoBehaviour
 {
+    //ES
+    [SerializeField] private PunchHitbox punchHitbox;
+
     // 이동 관련
     public float walkSpeed = 5f;
     public float runMultiplier = 1.5f;
@@ -427,4 +430,7 @@ public class SantaFirstPersonController : MonoBehaviour
             isNearChimney = false;
         }
     }
+    // ES
+    public void AE_PunchOpen() { punchHitbox?.ActivateWindow(); }
+    public void AE_PunchClose() { punchHitbox?.DeactivateWindow(); }
 }
