@@ -1,0 +1,388 @@
+Using pre-set license
+Built from '2022.3/staging' branch; Version is '2022.3.60f1 (5f63fdee6d95) revision 6251517'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 11  (10.0.26100) 64bit Professional' Language: 'ko' Physical Memory: 32610 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2022.3.60f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker13
+-projectPath
+C:/Users/hlj10/DevNull_1_OhMyChristmas
+-logFile
+Logs/AssetImportWorker13.log
+-srvPort
+51750
+Successfully changed project path to: C:/Users/hlj10/DevNull_1_OhMyChristmas
+C:/Users/hlj10/DevNull_1_OhMyChristmas
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [33052]  Target information:
+
+Player connection [33052]  * "[IP] 172.30.73.92 [Port] 0 [Flags] 2 [Guid] 2821806416 [EditorId] 2821806416 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-R06SEU4) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [33052] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [33052] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+Refreshing native plugins compatible for Editor in 13.74 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2022.3.60f1 (5f63fdee6d95)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/hlj10/DevNull_1_OhMyChristmas/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 4060 Ti (ID=0x2803)
+    Vendor:   NVIDIA
+    VRAM:     16109 MB
+    Driver:   32.0.15.8088
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56256
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/MetroSupport/UnityEditor.UWP.Extensions.dll
+Registered in 0.005424 seconds.
+- Loaded All Assemblies, in  0.260 seconds
+Native extension for UWP target not found
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.170 seconds
+Domain Reload Profiling: 428ms
+	BeginReloadAssembly (84ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (0ms)
+	RebuildCommonClasses (24ms)
+	RebuildNativeTypeToScriptingClass (6ms)
+	initialDomainReloadingComplete (44ms)
+	LoadAllAssembliesAndSetupDomain (99ms)
+		LoadAssemblies (83ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (97ms)
+			TypeCache.Refresh (96ms)
+				TypeCache.ScanAssembly (87ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (0ms)
+	FinalizeReload (171ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (141ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (9ms)
+			SetLoadedEditorAssemblies (4ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (1ms)
+			ProcessInitializeOnLoadAttributes (92ms)
+			ProcessInitializeOnLoadMethodAttributes (35ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+========================================================================
+Worker process is ready to serve import requests
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.513 seconds
+Native extension for UWP target not found
+Native extension for WindowsStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.414 seconds
+Domain Reload Profiling: 925ms
+	BeginReloadAssembly (101ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (3ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (14ms)
+	RebuildCommonClasses (22ms)
+	RebuildNativeTypeToScriptingClass (6ms)
+	initialDomainReloadingComplete (31ms)
+	LoadAllAssembliesAndSetupDomain (352ms)
+		LoadAssemblies (270ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (142ms)
+			TypeCache.Refresh (121ms)
+				TypeCache.ScanAssembly (108ms)
+			ScanForSourceGeneratedMonoScriptInfo (14ms)
+			ResolveRequiredComponents (6ms)
+	FinalizeReload (414ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (318ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (6ms)
+			SetLoadedEditorAssemblies (4ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (50ms)
+			ProcessInitializeOnLoadAttributes (241ms)
+			ProcessInitializeOnLoadMethodAttributes (13ms)
+			AfterProcessingInitializeOnLoad (4ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (8ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
+Refreshing native plugins compatible for Editor in 4.63 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4048 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 30 unused Assets / (58.6 KB). Loaded Objects now: 4539.
+Memory consumption went from 160.5 MB to 160.4 MB.
+Total: 2.079400 ms (FindLiveObjects: 0.160000 ms CreateObjectMapping: 0.052100 ms MarkObjects: 1.776000 ms  DeleteObjects: 0.090600 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 13219.594265 seconds.
+  path: Assets/huisu/New Folder/Light_String_White_2m_Christmas (24).prefab
+  artifactKey: Guid(75c88655e0053e24c99ba3ffff52d1b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Light_String_White_2m_Christmas (24).prefab using Guid(75c88655e0053e24c99ba3ffff52d1b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: 'f8f29ff1943c0a850f30ec182529de2d') in 0.216780 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 53
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/huisu/New Folder/Pot_Clay_Stack_B.prefab
+  artifactKey: Guid(0090ae8815e1ceb4d996ada3c9343763) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Pot_Clay_Stack_B.prefab using Guid(0090ae8815e1ceb4d996ada3c9343763) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '2a655b2de18c6becabbf8b10efd25298') in 0.026931 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 12
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/huisu/New Folder/Sea_Shell_Sunrise_Venus_Half_A (3).prefab
+  artifactKey: Guid(81a9886f7009ff44192ec0655087bc47) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Sea_Shell_Sunrise_Venus_Half_A (3).prefab using Guid(81a9886f7009ff44192ec0655087bc47) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '6e79c258df739b9ac12a49b5e081b07b') in 0.016771 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 48
+========================================================================
+Received Import Request.
+  Time since last request: 0.002465 seconds.
+  path: Assets/huisu/New Folder/Sea_Shell_Sunrise_Venus_Half_A (8).prefab
+  artifactKey: Guid(9464fad4358fcc94f8297c8f7f6f6e4c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Sea_Shell_Sunrise_Venus_Half_A (8).prefab using Guid(9464fad4358fcc94f8297c8f7f6f6e4c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '7ea054ececf50c0af28599013a986388') in 0.015963 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 48
+========================================================================
+Received Import Request.
+  Time since last request: 0.001419 seconds.
+  path: Assets/huisu/New Folder/Sea_Shell_Sunrise_Venus_Half_A (12).prefab
+  artifactKey: Guid(975b7b75e8968c849ac8919745e73995) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Sea_Shell_Sunrise_Venus_Half_A (12).prefab using Guid(975b7b75e8968c849ac8919745e73995) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '64033ecc718c176640fa9b7c24389c0b') in 0.018593 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 48
+========================================================================
+Received Import Request.
+  Time since last request: 0.015726 seconds.
+  path: Assets/huisu/New Folder/Singboard_Fish_Fantasy.prefab
+  artifactKey: Guid(730d7a92997080e4981c8200a460f12f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Singboard_Fish_Fantasy.prefab using Guid(730d7a92997080e4981c8200a460f12f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: 'cf5c7f6ec2093df1556186736d510093') in 0.022033 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 12
+========================================================================
+Received Import Request.
+  Time since last request: 0.000773 seconds.
+  path: Assets/huisu/New Folder/Stone_C_Snow (1).prefab
+  artifactKey: Guid(ff274e76cc53e5e4fae073ffa3a8bc83) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Stone_C_Snow (1).prefab using Guid(ff274e76cc53e5e4fae073ffa3a8bc83) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '9db3982a05ebeca956411e5b6f2433ad') in 0.016685 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 12
+========================================================================
+Received Import Request.
+  Time since last request: 0.006971 seconds.
+  path: Assets/huisu/New Folder/Supply_Drop_Fabric.prefab
+  artifactKey: Guid(88809df8ff3630044a1fa192034e94a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Supply_Drop_Fabric.prefab using Guid(88809df8ff3630044a1fa192034e94a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '27029056c9e80d1639b62ec2d0a0b1a3') in 0.022041 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 12
+========================================================================
+Received Import Request.
+  Time since last request: 0.009701 seconds.
+  path: Assets/huisu/New Folder/Vase_Ceramic_Tall_A_Fantasy.prefab
+  artifactKey: Guid(73011ac1397ab894fad7f05693bba9d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Vase_Ceramic_Tall_A_Fantasy.prefab using Guid(73011ac1397ab894fad7f05693bba9d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: 'f23c686da40bcd1986506f0d97a4704e') in 0.019367 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 12
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/huisu/New Folder/Vase_Short_Fantasy.prefab
+  artifactKey: Guid(5189c9a1dce80084e8912af5218a8251) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Vase_Short_Fantasy.prefab using Guid(5189c9a1dce80084e8912af5218a8251) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '25ed3f7c17b9d00c33a3b38af2ef2698') in 0.021151 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 12
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/huisu/New Folder/Wall_Thick_2x3m_Ext_Fantasy (1).prefab
+  artifactKey: Guid(f10d080c7c9136f4ebfe7d282eef0ded) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Wall_Thick_2x3m_Ext_Fantasy (1).prefab using Guid(f10d080c7c9136f4ebfe7d282eef0ded) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '534e6547d64b707eb5ccf4567cab06ff') in 0.053196 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 14
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/huisu/New Folder/Wall_Thick_3x3m_Ext_Fantasy (5).prefab
+  artifactKey: Guid(684db1549f6aa3b4f9ac2b4a3ca008b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Wall_Thick_3x3m_Ext_Fantasy (5).prefab using Guid(684db1549f6aa3b4f9ac2b4a3ca008b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '678be58fac5e90d74da650ec1ff162cd') in 0.025482 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 50
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/huisu/New Folder/Wall_Thick_5x3m_Ext_Fantasy (3).prefab
+  artifactKey: Guid(93cc4938ca063544c8558da7283b80b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Wall_Thick_5x3m_Ext_Fantasy (3).prefab using Guid(93cc4938ca063544c8558da7283b80b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '428c4d8c52ee3a34e7304d7651e16d42') in 0.028140 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 14
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/huisu/New Folder/Wall_Vertical_B_3x3m_Ext (4).prefab
+  artifactKey: Guid(916fdc2ce6bc8fe4caf3747a3537af50) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Wall_Vertical_B_3x3m_Ext (4).prefab using Guid(916fdc2ce6bc8fe4caf3747a3537af50) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: 'b1571b64f89b852a7d9da37defd8eff5') in 0.082006 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 785
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/huisu/New Folder/Wheelbarrow_Wooden_B.prefab
+  artifactKey: Guid(a7dc682cc41d6014e9e9f3c58381346b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Wheelbarrow_Wooden_B.prefab using Guid(a7dc682cc41d6014e9e9f3c58381346b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '86c1d4fac10a07227309787ac49c8a69') in 0.024203 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 20
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/huisu/New Folder/Wall_Thick_5x3m_Ext_Fantasy (2).prefab
+  artifactKey: Guid(dbb9528807dca5d49a7540e5898a368f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Wall_Thick_5x3m_Ext_Fantasy (2).prefab using Guid(dbb9528807dca5d49a7540e5898a368f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: 'db039cb08b243c931fd14d41f461b29b') in 0.017311 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 14
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/huisu/New Folder/Wall_Thick_3x3m_Ext_Fantasy (7).prefab
+  artifactKey: Guid(9d4bee2571406064194739e17a2b7153) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Wall_Thick_3x3m_Ext_Fantasy (7).prefab using Guid(9d4bee2571406064194739e17a2b7153) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: 'd4d169b85833c41f8e4518f5b2973fd0') in 0.017534 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 14
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/huisu/New Folder/Wall_Thick_4x3m_Ext_Fantasy (1).prefab
+  artifactKey: Guid(3a5d3cc0911ebd04fa4c7308de40285d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Wall_Thick_4x3m_Ext_Fantasy (1).prefab using Guid(3a5d3cc0911ebd04fa4c7308de40285d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '6ae2841cb2427a5e247e332e555939e3') in 0.017489 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 14
+========================================================================
+Received Import Request.
+  Time since last request: 0.427104 seconds.
+  path: Assets/huisu/New Folder/Tree_Christmass.prefab
+  artifactKey: Guid(5feef4e44cfde1342b771083347515d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Tree_Christmass.prefab using Guid(5feef4e44cfde1342b771083347515d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: 'b912b22feded2e92a23b7d8a0c0eb4fa') in 0.076034 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 18
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/huisu/New Folder/Tree_Sequoia_Young_A_Snow.prefab
+  artifactKey: Guid(08b57bfeaa25f8f49b188cce94370b2c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Folder/Tree_Sequoia_Young_A_Snow.prefab using Guid(08b57bfeaa25f8f49b188cce94370b2c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: 'e4db164f5481020090f648c70c327fae') in 0.028037 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 14
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+TcpMessagingSession - receive error: operation aborted. errorcode: 995, details: 스레드 종료 또는 응용 프로그램 요청 때문에 I/O 작업이 취소되었습니다.
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0
