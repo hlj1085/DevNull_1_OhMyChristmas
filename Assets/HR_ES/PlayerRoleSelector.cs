@@ -9,20 +9,45 @@ using UnityEngine.UI;
 
 public class PlayerRoleSelector : MonoBehaviourPunCallbacks
 {
+    // UI Canvases
+    public GameObject roleSelectCanvas;
+    public GameObject afterSelectCanvas;
+
+    // Role Selection UI
     public Button santaButton;
     public Button reindeerButton;
-    public TextMeshProUGUI statusText;
-    public TextMeshProUGUI playerListText; // UI element to display the player list
+
+    // After Select UI
+    public Button startGameButton;
+    public Transform playerCardsParent;
+    public TextMeshProUGUI[] playerNicknames;
+    public Image[] playerRoleIcons;
+    public Image[] playerBellImages; // 각 카드 아래의 벨 이미지들
+
+    // Role Sprites
+    public Sprite santaIconSprite;
+    public Sprite reindeerIconSprite;
+
+    private const int MaxReindeers = 4;
+    private const int MaxPlayers = 5;
+    private const int DemoPlayerCount = 3;
 
     void Start()
     {
+        // UI 초기 상태 설정
+        roleSelectCanvas.SetActive(true);
+        afterSelectCanvas.SetActive(false);
+        startGameButton.gameObject.SetActive(false);
+
+        // 버튼 리스너 등록
         santaButton.onClick.AddListener(() => TrySelectRole("Santa"));
         reindeerButton.onClick.AddListener(() => TrySelectRole("Reindeer"));
-        UpdateRoleButtons();
-        UpdatePlayerList();
+        startGameButton.onClick.AddListener(LoadGameScene);
+
+        UpdateAllUI();
     }
 
-    void Update()
+    private void Update()
     {
         // 개발자용: P 키로 강제 게임 시작 (마스터 클라이언트만)
         if (PhotonNetwork.IsMasterClient && Input.GetKeyDown(KeyCode.P))
@@ -34,28 +59,39 @@ public class PlayerRoleSelector : MonoBehaviourPunCallbacks
 
     void TrySelectRole(string role)
     {
+        if (IsRoleAlreadySelected(PhotonNetwork.LocalPlayer))
+        {
+            Debug.Log("You have already selected a role.");
+            return;
+        }
+
         if (role == "Santa" && !IsSantaTaken())
         {
             SetPlayerRole("Santa");
+            SwitchToAfterSelectUI();
         }
-        else if (role == "Reindeer" && GetReindeerCount() < 4)
+        else if (role == "Reindeer" && GetReindeerCount() < MaxReindeers)
         {
             SetPlayerRole("Reindeer");
+            SwitchToAfterSelectUI();
         }
-        else
-        {
-            statusText.text = "You Can't select this role";
-        }
-        UpdateRoleButtons();
-        UpdatePlayerList();
     }
 
     void SetPlayerRole(string role)
     {
         var props = new ExitGames.Client.Photon.Hashtable { { "Role", role } };
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
-        statusText.text = $"{role} selected";
-        UpdatePlayerList();
+    }
+
+    void SwitchToAfterSelectUI()
+    {
+        roleSelectCanvas.SetActive(false);
+        afterSelectCanvas.SetActive(true);
+    }
+
+    bool IsRoleAlreadySelected(Player player)
+    {
+        return player.CustomProperties.ContainsKey("Role");
     }
 
     bool IsSantaTaken()
@@ -78,60 +114,80 @@ public class PlayerRoleSelector : MonoBehaviourPunCallbacks
         }
         return count;
     }
-    void UpdatePlayerList()
-    {
-        if (playerListText == null) return;
 
-        string list = "Player List\n";
-        foreach (var player in PhotonNetwork.PlayerList)
-        {
-            string role = "Unselected";
-            if (player.CustomProperties.TryGetValue("Role", out object roleObj) && roleObj is string roleStr)
-            {
-                role = roleStr;
-            }
-            list += $"{player.NickName} : {role}\n";
-        }
-        playerListText.text = list;
+    void UpdateAllUI()
+    {
+        UpdateRoleButtons();
+        UpdatePlayerCards();
+        UpdateStartGameButton();
     }
 
     void UpdateRoleButtons()
     {
-        object myRoleObj;
-        PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue("Role", out myRoleObj);
-        string myRole = myRoleObj as string;
+        santaButton.interactable = !IsSantaTaken();
+        reindeerButton.interactable = GetReindeerCount() < MaxReindeers;
 
-        santaButton.interactable = !IsSantaTaken() || myRole == "Santa";
-        reindeerButton.interactable = GetReindeerCount() < 4 || myRole == "Reindeer";
-    }
-
-    public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
-    {
-        UpdateRoleButtons();
-        UpdatePlayerList();
-
-        if (PhotonNetwork.IsMasterClient && AllRolesSelected())
+        // 역할이 다 찼을 때 회색으로 비활성화 (선택 불가능)
+        if (!santaButton.interactable)
         {
-            Debug.Log("모든 역할 선택 완료. 게임 씬으로 이동합니다.");
-            //PhotonNetwork.LoadLevel("GameTest");
-            PhotonNetwork.LoadLevel("Playground");
+            santaButton.GetComponent<Image>().color = Color.gray;
+        }
+        else
+        {
+            santaButton.GetComponent<Image>().color = Color.white;
+        }
+
+        if (!reindeerButton.interactable)
+        {
+            reindeerButton.GetComponent<Image>().color = Color.gray;
+        }
+        else
+        {
+            reindeerButton.GetComponent<Image>().color = Color.white;
         }
     }
 
-    public override void OnPlayerEnteredRoom(Player newPlayer)
+    void UpdatePlayerCards()
     {
-        UpdatePlayerList();
+        for (int i = 0; i < MaxPlayers; i++)
+        {
+            // 플레이어가 있을 경우
+            if (i < PhotonNetwork.PlayerList.Length)
+            {
+                var player = PhotonNetwork.PlayerList[i];
+                string nickname = $"Player {i + 1}";
+                string role = "Unselected";
+                Sprite roleSprite = null; // 초기 스프라이트 없음
+
+                if (player.CustomProperties.TryGetValue("Role", out object roleObj) && roleObj is string roleStr)
+                {
+                    role = roleStr;
+                    roleSprite = (roleStr == "Santa") ? santaIconSprite : reindeerIconSprite;
+                }
+
+                playerNicknames[i].text = nickname;
+                playerRoleIcons[i].sprite = roleSprite;
+                playerRoleIcons[i].color = (role == "Unselected") ? Color.clear : Color.white;
+                playerBellImages[i].gameObject.SetActive(true); // 벨 이미지 활성화
+            }
+            // 플레이어가 없을 경우
+            else
+            {
+                playerNicknames[i].text = "Waiting...";
+                playerRoleIcons[i].sprite = null; // 이미지 비우기
+                playerRoleIcons[i].color = Color.clear; // 완전히 투명하게 설정
+                playerBellImages[i].gameObject.SetActive(false); // 벨 이미지 비활성화
+            }
+        }
     }
 
-    public override void OnPlayerLeftRoom(Player otherPlayer)
+    void UpdateStartGameButton()
     {
-        UpdatePlayerList();
-    }
-
-    bool AllRolesSelected()
-    {
-        if (PhotonNetwork.CurrentRoom.PlayerCount != 2)
-            return false;
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            startGameButton.gameObject.SetActive(false);
+            return;
+        }
 
         int santaCount = 0;
         int reindeerCount = 0;
@@ -145,6 +201,65 @@ public class PlayerRoleSelector : MonoBehaviourPunCallbacks
             }
         }
 
-        return santaCount == 1 && reindeerCount == 1;
+        // 시연용: 산타 1명, 순록 2명일 때 버튼 활성화
+        if (santaCount == 1 && reindeerCount == 2)
+        {
+            startGameButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            startGameButton.gameObject.SetActive(false);
+        }
+    }
+
+    void LoadGameScene()
+    {
+        // 마스터 클라이언트만 씬 로드
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if (AreAllRolesSelectedForStart())
+            {
+                Debug.Log("게임 시작! 씬으로 이동합니다.");
+                PhotonNetwork.LoadLevel("Playground");
+            }
+        }
+    }
+
+    bool AreAllRolesSelectedForStart()
+    {
+        if (PhotonNetwork.CurrentRoom.PlayerCount != DemoPlayerCount)
+        {
+            return false;
+        }
+
+        int santaCount = 0;
+        int reindeerCount = 0;
+
+        foreach (var player in PhotonNetwork.PlayerList)
+        {
+            if (player.CustomProperties.TryGetValue("Role", out object roleObj) && roleObj is string roleStr)
+            {
+                if (roleStr == "Santa") santaCount++;
+                else if (roleStr == "Reindeer") reindeerCount++;
+            }
+        }
+
+        return santaCount == 1 && reindeerCount == 2;
+    }
+
+    // Photon Callbacks
+    public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
+    {
+        UpdateAllUI();
+    }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        UpdateAllUI();
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        UpdateAllUI();
     }
 }
