@@ -59,6 +59,12 @@ MonoBehaviour:
   - AttachReindeerRPC
   - AttachToSleigh
   - ApplyKnockback
+  - AddItemByNameRPC
+  - AddItemRPC
+  - EquipItemRPC
+  - RemoveItemByNameRPC
+  - RemoveItemRPC
+  - UnequipItemRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
