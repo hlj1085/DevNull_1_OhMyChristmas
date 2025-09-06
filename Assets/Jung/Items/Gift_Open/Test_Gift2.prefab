@@ -243,7 +243,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 15.7, y: 0.428, z: 11.086444}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2846015886959396442}
   - {fileID: 4027239221954341581}
@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxAnimator: {fileID: 6577427939347843483}
-  itemPrefabToSpawn: {fileID: 5488084261992699047, guid: bf3ae520ab1022748afebdf11e6d1295, type: 3}
+  itemPrefabToSpawn: {fileID: 5488084261992699047, guid: e40f2775d0ea9bc46b4f91d4411fcace, type: 3}
   itemSpawnPoint: {fileID: 4027239221954341581}
   boxLid: {fileID: 2732306602129267361}
 --- !u!95 &6577427939347843483

@@ -8,77 +8,60 @@ using UnityEngine.SceneManagement;
 
 public class MatchMaking : MonoBehaviourPunCallbacks, ILobbyCallbacks
 {
-    public TextMeshProUGUI playerListText; // UI element to display the player list
+    public TextMeshProUGUI playerListText;
 
-    // Start is called before the first frame update
     void Awake()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
     }
 
-    void Start()
-    {
-        PhotonNetwork.ConnectUsingSettings(); //서버 연결
-        // Connect to Photon server using settings defined in the PhotonServerSettings file
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public override void OnConnectedToMaster()
     {
-        //마스터 서버에 연결되면 로비에 접속
         Debug.Log("Connected to Master Server");
-        // Optionally, join a lobby or create/join a room here
-        PhotonNetwork.JoinLobby(); // Join the default lobby
+        // 연결이 되면 로비에 접속
+        PhotonNetwork.JoinLobby();
     }
 
     public override void OnJoinedLobby()
     {
         Debug.Log("Joined Lobby");
+        // 로비에 접속하면 무작위 방에 참가
         PhotonNetwork.JoinRandomRoom();
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
+        // 무작위 방 참가가 실패하면 새로운 방을 생성
         PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 5 });
     }
 
     public override void OnJoinedRoom()
     {
         Debug.Log("Enter Room");
-        UpdatePlayerList();
+        // 방에 들어가면 씬을 전환
+        // UpdatePlayerList()는 PlayerRoleSelector.cs에서 처리되므로 여기서는 제거
         SceneManager.LoadScene("RoomScene");
     }
 
-    public override void OnPlayerLeftRoom(Player otherPlayer)
-    {
-        UpdatePlayerList();
-    }
-
-    void UpdatePlayerList()
-    {
-        if (playerListText == null) return;
-
-        string list = "Player (" + PhotonNetwork.CurrentRoom.PlayerCount + "/5):\n";
-        foreach (var player in PhotonNetwork.PlayerList)
-        {
-            list += player.NickName + "\n";
-        }
-        playerListText.text = list;
-    }
+    // '게임 참가' 버튼 클릭 시 호출될 함수
     public void OnJoinRoomButton()
     {
-        if (PhotonNetwork.IsConnectedAndReady)
+        // 서버에 연결되지 않은 상태라면, 먼저 서버에 연결
+        if (!PhotonNetwork.IsConnected)
         {
-            PhotonNetwork.JoinRandomRoom();
+            PhotonNetwork.ConnectUsingSettings();
+            Debug.Log("Connecting to Photon server...");
+        }
+        // 이미 연결된 상태라면, 바로 로비에 접속하여 방을 찾음
+        else if (!PhotonNetwork.InLobby)
+        {
+            PhotonNetwork.JoinLobby();
+            Debug.Log("Joining lobby...");
         }
         else
         {
-            Debug.LogWarning("포톤 서버에 아직 연결되지 않았습니다.");
+            PhotonNetwork.JoinRandomRoom();
+            Debug.Log("Attempting to join a random room...");
         }
     }
 }
