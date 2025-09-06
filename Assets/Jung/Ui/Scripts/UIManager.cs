@@ -15,10 +15,13 @@ public class UIManager : MonoBehaviour
 
     [Header("UI Elements")]
     public TextMeshProUGUI interactionPromptUI;
-    public TextMeshProUGUI useItemPromptUI; // <<< [추가]
+    public TextMeshProUGUI useItemPromptUI;
+    public TextMeshProUGUI recoveryText; // <<< [추가] 회복 바 텍스트
 
     public Slider interactionSlider;
     public Slider recoverySlider;
+    public Image recoverySliderFill; // <<< [추가] 회복 바의 Fill 이미지
+
 
     // --- [수정] --- InventoryUI를 외부에서 연결할 수 있도록 public 변수로 변경
     [Header("UI Scripts")]
