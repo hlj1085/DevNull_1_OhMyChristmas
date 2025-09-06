@@ -7,9 +7,6 @@ using UnityEngine.AI;
 
 public class SantaFirstPersonController : MonoBehaviourPunCallbacks
 {
-    //ES
-    [SerializeField] private PunchHitbox punchHitbox;
-
     // 이동 관련
     public float walkSpeed = 5f;
     public float runMultiplier = 1.5f;
@@ -514,7 +511,4 @@ public class SantaFirstPersonController : MonoBehaviourPunCallbacks
             isNearChimney = false;
         }
     }
-    // ES
-    public void AE_PunchOpen() { punchHitbox?.ActivateWindow(); }
-    public void AE_PunchClose() { punchHitbox?.DeactivateWindow(); }
 }
