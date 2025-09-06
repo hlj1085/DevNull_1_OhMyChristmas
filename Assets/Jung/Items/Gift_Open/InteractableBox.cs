@@ -51,8 +51,8 @@ public class InteractableBox : MonoBehaviour, IInteractable, IPunObservable
         if (PhotonNetwork.IsMasterClient && itemPrefabToSpawn != null)
         {
             Transform spawnPoint = itemSpawnPoint != null ? itemSpawnPoint : transform;
-            // 로컬 Instantiate 대신 PhotonNetwork.Instantiate를 사용해야 모든 사람에게 보임
-            PhotonNetwork.Instantiate(itemPrefabToSpawn.name, spawnPoint.position, Quaternion.identity);
+            string prefabPath = "Items/" + itemPrefabToSpawn.name;
+            PhotonNetwork.Instantiate(prefabPath, spawnPoint.position, Quaternion.identity);
         }
     }
 

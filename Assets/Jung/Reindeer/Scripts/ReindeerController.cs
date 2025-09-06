@@ -314,7 +314,7 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     {
         if (currentState != PlayerState.Normal)
         {
-            if (currentState == PlayerState.Captured)
+            if (currentState == PlayerState.Captured || currentState == PlayerState.TiedToSleigh)
             {
                 ReleaseFromCapture();
             }
@@ -499,8 +499,8 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     // 상호작용이 가능한 조건: 내가 '기절' 또는 '포획' 또는 '썰매에 묶인' 상태일 때만
     public bool CanInteract => currentState == PlayerState.Stunned || currentState == PlayerState.TiedToSleigh; public string GetInteractMessage()
     {
-        if (currentState == PlayerState.Stunned) return "F to Help player";
-        if (currentState == PlayerState.TiedToSleigh) return "F to Help Player";
+        if (currentState == PlayerState.Stunned) return "Press F to help";
+        if (currentState == PlayerState.TiedToSleigh) return "Press F to liberate";
         return "";
     }
     // Interact 함수의 반환 타입을 bool로 변경하고, true를 return
@@ -574,6 +574,42 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
 
     }
 
+    // --- 아이템 장착 동기화를 위한 RPC 함수들 ---
+
+    [PunRPC]
+    private void EquipItemRPC(string itemDataName)
+    {
+        // 이미 물고 있는 아이템이 있으면 파괴
+        if (equippedItemObject != null)
+        {
+            Destroy(equippedItemObject);
+        }
+        // Resources 폴더에서 이름에 해당하는 ItemData를 찾아 로드합니다.
+        ItemData itemData = Resources.Load<ItemData>("Items/" + itemDataName);
+
+        if (itemData != null && itemData.itemPrefab != null)
+        {
+            // 찾은 ItemData를 기반으로 3D 모델을 생성하고 입에 붙입니다.
+            Debug.Log(itemData.itemPrefab+"aaaaaaaaaaaaaaple");
+            equippedItemObject = Instantiate(itemData.itemPrefab, mouthAttachPoint);
+            equippedItemObject.transform.localPosition = Vector3.zero;
+            equippedItemObject.transform.localRotation = Quaternion.identity;
+        }
+    }
+
+    [PunRPC]
+    private void UnequipItemRPC()
+    {
+        // 입에 물고 있는 아이템 모델이 있다면
+        if (equippedItemObject != null)
+        {
+            // 파괴하고,
+            Destroy(equippedItemObject);
+            // 변수를 null로 초기화합니다.
+            equippedItemObject = null;
+        }
+    }
+
     private void EquipItemFromSlot(int slotIndex)
     {
         if (currentState != PlayerState.Normal) return;
@@ -608,15 +644,12 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         equippedItem = newItem;
         lastEquippedSlot = slotIndex; // 마지막으로 장착한 슬롯 번호 기억
 
-        // 새 아이템 모델 생성
-        if (equippedItem.itemPrefab != null)
-        {
-            equippedItemObject = Instantiate(equippedItem.itemPrefab, mouthAttachPoint);
-            equippedItemObject.transform.localPosition = Vector3.zero;
-            equippedItemObject.transform.localRotation = Quaternion.identity;
-        }
 
-        // UI 업데이트
+        // --- [핵심 수정] ---
+        // 모든 클라이언트에게 새 아이템 모델을 생성하라는 RPC를 보냅니다.
+        photonView.RPC("EquipItemRPC", RpcTarget.All, newItem.name);
+
+        // UI 업데이트 로직 (이것은 로컬에서만 실행)
         if (UIManager.instance != null)
         {
             UIManager.instance.inventoryUI.UpdateSelection(slotIndex);
@@ -653,29 +686,22 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     /// </summary>
     private void UnequipItem()
     {
-        // 이미 맨손 상태이면 아무것도 하지 않음
         if (equippedItem == null) return;
-
         Debug.Log("아이템 장착 해제 (맨손 상태)");
 
-        // 입에 물고 있던 3D 모델이 있다면 파괴
-        if (equippedItemObject != null)
-        {
-            Destroy(equippedItemObject);
-        }
+        // 1. 모든 클라이언트에게 아이템 모델을 파괴하라는 RPC를 먼저 보냅니다.
+        photonView.RPC("UnequipItemRPC", RpcTarget.All);
 
-        // 모든 관련 변수를 깨끗하게 초기화
+        // 2. RPC를 보낸 후, 로컬 변수들을 초기화합니다.
         equippedItem = null;
-        equippedItemObject = null;
-        lastEquippedSlot = -1; // 마지막 슬롯 기록도 초기화
+        lastEquippedSlot = -1;
+        // equippedItemObject = null; // 이 줄을 여기서 삭제합니다. RPC가 처리할 것입니다.
 
-        // UI 선택 테두리를 모두 끔
+        // 3. UI 업데이트 로직을 실행합니다.
         if (UIManager.instance != null && UIManager.instance.inventoryUI != null)
         {
             UIManager.instance.inventoryUI.UpdateSelection(-1);
         }
-
-        // "사용하기" 안내 텍스트를 숨김
         if (useItemPromptUI != null)
         {
             useItemPromptUI.gameObject.SetActive(false);
@@ -707,7 +733,7 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     }
 
     [PunRPC]
-    private void ThrowItemRPC(string projectilePrefabName, float force)
+    public void ThrowItemRPC(string projectilePrefabName, float force)
     {
         // 던지는 로직은 모든 클라이언트에서 실행되어야 모두에게 보임
         // 카메라 방향은 로컬 플레이어 기준으로 계산

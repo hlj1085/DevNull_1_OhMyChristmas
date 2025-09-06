@@ -1,6 +1,6 @@
 Using pre-set license
 Built from '2022.3/staging' branch; Version is '2022.3.60f1 (5f63fdee6d95) revision 6251517'; Using compiler version '192829333'; Build Type 'Release'
-OS: 'Windows 11  (10.0.26100) 64bit Professional' Language: 'ko' Physical Memory: 32397 MB
+OS: 'Windows 11  (10.0.26100) 64bit Professional' Language: 'ko' Physical Memory: 12011 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
 
 COMMAND LINE ARGUMENTS:
@@ -11,13 +11,13 @@ C:\Program Files\Unity\Hub\Editor\2022.3.60f1\Editor\Unity.exe
 -name
 AssetImportWorker0
 -projectPath
-C:/Users/hlj10/OneDrive/문서/GitHub/DevNull_1_OhMyChristmas
+C:/새 폴더
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-59627
-Successfully changed project path to: C:/Users/hlj10/OneDrive/문서/GitHub/DevNull_1_OhMyChristmas
-C:/Users/hlj10/OneDrive/문서/GitHub/DevNull_1_OhMyChristmas
+57138
+Successfully changed project path to: C:/새 폴더
+C:/새 폴더
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
     "memorysetup-bucket-allocator-granularity=16"
     "memorysetup-bucket-allocator-bucket-count=8"
@@ -49,68 +49,84 @@ C:/Users/hlj10/OneDrive/문서/GitHub/DevNull_1_OhMyChristmas
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [8628]  Target information:
+Player connection [21548]  Target information:
 
-Player connection [8628]  * "[IP] 192.168.75.238 [Port] 0 [Flags] 2 [Guid] 3880352835 [EditorId] 3880352835 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-PRTB3GD) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [21548]  * "[IP] 192.168.0.19 [Port] 0 [Flags] 2 [Guid] 413741473 [EditorId] 413741473 [Version] 1048832 [Id] WindowsEditor(7,parkcom) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [8628] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [8628] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [21548] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [21548] Host joined alternative multi-casting on [225.0.0.222:34997]...
 Input System module state changed to: Initialized.
 [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-Refreshing native plugins compatible for Editor in 13.92 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 27.32 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2022.3.60f1 (5f63fdee6d95)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/Resources/UnitySubsystems
-[Subsystems] Discovering subsystems at path C:/Users/hlj10/OneDrive/문서/GitHub/DevNull_1_OhMyChristmas/Assets
+[Subsystems] Discovering subsystems at path C:/새 폴더/Assets
 GfxDevice: creating device client; threaded=0; jobified=0
 Direct3D:
     Version:  Direct3D 11.0 [level 11.1]
-    Renderer: NVIDIA GeForce RTX 5060 (ID=0x2d05)
+    Renderer: NVIDIA GeForce RTX 4050 Laptop GPU (ID=0x28a1)
     Vendor:   NVIDIA
-    VRAM:     7807 MB
-    Driver:   32.0.15.7688
+    VRAM:     5921 MB
+    Driver:   32.0.15.6626
 Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56312
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56056
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/VisionOSPlayer/UnityEditor.VisionOS.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/AppleTVSupport/UnityEditor.AppleTV.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.005384 seconds.
-- Loaded All Assemblies, in  0.227 seconds
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/MetroSupport/UnityEditor.UWP.Extensions.dll
+Registered in 0.039811 seconds.
+- Loaded All Assemblies, in  0.580 seconds
+Native extension for UWP target not found
+Native extension for LinuxStandalone target not found
 Native extension for WindowsStandalone target not found
+[usbmuxd] Start listen thread
+[usbmuxd] Listen thread started
+Native extension for AppleTV target not found
+Failed to load: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/VisionOSPlayer\x64\UnityEditor.VisionOS.Native.dll
+Native extension for VisionOS target not found
+Native extension for Android target not found
+Android Extension - Scanning For ADB Devices 581 ms
+Native extension for OSXStandalone target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.170 seconds
-Domain Reload Profiling: 395ms
-	BeginReloadAssembly (69ms)
+- Finished resetting the current domain, in  1.022 seconds
+Domain Reload Profiling: 1595ms
+	BeginReloadAssembly (211ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (0ms)
-	RebuildCommonClasses (23ms)
-	RebuildNativeTypeToScriptingClass (7ms)
-	initialDomainReloadingComplete (37ms)
-	LoadAllAssembliesAndSetupDomain (89ms)
-		LoadAssemblies (67ms)
+		CreateAndSetChildDomain (1ms)
+	RebuildCommonClasses (42ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (111ms)
+	LoadAllAssembliesAndSetupDomain (198ms)
+		LoadAssemblies (210ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (88ms)
-			TypeCache.Refresh (87ms)
-				TypeCache.ScanAssembly (79ms)
+		AnalyzeDomain (191ms)
+			TypeCache.Refresh (189ms)
+				TypeCache.ScanAssembly (173ms)
 			ScanForSourceGeneratedMonoScriptInfo (0ms)
 			ResolveRequiredComponents (0ms)
-	FinalizeReload (170ms)
+	FinalizeReload (1022ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (138ms)
+		SetupLoadedEditorAssemblies (969ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (6ms)
-			SetLoadedEditorAssemblies (6ms)
+			InitializePlatformSupportModulesInManaged (732ms)
+			SetLoadedEditorAssemblies (5ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (1ms)
-			ProcessInitializeOnLoadAttributes (96ms)
-			ProcessInitializeOnLoadMethodAttributes (29ms)
+			BeforeProcessingInitializeOnLoad (3ms)
+			ProcessInitializeOnLoadAttributes (152ms)
+			ProcessInitializeOnLoadMethodAttributes (76ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -119,1433 +135,136 @@ Domain Reload Profiling: 395ms
 Worker process is ready to serve import requests
 Caller must complete domain reload
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.470 seconds
+- Loaded All Assemblies, in  1.321 seconds
+Native extension for UWP target not found
+Native extension for LinuxStandalone target not found
 Native extension for WindowsStandalone target not found
+Native extension for AppleTV target not found
+Failed to load: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/VisionOSPlayer\x64\UnityEditor.VisionOS.Native.dll
+Native extension for VisionOS target not found
+Native extension for Android target not found
+Native extension for OSXStandalone target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.435 seconds
-Domain Reload Profiling: 901ms
-	BeginReloadAssembly (98ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (4ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (17ms)
-	RebuildCommonClasses (21ms)
-	RebuildNativeTypeToScriptingClass (7ms)
-	initialDomainReloadingComplete (29ms)
-	LoadAllAssembliesAndSetupDomain (311ms)
-		LoadAssemblies (239ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (126ms)
-			TypeCache.Refresh (108ms)
-				TypeCache.ScanAssembly (98ms)
-			ScanForSourceGeneratedMonoScriptInfo (12ms)
-			ResolveRequiredComponents (5ms)
-	FinalizeReload (435ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (343ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (4ms)
-			SetLoadedEditorAssemblies (3ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (51ms)
-			ProcessInitializeOnLoadAttributes (264ms)
-			ProcessInitializeOnLoadMethodAttributes (15ms)
-			AfterProcessingInitializeOnLoad (6ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (4ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
-Refreshing native plugins compatible for Editor in 9.45 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4052 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 30 unused Assets / (58.6 KB). Loaded Objects now: 4545.
-Memory consumption went from 157.8 MB to 157.8 MB.
-Total: 4.496400 ms (FindLiveObjects: 0.580400 ms CreateObjectMapping: 0.242200 ms MarkObjects: 3.561300 ms  DeleteObjects: 0.111900 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 1135487.270348 seconds.
-  path: Assets/Jung/Ui/GameManager.prefab
-  artifactKey: Guid(ece34622f764fba448f93d3b28d9aa0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Jung/Ui/GameManager.prefab using Guid(ece34622f764fba448f93d3b28d9aa0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '5a77cf7e84e1cdebfe6c10a7ab2c7b24') in 0.064326 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 5
-========================================================================
-Received Import Request.
-  Time since last request: 251.017465 seconds.
-  path: Assets/HR_ES/Server_1.unity
-  artifactKey: Guid(94d498e30ccb8114385011eda0c2e065) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/HR_ES/Server_1.unity using Guid(94d498e30ccb8114385011eda0c2e065) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '16ffbfbdd6b45c8146fe10dbf9bee7d6') in 0.000473 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 10.298408 seconds.
-  path: Assets/HR_ES/RoomScene.unity
-  artifactKey: Guid(4629c39afc4b00b4c910803e6d11a273) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/HR_ES/RoomScene.unity using Guid(4629c39afc4b00b4c910803e6d11a273) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'cf419265951fb2d86a0536f015229904') in 0.000527 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 259.211972 seconds.
-  path: Assets/Jung/Reindeer/Reindeer_Input.inputactions
-  artifactKey: Guid(5b5ca19f7eaeb6742b369256231ac353) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Jung/Reindeer/Reindeer_Input.inputactions using Guid(5b5ca19f7eaeb6742b369256231ac353) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'f7a7f87065f98a08cda40763f32e4143') in 0.003855 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 12
-========================================================================
-Received Import Request.
-  Time since last request: 1.636651 seconds.
-  path: Assets/Jung/Ui/Inventory
-  artifactKey: Guid(e97c79309e223404a9aa08acee797a9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Jung/Ui/Inventory using Guid(e97c79309e223404a9aa08acee797a9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '21b5e59db5fe809e3e6d3e9e2d40770b') in 0.000429 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 5.297767 seconds.
-  path: Assets/Christmas Game GUI/png/BG.png
-  artifactKey: Guid(dce227015cdb7db4bb2e1333109f46fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/BG.png using Guid(dce227015cdb7db4bb2e1333109f46fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '947beb2dc04afeff984f767b9dd71b2d') in 0.078797 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 1.660989 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Back (1).png
-  artifactKey: Guid(f979ddc094ec7a0478114e8bc7b9b430) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Back (1).png using Guid(f979ddc094ec7a0478114e8bc7b9b430) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'a32fc7c217ec6f5d48c0f0ad849fddfa') in 0.014660 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000012 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Back (3).png
-  artifactKey: Guid(77e19da75b44d014f8473e23cca7b93a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Back (3).png using Guid(77e19da75b44d014f8473e23cca7b93a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'e7ac7507e0019fa6c3aace87fd54a02b') in 0.012657 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000013 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Badges (1).png
-  artifactKey: Guid(a6db74989654c084da8948034f2c1631) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Badges (1).png using Guid(a6db74989654c084da8948034f2c1631) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '90044ad98bf5dae8befe4961614b7dca') in 0.012563 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Back (4).png
-  artifactKey: Guid(c63f307f22552f745b9051b068e80447) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Back (4).png using Guid(c63f307f22552f745b9051b068e80447) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'ffc42da9e809e14e6e07141ecead9731') in 0.012388 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000014 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Badges (4).png
-  artifactKey: Guid(dfdc16e7b35bef640a0e1b4421d82d9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Badges (4).png using Guid(dfdc16e7b35bef640a0e1b4421d82d9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'b148ae42ec442f0fafd5a6d640b7921f') in 0.011936 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000013 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Down (2).png
-  artifactKey: Guid(f10ddb8decd22ef43a5ea4a059f9ad80) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Down (2).png using Guid(f10ddb8decd22ef43a5ea4a059f9ad80) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'ab8e8df2272093f87172d776a2321bf5') in 0.011757 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000020 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Down (4).png
-  artifactKey: Guid(690aa8904ead07c45affdee4a099f6b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Down (4).png using Guid(690aa8904ead07c45affdee4a099f6b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '5eb88131e40dab10d1e5610fe77ed3e3') in 0.011648 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000013 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/DownArrow (2).png
-  artifactKey: Guid(d3314945acd1af6419b48316089119df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/DownArrow (2).png using Guid(d3314945acd1af6419b48316089119df) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'd161e7ea6faef77db06d9e43df09531f') in 0.012381 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000012 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/DownArrow (4).png
-  artifactKey: Guid(5d5711405b9ef7346a06823a1fc4739a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/DownArrow (4).png using Guid(5d5711405b9ef7346a06823a1fc4739a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'd9f91c6a0b06100441904e98412445d9') in 0.009776 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000012 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Down (1).png
-  artifactKey: Guid(f05bf07c69892b8478115d0df5a6e238) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Down (1).png using Guid(f05bf07c69892b8478115d0df5a6e238) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '828d18d610fe6ebda14d1f951e895c84') in 0.010436 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000013 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Exit (1).png
-  artifactKey: Guid(c33a22d6af7a177488ecba4fa282191a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Exit (1).png using Guid(c33a22d6af7a177488ecba4fa282191a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '21dabc064c52307a6c717be6beaf4700') in 0.010909 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Exit (2).png
-  artifactKey: Guid(6c65ef6b0e2fd64418de7a37e811fec6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Exit (2).png using Guid(6c65ef6b0e2fd64418de7a37e811fec6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '0418dbed8f44da85820a5e939e6f38fc') in 0.011402 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Exit (4).png
-  artifactKey: Guid(06bf1e178c792714db8dd1b1eda1db85) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Exit (4).png using Guid(06bf1e178c792714db8dd1b1eda1db85) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '0b385c6adaf95a52a7a69009acea649b') in 0.011872 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000013 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Facebook (2).png
-  artifactKey: Guid(6ed637e943823234388f33e2df067ce4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Facebook (2).png using Guid(6ed637e943823234388f33e2df067ce4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '0e62f2ddef155bfc7c5afba6f5e2e6fd') in 0.011714 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000013 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/GooglePlus (1).png
-  artifactKey: Guid(5041fef0db58c5a4a97fb1a90bbd5f79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/GooglePlus (1).png using Guid(5041fef0db58c5a4a97fb1a90bbd5f79) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '5439e679cdea7585958e7d3064a97f4c') in 0.010632 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000022 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Facebook (3).png
-  artifactKey: Guid(d76bf967d6904e043a4e3704da341082) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Facebook (3).png using Guid(d76bf967d6904e043a4e3704da341082) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '1ed931e2054bf9b46578a1a7b77c2700') in 0.011537 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000011 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Help (1).png
-  artifactKey: Guid(3f4b6bf75f4809d4da6de0d9aa119e66) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Help (1).png using Guid(3f4b6bf75f4809d4da6de0d9aa119e66) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '9afe61573ee43a7d354b429bbf05a43e') in 0.011372 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Help (3).png
-  artifactKey: Guid(022a7bf48adc2b6409c49f582563d0f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Help (3).png using Guid(022a7bf48adc2b6409c49f582563d0f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '1b2eb43f2a59d95ee49d14a31267b56e') in 0.011618 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Home (1).png
-  artifactKey: Guid(cf51ebc9b791e10459c43b01df0f4389) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Home (1).png using Guid(cf51ebc9b791e10459c43b01df0f4389) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '1619b72dba4db079e28fb9e2128aa5c8') in 0.011147 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000014 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Home (3).png
-  artifactKey: Guid(b08e73e89b4d24c48a3026acda55e7af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Home (3).png using Guid(b08e73e89b4d24c48a3026acda55e7af) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '4c4ec9a020e02c31d205b7731c65b97c') in 0.011709 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000012 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Info (3).png
-  artifactKey: Guid(53b7fc552066f134e89a661b645e9a61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Info (3).png using Guid(53b7fc552066f134e89a661b645e9a61) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '567b4ad1c3429f2df627b8d6528e663b') in 0.011950 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Info (2).png
-  artifactKey: Guid(81771ede3bcd28748b1106a1eee85d62) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Info (2).png using Guid(81771ede3bcd28748b1106a1eee85d62) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '8afb7c95c4c202b5178356c7ec0eaec8') in 0.011433 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000013 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Leaderboard (2).png
-  artifactKey: Guid(8bc72a4846ad84444809af50583ca2c4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Leaderboard (2).png using Guid(8bc72a4846ad84444809af50583ca2c4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '4a2a3e4023d3b8bc147f96944dcf3005') in 0.012127 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000012 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/LeftArrow (1).png
-  artifactKey: Guid(8a434e045880c7249846bc300b655c26) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/LeftArrow (1).png using Guid(8a434e045880c7249846bc300b655c26) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '382441042b4ce4b0ed98ff08268a76a8') in 0.011528 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000014 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/LeftArrow (3).png
-  artifactKey: Guid(11201673d9e8198439c1d6d243f530a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/LeftArrow (3).png using Guid(11201673d9e8198439c1d6d243f530a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'd626aebf0cef955eff0ae6438c4143f7') in 0.011682 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000034 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/LevelGrid (2).png
-  artifactKey: Guid(9442916eb840cf246b23c2f630638354) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/LevelGrid (2).png using Guid(9442916eb840cf246b23c2f630638354) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'c8f9a8e0b7b55cf9a8b0d9a2efc703a4') in 0.010498 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/LevelSelect (1).png
-  artifactKey: Guid(caa8ed570d32e6f4c87563cbc4eda23e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/LevelSelect (1).png using Guid(caa8ed570d32e6f4c87563cbc4eda23e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '3a02f4604137ad40b824acda3c9ea369') in 0.010962 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000012 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/LevelSelect (2).png
-  artifactKey: Guid(670fcd5d83a946741b555921249da7f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/LevelSelect (2).png using Guid(670fcd5d83a946741b555921249da7f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '01db5dfa3fa33aca99de9c02b8d8d342') in 0.011608 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000012 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Like (1).png
-  artifactKey: Guid(85e397f5e00118646a3e9c3af5ba109f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Like (1).png using Guid(85e397f5e00118646a3e9c3af5ba109f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '700afda026de4186f231ac930274b429') in 0.011405 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Like (3).png
-  artifactKey: Guid(dc8725639d466c749a8cbed730f758d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Like (3).png using Guid(dc8725639d466c749a8cbed730f758d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '5a9e2eb9264e155d8d37e5123de14a0e') in 0.012561 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000012 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Minus (1).png
-  artifactKey: Guid(0345d8479ec64b34aa09a4d1dc939276) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Minus (1).png using Guid(0345d8479ec64b34aa09a4d1dc939276) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '6140a2b05e7d49c5489c2166d63d0302') in 0.011590 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000014 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Minus (3).png
-  artifactKey: Guid(687266e917dfb5e44a9c2735e3ec63d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Minus (3).png using Guid(687266e917dfb5e44a9c2735e3ec63d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'a013fc07c0d9269ca291ec63360031d9') in 0.011106 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/MoreGames (1).png
-  artifactKey: Guid(0d6d8c832a2fd9047b7b53faac643839) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/MoreGames (1).png using Guid(0d6d8c832a2fd9047b7b53faac643839) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '9c4a24b9a16d34e56c51343e9c0e3f91') in 0.011259 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000021 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Info (4).png
-  artifactKey: Guid(66f1d2a2d85307f45bae5710535cda09) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Info (4).png using Guid(66f1d2a2d85307f45bae5710535cda09) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '173853db8804d8b248305f838c91f6b2') in 0.011060 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000012 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Like (4).png
-  artifactKey: Guid(be4a8efa1aef6f94f9b88700b4fc653e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Like (4).png using Guid(be4a8efa1aef6f94f9b88700b4fc653e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '213d543fad13dc4bc118a982aebe2b37') in 0.011353 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000014 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Multiplayer (2).png
-  artifactKey: Guid(980c489998e407e43bc894f6f488c30f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Multiplayer (2).png using Guid(980c489998e407e43bc894f6f488c30f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '568ed046860a908048753a61de36cfe6') in 0.011109 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000014 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Music (1).png
-  artifactKey: Guid(72043ef38dae1b24f90559f133b969b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Music (1).png using Guid(72043ef38dae1b24f90559f133b969b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '56955bf19d26dc1dafd6c928dd0f5b0a') in 0.011905 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000018 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Music (3).png
-  artifactKey: Guid(69d3714b07f737a41ba93c1887bbe843) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Music (3).png using Guid(69d3714b07f737a41ba93c1887bbe843) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '58f4c48ab0be3027e265269d1b28ac16') in 0.014626 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000013 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/MoreGames (4).png
-  artifactKey: Guid(00a19589fd72c8d428d3e12c93c8d10a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/MoreGames (4).png using Guid(00a19589fd72c8d428d3e12c93c8d10a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'd2df784fd17ff90cb454e46ca326587a') in 0.013143 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000013 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Leaderboard (4).png
-  artifactKey: Guid(0155316bd0c7a574c91a36d3d19889dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Leaderboard (4).png using Guid(0155316bd0c7a574c91a36d3d19889dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '10f664ab6ed68c5eeea4b23dd48d64c4') in 0.012566 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000013 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Home (2).png
-  artifactKey: Guid(09b2040b741760d4c84b12951a9abb83) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Home (2).png using Guid(09b2040b741760d4c84b12951a9abb83) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'fe8a22a289feb39ce64c7310cbff2bd4') in 0.013345 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 4.658949 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/No (1).png
-  artifactKey: Guid(4e7eeb58bf0706e4e9deb0a128007a0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/No (1).png using Guid(4e7eeb58bf0706e4e9deb0a128007a0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '942648eca25d5bfe394ed2193e1b217c') in 0.012080 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/No (3).png
-  artifactKey: Guid(35464ee554a9c4646809a54db962756d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/No (3).png using Guid(35464ee554a9c4646809a54db962756d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'eb8a957eea4556ee44a7b6d2129db222') in 0.010585 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Pause (1).png
-  artifactKey: Guid(520e711b227c85243be4d885021ea449) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Pause (1).png using Guid(520e711b227c85243be4d885021ea449) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '887610253aa7059305f4b665333aec65') in 0.011102 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000012 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Pause (3).png
-  artifactKey: Guid(b924b9d1a6e1b764681374e6775ffc71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Pause (3).png using Guid(b924b9d1a6e1b764681374e6775ffc71) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'bf4bef05485d11159893f90e39837781') in 0.011360 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000014 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Play (1).png
-  artifactKey: Guid(857ee772ed7d9e849af0251f7ce58296) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Play (1).png using Guid(857ee772ed7d9e849af0251f7ce58296) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'd9e0645d2fbd71e829e2c27fa84b96fc') in 0.011661 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Play (3).png
-  artifactKey: Guid(7ddcf4e3850e7f44a992ca0169d43c0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Play (3).png using Guid(7ddcf4e3850e7f44a992ca0169d43c0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '571b89857d00e3519c92c7b045408302') in 0.010367 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.004065 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Plus (2).png
-  artifactKey: Guid(3d04e52e51c6aaa4e9657d2406eeb229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Plus (2).png using Guid(3d04e52e51c6aaa4e9657d2406eeb229) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '28ace6bbee800badf3c1c1991fa86f2b') in 0.012082 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.361099 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Profile (1).png
-  artifactKey: Guid(68b66acfa1647a140bcf7b25fa688095) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Profile (1).png using Guid(68b66acfa1647a140bcf7b25fa688095) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '8394f81941694cac7ad90ec15a7560d9') in 0.010128 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.006262 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Profile (4).png
-  artifactKey: Guid(02cadbe2ac68c5349a8d756f9dde072c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Profile (4).png using Guid(02cadbe2ac68c5349a8d756f9dde072c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'f3d45f0a783a61dd7af068a3c618ffb7') in 0.010430 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.004449 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Reload (3).png
-  artifactKey: Guid(5fc4980c762a3e34280ac699bd46cfc2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Reload (3).png using Guid(5fc4980c762a3e34280ac699bd46cfc2) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'a47166cba93ff0ec8eb4fc6b2d85e992') in 0.011301 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.003941 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Replay (2).png
-  artifactKey: Guid(3c518f4112e3d894eb6382b70d25f9a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Replay (2).png using Guid(3c518f4112e3d894eb6382b70d25f9a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '31827aabb0bc7156b941b692bd8c88fc') in 0.010840 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.004228 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/RightArrow (1).png
-  artifactKey: Guid(3445a132af319474b9d5d36ad9139298) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/RightArrow (1).png using Guid(3445a132af319474b9d5d36ad9139298) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'f4938bc5c7e8cbbd2e18fc105c3cb7a9') in 0.011079 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.010481 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/RightArrow (4).png
-  artifactKey: Guid(396752f31c4ce554c8e3a7fee31c3205) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/RightArrow (4).png using Guid(396752f31c4ce554c8e3a7fee31c3205) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '0fb6483783d2d10dae96d05816c69953') in 0.010974 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.003689 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Save (3).png
-  artifactKey: Guid(9493c72318f90d1428e9ea188b998c7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Save (3).png using Guid(9493c72318f90d1428e9ea188b998c7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '0fdbbcb8540786bf19a165f821a49b86') in 0.010007 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000152 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/SeekHorizontal (1).png
-  artifactKey: Guid(5d7690289392bdd48abb8d8a4bf5bcfd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/SeekHorizontal (1).png using Guid(5d7690289392bdd48abb8d8a4bf5bcfd) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '82f6f919b2b1970ab08a52bd015716b7') in 0.010220 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.004197 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/SeekHorizontal (4).png
-  artifactKey: Guid(60ea5f17724a5a6468d3d2ce74847b18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/SeekHorizontal (4).png using Guid(60ea5f17724a5a6468d3d2ce74847b18) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '1a4b019b59cf9bb30f443791a583df24') in 0.012226 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.002519 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/SeekVertical (3).png
-  artifactKey: Guid(a2d179974f34e9941be2d2a7b4ef7be5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/SeekVertical (3).png using Guid(a2d179974f34e9941be2d2a7b4ef7be5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '5af5344170382e606c70045441408e62') in 0.011462 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.004903 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Settings (2).png
-  artifactKey: Guid(d3ba02b2ea4f2e94c8dbf48b7e5ad55a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Settings (2).png using Guid(d3ba02b2ea4f2e94c8dbf48b7e5ad55a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '259a4f87b7dc59f542eb7633e3c0dca9') in 0.010853 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.005017 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Share (1).png
-  artifactKey: Guid(fbfe8ddcc34379244857ace61b9a4957) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Share (1).png using Guid(fbfe8ddcc34379244857ace61b9a4957) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'aa0a539a807de204a184afd390d4e1d6') in 0.010779 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.004498 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Share (4).png
-  artifactKey: Guid(66b2ea48c8d137c48a74d568ea3e44ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Share (4).png using Guid(66b2ea48c8d137c48a74d568ea3e44ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '77f1b6fd17c5b4d897136f5a5b0eb072') in 0.010339 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.004447 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Shop (3).png
-  artifactKey: Guid(a3240657d617cde479ce3983271df53a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Shop (3).png using Guid(a3240657d617cde479ce3983271df53a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '54c07cd89c56dabd619292493912c241') in 0.010602 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.004165 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/SliderHorizontal (2).png
-  artifactKey: Guid(804ebd19a5e0b034a9add061913eca7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/SliderHorizontal (2).png using Guid(804ebd19a5e0b034a9add061913eca7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'aeb20ecace4a8e8907b8b6f4c083f456') in 0.010160 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.005017 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/SliderVertical (1).png
-  artifactKey: Guid(13fc1e64632ab3449909184115298637) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/SliderVertical (1).png using Guid(13fc1e64632ab3449909184115298637) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '3938151a089b2db35664449c3b1508cd') in 0.009945 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.004728 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/SliderVertical (4).png
-  artifactKey: Guid(cf2010e2de19b824fa14348cebf3f2dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/SliderVertical (4).png using Guid(cf2010e2de19b824fa14348cebf3f2dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '75f989b26bbbef0fac8e339599e1afc7') in 0.010627 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.004441 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Sound (3).png
-  artifactKey: Guid(5550230534976bc4383669146fe258d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Sound (3).png using Guid(5550230534976bc4383669146fe258d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '2533e02716b6d6e465d82703868f483b') in 0.010215 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.003832 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Trash (2).png
-  artifactKey: Guid(25b442bba7525694989bb0b8f95980e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Trash (2).png using Guid(25b442bba7525694989bb0b8f95980e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'd6a0518cdd62756569985ca4398bb5b8') in 0.011386 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.003604 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Trophy (1).png
-  artifactKey: Guid(df12eb49555256e4cb93b28907f1aad1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Trophy (1).png using Guid(df12eb49555256e4cb93b28907f1aad1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '4a6b20ba6910f6a777c09e589e3fc8e4') in 0.010902 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.003917 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Trophy (4).png
-  artifactKey: Guid(641d52431e5aff84aa568f42eece61ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Trophy (4).png using Guid(641d52431e5aff84aa568f42eece61ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '026504c8f0b39868201f43a3201c3670') in 0.010571 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.004272 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Twitter (3).png
-  artifactKey: Guid(f779a45851bbad44e98137917a3372f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Twitter (3).png using Guid(f779a45851bbad44e98137917a3372f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'e7e3ae7199fd574cb79196fbf6e3c039') in 0.011735 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.006180 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Up (1).png
-  artifactKey: Guid(2fa2c01563f622f4d9af5b06ca5ed088) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Up (1).png using Guid(2fa2c01563f622f4d9af5b06ca5ed088) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '22b0d1662ffa48b4df544129c4a466a2') in 0.010828 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.004656 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Up (4).png
-  artifactKey: Guid(abfe2b85c76422f4495cee56ef0baf79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Up (4).png using Guid(abfe2b85c76422f4495cee56ef0baf79) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'beb2e468fde6fa6e7ee0547ee3039cc8') in 0.011127 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.006031 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/UpArrow (3).png
-  artifactKey: Guid(e92d8fc0bc3e29d49b16392c30271948) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/UpArrow (3).png using Guid(e92d8fc0bc3e29d49b16392c30271948) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '47b1f569761a6e2774a7ea2d772ed932') in 0.011019 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.004729 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Upload (2).png
-  artifactKey: Guid(a823c0e8d33b4a8489142cc338ba83c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Upload (2).png using Guid(a823c0e8d33b4a8489142cc338ba83c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'c899975d0974ebe7c71b652a97e8b990') in 0.010728 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.004970 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Yes (1).png
-  artifactKey: Guid(34f0ff8a1a3967545b9434ff402e8717) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Yes (1).png using Guid(34f0ff8a1a3967545b9434ff402e8717) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '7d6da8e3c8cc7036a7f6759a06c913f0') in 0.011565 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 5.891031 seconds.
-  path: Assets/Christmas Game GUI/png/buttons/Blank/Blank (2).png
-  artifactKey: Guid(35c5855e7ecf84e409c8d9ca646c4a1d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/buttons/Blank/Blank (2).png using Guid(35c5855e7ecf84e409c8d9ca646c4a1d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '0ba248bf979bff72b9275b908952ee77') in 0.012445 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 26.190902 seconds.
-  path: Assets/Christmas Game GUI/png/elements/buttons/Action/NoEnergy (1).png
-  artifactKey: Guid(cb1290c7ec5a21d4eb842ecc8821677c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/buttons/Action/NoEnergy (1).png using Guid(cb1290c7ec5a21d4eb842ecc8821677c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '60a581379b7010b0cf4eaf68e1133f00') in 0.014670 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Christmas Game GUI/png/elements/buttons/Action/WithEnergy (2).png
-  artifactKey: Guid(9427f6380bedf364f9fcf0634ce64fc7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/buttons/Action/WithEnergy (2).png using Guid(9427f6380bedf364f9fcf0634ce64fc7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'ba738fcea2a3c315774b0e2f1ea759e3') in 0.015614 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 1.240269 seconds.
-  path: Assets/Christmas Game GUI/png/elements/buttons/Buy/Gem (2).png
-  artifactKey: Guid(305917c3707c9b146a8242aa533b2939) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/buttons/Buy/Gem (2).png using Guid(305917c3707c9b146a8242aa533b2939) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'd4e0ea536b33a73de949dedc62b1258c') in 0.011202 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.003152 seconds.
-  path: Assets/Christmas Game GUI/png/elements/buttons/Buy/Money (1).png
-  artifactKey: Guid(027dbb8d49565b9448146b7d14f77281) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/buttons/Buy/Money (1).png using Guid(027dbb8d49565b9448146b7d14f77281) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '789c2c63a287869dfc05f04d00996ef7') in 0.011883 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.685938 seconds.
-  path: Assets/Christmas Game GUI/png/elements/buttons/Skill/SkillButton (1).png
-  artifactKey: Guid(24971141e358d6c42a667ac9b71c521d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/buttons/Skill/SkillButton (1).png using Guid(24971141e358d6c42a667ac9b71c521d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '2ae6f10127a48ba240dbc4082b676e7c') in 0.013076 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 3.401665 seconds.
-  path: Assets/Christmas Game GUI/png/elements/HUD/Bar/Energy (2).png
-  artifactKey: Guid(7021b28dc173b67499afd34fbd9e5ba4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/HUD/Bar/Energy (2).png using Guid(7021b28dc173b67499afd34fbd9e5ba4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'dd1b8de855fd3a98df63f0af2ca45640') in 0.011797 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.004208 seconds.
-  path: Assets/Christmas Game GUI/png/elements/HUD/Bar/NoIcon.png
-  artifactKey: Guid(d1e8ab4c73e449b45a069251312d7ab8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/HUD/Bar/NoIcon.png using Guid(d1e8ab4c73e449b45a069251312d7ab8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '482928aaec9c47ba08b30fd3680551f5') in 0.011568 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.915296 seconds.
-  path: Assets/Christmas Game GUI/png/elements/HUD/Icon/IconPlaceholder.png
-  artifactKey: Guid(88533d7ffa05ce64a97bd87ab4ac2256) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/HUD/Icon/IconPlaceholder.png using Guid(88533d7ffa05ce64a97bd87ab4ac2256) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'a7f2dea8a623dfdaae1968d92bd0114d') in 0.012381 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.630999 seconds.
-  path: Assets/Christmas Game GUI/png/elements/HUD/Text/Gems.png
-  artifactKey: Guid(74c6a4433b9bbe6469925996f4b41c60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/HUD/Text/Gems.png using Guid(74c6a4433b9bbe6469925996f4b41c60) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '464ac680261fbd8e1f6e28f4b0beb9e1') in 0.010574 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.005154 seconds.
-  path: Assets/Christmas Game GUI/png/elements/HUD/Text/NoIcon.png
-  artifactKey: Guid(e30cbe4e49f651c439e4bd6cecd81aa5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/HUD/Text/NoIcon.png using Guid(e30cbe4e49f651c439e4bd6cecd81aa5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '8e7ca76332096d17f92cc9681dd3ac34') in 0.010534 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.565374 seconds.
-  path: Assets/Christmas Game GUI/png/elements/icons/Icon (2).png
-  artifactKey: Guid(0aad93a18982ed94d965935bccdf5eb5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/icons/Icon (2).png using Guid(0aad93a18982ed94d965935bccdf5eb5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'f6d649a3e1fbfd242f77b755c8a2ae54') in 0.011660 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.003859 seconds.
-  path: Assets/Christmas Game GUI/png/elements/icons/Icon (5).png
-  artifactKey: Guid(79f3bbfde412a38488ab4891b706e66a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/icons/Icon (5).png using Guid(79f3bbfde412a38488ab4891b706e66a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '77e7f5e39c126c6b1e3886d41bd34d83') in 0.011734 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.003910 seconds.
-  path: Assets/Christmas Game GUI/png/elements/icons/Icon (8).png
-  artifactKey: Guid(7a5ae77ac21645c47ace6a3907020227) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/icons/Icon (8).png using Guid(7a5ae77ac21645c47ace6a3907020227) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '87140ed3552d2c0ad1df23c7649b7c19') in 0.011234 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.004525 seconds.
-  path: Assets/Christmas Game GUI/png/elements/icons/Icon (11).png
-  artifactKey: Guid(4673fd7d32a421f469d011a44ca395b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/icons/Icon (11).png using Guid(4673fd7d32a421f469d011a44ca395b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'b003d2d77ba5081771ab481bdef9bdca') in 0.011016 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.004420 seconds.
-  path: Assets/Christmas Game GUI/png/elements/icons/Icon (14).png
-  artifactKey: Guid(6baea95f7a1f3fd4a8bd478928e07d5a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/icons/Icon (14).png using Guid(6baea95f7a1f3fd4a8bd478928e07d5a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '5a34af0149e6e35f52334bebf8b302af') in 0.012512 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.001966 seconds.
-  path: Assets/Christmas Game GUI/png/elements/icons/Icon (17).png
-  artifactKey: Guid(7ef9a99e96f1d4d4a9227737cb80e46f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/icons/Icon (17).png using Guid(7ef9a99e96f1d4d4a9227737cb80e46f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '9f8ed97e49898e753e238a8fa80ab32a') in 0.010496 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.004213 seconds.
-  path: Assets/Christmas Game GUI/png/elements/icons/Icon (20).png
-  artifactKey: Guid(78ed512db069d7249885fd07bccf8db7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/icons/Icon (20).png using Guid(78ed512db069d7249885fd07bccf8db7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '95ad70c5ba90570ce802c3da0af22e8c') in 0.010507 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.004714 seconds.
-  path: Assets/Christmas Game GUI/png/elements/icons/Icon (23).png
-  artifactKey: Guid(ec69fbd1684388a479728a1aaaf2c4ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/icons/Icon (23).png using Guid(ec69fbd1684388a479728a1aaaf2c4ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '5d09b1075df462c710660016a87dbfa9') in 0.012212 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 8.163167 seconds.
-  path: Assets/Christmas Game GUI/png/elements/icons/Decorations/Decoration (2).png
-  artifactKey: Guid(a9438db2861f83f4b93f86facef14ac2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/icons/Decorations/Decoration (2).png using Guid(a9438db2861f83f4b93f86facef14ac2) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'da3ddce4a2580ec6ef328e31e1e58b12') in 0.011716 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000019 seconds.
-  path: Assets/Christmas Game GUI/png/elements/icons/Decorations/Decoration (5).png
-  artifactKey: Guid(99b66693c867dfc4f985fd3af3f03227) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/icons/Decorations/Decoration (5).png using Guid(99b66693c867dfc4f985fd3af3f03227) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '77392e2e8a5cdd0a61417d5167af76f8') in 0.012454 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000013 seconds.
-  path: Assets/Christmas Game GUI/png/elements/icons/Decorations/Decoration (8).png
-  artifactKey: Guid(824d0dc4b3742b84b97b3a6a3aeb66ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/icons/Decorations/Decoration (8).png using Guid(824d0dc4b3742b84b97b3a6a3aeb66ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'a9faf815b79d977e5b623d337245ee67') in 0.013421 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 1.416512 seconds.
-  path: Assets/Christmas Game GUI/png/elements/icons/Star/2Stars.png
-  artifactKey: Guid(651145298f3f6d04091e291733b60682) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/icons/Star/2Stars.png using Guid(651145298f3f6d04091e291733b60682) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '028f46a92ac88eab42cce813a27a3bcb') in 0.011674 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 8.000124 seconds.
-  path: Assets/Christmas Game GUI/png/elements/items/Upgrade/Coin.png
-  artifactKey: Guid(7f2f88730e9675945bfeee8c97c07270) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/items/Upgrade/Coin.png using Guid(7f2f88730e9675945bfeee8c97c07270) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'cee033189e0639ad4dce74ae45ac0e6e') in 0.013976 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.003559 seconds.
-  path: Assets/Christmas Game GUI/png/elements/items/Upgrade/LockedBlank.png
-  artifactKey: Guid(a43354fee62a6a043856541d055bd622) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/items/Upgrade/LockedBlank.png using Guid(a43354fee62a6a043856541d055bd622) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '668e86a2071ff1ac6b2ed72d39e2fabf') in 0.022619 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.803511 seconds.
-  path: Assets/Christmas Game GUI/png/elements/items/Score/Badge (2).png
-  artifactKey: Guid(1f3065698d2a33740a01b819b86e7881) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/items/Score/Badge (2).png using Guid(1f3065698d2a33740a01b819b86e7881) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '55439dcfd34c8cff6233c63c6aa38e5d') in 0.010810 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.005054 seconds.
-  path: Assets/Christmas Game GUI/png/elements/items/Score/WithIcon.png
-  artifactKey: Guid(901300decd66fb9419141af508898231) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/items/Score/WithIcon.png using Guid(901300decd66fb9419141af508898231) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '04866f856ce7507402dcd5d87a36d8fe') in 0.016746 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 1.084094 seconds.
-  path: Assets/Christmas Game GUI/png/elements/items/Achievement/Complete.png
-  artifactKey: Guid(4b470529e882a6649b5098553ddb67fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/items/Achievement/Complete.png using Guid(4b470529e882a6649b5098553ddb67fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '3db485c365afa12fa2efda2919e38bf8') in 0.020776 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.527501 seconds.
-  path: Assets/Christmas Game GUI/png/elements/items/Shop/ShopItem (2).png
-  artifactKey: Guid(9977860dee5945745890208a8a9ca6e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/items/Shop/ShopItem (2).png using Guid(9977860dee5945745890208a8a9ca6e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'dbe4dd7d289b4f064da8bc84cb7817ff') in 0.016166 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Prepare
-Caller must complete domain reload
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  2.564 seconds
-Native extension for WindowsStandalone target not found
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  6.276 seconds
-Domain Reload Profiling: 8837ms
-	BeginReloadAssembly (192ms)
+- Finished resetting the current domain, in  1.216 seconds
+Domain Reload Profiling: 2538ms
+	BeginReloadAssembly (234ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (6ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (64ms)
-	RebuildCommonClasses (30ms)
-	RebuildNativeTypeToScriptingClass (7ms)
-	initialDomainReloadingComplete (30ms)
-	LoadAllAssembliesAndSetupDomain (2301ms)
-		LoadAssemblies (2351ms)
+		CreateAndSetChildDomain (27ms)
+	RebuildCommonClasses (41ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (66ms)
+	LoadAllAssembliesAndSetupDomain (958ms)
+		LoadAssemblies (782ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (33ms)
-			TypeCache.Refresh (13ms)
-				TypeCache.ScanAssembly (2ms)
-			ScanForSourceGeneratedMonoScriptInfo (12ms)
+		AnalyzeDomain (332ms)
+			TypeCache.Refresh (292ms)
+				TypeCache.ScanAssembly (260ms)
+			ScanForSourceGeneratedMonoScriptInfo (28ms)
+			ResolveRequiredComponents (9ms)
+	FinalizeReload (1229ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (1021ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (108ms)
+			SetLoadedEditorAssemblies (6ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (106ms)
+			ProcessInitializeOnLoadAttributes (753ms)
+			ProcessInitializeOnLoadMethodAttributes (25ms)
+			AfterProcessingInitializeOnLoad (24ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (15ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.08 seconds
+Refreshing native plugins compatible for Editor in 18.81 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4052 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 30 unused Assets / (57.8 KB). Loaded Objects now: 4547.
+Memory consumption went from 163.0 MB to 162.9 MB.
+Total: 5.075800 ms (FindLiveObjects: 0.491600 ms CreateObjectMapping: 0.306300 ms MarkObjects: 4.146100 ms  DeleteObjects: 0.130400 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 87216.799754 seconds.
+  path: Assets/huisu/학교안심_별자리_B(글꼴)/학교안심 별자리 B.png
+  artifactKey: Guid(6af47041e75a2864c91df5706157c10d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/학교안심_별자리_B(글꼴)/학교안심 별자리 B.png using Guid(6af47041e75a2864c91df5706157c10d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '2a1c3faabdeee3284872be1558f69107') in 0.091374 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.736 seconds
+Native extension for UWP target not found
+Native extension for LinuxStandalone target not found
+Native extension for WindowsStandalone target not found
+Native extension for AppleTV target not found
+Failed to load: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/VisionOSPlayer\x64\UnityEditor.VisionOS.Native.dll
+Native extension for VisionOS target not found
+Native extension for Android target not found
+Native extension for OSXStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.465 seconds
+Domain Reload Profiling: 2193ms
+	BeginReloadAssembly (220ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (5ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (43ms)
+	RebuildCommonClasses (32ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (46ms)
+	LoadAllAssembliesAndSetupDomain (422ms)
+		LoadAssemblies (533ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (16ms)
+			TypeCache.Refresh (6ms)
+				TypeCache.ScanAssembly (0ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
 			ResolveRequiredComponents (7ms)
-	FinalizeReload (6276ms)
+	FinalizeReload (1466ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (362ms)
+		SetupLoadedEditorAssemblies (618ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (5ms)
-			SetLoadedEditorAssemblies (5ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (55ms)
-			ProcessInitializeOnLoadAttributes (272ms)
-			ProcessInitializeOnLoadMethodAttributes (17ms)
-			AfterProcessingInitializeOnLoad (9ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (5ms)
-Refreshing native plugins compatible for Editor in 7.55 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4030 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 22 unused Assets / (29.6 KB). Loaded Objects now: 4604.
-Memory consumption went from 157.7 MB to 157.6 MB.
-Total: 3.717100 ms (FindLiveObjects: 0.426500 ms CreateObjectMapping: 0.193100 ms MarkObjects: 3.059200 ms  DeleteObjects: 0.038000 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Caller must complete domain reload
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.424 seconds
-Native extension for WindowsStandalone target not found
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.797 seconds
-Domain Reload Profiling: 1217ms
-	BeginReloadAssembly (130ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (3ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (28ms)
-	RebuildCommonClasses (29ms)
-	RebuildNativeTypeToScriptingClass (11ms)
-	initialDomainReloadingComplete (27ms)
-	LoadAllAssembliesAndSetupDomain (223ms)
-		LoadAssemblies (267ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (25ms)
-			TypeCache.Refresh (8ms)
-				TypeCache.ScanAssembly (2ms)
-			ScanForSourceGeneratedMonoScriptInfo (11ms)
-			ResolveRequiredComponents (5ms)
-	FinalizeReload (797ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (334ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (5ms)
-			SetLoadedEditorAssemblies (5ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (54ms)
-			ProcessInitializeOnLoadAttributes (247ms)
-			ProcessInitializeOnLoadMethodAttributes (16ms)
-			AfterProcessingInitializeOnLoad (7ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (6ms)
-Refreshing native plugins compatible for Editor in 7.80 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4030 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 22 unused Assets / (29.6 KB). Loaded Objects now: 4608.
-Memory consumption went from 157.9 MB to 157.9 MB.
-Total: 3.506200 ms (FindLiveObjects: 0.512600 ms CreateObjectMapping: 0.115700 ms MarkObjects: 2.825200 ms  DeleteObjects: 0.051800 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 2645.875566 seconds.
-  path: Assets/huisu/룰 설명/룰 설명, 산타, 순록 포획 1.png
-  artifactKey: Guid(a7f0f88b263c4104c85bf8a8abf1b1a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/huisu/룰 설명/룰 설명, 산타, 순록 포획 1.png using Guid(a7f0f88b263c4104c85bf8a8abf1b1a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '55a2adc5c1fcb34ff21978caa5096a81') in 0.052718 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
-========================================================================
-Received Import Request.
-  Time since last request: 0.003596 seconds.
-  path: Assets/huisu/룰 설명/룰 설명, 순록, 사탕 1.png
-  artifactKey: Guid(07b0949ce0a9ca9428cadd491ec7c629) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/huisu/룰 설명/룰 설명, 순록, 사탕 1.png using Guid(07b0949ce0a9ca9428cadd491ec7c629) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'cb765500fbcad3e409e93bba294c6e12') in 0.012206 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
-========================================================================
-Received Import Request.
-  Time since last request: 0.000020 seconds.
-  path: Assets/huisu/룰 설명/룰 설명, 순록, 요정가루 1.png
-  artifactKey: Guid(42b3212c005d6c646b776a27b2f207b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/huisu/룰 설명/룰 설명, 순록, 요정가루 1.png using Guid(42b3212c005d6c646b776a27b2f207b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '84f0ac0546f9fa7a01936a6cfbd5306e') in 0.013178 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/huisu/룰 설명/룰 설명, 순록, 요정가루 2.png
-  artifactKey: Guid(64c0e95dc2d7a0d47a682a42f81e3fdc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/huisu/룰 설명/룰 설명, 순록, 요정가루 2.png using Guid(64c0e95dc2d7a0d47a682a42f81e3fdc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '82ade80cbaa66db57661835cc65bb152') in 0.017311 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
-========================================================================
-Received Import Request.
-  Time since last request: 0.817024 seconds.
-  path: Assets/huisu/배경사진/KakaoTalk_20250902_204201620.png
-  artifactKey: Guid(5415d706bc386d243aece78abec9735a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/huisu/배경사진/KakaoTalk_20250902_204201620.png using Guid(5415d706bc386d243aece78abec9735a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'ac67d6e8917589befad3c1e0e9a63b7d') in 0.010171 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
-========================================================================
-Received Import Request.
-  Time since last request: 2.544951 seconds.
-  path: Assets/huisu/Ui/ui 인게임/순록 산타 선택, 루돌프.png
-  artifactKey: Guid(1b3d8b9164aef7147b57321d2f0a9b07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/huisu/Ui/ui 인게임/순록 산타 선택, 루돌프.png using Guid(1b3d8b9164aef7147b57321d2f0a9b07) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'bfebebbfa38a36919c60e416c3f7d245') in 0.030420 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000014 seconds.
-  path: Assets/huisu/Ui/ui 인게임/스테미나, 모두 소진.png
-  artifactKey: Guid(83e8ccd2fd24f3947b37f976352c2684) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/huisu/Ui/ui 인게임/스테미나, 모두 소진.png using Guid(83e8ccd2fd24f3947b37f976352c2684) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'b5debfad3ea62e44bbd367f84fc4e2d9') in 0.010685 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000014 seconds.
-  path: Assets/huisu/Ui/ui 인게임/인게임 요정갈 남은 갯수.png
-  artifactKey: Guid(9c689d8437a82b949ac8a95e9191f6e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/huisu/Ui/ui 인게임/인게임 요정갈 남은 갯수.png using Guid(9c689d8437a82b949ac8a95e9191f6e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'c17f30294b3f82d153231c7a952dadfb') in 0.015532 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/huisu/Ui/ui 인게임/인게임 루돌프, 잡힘.png
-  artifactKey: Guid(a764952a75b9c3d4fa167b6aa08f8711) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/huisu/Ui/ui 인게임/인게임 루돌프, 잡힘.png using Guid(a764952a75b9c3d4fa167b6aa08f8711) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '52b514737682a09ab9a06287449d66e5') in 0.013975 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000013 seconds.
-  path: Assets/huisu/Ui/ui 인게임/요정가루.png
-  artifactKey: Guid(643321f2a5c1374479f5a11fd53044e5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/huisu/Ui/ui 인게임/요정가루.png using Guid(643321f2a5c1374479f5a11fd53044e5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '4a27689ea906ee99fa04eb8407eaa367') in 0.016752 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Prepare
-Caller must complete domain reload
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.404 seconds
-Native extension for WindowsStandalone target not found
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.777 seconds
-Domain Reload Profiling: 1177ms
-	BeginReloadAssembly (117ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (4ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (30ms)
-	RebuildCommonClasses (21ms)
-	RebuildNativeTypeToScriptingClass (7ms)
-	initialDomainReloadingComplete (29ms)
-	LoadAllAssembliesAndSetupDomain (226ms)
-		LoadAssemblies (257ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (23ms)
-			TypeCache.Refresh (8ms)
-				TypeCache.ScanAssembly (2ms)
-			ScanForSourceGeneratedMonoScriptInfo (9ms)
-			ResolveRequiredComponents (5ms)
-	FinalizeReload (778ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (334ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (6ms)
+			InitializePlatformSupportModulesInManaged (59ms)
 			SetLoadedEditorAssemblies (4ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (50ms)
-			ProcessInitializeOnLoadAttributes (254ms)
-			ProcessInitializeOnLoadMethodAttributes (13ms)
-			AfterProcessingInitializeOnLoad (7ms)
+			BeforeProcessingInitializeOnLoad (73ms)
+			ProcessInitializeOnLoadAttributes (444ms)
+			ProcessInitializeOnLoadMethodAttributes (24ms)
+			AfterProcessingInitializeOnLoad (12ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (5ms)
-Refreshing native plugins compatible for Editor in 5.80 ms, found 3 plugins.
+		AwakeInstancesAfterBackupRestoration (13ms)
+Refreshing native plugins compatible for Editor in 14.17 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4029 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 22 unused Assets / (29.5 KB). Loaded Objects now: 4621.
-Memory consumption went from 157.7 MB to 157.6 MB.
-Total: 4.013900 ms (FindLiveObjects: 0.518600 ms CreateObjectMapping: 0.262900 ms MarkObjects: 3.175900 ms  DeleteObjects: 0.055700 ms)
+Unloading 22 unused Assets / (29.6 KB). Loaded Objects now: 4554.
+Memory consumption went from 158.2 MB to 158.2 MB.
+Total: 4.053800 ms (FindLiveObjects: 0.526600 ms CreateObjectMapping: 0.099000 ms MarkObjects: 3.354800 ms  DeleteObjects: 0.071200 ms)
 
 Prepare: number of updated asset objects reloaded= 0
 AssetImportParameters requested are different than current active one (requested -> active):
@@ -1566,238 +285,56 @@ AssetImportParameters requested are different than current active one (requested
 Received Prepare
 Caller must complete domain reload
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.353 seconds
+- Loaded All Assemblies, in  0.643 seconds
+Native extension for UWP target not found
+Native extension for LinuxStandalone target not found
 Native extension for WindowsStandalone target not found
+Native extension for AppleTV target not found
+Failed to load: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/VisionOSPlayer\x64\UnityEditor.VisionOS.Native.dll
+Native extension for VisionOS target not found
+Native extension for Android target not found
+Native extension for OSXStandalone target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.787 seconds
-Domain Reload Profiling: 1137ms
-	BeginReloadAssembly (115ms)
+- Finished resetting the current domain, in  1.420 seconds
+Domain Reload Profiling: 2056ms
+	BeginReloadAssembly (177ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (3ms)
+		DisableScriptedObjects (5ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (25ms)
-	RebuildCommonClasses (20ms)
-	RebuildNativeTypeToScriptingClass (7ms)
-	initialDomainReloadingComplete (23ms)
-	LoadAllAssembliesAndSetupDomain (185ms)
-		LoadAssemblies (234ms)
+		CreateAndSetChildDomain (32ms)
+	RebuildCommonClasses (30ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (39ms)
+	LoadAllAssembliesAndSetupDomain (380ms)
+		LoadAssemblies (470ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (11ms)
-			TypeCache.Refresh (5ms)
+		AnalyzeDomain (16ms)
+			TypeCache.Refresh (6ms)
 				TypeCache.ScanAssembly (0ms)
 			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (5ms)
-	FinalizeReload (787ms)
+			ResolveRequiredComponents (8ms)
+	FinalizeReload (1421ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (338ms)
+		SetupLoadedEditorAssemblies (611ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (5ms)
-			SetLoadedEditorAssemblies (4ms)
+			InitializePlatformSupportModulesInManaged (57ms)
+			SetLoadedEditorAssemblies (5ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (57ms)
-			ProcessInitializeOnLoadAttributes (251ms)
-			ProcessInitializeOnLoadMethodAttributes (15ms)
-			AfterProcessingInitializeOnLoad (6ms)
+			BeforeProcessingInitializeOnLoad (73ms)
+			ProcessInitializeOnLoadAttributes (444ms)
+			ProcessInitializeOnLoadMethodAttributes (20ms)
+			AfterProcessingInitializeOnLoad (13ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (5ms)
-Refreshing native plugins compatible for Editor in 8.64 ms, found 3 plugins.
+		AwakeInstancesAfterBackupRestoration (13ms)
+Refreshing native plugins compatible for Editor in 10.04 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4030 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 22 unused Assets / (29.5 KB). Loaded Objects now: 4625.
-Memory consumption went from 157.9 MB to 157.9 MB.
-Total: 3.571400 ms (FindLiveObjects: 0.464700 ms CreateObjectMapping: 0.108500 ms MarkObjects: 2.908100 ms  DeleteObjects: 0.089000 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Caller must complete domain reload
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.354 seconds
-Native extension for WindowsStandalone target not found
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.836 seconds
-Domain Reload Profiling: 1187ms
-	BeginReloadAssembly (118ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (3ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (27ms)
-	RebuildCommonClasses (28ms)
-	RebuildNativeTypeToScriptingClass (7ms)
-	initialDomainReloadingComplete (22ms)
-	LoadAllAssembliesAndSetupDomain (177ms)
-		LoadAssemblies (228ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (10ms)
-			TypeCache.Refresh (4ms)
-				TypeCache.ScanAssembly (0ms)
-			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (5ms)
-	FinalizeReload (836ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (379ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (6ms)
-			SetLoadedEditorAssemblies (3ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (77ms)
-			ProcessInitializeOnLoadAttributes (270ms)
-			ProcessInitializeOnLoadMethodAttributes (16ms)
-			AfterProcessingInitializeOnLoad (6ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (5ms)
-Refreshing native plugins compatible for Editor in 7.51 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4030 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 22 unused Assets / (29.6 KB). Loaded Objects now: 4629.
-Memory consumption went from 157.9 MB to 157.8 MB.
-Total: 3.865400 ms (FindLiveObjects: 0.473600 ms CreateObjectMapping: 0.108500 ms MarkObjects: 3.227500 ms  DeleteObjects: 0.055000 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Caller must complete domain reload
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.343 seconds
-Native extension for WindowsStandalone target not found
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.783 seconds
-Domain Reload Profiling: 1123ms
-	BeginReloadAssembly (108ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (3ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (26ms)
-	RebuildCommonClasses (20ms)
-	RebuildNativeTypeToScriptingClass (7ms)
-	initialDomainReloadingComplete (22ms)
-	LoadAllAssembliesAndSetupDomain (182ms)
-		LoadAssemblies (225ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (11ms)
-			TypeCache.Refresh (4ms)
-				TypeCache.ScanAssembly (0ms)
-			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (6ms)
-	FinalizeReload (783ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (335ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (5ms)
-			SetLoadedEditorAssemblies (3ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (54ms)
-			ProcessInitializeOnLoadAttributes (250ms)
-			ProcessInitializeOnLoadMethodAttributes (16ms)
-			AfterProcessingInitializeOnLoad (7ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (5ms)
-Refreshing native plugins compatible for Editor in 8.81 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4030 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 22 unused Assets / (29.6 KB). Loaded Objects now: 4633.
-Memory consumption went from 157.9 MB to 157.9 MB.
-Total: 5.072600 ms (FindLiveObjects: 1.176300 ms CreateObjectMapping: 0.130800 ms MarkObjects: 3.675700 ms  DeleteObjects: 0.089000 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
-  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Caller must complete domain reload
-Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.339 seconds
-Native extension for WindowsStandalone target not found
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.792 seconds
-Domain Reload Profiling: 1128ms
-	BeginReloadAssembly (108ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (3ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (25ms)
-	RebuildCommonClasses (20ms)
-	RebuildNativeTypeToScriptingClass (7ms)
-	initialDomainReloadingComplete (22ms)
-	LoadAllAssembliesAndSetupDomain (178ms)
-		LoadAssemblies (221ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (10ms)
-			TypeCache.Refresh (4ms)
-				TypeCache.ScanAssembly (0ms)
-			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (5ms)
-	FinalizeReload (793ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (342ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (6ms)
-			SetLoadedEditorAssemblies (4ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (57ms)
-			ProcessInitializeOnLoadAttributes (252ms)
-			ProcessInitializeOnLoadMethodAttributes (16ms)
-			AfterProcessingInitializeOnLoad (7ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (5ms)
-Refreshing native plugins compatible for Editor in 6.79 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4030 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 22 unused Assets / (29.7 KB). Loaded Objects now: 4637.
-Memory consumption went from 157.9 MB to 157.9 MB.
-Total: 5.296500 ms (FindLiveObjects: 0.532900 ms CreateObjectMapping: 0.842800 ms MarkObjects: 3.867300 ms  DeleteObjects: 0.052700 ms)
+Unloading 22 unused Assets / (29.6 KB). Loaded Objects now: 4558.
+Memory consumption went from 158.5 MB to 158.5 MB.
+Total: 3.277700 ms (FindLiveObjects: 0.278200 ms CreateObjectMapping: 0.118500 ms MarkObjects: 2.825900 ms  DeleteObjects: 0.054100 ms)
 
 Prepare: number of updated asset objects reloaded= 0
 AssetImportParameters requested are different than current active one (requested -> active):
@@ -1816,476 +353,31 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 746.242030 seconds.
-  path: Assets/Christmas Game GUI/png/elements/indicators/Button/ButtonIndicator (2).png
-  artifactKey: Guid(16e49c2cec0ca534d948497281164ad7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/indicators/Button/ButtonIndicator (2).png using Guid(16e49c2cec0ca534d948497281164ad7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+  Time since last request: 1169.889305 seconds.
+  path: Assets/huisu/배경사진/스크린샷 2025-09-06 152444.png
+  artifactKey: Guid(1efe125675b90904fb1530c667ac1a17) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/배경사진/스크린샷 2025-09-06 152444.png using Guid(1efe125675b90904fb1530c667ac1a17) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
 [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '57f7d7d2d3cae78c3af183d2c70dff83') in 0.049117 seconds
+ -> (artifact id: 'cc8f68b444230f1cc989cd8fdac815ff') in 0.079797 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
+Number of asset objects unloaded after import = 2
 ========================================================================
 Received Import Request.
-  Time since last request: 10.014654 seconds.
-  path: Assets/Christmas Game GUI/png/elements/others/Preloader/Clean.png
-  artifactKey: Guid(f2b36082a57e7eb4f8a582bb76995496) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/others/Preloader/Clean.png using Guid(f2b36082a57e7eb4f8a582bb76995496) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+  Time since last request: 0.000045 seconds.
+  path: Assets/huisu/배경사진/스크린샷 2025-09-06 153005.png
+  artifactKey: Guid(261b6aba8d6cbd84db8e2c714b7bdcbe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/배경사진/스크린샷 2025-09-06 153005.png using Guid(261b6aba8d6cbd84db8e2c714b7bdcbe) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
 [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'f5ff9f715d34e39e56de0a8c17de4f96') in 0.013545 seconds
+ -> (artifact id: '425160a365acdb404d0997e9bb02230f') in 0.029188 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
+Number of asset objects unloaded after import = 2
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/Christmas Game GUI/png/elements/others/Preloader/Title.png
-  artifactKey: Guid(56761a95e26971242a59d25be195a931) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/others/Preloader/Title.png using Guid(56761a95e26971242a59d25be195a931) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+  Time since last request: 11.488412 seconds.
+  path: Assets/huisu/배경사진/KakaoTalk_20250906_153237607_01.png
+  artifactKey: Guid(8155c7c10881cf842803c259a2584229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/배경사진/KakaoTalk_20250906_153237607_01.png using Guid(8155c7c10881cf842803c259a2584229) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
 [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'e951a5ccbf19d639240a97688cf963a7') in 0.023495 seconds
+ -> (artifact id: 'efa64fdd7cf9ee176501a10bdcde3431') in 0.031251 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.727063 seconds.
-  path: Assets/Christmas Game GUI/png/elements/others/Tooltips/Tooltips (2).png
-  artifactKey: Guid(3825d1f1c4497ad45b0b3932a33f6901) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/others/Tooltips/Tooltips (2).png using Guid(3825d1f1c4497ad45b0b3932a33f6901) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'a3224a0598fc56558bdd4c1019074ed1') in 0.010086 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Christmas Game GUI/png/elements/others/Tooltips/Tooltips (4).png
-  artifactKey: Guid(2075d1b103f312e4eb509a93e35f010d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/others/Tooltips/Tooltips (4).png using Guid(2075d1b103f312e4eb509a93e35f010d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '280dbcc244dd420bf0c9290a08aa6375') in 0.012095 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 2.716721 seconds.
-  path: Assets/Christmas Game GUI/png/elements/toggle/Checkbox/Click.png
-  artifactKey: Guid(10dc21561b0900b4aa7bd74156719dc2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/toggle/Checkbox/Click.png using Guid(10dc21561b0900b4aa7bd74156719dc2) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'c52ad7b985b82e8467e1bd728dfb2efc') in 0.012063 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000013 seconds.
-  path: Assets/Christmas Game GUI/png/elements/toggle/Checkbox/Locked.png
-  artifactKey: Guid(a06fe395c1a97234ebe9cb664fecd1eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/toggle/Checkbox/Locked.png using Guid(a06fe395c1a97234ebe9cb664fecd1eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'affa16ab367eea54c4bc62a730ee7644') in 0.012794 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.790758 seconds.
-  path: Assets/Christmas Game GUI/png/elements/toggle/Radio/Click.png
-  artifactKey: Guid(12ff22407ab57144b83dd6815d6f38a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/toggle/Radio/Click.png using Guid(12ff22407ab57144b83dd6815d6f38a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'c8acaca728fe62b1c468053cff567cc0') in 0.010947 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000013 seconds.
-  path: Assets/Christmas Game GUI/png/elements/toggle/Radio/Locked.png
-  artifactKey: Guid(28e547f9e3f22ca468972dbda3db1dcc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/toggle/Radio/Locked.png using Guid(28e547f9e3f22ca468972dbda3db1dcc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '3d323980c6ca146bc2af1ef4f9b943af') in 0.012781 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.414739 seconds.
-  path: Assets/Christmas Game GUI/png/elements/toggle/Toggle/clickON.png
-  artifactKey: Guid(038b67022a27fdb4fbb1e5d99f349328) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/toggle/Toggle/clickON.png using Guid(038b67022a27fdb4fbb1e5d99f349328) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '5db34280fc3dfd670ccc65cf1d46e9b5') in 0.011197 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Christmas Game GUI/png/elements/toggle/Toggle/hoverON.png
-  artifactKey: Guid(e1ba4a3e3f72fe2448b81f145f56c7a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/toggle/Toggle/hoverON.png using Guid(e1ba4a3e3f72fe2448b81f145f56c7a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'faca0fb803b579cba16d549e60ede570') in 0.010459 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000013 seconds.
-  path: Assets/Christmas Game GUI/png/elements/toggle/Toggle/lockedON.png
-  artifactKey: Guid(bab21e75cc33b2342ad620be4eab73f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/toggle/Toggle/lockedON.png using Guid(bab21e75cc33b2342ad620be4eab73f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '6403f9e6c4805b3853f19cde9d37aa5f') in 0.013050 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Christmas Game GUI/png/elements/toggle/Toggle/normalOFF.png
-  artifactKey: Guid(65d84a36b222fca4cb5637b5e0e2b8c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/toggle/Toggle/normalOFF.png using Guid(65d84a36b222fca4cb5637b5e0e2b8c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '6903b7541e2f248f58ff51499eff2d9e') in 0.012422 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 2.448182 seconds.
-  path: Assets/Christmas Game GUI/png/elements/toggle/Toggle/NoText/clickON.png
-  artifactKey: Guid(769803ceb87ef5f4aabe5bca5433fae3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/toggle/Toggle/NoText/clickON.png using Guid(769803ceb87ef5f4aabe5bca5433fae3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '1d20813348b7f59c974edfa79c229c3e') in 0.009711 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000012 seconds.
-  path: Assets/Christmas Game GUI/png/elements/toggle/Toggle/NoText/hoverON.png
-  artifactKey: Guid(8d3ab196645b1a54e83cdfc6b0d1bd95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/toggle/Toggle/NoText/hoverON.png using Guid(8d3ab196645b1a54e83cdfc6b0d1bd95) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '17f0fb2e9432d728113dd83041a91e02') in 0.010061 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000011 seconds.
-  path: Assets/Christmas Game GUI/png/elements/toggle/Toggle/NoText/lockedON.png
-  artifactKey: Guid(aa5350bc99f838f4a93534fb43270f6d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/toggle/Toggle/NoText/lockedON.png using Guid(aa5350bc99f838f4a93534fb43270f6d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'afc2ae1821d28a24f25f738a74d8ba80') in 0.010448 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000013 seconds.
-  path: Assets/Christmas Game GUI/png/elements/toggle/Toggle/NoText/normalOFF.png
-  artifactKey: Guid(e64b2112f1d718640a7336b6a3fe98b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/elements/toggle/Toggle/NoText/normalOFF.png using Guid(e64b2112f1d718640a7336b6a3fe98b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'a998696c6425ba070120d946776df9bb') in 0.011392 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 2.806493 seconds.
-  path: Assets/Christmas Game GUI/png/windows/1/Decor.png
-  artifactKey: Guid(5edd11d12ff000d4fa3598fba2f311a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/1/Decor.png using Guid(5edd11d12ff000d4fa3598fba2f311a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'ff77b989ad018fdcc87332a63bc3472b') in 0.013636 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Christmas Game GUI/png/windows/1/Title.png
-  artifactKey: Guid(0561c1028c5c44343a9304d37455b05c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/1/Title.png using Guid(0561c1028c5c44343a9304d37455b05c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'b3b3342cb60d3bc99b224aa39b211385') in 0.013695 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Christmas Game GUI/png/windows/1/TitleArea.png
-  artifactKey: Guid(3a2ea02e592e85b43886efbd6c27dee4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/1/TitleArea.png using Guid(3a2ea02e592e85b43886efbd6c27dee4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '82f965344260a1b988534caa820df445') in 0.010373 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.668522 seconds.
-  path: Assets/Christmas Game GUI/png/windows/2/Complete.png
-  artifactKey: Guid(3c7d36437118c5e4f9aaa5e88a422715) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/2/Complete.png using Guid(3c7d36437118c5e4f9aaa5e88a422715) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'ded4d54404a8eaf56405ece4359b4e61') in 0.021539 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000014 seconds.
-  path: Assets/Christmas Game GUI/png/windows/2/NoTitle.png
-  artifactKey: Guid(cf7324b2bcf82104faf4b2cb3ad94563) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/2/NoTitle.png using Guid(cf7324b2bcf82104faf4b2cb3ad94563) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'fb183fc015ca478b3c2c73997b83601a') in 0.015491 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000014 seconds.
-  path: Assets/Christmas Game GUI/png/windows/2/TitleArea.png
-  artifactKey: Guid(2abba387bee618d4d99d80f0d82c2f57) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/2/TitleArea.png using Guid(2abba387bee618d4d99d80f0d82c2f57) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '2a7e75d7dd26919a70de78f7425c4006') in 0.014200 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.859727 seconds.
-  path: Assets/Christmas Game GUI/png/windows/3/ContentArea (1).png
-  artifactKey: Guid(5223e7d3eb188c04599cd66718ad0f42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/3/ContentArea (1).png using Guid(5223e7d3eb188c04599cd66718ad0f42) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'b98ed232e39954a7d61a1ba5e4f0371b') in 0.011256 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000012 seconds.
-  path: Assets/Christmas Game GUI/png/windows/3/Decor.png
-  artifactKey: Guid(fe22284127c8ff143b060bb4e9c48b68) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/3/Decor.png using Guid(fe22284127c8ff143b060bb4e9c48b68) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'ce19913cabdcf137a0914cc12432b729') in 0.011250 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000012 seconds.
-  path: Assets/Christmas Game GUI/png/windows/3/Title (1).png
-  artifactKey: Guid(098230cf4b2233f4ead2b24e3e4d9ab1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/3/Title (1).png using Guid(098230cf4b2233f4ead2b24e3e4d9ab1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '1d98c31305951eff9605e7d2deba3402') in 0.010443 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000012 seconds.
-  path: Assets/Christmas Game GUI/png/windows/3/TitleArea.png
-  artifactKey: Guid(c5b897f989179e84ab5413f7a7bfb25e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/3/TitleArea.png using Guid(c5b897f989179e84ab5413f7a7bfb25e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '47b39b257f99c0752c5478c4ee79faac') in 0.012806 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000013 seconds.
-  path: Assets/Christmas Game GUI/png/windows/3/Window.png
-  artifactKey: Guid(5d942e0f90b403e4fab7f6c03566d43b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/3/Window.png using Guid(5d942e0f90b403e4fab7f6c03566d43b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'd71dde9fee93b3127e09eaf198302da7') in 0.018267 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 5.812822 seconds.
-  path: Assets/Christmas Game GUI/png/windows/4/Decor.png
-  artifactKey: Guid(bd1d82697dfa5ab47830ce35b06dab8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/4/Decor.png using Guid(bd1d82697dfa5ab47830ce35b06dab8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'b01836af8bd4801bf68c22153607f26e') in 0.014118 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000013 seconds.
-  path: Assets/Christmas Game GUI/png/windows/4/StarArea.png
-  artifactKey: Guid(6af2b04ceab646648a812cf587a49ebf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/4/StarArea.png using Guid(6af2b04ceab646648a812cf587a49ebf) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'bf108f4fd81bb476eeb8ee79803a478f') in 0.013759 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.005869 seconds.
-  path: Assets/Christmas Game GUI/png/windows/4/Title (1).png
-  artifactKey: Guid(fc38f84a7d258644c8b91b2f8841b282) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/4/Title (1).png using Guid(fc38f84a7d258644c8b91b2f8841b282) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'cd7f0afd126692cc37bef701d656c1e3') in 0.012954 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/Christmas Game GUI/png/windows/4/TextArea.png
-  artifactKey: Guid(a0ff40c566a020448b5b42d3ad45f873) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/4/TextArea.png using Guid(a0ff40c566a020448b5b42d3ad45f873) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'a2a9055593ab34c2dfa6867d3083d609') in 0.015507 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.611116 seconds.
-  path: Assets/Christmas Game GUI/png/windows/5/Complete.png
-  artifactKey: Guid(1b48852293e728b43a7c7efc83e0e0b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/5/Complete.png using Guid(1b48852293e728b43a7c7efc83e0e0b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'f3b729c2ad9b0d2481a4a0865884a717') in 0.024426 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000012 seconds.
-  path: Assets/Christmas Game GUI/png/windows/5/NoTitle.png
-  artifactKey: Guid(8c91305bf61aff447a9a8263b46aa6e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/5/NoTitle.png using Guid(8c91305bf61aff447a9a8263b46aa6e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '38170cd17a8a782a04676b170fcc959a') in 0.017497 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000019 seconds.
-  path: Assets/Christmas Game GUI/png/windows/5/TitleArea.png
-  artifactKey: Guid(c545cd147cd4ced4d8811e31a29fd06a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/5/TitleArea.png using Guid(c545cd147cd4ced4d8811e31a29fd06a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'ad5cad260dfa55e746b1058be152e9d3') in 0.012637 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.589035 seconds.
-  path: Assets/Christmas Game GUI/png/windows/6/Complete.png
-  artifactKey: Guid(34fca87554cde0848be1d1fcb3526d63) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/6/Complete.png using Guid(34fca87554cde0848be1d1fcb3526d63) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'e061bffdafc4372ecf85b20987f93485') in 0.028261 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000018 seconds.
-  path: Assets/Christmas Game GUI/png/windows/6/Decor (2).png
-  artifactKey: Guid(954b7d8080abe7442b9b15cfd3d93e65) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/6/Decor (2).png using Guid(954b7d8080abe7442b9b15cfd3d93e65) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'd2a41311caa33ce78f2a6f25b59cb550') in 0.015175 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000022 seconds.
-  path: Assets/Christmas Game GUI/png/windows/6/TitleArea.png
-  artifactKey: Guid(7b057fed40ed1d043b8862efddcaad1f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/6/TitleArea.png using Guid(7b057fed40ed1d043b8862efddcaad1f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '8f62b3a0cd9716cd1f954d478c8354f2') in 0.013220 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000014 seconds.
-  path: Assets/Christmas Game GUI/png/windows/6/Decor (1).png
-  artifactKey: Guid(df55332dd4da874438be80c55541a0b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/6/Decor (1).png using Guid(df55332dd4da874438be80c55541a0b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '9ec85154b66a1e5fc7a61ba8615a242a') in 0.013849 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 2.859089 seconds.
-  path: Assets/Christmas Game GUI/png/windows/7/ContentArea.png
-  artifactKey: Guid(abc4e6d3c22b98d49a7b8f2fee456712) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/7/ContentArea.png using Guid(abc4e6d3c22b98d49a7b8f2fee456712) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '9a93e4c4510896cd4ae9c6d0afe4c847') in 0.014827 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000014 seconds.
-  path: Assets/Christmas Game GUI/png/windows/7/NoTitle.png
-  artifactKey: Guid(c7962bde496daf14d819436a24826f96) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/7/NoTitle.png using Guid(c7962bde496daf14d819436a24826f96) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '61712c3b696c095e56bd920ba84efe63') in 0.017819 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/Christmas Game GUI/png/windows/7/TitleArea.png
-  artifactKey: Guid(eb5c9d720dd138145a17f49c845f325f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/7/TitleArea.png using Guid(eb5c9d720dd138145a17f49c845f325f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'ec3cebd42796fa85e5f8644f27eef74a') in 0.014503 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 3.239559 seconds.
-  path: Assets/Christmas Game GUI/png/windows/8/ContentArea.png
-  artifactKey: Guid(e13cb810b65b00e43953fb892a83433f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/8/ContentArea.png using Guid(e13cb810b65b00e43953fb892a83433f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '4939b95bc0ea63a67c4e1931121cd598') in 0.017200 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000014 seconds.
-  path: Assets/Christmas Game GUI/png/windows/8/TitleArea.png
-  artifactKey: Guid(cc310a2d53ebb85449d11ba7a3fbeaaa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/8/TitleArea.png using Guid(cc310a2d53ebb85449d11ba7a3fbeaaa) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'c7cb14ed55c6751e8b5049afd623a6f7') in 0.026405 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.622591 seconds.
-  path: Assets/Christmas Game GUI/png/windows/9/ContentArea.png
-  artifactKey: Guid(85764a717501b4240aa1b537b285b2ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/9/ContentArea.png using Guid(85764a717501b4240aa1b537b285b2ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '2e444aa55036f0a2a2c2171d3f760bb6') in 0.012255 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.004496 seconds.
-  path: Assets/Christmas Game GUI/png/windows/9/NoTitle.png
-  artifactKey: Guid(a39c877306f4d2746a977e1b4c7888c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/9/NoTitle.png using Guid(a39c877306f4d2746a977e1b4c7888c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: 'e4dd06d0d4497b8b7467c620236d8a64') in 0.015564 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 1.578095 seconds.
-  path: Assets/Christmas Game GUI/png/windows/10/Decor (2).png
-  artifactKey: Guid(dbcaf71b2a66a3745b6dc2a81a332ad9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Christmas Game GUI/png/windows/10/Decor (2).png using Guid(dbcaf71b2a66a3745b6dc2a81a332ad9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
- -> (artifact id: '38e47e84377c326f366188e5eff983f6') in 0.011704 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 3
-Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
-TcpMessagingSession - receive error: operation aborted. errorcode: 995, details: ������ ���� �Ǵ� ���� ���α׷� ��û ������ I/O �۾��� ��ҵǾ����ϴ�.
-AssetImportWorker is now disconnected from the server
-Process exiting
-Exiting without the bug reporter. Application will terminate with return code 0
+Number of asset objects unloaded after import = 2
