@@ -250,3 +250,283 @@ Start importing Assets/huisu/학교안심_별자리_B(글꼴)/학교안심 별�
  -> (artifact id: '406b9f423a8ad24f9220eb8662e0ac7a') in 0.002244 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 1
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.734 seconds
+Native extension for UWP target not found
+Native extension for LinuxStandalone target not found
+Native extension for WindowsStandalone target not found
+Native extension for AppleTV target not found
+Failed to load: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/VisionOSPlayer\x64\UnityEditor.VisionOS.Native.dll
+Native extension for VisionOS target not found
+Native extension for Android target not found
+Native extension for OSXStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.466 seconds
+Domain Reload Profiling: 2193ms
+	BeginReloadAssembly (217ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (5ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (44ms)
+	RebuildCommonClasses (37ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (46ms)
+	LoadAllAssembliesAndSetupDomain (418ms)
+		LoadAssemblies (530ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (15ms)
+			TypeCache.Refresh (6ms)
+				TypeCache.ScanAssembly (0ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (7ms)
+	FinalizeReload (1467ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (616ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (59ms)
+			SetLoadedEditorAssemblies (5ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (74ms)
+			ProcessInitializeOnLoadAttributes (441ms)
+			ProcessInitializeOnLoadMethodAttributes (24ms)
+			AfterProcessingInitializeOnLoad (14ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (12ms)
+Refreshing native plugins compatible for Editor in 15.21 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4029 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 22 unused Assets / (29.5 KB). Loaded Objects now: 4596.
+Memory consumption went from 162.9 MB to 162.9 MB.
+Total: 4.597200 ms (FindLiveObjects: 0.270900 ms CreateObjectMapping: 0.112300 ms MarkObjects: 4.113800 ms  DeleteObjects: 0.098600 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.644 seconds
+Native extension for UWP target not found
+Native extension for LinuxStandalone target not found
+Native extension for WindowsStandalone target not found
+Native extension for AppleTV target not found
+Failed to load: C:/Program Files/Unity/Hub/Editor/2022.3.60f1/Editor/Data/PlaybackEngines/VisionOSPlayer\x64\UnityEditor.VisionOS.Native.dll
+Native extension for VisionOS target not found
+Native extension for Android target not found
+Native extension for OSXStandalone target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.430 seconds
+Domain Reload Profiling: 2066ms
+	BeginReloadAssembly (178ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (4ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (33ms)
+	RebuildCommonClasses (30ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (39ms)
+	LoadAllAssembliesAndSetupDomain (379ms)
+		LoadAssemblies (469ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (16ms)
+			TypeCache.Refresh (6ms)
+				TypeCache.ScanAssembly (0ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (7ms)
+	FinalizeReload (1430ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (612ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (57ms)
+			SetLoadedEditorAssemblies (4ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (73ms)
+			ProcessInitializeOnLoadAttributes (445ms)
+			ProcessInitializeOnLoadMethodAttributes (21ms)
+			AfterProcessingInitializeOnLoad (12ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (12ms)
+Refreshing native plugins compatible for Editor in 10.85 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4030 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 22 unused Assets / (29.5 KB). Loaded Objects now: 4600.
+Memory consumption went from 163.2 MB to 163.1 MB.
+Total: 3.199200 ms (FindLiveObjects: 0.270100 ms CreateObjectMapping: 0.134700 ms MarkObjects: 2.741000 ms  DeleteObjects: 0.052400 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 1076.696133 seconds.
+  path: Assets/huisu/배경사진/스크린샷 2025-09-06 152202.png
+  artifactKey: Guid(d29e12199592d8a4688b2230e55014e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/배경사진/스크린샷 2025-09-06 152202.png using Guid(d29e12199592d8a4688b2230e55014e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '183dbaf2b756a72c9c3b180f7518e549') in 0.103192 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000048 seconds.
+  path: Assets/huisu/배경사진/스크린샷 2025-09-06 152749.png
+  artifactKey: Guid(47a2c06dba8316948b281b33253f5271) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/배경사진/스크린샷 2025-09-06 152749.png using Guid(47a2c06dba8316948b281b33253f5271) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'f482c813365fe8f8756e7f499599afc6') in 0.025119 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 11.468423 seconds.
+  path: Assets/huisu/배경사진/KakaoTalk_20250906_153237607.png
+  artifactKey: Guid(acc29ca81b6deb64c900cfd3297cd256) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/배경사진/KakaoTalk_20250906_153237607.png using Guid(acc29ca81b6deb64c900cfd3297cd256) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '166a30a5e42a5ae5bd47addadb818b84') in 0.029508 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/huisu/배경사진/KakaoTalk_20250906_153237607_02.png
+  artifactKey: Guid(bf5d5c502cd74b84da289ffe3e934676) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/배경사진/KakaoTalk_20250906_153237607_02.png using Guid(bf5d5c502cd74b84da289ffe3e934676) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '6773d0785d0727e9ee7f21bb5c2d4a8c') in 0.023509 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 35.027902 seconds.
+  path: Assets/huisu/배경사진/로울폴리, AI 배경화면 1.png
+  artifactKey: Guid(3b5ae58750540b149b63f3162f08d586) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/배경사진/로울폴리, AI 배경화면 1.png using Guid(3b5ae58750540b149b63f3162f08d586) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '486f18e29dc653a08004113bac67d3d2') in 0.020222 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 16.459065 seconds.
+  path: Assets/huisu/배경사진/로우폴리, AI 배경화면 1.png
+  artifactKey: Guid(3b5ae58750540b149b63f3162f08d586) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/배경사진/로우폴리, AI 배경화면 1.png using Guid(3b5ae58750540b149b63f3162f08d586) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'e27b7b0a0334fefd3ee59e72b53c9f35') in 0.022753 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 27.005766 seconds.
+  path: Assets/huisu/배경사진/로우폴리, AI 배경화면 2.png
+  artifactKey: Guid(acc29ca81b6deb64c900cfd3297cd256) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/배경사진/로우폴리, AI 배경화면 2.png using Guid(acc29ca81b6deb64c900cfd3297cd256) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '998af031f37b4f20c5ae919173f65bdc') in 0.009505 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 27.538615 seconds.
+  path: Assets/huisu/배경사진/로우폴리, AI 배경화면 3.png
+  artifactKey: Guid(8155c7c10881cf842803c259a2584229) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/배경사진/로우폴리, AI 배경화면 3.png using Guid(8155c7c10881cf842803c259a2584229) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '888d81aebf88e2a413121df580b14c4d') in 0.025332 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 28.872221 seconds.
+  path: Assets/huisu/배경사진/로우폴리. AI 배경화면 4.png
+  artifactKey: Guid(bf5d5c502cd74b84da289ffe3e934676) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/배경사진/로우폴리. AI 배경화면 4.png using Guid(bf5d5c502cd74b84da289ffe3e934676) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '1e05a4379e9f339e36ffc8c6cc1cee86') in 0.023070 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 23.871134 seconds.
+  path: Assets/huisu/배경사진/인게임 배경화면 1.png
+  artifactKey: Guid(d29e12199592d8a4688b2230e55014e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/배경사진/인게임 배경화면 1.png using Guid(d29e12199592d8a4688b2230e55014e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '60d2d092ae15daa08f08c974f3a0d99f') in 0.007914 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 10.728427 seconds.
+  path: Assets/huisu/배경사진/인게임 배경화면 2.png
+  artifactKey: Guid(1efe125675b90904fb1530c667ac1a17) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/배경사진/인게임 배경화면 2.png using Guid(1efe125675b90904fb1530c667ac1a17) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'ca3f6910776385ed738058aa6fe80b08') in 0.009293 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 8.709162 seconds.
+  path: Assets/huisu/배경사진/인게임 배경화면 3.png
+  artifactKey: Guid(47a2c06dba8316948b281b33253f5271) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/배경사진/인게임 배경화면 3.png using Guid(47a2c06dba8316948b281b33253f5271) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '6371d06c8a0ff3d50b77a88d0752d10b') in 0.023062 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 10.456535 seconds.
+  path: Assets/huisu/배경사진/인게임 배경화면 4.png
+  artifactKey: Guid(261b6aba8d6cbd84db8e2c714b7bdcbe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/배경사진/인게임 배경화면 4.png using Guid(261b6aba8d6cbd84db8e2c714b7bdcbe) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '18152ac0078e10cec2b504ddb3d0ddcc') in 0.021353 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 16.085053 seconds.
+  path: Assets/huisu/배경사진/인게임 배경화면 흐린버전.png
+  artifactKey: Guid(5415d706bc386d243aece78abec9735a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/배경사진/인게임 배경화면 흐린버전.png using Guid(5415d706bc386d243aece78abec9735a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '5a3cb7fc806ca68f32d935259cab3e64') in 0.022494 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
