@@ -2606,6 +2606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4046c54aa1c3474b9ea109d80760a23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fairyDustItemData: {fileID: 11400000, guid: 056c7459d06fac4469ca32cdb379b8e8, type: 2}
   playerCameraObject: {fileID: 3350020433127300816}
   thirdPersonCameraScript: {fileID: 4586620452735069252}
   sackTransform: {fileID: 0}

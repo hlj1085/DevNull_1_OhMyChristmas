@@ -25,7 +25,7 @@ public class ItemObject : MonoBehaviour, IInteractable
 
     public string GetInteractMessage()
     {
-        return "[F] to Get " + itemData.itemName;
+        return "Press F to get " + itemData.itemName;
     }
 
     // 플레이어가 상호작용했을 때 호출되는 함수

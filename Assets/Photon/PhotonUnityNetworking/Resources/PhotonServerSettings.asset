@@ -60,6 +60,12 @@ MonoBehaviour:
   - AttachToSleigh
   - EquipItemRPC
   - UnequipItemRPC
+  - AddItemByNameRPC
+  - RemoveItemByNameRPC
+  - TransferFairyDust
+  - RequestFairyDustTransfer
+  - AddItemRPC
+  - RemoveItemRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
