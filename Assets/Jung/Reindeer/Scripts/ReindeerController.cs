@@ -100,6 +100,8 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     private TextMeshProUGUI interactionPromptUI;
     private Slider interactionSlider;
     private Slider recoverySlider;
+    private TextMeshProUGUI recoveryText; // <<< [추가]
+    private Image recoverySliderFill;     // <<< [추가]
 
     // --- 내부 로직 변수 ---
     private int lastEquippedSlot = -1; // 마지막으로 장착한 아이템 슬롯 번호 (-1은 없음)
@@ -178,6 +180,8 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
                 interactionSlider = UIManager.instance.interactionSlider;
                 recoverySlider = UIManager.instance.recoverySlider;
                 useItemPromptUI = UIManager.instance.useItemPromptUI; // <<< [추가]
+                recoveryText = UIManager.instance.recoveryText;         // <<< [추가]
+                recoverySliderFill = UIManager.instance.recoverySliderFill; // <<< [추가]
 
                 // 게임 시작 시 UI들을 확실하게 꺼줍니다.
                 if (interactionUIGroup != null) interactionUIGroup.SetActive(false);
@@ -407,6 +411,16 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
             {
                 recoverySlider.value = currentRecoveryTimer / recoveryTime;
             }
+            if (currentState == PlayerState.Stunned)
+            {
+                if (recoveryText != null) recoveryText.text = "Struggle - Press E";
+                if (recoverySliderFill != null) recoverySliderFill.color = Color.green;
+            }
+            else // PlayerState.Captured
+            {
+                if (recoveryText != null) recoveryText.text = "CAPTURED";
+                if (recoverySliderFill != null) recoverySliderFill.color = Color.red;
+            }
         }
         // --- 2. 정상 상태일 때 ---
         else if (currentState == PlayerState.Normal)
@@ -414,14 +428,22 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
             // 회복 UI는 반드시 끈다.
             recoveryUIGroup.SetActive(false);
 
-            // --- [핵심 수정] UI 우선순위 로직 ---
-
             // 우선순위 1: 장착한 아이템이 있는지 먼저 확인
             if (equippedItem != null)
             {
-                // 아이템을 들고 있다면, '사용' 안내 UI를 켜고,
-                useItemPromptUI.gameObject.SetActive(true);
-                useItemPromptUI.text = "E to Use";
+                // 장착한 아이템이 사용 불가능한 '퀘스트' 아이템인지 확인합니다.
+                bool isQuestItem = (equippedItem.effects != null && equippedItem.effects.Count > 0 && equippedItem.effects[0] is QuestItemEffect);
+
+                // 퀘스트 아이템이 아닐 경우에만 "사용하기" 안내 UI를 켭니다.
+                if (!isQuestItem)
+                {
+                    useItemPromptUI.gameObject.SetActive(true);
+                    useItemPromptUI.text = "Press E to use";
+                }
+                else // 퀘스트 아이템이라면 UI를 끕니다.
+                {
+                    useItemPromptUI.gameObject.SetActive(false);
+                }
 
                 // 일반 상호작용 UI는 반드시 끈다.
                 interactionUIGroup.SetActive(false);
@@ -547,7 +569,17 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         }
 
         Transform attachPoint = sleigh.attachmentPoints[slotIndex];
-        transform.SetParent(attachPoint, true);
+
+        // 1. 잠시 부모를 해제하여 최상위 계층으로 이동시킵니다.
+        transform.SetParent(null);
+
+        // 2. 월드 스케일을 완벽하게 (1, 1, 1)로 리셋합니다.
+        transform.localScale = Vector3.one;
+
+        // 3. 리셋된 상태에서 다시 썰매의 자식으로 설정합니다.
+        transform.SetParent(attachPoint);
+
+        // 4. 자식이 된 후, 로컬 위치와 회전을 0으로 맞춰 자리에 고정합니다.
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
 
@@ -590,7 +622,6 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         if (itemData != null && itemData.itemPrefab != null)
         {
             // 찾은 ItemData를 기반으로 3D 모델을 생성하고 입에 붙입니다.
-            Debug.Log(itemData.itemPrefab+"aaaaaaaaaaaaaaple");
             equippedItemObject = Instantiate(itemData.itemPrefab, mouthAttachPoint);
             equippedItemObject.transform.localPosition = Vector3.zero;
             equippedItemObject.transform.localRotation = Quaternion.identity;
@@ -644,20 +675,11 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         equippedItem = newItem;
         lastEquippedSlot = slotIndex; // 마지막으로 장착한 슬롯 번호 기억
 
-
-        // --- [핵심 수정] ---
         // 모든 클라이언트에게 새 아이템 모델을 생성하라는 RPC를 보냅니다.
         photonView.RPC("EquipItemRPC", RpcTarget.All, newItem.name);
-
-        // UI 업데이트 로직 (이것은 로컬에서만 실행)
         if (UIManager.instance != null)
         {
             UIManager.instance.inventoryUI.UpdateSelection(slotIndex);
-        }
-        if (useItemPromptUI != null)
-        {
-            useItemPromptUI.text = "E to Use Item";
-            useItemPromptUI.gameObject.SetActive(true);
         }
     }
 
@@ -665,11 +687,15 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     // 장착한 아이템을 사용하는 함수
     private void UseEquippedItem()
     {
-        if (currentState != PlayerState.Normal) return;
+        if (currentState != PlayerState.Normal || equippedItem == null) return;
 
-        // 1. 장착한 아이템이 없으면 아무것도 하지 않음
-        if (equippedItem == null) return;
-
+        // 1. 장착한 아이템의 효과가 '퀘스트 효과'인지 확인합니다.
+        if (equippedItem.effects != null && equippedItem.effects.Count > 0 && equippedItem.effects[0] is QuestItemEffect)
+        {
+            Debug.Log(equippedItem.itemName + "은(는) 사용할 수 없는 아이템입니다.");
+            // 퀘스트 아이템은 사용할 수 없으므로, 아무것도 하지 않고 함수를 종료합니다.
+            return;
+        }
         Debug.Log(equippedItem.itemName + " 아이템 사용!");
 
         // 2. 아이템 데이터에게 효과를 실행하라고 먼저 명령
@@ -715,10 +741,7 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         StartCoroutine(SpeedBoostCoroutine(newSpeed, duration));
     }
 
-    public void ThrowItem(string prefabName, float force)
-    {
-        photonView.RPC("ThrowItemRPC", RpcTarget.All, prefabName, force);
-    }
+
 
     private IEnumerator SpeedBoostCoroutine(float newSpeed, float duration)
     {
@@ -731,23 +754,28 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         runSpeed = originalSpeed;
         Debug.Log("속도 원래대로 복귀. 현재 속도: " + runSpeed);
     }
+    // 이 함수는 '아이템 효과' 스크립트가 호출합니다.
+    public void ThrowItem(string prefabName, float force)
+    {
+        // 1. 아이템을 던지는 '나'의 카메라 방향을 계산합니다.
+        Vector3 throwDirection = thirdPersonCameraScript.transform.forward;
+
+        // 2. 이 방향과 힘, 생성 위치 정보를 모든 사람에게 RPC로 전달합니다.
+        photonView.RPC("ThrowItemRPC", RpcTarget.All, prefabName, force, throwDirection, mouthAttachPoint.position);
+    }
 
     [PunRPC]
-    public void ThrowItemRPC(string projectilePrefabName, float force)
+    public void ThrowItemRPC(string projectilePrefabName, float force, Vector3 throwDirection, Vector3 spawnRootPosition)
     {
-        // 던지는 로직은 모든 클라이언트에서 실행되어야 모두에게 보임
-        // 카메라 방향은 로컬 플레이어 기준으로 계산
-        Vector3 throwDirection = thirdPersonCameraScript.transform.forward;
-        Vector3 spawnPosition = mouthAttachPoint.position + throwDirection * 0.5f;
-
-        // 마스터 클라이언트만 생성하여 중복 방지
+        // 3. 이 RPC는 모든 클라이언트에서 실행되지만, 생성은 마스터 클라이언트가 딱 한 번만 하도록 합니다.
         if (PhotonNetwork.IsMasterClient)
         {
-            GameObject projectile = PhotonNetwork.Instantiate(projectilePrefabName, spawnPosition, Quaternion.LookRotation(throwDirection));
-            if (projectile.GetComponent<Rigidbody>() != null)
-            {
-                projectile.GetComponent<Rigidbody>().AddForce(throwDirection * force, ForceMode.VelocityChange);
-            }
+            Vector3 spawnPosition = spawnRootPosition + throwDirection * 0.5f;
+
+            // 4. [핵심] 생성 시점에 '초기 속도'를 데이터로 함께 넘겨줍니다.
+            object[] instantiationData = new object[] { throwDirection * force };
+
+            PhotonNetwork.Instantiate(projectilePrefabName, spawnPosition, Quaternion.LookRotation(throwDirection), 0, instantiationData);
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -793,8 +821,21 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     }
     private void HandleInteractionCancel() { if (interactionCoroutine != null) { StopCoroutine(interactionCoroutine); interactionCoroutine = null; if (interactionSlider != null) { interactionSlider.value = 0; } } }
     private IEnumerator HoldInteractionCoroutine() { if (interactionSlider == null) yield break; float timer = 0f; while (timer < interactionHoldDuration) { timer += Time.deltaTime; interactionSlider.value = timer / interactionHoldDuration; yield return null; } currentInteractable?.Interact(inventory); interactionCoroutine = null; if (interactionSlider != null) interactionSlider.value = 0; }
-    private void HandleRecoveryMash() { if (inputActions == null || (currentState != PlayerState.Stunned && currentState != PlayerState.Captured)) return; if (inputActions.Player.Recovery.triggered) { if (Time.time >= lastMashTime + mashCooldown) { lastMashTime = Time.time; float amountToAdd = (currentState == PlayerState.Stunned) ? stunMashAmount : capturedMashAmount; photonView.RPC("AddRecoveryProgress", RpcTarget.All, amountToAdd); } } }
+    private void HandleRecoveryMash()
+    {
+        // [수정] 오직 'Stunned' 상태일 때만 연타(Recovery) 입력이 작동하도록 조건을 변경합니다.
+        if (currentState != PlayerState.Stunned || !photonView.IsMine) return;
 
+        if (inputActions.Player.Recovery.triggered)
+        {
+            if (Time.time >= lastMashTime + mashCooldown)
+            {
+                lastMashTime = Time.time;
+                // 이제 Stunned 상태만 처리하므로 stunMashAmount만 사용합니다.
+                photonView.RPC("AddRecoveryProgress", RpcTarget.All, stunMashAmount);
+            }
+        }
+    }
     // --- 기본 행동 로직 ---
     private void HandleTimers() { bool hasJumpBuffer = jumpBufferTimer > 0f; bool canUseCoyoteTime = (Time.time - lastGroundedTime <= coyoteTime); bool isReadyToJump = _isGrounded || canUseCoyoteTime; bool isJumpCooledDown = (Time.time - lastJumpTime >= jumpCooldownTime); if (hasJumpBuffer && isReadyToJump && isJumpCooledDown) { PerformJump(); } jumpBufferTimer -= Time.deltaTime; }
     private void PerformJump() { if (currentState != PlayerState.Normal || interactionCoroutine != null || isDashing) return; rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); _isGrounded = false; animator.SetBool(hashIsGrounded, false); animator.SetTrigger(hashJump); jumpBufferTimer = 0f; lastJumpTime = Time.time; }
