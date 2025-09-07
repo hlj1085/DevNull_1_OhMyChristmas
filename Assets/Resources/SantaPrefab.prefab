@@ -1541,8 +1541,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.1564345, y: -0, z: -0, w: 0.98768836}
   m_LocalPosition: {x: -2.6520271, y: -0.6317065, z: -1.6093559}
-  m_LocalScale: {x: 1, y: 0.8, z: 0.9}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1407004252282155873}
   m_LocalEulerAnglesHint: {x: 18, y: 0, z: 0}
@@ -3104,13 +3104,16 @@ MonoBehaviour:
   staminaRegenRate: 15
   staminaRegenDelay: 2.5
   jumpStaminaCost: 15
-  lookSensitivity: 0.1
+  lookSensitivity: 15
   groundCheck: {fileID: 1917666651062764518}
   groundDistance: 0.2
   groundMask:
     serializedVersion: 2
     m_Bits: 200
   staminaBar: {fileID: 0}
+  interactionUIGroup: {fileID: 0}
+  interactionSlider: {fileID: 0}
+  interactionText: {fileID: 0}
   sleigh: {fileID: 3415050833218575573, guid: 4010b8eae2683f5418e309709f8c0b54, type: 3}
   sackPrefab: {fileID: 6014659699394296417}
 --- !u!95 &4891211927474294290

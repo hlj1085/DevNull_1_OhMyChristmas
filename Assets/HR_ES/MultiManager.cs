@@ -31,7 +31,7 @@ public class MultiManager : MonoBehaviour
                 GameObject prefab = role == "Santa" ? santaPrefab : reindeerPrefab;
 
                 // 원하는 위치와 회전으로 생성 (예시: Vector3.zero)
-                PhotonNetwork.Instantiate(prefab.name, Vector3.one, Quaternion.identity);
+                PhotonNetwork.Instantiate(prefab.name, new Vector3(20,5,20), Quaternion.identity);
 
         //기본 플레이어 생성
         //PhotonNetwork.Instantiate("PlayerArmature", Vector3.zero, Quaternion.identity);

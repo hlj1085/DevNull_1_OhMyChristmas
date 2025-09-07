@@ -1,12 +1,14 @@
 ﻿using Photon.Pun;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections; // <<< 이 줄을 추가하세요.
 using UnityEngine.UI; // UI 요소를 사용하기 위해 꼭 추가해주세요!
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Animator))]
-public class SantaController : MonoBehaviour
+public class SantaController : MonoBehaviour, IPunObservable
 {
     [Header("카메라 설정")]
     public Transform cameraTransform;
@@ -44,6 +46,9 @@ public class SantaController : MonoBehaviour
     [Header("UI 설정")]
     [Tooltip("스태미나를 표시할 UI 슬라이더를 연결해주세요.")]
     public Slider staminaBar;
+    public GameObject interactionUIGroup; // 상호작용 UI 그룹 (F to Capture 등)
+    public Slider interactionSlider;    // 홀드 진행 바
+    public TMP_Text interactionText;      // 상호작용 텍스트
 
     [Header("포획 및 썰매 참조")]
     public Sleigh sleigh; // Sleigh 스크립트를 직접 연결
@@ -57,8 +62,8 @@ public class SantaController : MonoBehaviour
     private PhotonView photonView;
     private PhotonView sackPhotonView; // <--- 2. 보따리의 PhotonView를 저장할 변수
     private IInteractable currentInteractable;
+    private Coroutine interactionCoroutine;
 
-    // --- 내부 변수들 ---
     private Rigidbody rb;
     private Animator animator;
     private Santa_Input playerInput;
@@ -111,8 +116,8 @@ public class SantaController : MonoBehaviour
         playerInput.Santa.Enable();
         playerInput.Santa.Move.performed += OnMoveInput;
         playerInput.Santa.Move.canceled += OnMoveInput;
-        playerInput.Santa.Look.performed += OnLookInput;
-        playerInput.Santa.Look.canceled += OnLookInput;
+        playerInput.Santa.Look.performed += OnLookInput; // <<< [추가]
+        playerInput.Santa.Look.canceled += OnLookInput; // <<< [추가]
         playerInput.Santa.Punch.performed += OnPunchInput;
         playerInput.Santa.Jump.performed += OnJumpInput;
         playerInput.Santa.Run.performed += OnRunInput;
@@ -122,32 +127,131 @@ public class SantaController : MonoBehaviour
     private void OnDisable()
     {
         playerInput.Santa.Disable();
-        // ... (이벤트 해제 코드들은 이전과 동일)
+        playerInput.Santa.Move.performed -= OnMoveInput;
+        playerInput.Santa.Move.canceled -= OnMoveInput;
+        playerInput.Santa.Look.performed -= OnLookInput; // <<< [추가]
+        playerInput.Santa.Look.canceled -= OnLookInput; // <<< [추가]
+        playerInput.Santa.Punch.performed -= OnPunchInput;
+        playerInput.Santa.Jump.performed -= OnJumpInput;
+        playerInput.Santa.Run.performed -= OnRunInput;
+        playerInput.Santa.Run.canceled -= OnRunInput;
     }
 
     private void Update()
     {
-        if (photonView.IsMine)
+        if (!photonView.IsMine) return;
+
+        CheckForInteractables(); // 주변 탐색
+        UpdateInteractionUI();   // UI 업데이트
+        if (playerInput.Santa.Interact.WasPressedThisFrame()) // 키를 누르기 시작했을 때
         {
-            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-            animator.SetBool(isGroundHash, isGrounded);
+            HandleInteractionStart();
+        }
+        if (playerInput.Santa.Interact.WasReleasedThisFrame()) // 키를 뗐을 때
+        {
+            HandleInteractionCancel();
+        }
 
-            // '달리기' 상태를 스태미나와 입력을 조합하여 최종 결정
-            isRunning = isTryingToRun && moveInput.magnitude > 0.1f && currentStamina > 0;
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        animator.SetBool(isGroundHash, isGrounded);
 
-            HandleStamina();
-            HandleAnimation();
-            HandleLook();
-            UpdateUI();
+        // '달리기' 상태를 스태미나와 입력을 조합하여 최종 결정
+        isRunning = isTryingToRun && moveInput.magnitude > 0.1f && currentStamina > 0;
+        animator.SetBool(isGroundHash, isGrounded);
 
-            // 상호작용 키(F) 입력 처리
-            if (playerInput.Santa.Interact.triggered) // Input System 사용
+        HandleStamina();
+        HandleAnimation();
+        HandleLook();
+        UpdateUI();
+
+        // 상호작용 키(F) 입력 처리
+        if (playerInput.Santa.Interact.triggered) // Input System 사용
+        {
+            HandleInteraction();
+        }
+        
+    }
+
+
+    // 주변 상호작용 대상을 찾는 함수 (새로 추가)
+    private void CheckForInteractables()
+    {
+        currentInteractable = null;
+        RaycastHit hit;
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, 5f))
+        {
+            // ReindeerController가 IInteractable을 구현하므로 바로 가져올 수 있음
+            if (hit.collider.TryGetComponent<IInteractable>(out var interactable))
             {
-                HandleInteraction();
+                if (interactable.CanInteract)
+                {
+                    currentInteractable = interactable;
+                }
             }
         }
     }
 
+    // 상호작용 UI를 업데이트하는 함수 (새로 추가)
+    private void UpdateInteractionUI()
+    {
+        bool canInteract = (currentInteractable != null);
+        //interactionUIGroup.SetActive(canInteract);
+
+        if (canInteract)
+        {
+            interactionText.text = currentInteractable.GetInteractMessage(this.gameObject);
+            bool isHoldType = currentInteractable.InteractionType == InteractionType.Hold;
+            interactionSlider.gameObject.SetActive(isHoldType && interactionCoroutine != null);
+        }
+    }
+
+    // 상호작용을 시작하는 함수 (새로 추가)
+    private void HandleInteractionStart()
+    {
+        if (currentInteractable == null) return;
+
+        if (currentInteractable.InteractionType == InteractionType.Hold)
+        {
+            interactionCoroutine = StartCoroutine(HoldInteractionCoroutine());
+        }
+        else // Instant
+        {
+            currentInteractable.Interact(this.gameObject);
+            currentInteractable = null; // 즉시 실행 후 대상 초기화
+        }
+    }
+
+    // 상호작용을 취소하는 함수 (새로 추가)
+    private void HandleInteractionCancel()
+    {
+        if (interactionCoroutine != null)
+        {
+            StopCoroutine(interactionCoroutine);
+            interactionCoroutine = null;
+            interactionSlider.gameObject.SetActive(false);
+            interactionSlider.value = 0;
+        }
+    }
+
+    // 홀드 상호작용 코루틴 (새로 추가)
+    private IEnumerator HoldInteractionCoroutine()
+    {
+        interactionSlider.gameObject.SetActive(true);
+        interactionSlider.value = 0;
+        float timer = 0f;
+
+        while (timer < 2f) // 2초 홀드 (조절 가능)
+        {
+            timer += Time.deltaTime;
+            interactionSlider.value = timer / 2f;
+            yield return null;
+        }
+
+        interactionSlider.gameObject.SetActive(false);
+        currentInteractable.Interact(this.gameObject);
+        currentInteractable = null; // 상호작용 완료 후 대상 초기화
+        interactionCoroutine = null;
+    }
     // 상호작용 로직을 처리할 새로운 함수
     private void HandleInteraction()
     {
@@ -157,32 +261,40 @@ public class SantaController : MonoBehaviour
             float distanceToSleigh = Vector3.Distance(transform.position, sleigh.transform.position);
             if (distanceToSleigh <= 5f) // 상호작용 거리
             {
+                // [추가] 썰매에게 묶으라고 알리기 전, 보따리를 끈다는 신호를 모두에게 보냄
+                photonView.RPC("SetSackActiveRPC", RpcTarget.All, false);
+
                 sleigh.AttachReindeer(capturedReindeer);
                 capturedReindeer = null; // 썰매에 넘겼으므로 초기화
                 return;
             }
         }
-
         // 우선순위 2: 기절한 순록을 발견하면 -> 포획하기
-        RaycastHit hit;
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, 5f))
+        // [추가] 이미 다른 순록을 포획한 상태가 아닐 때만 실행
+        if (capturedReindeer == null)
         {
-            if (hit.collider.CompareTag("Reindeer"))
+            RaycastHit hit;
+            if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, 5f))
             {
-                ReindeerController reindeer = hit.collider.GetComponent<ReindeerController>();
-                if (reindeer != null && reindeer.CurrentState == ReindeerController.PlayerState.Stunned)
+                if (hit.collider.CompareTag("Reindeer"))
                 {
-                    CaptureReindeer(reindeer);
+                    ReindeerController reindeer = hit.collider.GetComponent<ReindeerController>();
+                    if (reindeer != null && reindeer.CurrentState == ReindeerController.PlayerState.Stunned)
+                    {
+                        CaptureReindeer(reindeer);
+                    }
                 }
             }
         }
     }
 
 
-
     // 펀치 함수 (순록 기절시키기)
     private void OnPunchInput(InputAction.CallbackContext context)
     {
+        if (capturedReindeer != null) return;
+        if (Time.time < nextPunchTime) return;
+
         if (Time.time >= nextPunchTime)
         {
             nextPunchTime = Time.time + punchCooldown;
@@ -302,9 +414,12 @@ private void FixedUpdate()
 
     private void HandleLook()
     {
-        float mouseX = lookInput.x * lookSensitivity;
-        float mouseY = lookInput.y * lookSensitivity;
-        xRotation = Mathf.Clamp(xRotation - mouseY, -80f, 80f);
+        float mouseX = lookInput.x * lookSensitivity * Time.deltaTime;
+        float mouseY = lookInput.y * lookSensitivity * Time.deltaTime;
+
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -80f, 80f);
+
         cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
     }
@@ -323,4 +438,22 @@ private void FixedUpdate()
         // sackPhotonView가 null이 아니면 ViewID를, null이면 0을 반환
         return (sackPhotonView != null) ? sackPhotonView.ViewID : 0;
     }
+
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // 내 애니메이션 상태를 다른 사람에게 보냅니다.
+            stream.SendNext(animator.GetFloat(speedHash));
+            stream.SendNext(animator.GetBool(isGroundHash));
+        }
+        else
+        {
+            // 다른 사람의 애니메이션 상태를 받아서 내 화면의 아바타에 적용합니다.
+            animator.SetFloat(speedHash, (float)stream.ReceiveNext());
+            animator.SetBool(isGroundHash, (bool)stream.ReceiveNext());
+        }
+    }
+
 }
