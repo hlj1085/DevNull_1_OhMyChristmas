@@ -290,18 +290,24 @@
         }
 
         [PunRPC]
-        public void GetCaptured(int sackPhotonViewID)
-        {
+        public void GetCaptured(int santaViewID)
+        {   
             if (currentState != PlayerState.Stunned) return;
 
-            PhotonView sackPhotonView = PhotonView.Find(sackPhotonViewID);
-            if (sackPhotonView == null)
+            PhotonView santaPhotonView = PhotonView.Find(santaViewID);
+            if (santaPhotonView == null)
             {
-                Debug.LogError("포획 RPC 오류: ID " + sackPhotonViewID + "의 보따리를 찾을 수 없습니다!");
+                Debug.LogError("포획 RPC 오류: ID " + santaViewID + "의 산타를 찾을 수 없습니다!");
                 return;
             }
 
-            currentSackTransform = sackPhotonView.transform;
+            // SantaController에서 보따리 오브젝트를 직접 찾아 연결
+            SantaController santa = santaPhotonView.GetComponent<SantaController>();
+            if (santa != null && santa.sackPrefab != null)
+            {
+                currentSackTransform = santa.sackPrefab.transform;
+            }
+            currentSackTransform = santaPhotonView.transform;
             currentState = PlayerState.Captured;
             currentRecoveryTimer = 0f;
             lastMashTime = -mashCooldown;
@@ -577,14 +583,13 @@
                     SantaController santa = interactorObject.GetComponent<SantaController>();
                     if (santa != null)
                     {
-                    /*
                         int sackId = santa.GetSackViewID();
                         if (sackId != 0)
                         {
                             // 포획 RPC 호출
                             photonView.RPC("GetCaptured", RpcTarget.All, sackId);
                             return true; // 상호작용 성공
-                        }*/
+                        }
                 }
                 }
             }
