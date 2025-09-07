@@ -585,7 +585,7 @@
                             photonView.RPC("GetCaptured", RpcTarget.All, sackId);
                             return true; // 상호작용 성공
                         }*/
-                    }
+                }
                 }
             }
             // --- 상호작용한 대상이 다른 '순록'일 경우 ---
