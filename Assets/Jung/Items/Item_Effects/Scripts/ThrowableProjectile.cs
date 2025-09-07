@@ -42,9 +42,21 @@ public class ThrowableProjectile : MonoBehaviour, IPunInstantiateMagicCallback
 
     void OnCollisionEnter(Collision collision)
     {
-        // 충돌 후 파괴는 마스터 클라이언트만 결정하도록 하여 동기화 오류를 막습니다.
         if (PhotonNetwork.IsMasterClient)
         {
+            // 'Santa' 태그 대신 'SantaController' 스크립트로 확인하는 것이 더 안정적
+            SantaController santa = collision.gameObject.GetComponent<SantaController>();
+            if (santa != null)
+            {
+                Debug.Log("산타를 맞췄다!");
+                PhotonView santaPhotonView = santa.GetComponent<PhotonView>();
+                if (santaPhotonView != null)
+                {
+                    // 넉백 방향과 힘을 RPC로 전달
+                    Vector3 knockbackDir = (santa.transform.position - transform.position).normalized;
+                    santaPhotonView.RPC("ApplyKnockback", RpcTarget.All, knockbackDir, 10f); // 10f는 넉백 힘
+                }
+            }
             PhotonNetwork.Destroy(gameObject);
         }
     }

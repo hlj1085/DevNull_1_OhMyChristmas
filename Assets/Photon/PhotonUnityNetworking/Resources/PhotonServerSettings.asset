@@ -72,6 +72,8 @@ MonoBehaviour:
   - StartPunchAnimationRPC
   - TeleportToRPC
   - RPC_PlayAnimation
+  - SyncAttachment
+  - SetSackActiveRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

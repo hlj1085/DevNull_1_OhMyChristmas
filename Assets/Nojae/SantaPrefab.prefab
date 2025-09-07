@@ -1095,6 +1095,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 200
   staminaBar: {fileID: 0}
+  sleigh: {fileID: 0}
+  sackPrefab: {fileID: 1613673298549955126}
 --- !u!95 &1122175078539905817
 Animator:
   serializedVersion: 5

@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 3394794381152542782}
   - component: {fileID: 3415050833218575573}
   - component: {fileID: 5868037012855548305}
+  - component: {fileID: 4185085495427900364}
   m_Layer: 6
   m_Name: Sleigh
   m_TagString: Sleigh
@@ -199,7 +200,6 @@ MonoBehaviour:
   - {fileID: 5818762007074754345}
   - {fileID: 8992096531771261712}
   - {fileID: 6511944414322896297}
-  searchRadius: 15
 --- !u!114 &5868037012855548305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,6 +222,27 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!65 &4185085495427900364
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7667050922140220948}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.4024214, y: 1.6280563, z: 3.5716724}
+  m_Center: {x: 0, y: 0.9771793, z: -0.20121858}
 --- !u!1 &8354365911231821412
 GameObject:
   m_ObjectHideFlags: 0

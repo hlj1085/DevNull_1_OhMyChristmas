@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI; // UI 요소를 사용하기 위해 꼭 추가해주세요!
 
@@ -44,6 +45,19 @@ public class SantaController : MonoBehaviour
     [Tooltip("스태미나를 표시할 UI 슬라이더를 연결해주세요.")]
     public Slider staminaBar;
 
+    [Header("포획 및 썰매 참조")]
+    public Sleigh sleigh; // Sleigh 스크립트를 직접 연결
+    [Tooltip("산타가 들고 다니는 보따리 오브젝트")]
+    public GameObject sackPrefab; // Resources 폴더에 있어야 함
+
+    private ReindeerController capturedReindeer; // 내가 현재 포획한 순록
+
+
+    // --- 내부 변수들 ---
+    private PhotonView photonView;
+    private PhotonView sackPhotonView; // <--- 2. 보따리의 PhotonView를 저장할 변수
+    private IInteractable currentInteractable;
+
     // --- 내부 변수들 ---
     private Rigidbody rb;
     private Animator animator;
@@ -67,6 +81,14 @@ public class SantaController : MonoBehaviour
 
     private void Awake()
     {
+        photonView = GetComponent<PhotonView>(); // <<< 이 줄 추가
+            // --- 내 캐릭터가 아닐 경우 비활성화 ---
+    if (!photonView.IsMine)
+    {
+        if (cameraTransform != null) cameraTransform.gameObject.SetActive(false);
+        this.enabled = false;
+        return; // return을 추가하여 아래 초기화 코드가 실행되지 않도록 합니다.
+    }
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         playerInput = new Santa_Input();
@@ -105,19 +127,109 @@ public class SantaController : MonoBehaviour
 
     private void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        animator.SetBool(isGroundHash, isGrounded);
+        if (photonView.IsMine)
+        {
+            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+            animator.SetBool(isGroundHash, isGrounded);
 
-        // '달리기' 상태를 스태미나와 입력을 조합하여 최종 결정
-        isRunning = isTryingToRun && moveInput.magnitude > 0.1f && currentStamina > 0;
+            // '달리기' 상태를 스태미나와 입력을 조합하여 최종 결정
+            isRunning = isTryingToRun && moveInput.magnitude > 0.1f && currentStamina > 0;
 
-        HandleStamina();
-        HandleAnimation();
-        HandleLook();
-        UpdateUI();
+            HandleStamina();
+            HandleAnimation();
+            HandleLook();
+            UpdateUI();
+
+            // 상호작용 키(F) 입력 처리
+            if (playerInput.Santa.Interact.triggered) // Input System 사용
+            {
+                HandleInteraction();
+            }
+        }
     }
 
-    private void FixedUpdate()
+    // 상호작용 로직을 처리할 새로운 함수
+    private void HandleInteraction()
+    {
+        // 우선순위 1: 잡고 있는 순록이 있고, 썰매와 가까우면 -> 썰매에 묶기
+        if (capturedReindeer != null && sleigh != null)
+        {
+            float distanceToSleigh = Vector3.Distance(transform.position, sleigh.transform.position);
+            if (distanceToSleigh <= 5f) // 상호작용 거리
+            {
+                sleigh.AttachReindeer(capturedReindeer);
+                capturedReindeer = null; // 썰매에 넘겼으므로 초기화
+                return;
+            }
+        }
+
+        // 우선순위 2: 기절한 순록을 발견하면 -> 포획하기
+        RaycastHit hit;
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, 5f))
+        {
+            if (hit.collider.CompareTag("Reindeer"))
+            {
+                ReindeerController reindeer = hit.collider.GetComponent<ReindeerController>();
+                if (reindeer != null && reindeer.CurrentState == ReindeerController.PlayerState.Stunned)
+                {
+                    CaptureReindeer(reindeer);
+                }
+            }
+        }
+    }
+
+
+
+    // 펀치 함수 (순록 기절시키기)
+    private void OnPunchInput(InputAction.CallbackContext context)
+    {
+        if (Time.time >= nextPunchTime)
+        {
+            nextPunchTime = Time.time + punchCooldown;
+            animator.SetTrigger(punchHash);
+
+            // [수정] 펀치가 맞았는지 로컬에서 확인하고, 맞았다면 RPC로 모든 클라이언트에게 알림
+            RaycastHit hit;
+            if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, 3f)) // 3f는 펀치 사거리
+            {
+                PhotonView hitPhotonView = hit.collider.GetComponent<PhotonView>();
+                if (hit.collider.CompareTag("Reindeer") && hitPhotonView != null)
+                {
+                    // 맞은 순록에게 "기절하라"는 신호를 보냄
+                    hitPhotonView.RPC("GetStunned", RpcTarget.All);
+                }
+            }
+        }
+    }
+
+    [PunRPC]
+    private void SetSackActiveRPC(bool isActive)
+    {
+        if (sackPrefab != null)
+        {
+            sackPrefab.SetActive(isActive);
+        }
+    }
+
+    private void CaptureReindeer(ReindeerController reindeer)
+    {
+        // 1. 모든 클라이언트에게 "내 보따리를 활성화해라" 라고 RPC로 명령
+        photonView.RPC("SetSackActiveRPC", RpcTarget.All, true);
+
+        // 2. 순록에게 "나(산타)의 보따리에 잡혀라"고 나의 PhotonView ID를 알려줌
+        reindeer.GetComponent<PhotonView>().RPC("GetCaptured", RpcTarget.All, this.photonView.ViewID);
+
+        capturedReindeer = reindeer; // 잡은 순록 기록
+    }
+
+    // 스노우볼에 맞았을 때 넉백 RPC
+    [PunRPC]
+    public void ApplyKnockback(Vector3 direction, float force)
+    {
+        rb.AddForce(direction * force, ForceMode.Impulse);
+    }
+
+private void FixedUpdate()
     {
         HandleMovement();
     }
@@ -125,15 +237,6 @@ public class SantaController : MonoBehaviour
     private void OnMoveInput(InputAction.CallbackContext context) => moveInput = context.ReadValue<Vector2>();
     private void OnLookInput(InputAction.CallbackContext context) => lookInput = context.ReadValue<Vector2>();
     private void OnRunInput(InputAction.CallbackContext context) => isTryingToRun = context.ReadValueAsButton();
-
-    private void OnPunchInput(InputAction.CallbackContext context)
-    {
-        if (Time.time >= nextPunchTime)
-        {
-            nextPunchTime = Time.time + punchCooldown;
-            animator.SetTrigger(punchHash);
-        }
-    }
 
     private void OnJumpInput(InputAction.CallbackContext context)
     {
@@ -213,5 +316,11 @@ public class SantaController : MonoBehaviour
         {
             staminaBar.value = currentStamina;
         }
+    }
+
+    public int GetSackViewID()
+    {
+        // sackPhotonView가 null이 아니면 ViewID를, null이면 0을 반환
+        return (sackPhotonView != null) ? sackPhotonView.ViewID : 0;
     }
 }
