@@ -23,15 +23,17 @@ public class ItemObject : MonoBehaviour, IInteractable
     // 항상 상호작용 가능
     public bool CanInteract => true;
 
-    public string GetInteractMessage()
+    public string GetInteractMessage(GameObject interactorObject)
     {
         return "Press F to get " + itemData.itemName;
     }
 
     // 플레이어가 상호작용했을 때 호출되는 함수
     // Interact 함수의 반환 타입을 bool로 변경하고, 성공 여부를 return
-    public bool Interact(Inventory interactorInventory)
+    public bool Interact(GameObject interactorObject)
     {
+        Inventory interactorInventory = interactorObject.GetComponent<Inventory>();
+
         bool success = interactorInventory.AddItem(itemData);
         if (success)
         {

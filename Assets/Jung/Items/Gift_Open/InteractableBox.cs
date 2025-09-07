@@ -24,7 +24,7 @@ public class InteractableBox : MonoBehaviour, IInteractable, IPunObservable
     }
 
     // Interact 함수의 반환 타입을 bool로 변경하고, true를 return
-    public bool Interact(Inventory inventory)
+    public bool Interact(GameObject interactorObject)
     {
         if (isOpened) return false; // 이미 열렸으면 상호작용 실패
 
@@ -69,7 +69,7 @@ public class InteractableBox : MonoBehaviour, IInteractable, IPunObservable
     }
     */
 
-    public string GetInteractMessage()
+    public string GetInteractMessage(GameObject interactorObject)
     {
         return isOpened ? "" : "Hold [F] to Open";
     }
