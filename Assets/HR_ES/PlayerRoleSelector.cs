@@ -19,6 +19,7 @@ public class PlayerRoleSelector : MonoBehaviourPunCallbacks
 
     // After Select UI
     public Button startGameButton;
+    public Button resetRoleButton;
     public Transform playerCardsParent;
     public TextMeshProUGUI[] playerNicknames;
     public Image[] playerRoleIcons;
@@ -43,6 +44,7 @@ public class PlayerRoleSelector : MonoBehaviourPunCallbacks
         santaButton.onClick.AddListener(() => TrySelectRole("Santa"));
         reindeerButton.onClick.AddListener(() => TrySelectRole("Reindeer"));
         startGameButton.onClick.AddListener(LoadGameScene);
+        resetRoleButton.onClick.AddListener(ResetRole);
 
         UpdateAllUI();
     }
@@ -75,6 +77,18 @@ public class PlayerRoleSelector : MonoBehaviourPunCallbacks
             SetPlayerRole("Reindeer");
             SwitchToAfterSelectUI();
         }
+    }
+
+    void ResetRole()
+    {
+        // 로컬 플레이어의 역할 정보 초기화
+        var props = new ExitGames.Client.Photon.Hashtable { { "Role", null } };
+        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+
+        // UI를 역할 선택 화면으로 다시 전환
+        roleSelectCanvas.SetActive(true);
+        afterSelectCanvas.SetActive(false);
+        UpdateAllUI(); // UI 상태 갱신
     }
 
     void SetPlayerRole(string role)
@@ -126,25 +140,6 @@ public class PlayerRoleSelector : MonoBehaviourPunCallbacks
     {
         santaButton.interactable = !IsSantaTaken();
         reindeerButton.interactable = GetReindeerCount() < MaxReindeers;
-
-        // 역할이 다 찼을 때 회색으로 비활성화 (선택 불가능)
-        if (!santaButton.interactable)
-        {
-            santaButton.GetComponent<Image>().color = Color.gray;
-        }
-        else
-        {
-            santaButton.GetComponent<Image>().color = Color.white;
-        }
-
-        if (!reindeerButton.interactable)
-        {
-            reindeerButton.GetComponent<Image>().color = Color.gray;
-        }
-        else
-        {
-            reindeerButton.GetComponent<Image>().color = Color.white;
-        }
     }
 
     void UpdatePlayerCards()
@@ -157,7 +152,7 @@ public class PlayerRoleSelector : MonoBehaviourPunCallbacks
                 var player = PhotonNetwork.PlayerList[i];
                 string nickname = $"Player {i + 1}";
                 string role = "Unselected";
-                Sprite roleSprite = null; // 초기 스프라이트 없음
+                Sprite roleSprite = null;
 
                 if (player.CustomProperties.TryGetValue("Role", out object roleObj) && roleObj is string roleStr)
                 {
@@ -165,18 +160,40 @@ public class PlayerRoleSelector : MonoBehaviourPunCallbacks
                     roleSprite = (roleStr == "Santa") ? santaIconSprite : reindeerIconSprite;
                 }
 
-                playerNicknames[i].text = nickname;
-                playerRoleIcons[i].sprite = roleSprite;
-                playerRoleIcons[i].color = (role == "Unselected") ? Color.clear : Color.white;
-                playerBellImages[i].gameObject.SetActive(true); // 벨 이미지 활성화
+                if (i < playerNicknames.Length && playerNicknames[i] != null)
+                {
+                    playerNicknames[i].text = nickname;
+                }
+
+                if (i < playerRoleIcons.Length && playerRoleIcons[i] != null)
+                {
+                    playerRoleIcons[i].sprite = roleSprite;
+                    playerRoleIcons[i].color = (role == "Unselected") ? Color.clear : Color.white;
+                }
+
+                if (i < playerBellImages.Length && playerBellImages[i] != null)
+                {
+                    playerBellImages[i].gameObject.SetActive(true);
+                }
             }
             // 플레이어가 없을 경우
             else
             {
-                playerNicknames[i].text = "Waiting...";
-                playerRoleIcons[i].sprite = null; // 이미지 비우기
-                playerRoleIcons[i].color = Color.clear; // 완전히 투명하게 설정
-                playerBellImages[i].gameObject.SetActive(false); // 벨 이미지 비활성화
+                if (i < playerNicknames.Length && playerNicknames[i] != null)
+                {
+                    playerNicknames[i].text = "Waiting...";
+                }
+
+                if (i < playerRoleIcons.Length && playerRoleIcons[i] != null)
+                {
+                    playerRoleIcons[i].sprite = null;
+                    playerRoleIcons[i].color = Color.clear;
+                }
+
+                if (i < playerBellImages.Length && playerBellImages[i] != null)
+                {
+                    playerBellImages[i].gameObject.SetActive(false);
+                }
             }
         }
     }

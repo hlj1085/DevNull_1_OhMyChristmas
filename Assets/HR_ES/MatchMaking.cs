@@ -64,4 +64,16 @@ public class MatchMaking : MonoBehaviourPunCallbacks, ILobbyCallbacks
             Debug.Log("Attempting to join a random room...");
         }
     }
+
+    public void ExitGame()
+    {
+        Debug.Log("게임 종료");
+#if UNITY_EDITOR
+        // 유니티 에디터에서 실행 중일 때
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        // 빌드된 게임에서 실행 중일 때
+        Application.Quit();
+#endif
+    }
 }
