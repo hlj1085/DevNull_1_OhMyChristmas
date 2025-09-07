@@ -11748,3 +11748,39 @@ Start importing Assets/StarterAssets/TutorialInfo/Icons/ReadMeImg.PNG using Guid
  -> (artifact id: 'f4f776de9707b385225804f9383b0c94') in 0.046127 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 118.188644 seconds.
+  path: Assets/HR_ES/RoomScene.unity
+  artifactKey: Guid(4629c39afc4b00b4c910803e6d11a273) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/HR_ES/RoomScene.unity using Guid(4629c39afc4b00b4c910803e6d11a273) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'cc5253f6bc02440c7a50709442e56efb') in 0.001068 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 7.102544 seconds.
+  path: Assets/huisu/New Scene.unity
+  artifactKey: Guid(017bebe51902ddf48b054927993d8065) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23)
+Start importing Assets/huisu/New Scene.unity using Guid(017bebe51902ddf48b054927993d8065) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '2c7624d4f5dc85b7fc03624def26767a') in 0.023054 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 13.885619 seconds.
+  path: Assets/huisu/New Scene.unity
+  artifactKey: Guid(017bebe51902ddf48b054927993d8065) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/huisu/New Scene.unity using Guid(017bebe51902ddf48b054927993d8065) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '8dfe94c97afb232f261d999312bb72ee') in 0.000905 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 60.414572 seconds.
+  path: Assets/huisu/New Scene.unity
+  artifactKey: Guid(017bebe51902ddf48b054927993d8065) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23)
+Start importing Assets/huisu/New Scene.unity using Guid(017bebe51902ddf48b054927993d8065) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'd1d8258c495fc25c10e1f9cf18f75398') in 0.026766 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
