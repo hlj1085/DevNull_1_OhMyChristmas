@@ -577,13 +577,14 @@
                     SantaController santa = interactorObject.GetComponent<SantaController>();
                     if (santa != null)
                     {
+                    /*
                         int sackId = santa.GetSackViewID();
                         if (sackId != 0)
                         {
                             // 포획 RPC 호출
                             photonView.RPC("GetCaptured", RpcTarget.All, sackId);
                             return true; // 상호작용 성공
-                        }
+                        }*/
                     }
                 }
             }
