@@ -84,6 +84,14 @@ public class SantaController : MonoBehaviour, IPunObservable
     private readonly int jumpHash = Animator.StringToHash("Jump");
     private readonly int punchHash = Animator.StringToHash("isPunching_Right");
 
+    void Start()
+    {
+        if (!photonView.IsMine) return;
+
+        // 게임 시작 시 상호작용 UI를 확실하게 끕니다.
+        if (interactionUIGroup != null) interactionUIGroup.SetActive(false);
+    }
+
     private void Awake()
     {
         photonView = GetComponent<PhotonView>(); // <<< 이 줄 추가
@@ -194,14 +202,22 @@ public class SantaController : MonoBehaviour, IPunObservable
     // 상호작용 UI를 업데이트하는 함수 (새로 추가)
     private void UpdateInteractionUI()
     {
+        // 상호작용 대상이 있을 때만 UI 그룹을 활성화합니다.
         bool canInteract = (currentInteractable != null);
-        //interactionUIGroup.SetActive(canInteract);
+        if (interactionUIGroup != null)
+        {
+            interactionUIGroup.SetActive(canInteract);
+        }
 
+        // 상호작용이 가능하다면, 세부 내용을 설정합니다.
         if (canInteract)
         {
-            interactionText.text = currentInteractable.GetInteractMessage(this.gameObject);
+            if (interactionText != null)
+                interactionText.text = currentInteractable.GetInteractMessage(null);
+
             bool isHoldType = currentInteractable.InteractionType == InteractionType.Hold;
-            interactionSlider.gameObject.SetActive(isHoldType && interactionCoroutine != null);
+            if (interactionSlider != null)
+                interactionSlider.gameObject.SetActive(isHoldType && interactionCoroutine != null);
         }
     }
 
