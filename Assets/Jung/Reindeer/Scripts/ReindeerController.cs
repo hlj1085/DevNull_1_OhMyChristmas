@@ -290,18 +290,24 @@
         }
 
         [PunRPC]
-        public void GetCaptured(int sackPhotonViewID)
-        {
+        public void GetCaptured(int santaViewID)
+        {   
             if (currentState != PlayerState.Stunned) return;
 
-            PhotonView sackPhotonView = PhotonView.Find(sackPhotonViewID);
-            if (sackPhotonView == null)
+            PhotonView santaPhotonView = PhotonView.Find(santaViewID);
+            if (santaPhotonView == null)
             {
-                Debug.LogError("포획 RPC 오류: ID " + sackPhotonViewID + "의 보따리를 찾을 수 없습니다!");
+                Debug.LogError("포획 RPC 오류: ID " + santaViewID + "의 산타를 찾을 수 없습니다!");
                 return;
             }
 
-            currentSackTransform = sackPhotonView.transform;
+            // SantaController에서 보따리 오브젝트를 직접 찾아 연결
+            SantaController santa = santaPhotonView.GetComponent<SantaController>();
+            if (santa != null && santa.sackPrefab != null)
+            {
+                currentSackTransform = santa.sackPrefab.transform;
+            }
+            currentSackTransform = santaPhotonView.transform;
             currentState = PlayerState.Captured;
             currentRecoveryTimer = 0f;
             lastMashTime = -mashCooldown;
@@ -466,7 +472,7 @@
                     {
                         // 세부 UI 설정 (텍스트, 홀드 슬라이더 등)
                         if (interactionPromptUI != null)
-                            interactionPromptUI.text = currentInteractable.GetInteractMessage();
+                            interactionPromptUI.text = currentInteractable.GetInteractMessage(this.gameObject);
 
                         if (interactionSlider != null)
                         {
@@ -541,66 +547,105 @@
             }
         }
 
-        public string GetInteractMessage()
+        public string GetInteractMessage(GameObject interactorObject)
         {
-            if (currentState == PlayerState.Stunned) return "F to Help Player";
-            if (currentState == PlayerState.TiedToSleigh) return "F to Untie Reindeer";
-            if (currentState == PlayerState.PermanentlyTied)
+            // 상호작용한 오브젝트의 태그를 확인
+            if (interactorObject.CompareTag("Santa"))
             {
-                // 요정 가루가 있을 때만 아이템 전달 메시지를 보여줌
-                return inventory.HasItem(fairyDustItemData) ? "F to take Fairy Dust" : "";
+                // 산타가 보고 있을 때
+                if (currentState == PlayerState.Stunned)
+                {
+                    return "Press F for Capture Reindeer";
+                }
+            }
+            else if (interactorObject.CompareTag("Reindeer"))
+            {
+                if (currentState == PlayerState.Stunned) return "F to Help Reindeer";
+                if (currentState == PlayerState.TiedToSleigh) return "F to Untie Reindeer";
+                if (currentState == PlayerState.PermanentlyTied)
+                {
+                    // 요정 가루가 있을 때만 아이템 전달 메시지를 보여줌
+                    return inventory.HasItem(fairyDustItemData) ? "F to Take Fairy Dust" : "";
+                }
             }
             return "";
         }
-
-    public bool Interact(Inventory interactorInventory)
-    {
-        if (photonView == null) return false;
-
-        switch (currentState)
+        public bool Interact(GameObject interactorObject)
         {
-            case PlayerState.Stunned:
-            case PlayerState.TiedToSleigh:
-                photonView.RPC("GetRescued", RpcTarget.All);
-                break;
+            if (photonView == null) return false;
 
-            case PlayerState.PermanentlyTied:
-                PhotonView interactorView = interactorInventory.GetComponent<PhotonView>();
-                if (interactorView != null && inventory.HasItem(fairyDustItemData))
+            // --- 상호작용한 대상이 '산타'일 경우 ---
+            if (interactorObject.CompareTag("Santa"))
+            {
+                // 산타는 '기절' 상태의 순록만 포획할 수 있습니다.
+                if (currentState == PlayerState.Stunned)
                 {
-                    // 1. 묶인 순록(나 자신)에게 아이템을 제거하라고 명령
-                    this.photonView.RPC("RemoveItemByNameRPC", RpcTarget.All, fairyDustItemData.name);
-
-                    // 2. 구조자에게 아이템을 추가하라고 명령
-                    interactorView.RPC("AddItemByNameRPC", RpcTarget.All, fairyDustItemData.name);
+                    SantaController santa = interactorObject.GetComponent<SantaController>();
+                    if (santa != null)
+                    {
+                        int sackId = santa.GetSackViewID();
+                        if (sackId != 0)
+                        {
+                            // 포획 RPC 호출
+                            photonView.RPC("GetCaptured", RpcTarget.All, sackId);
+                            return true; // 상호작용 성공
+                        }
                 }
-                break;
-        }
-        return true;
-    }
+                }
+            }
+            // --- 상호작용한 대상이 다른 '순록'일 경우 ---
+            else if (interactorObject.CompareTag("Reindeer"))
+            {
+                switch (currentState)
+                {
+                    // '기절' 또는 '썰매에 묶인' 상태의 동료를 구출합니다.
+                    case PlayerState.Stunned:
+                    case PlayerState.TiedToSleigh:
+                        photonView.RPC("GetRescued", RpcTarget.All);
+                        return true; // 상호작용 성공
 
-    [PunRPC]
-    private void AddItemByNameRPC(string itemName)
-    {
-        ItemData itemData = Resources.Load<ItemData>("Items/" + itemName);
-        if (itemData != null)
+                    // '영구적으로 묶인' 상태의 동료에게 아이템을 받습니다.
+                    case PlayerState.PermanentlyTied:
+                        Inventory interactorInventory = interactorObject.GetComponent<Inventory>();
+                        PhotonView interactorView = interactorObject.GetComponent<PhotonView>();
+
+                        // 아이템 이전 로직 (기존 코드와 동일)
+                        if (interactorView != null && inventory.HasItem(fairyDustItemData))
+                        {
+                            this.photonView.RPC("RemoveItemByNameRPC", RpcTarget.All, fairyDustItemData.name);
+                            interactorView.RPC("AddItemByNameRPC", RpcTarget.All, fairyDustItemData.name);
+                            return true; // 상호작용 성공
+                        }
+                        break;
+                }
+            }
+
+            // 위 조건에 해당하지 않으면 상호작용 실패
+            return false;
+        }
+
+        [PunRPC]
+        private void AddItemByNameRPC(string itemName)
         {
-            inventory.AddItem(itemData);
+            ItemData itemData = Resources.Load<ItemData>("Items/" + itemName);
+            if (itemData != null)
+            {
+                inventory.AddItem(itemData);
+            }
         }
-    }
 
-    [PunRPC]
-    private void RemoveItemByNameRPC(string itemName)
-    {
-        ItemData itemData = Resources.Load<ItemData>("Items/" + itemName);
-        if (itemData != null)
+        [PunRPC]
+        private void RemoveItemByNameRPC(string itemName)
         {
-            inventory.RemoveItem(itemData);
+            ItemData itemData = Resources.Load<ItemData>("Items/" + itemName);
+            if (itemData != null)
+            {
+                inventory.RemoveItem(itemData);
+            }
         }
-    }
 
-    // 썰매, 묶기
-    [PunRPC]
+        // 썰매, 묶기
+        [PunRPC]
         public void AttachToSleigh(int sleighViewID, int slotIndex)
         {
             if (isAttachedToSleigh || currentState != PlayerState.Captured) return;
@@ -867,8 +912,7 @@
             if (currentInteractable.InteractionType == InteractionType.Instant)
             {
                 // 상호작용을 시도하고, 그 결과를 'success' 변수에 저장
-                bool success = currentInteractable.Interact(inventory);
-
+                bool success = currentInteractable.Interact(this.gameObject); 
                 // [핵심] 상호작용에 성공했다면, 즉시 대상을 잊어버린다!
                 if (success)
                 {
@@ -886,7 +930,7 @@
             }
         }
         private void HandleInteractionCancel() { if (interactionCoroutine != null) { StopCoroutine(interactionCoroutine); interactionCoroutine = null; if (interactionSlider != null) { interactionSlider.value = 0; } } }
-        private IEnumerator HoldInteractionCoroutine() { if (interactionSlider == null) yield break; float timer = 0f; while (timer < interactionHoldDuration) { timer += Time.deltaTime; interactionSlider.value = timer / interactionHoldDuration; yield return null; } currentInteractable?.Interact(inventory); interactionCoroutine = null; if (interactionSlider != null) interactionSlider.value = 0; }
+        private IEnumerator HoldInteractionCoroutine() { if (interactionSlider == null) yield break; float timer = 0f; while (timer < interactionHoldDuration) { timer += Time.deltaTime; interactionSlider.value = timer / interactionHoldDuration; yield return null; } currentInteractable?.Interact(this.gameObject); interactionCoroutine = null; if (interactionSlider != null) interactionSlider.value = 0; }
         private void HandleRecoveryMash()
         {
             // [수정] 오직 'Stunned' 상태일 때만 연타(Recovery) 입력이 작동하도록 조건을 변경합니다.

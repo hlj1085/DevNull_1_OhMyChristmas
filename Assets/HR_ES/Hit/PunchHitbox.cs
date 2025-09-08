@@ -1,4 +1,4 @@
-using ExitGames.Client.Photon;
+ï»¿using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
@@ -6,15 +6,15 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class PunchHitbox : MonoBehaviour
 {
-    public SantaFirstPersonController santa; // »óÀ§ ÄÁÆ®·Ñ·¯
+    public SantaController santa; // ìƒìœ„ ì»¨íŠ¸ë¡¤ëŸ¬
     public int damage = 1;
-    public float hitCooldownMs = 150f; // ÇÑ ½ºÀ® ³» Áßº¹ ¹æÁö
-    public LayerMask hurtboxLayer;     // Hurtbox ·¹ÀÌ¾î
+    public float hitCooldownMs = 150f; // í•œ ìŠ¤ìœ™ ë‚´ ì¤‘ë³µ ë°©ì§€
+    public LayerMask hurtboxLayer;     // Hurtbox ë ˆì´ì–´
 
     Collider col;
     PhotonView pv;
     bool active;
-    int swingSeq;                      // ½ºÀ® ½ÃÄö½º
+    int swingSeq;                      // ìŠ¤ìœ™ ì‹œí€€ìŠ¤
     double lastOpenTime;
 
     void Awake()
@@ -40,7 +40,7 @@ public class PunchHitbox : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (!active) return;
-        if (!pv.IsMine) return; // ³» »êÅ¸¸¸ È÷Æ® ½Ãµµ
+        if (!pv.IsMine) return; // ë‚´ ì‚°íƒ€ë§Œ íˆíŠ¸ ì‹œë„
 
         var hurt = other.GetComponent<Hurtbox>();
         if (hurt == null) return;
@@ -48,17 +48,17 @@ public class PunchHitbox : MonoBehaviour
         var targetView = hurt.OwnerView;
         if (targetView == null) return;
 
-        // ·ÎÄÃ ¿¹Ãø FX
+        // ë¡œì»¬ ì˜ˆì¸¡ FX
         PlayLocalHitFX(other.ClosestPoint(transform.position));
 
-        // È÷Æ® ½Ãµµ ÆĞÅ¶ Àü¼Û(¸¶½ºÅÍ¸¸ ¼ö½Å)
+        // íˆíŠ¸ ì‹œë„ íŒ¨í‚· ì „ì†¡(ë§ˆìŠ¤í„°ë§Œ ìˆ˜ì‹ )
         var data = new object[] {
             pv.ViewID,                          // attacker
             targetView.ViewID,                  // victim
             damage,
             other.ClosestPoint(transform.position),
-            PhotonNetwork.Time,                 // ½Ãµµ ½Ã°¢
-            swingSeq                            // ½ÃÄö½º(Áßº¹ ¹æÁö)
+            PhotonNetwork.Time,                 // ì‹œë„ ì‹œê°
+            swingSeq                            // ì‹œí€€ìŠ¤(ì¤‘ë³µ ë°©ì§€)
         };
 
         PhotonNetwork.RaiseEvent(
@@ -68,7 +68,7 @@ public class PunchHitbox : MonoBehaviour
             SendOptions.SendReliable
         );
 
-        // ÇÑ ¹ø ¸ÂÃèÀ¸¸é ´çÀå Ã¢ ´İ¾Æ Áßº¹ °¨¼Ò
+        // í•œ ë²ˆ ë§ì·„ìœ¼ë©´ ë‹¹ì¥ ì°½ ë‹«ì•„ ì¤‘ë³µ ê°ì†Œ
         active = false;
     }
 

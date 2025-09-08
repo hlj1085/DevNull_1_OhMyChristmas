@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public enum InteractionType
 {
     Instant, // 한 번 누르기
@@ -8,8 +10,7 @@ public interface IInteractable
 {
     InteractionType InteractionType { get; }
     bool CanInteract { get; }
-    string GetInteractMessage();
-    
+    string GetInteractMessage(GameObject interactorObject);
     // void에서 bool로 변경
-    bool Interact(Inventory interactorInventory); 
+    bool Interact(GameObject interactorObject);
 }
