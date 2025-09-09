@@ -43,12 +43,12 @@ public class SantaController : MonoBehaviour, IPunObservable
     public float groundDistance = 0.2f;
     public LayerMask groundMask;
 
-    [Header("UI 설정")]
-    [Tooltip("스태미나를 표시할 UI 슬라이더를 연결해주세요.")]
-    public Slider staminaBar;
-    public GameObject interactionUIGroup; // 상호작용 UI 그룹 (F to Capture 등)
-    public Slider interactionSlider;    // 홀드 진행 바
-    public TMP_Text interactionText;      // 상호작용 텍스트
+
+    private Slider staminaBar;
+    private GameObject interactionUIGroup; // 상호작용 UI 그룹 (F to Capture 등)
+    private GameObject gamestatusUiGroup; // 게임 상태 UI 그룹 (스태미나 바 등)
+    private Slider interactionSlider;    // 홀드 진행 바
+    private TMP_Text interactionText;      // 상호작용 텍스트
 
     [Header("포획 및 썰매 참조")]
     public Sleigh sleigh; // Sleigh 스크립트를 직접 연결
@@ -64,6 +64,7 @@ public class SantaController : MonoBehaviour, IPunObservable
     private IInteractable currentInteractable;
     private Coroutine interactionCoroutine;
 
+    private bool hasCapturedReindeer = false; // [추가] 순록을 포획했는지 여부
     private Rigidbody rb;
     private Animator animator;
     private Santa_Input playerInput;
@@ -90,6 +91,37 @@ public class SantaController : MonoBehaviour, IPunObservable
 
         // 게임 시작 시 상호작용 UI를 확실하게 끕니다.
         if (interactionUIGroup != null) interactionUIGroup.SetActive(false);
+        if (photonView.IsMine && UIManager.instance != null)
+        {
+            // UIManager로부터 산타용 캔버스를 가져옵니다.
+            Transform canvasTransform = UIManager.instance.santaCanvas.transform;
+
+            // 캔버스 안에서 필요한 UI 요소들을 이름으로 직접 찾아옵니다.
+            interactionUIGroup = canvasTransform.Find("Interaction_UI_Group")?.gameObject;
+            gamestatusUiGroup = canvasTransform.Find("Game_Status_UI_Group")?.gameObject;
+
+            if (interactionUIGroup != null)
+            {
+                interactionText = interactionUIGroup.transform.Find("Interact_Text")?.GetComponent<TMP_Text>();
+                interactionSlider = interactionUIGroup.transform.Find("Interact_Hold_Slider")?.GetComponent<Slider>();
+            }
+            if (gamestatusUiGroup != null)
+            {
+                staminaBar = gamestatusUiGroup.transform.Find("Stamina_Slider")?.GetComponent<Slider>();
+            }
+
+            // 스태미나 바 초기화
+            if (staminaBar != null)
+            {
+                staminaBar.maxValue = maxStamina;
+                staminaBar.value = maxStamina;
+            }
+
+            if (interactionUIGroup != null) interactionUIGroup.SetActive(false);
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     private void Awake()
@@ -154,10 +186,12 @@ public class SantaController : MonoBehaviour, IPunObservable
         if (playerInput.Santa.Interact.WasPressedThisFrame()) // 키를 누르기 시작했을 때
         {
             HandleInteractionStart();
+            print("산타상호작용");
         }
         if (playerInput.Santa.Interact.WasReleasedThisFrame()) // 키를 뗐을 때
         {
             HandleInteractionCancel();
+            print("산타상호작용 종료 ------------");
         }
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
@@ -224,16 +258,20 @@ public class SantaController : MonoBehaviour, IPunObservable
     // 상호작용을 시작하는 함수 (새로 추가)
     private void HandleInteractionStart()
     {
-        if (currentInteractable == null) return;
 
-        if (currentInteractable.InteractionType == InteractionType.Hold)
+        if (!hasCapturedReindeer)
         {
-            interactionCoroutine = StartCoroutine(HoldInteractionCoroutine());
-        }
-        else // Instant
-        {
-            currentInteractable.Interact(this.gameObject);
-            currentInteractable = null; // 즉시 실행 후 대상 초기화
+            if (currentInteractable == null) return;
+
+            if (currentInteractable.InteractionType == InteractionType.Hold)
+            {
+                interactionCoroutine = StartCoroutine(HoldInteractionCoroutine());
+            }
+            else // Instant
+            {
+                currentInteractable.Interact(this.gameObject);
+                currentInteractable = null; // 즉시 실행 후 대상 초기화
+            }
         }
     }
 
@@ -308,6 +346,7 @@ public class SantaController : MonoBehaviour, IPunObservable
     // 펀치 함수 (순록 기절시키기)
     private void OnPunchInput(InputAction.CallbackContext context)
     {
+        if (hasCapturedReindeer) return;
         if (capturedReindeer != null) return;
         if (Time.time < nextPunchTime) return;
 
@@ -339,6 +378,13 @@ public class SantaController : MonoBehaviour, IPunObservable
         }
     }
 
+    [PunRPC]
+    private void SetCaptureStateRPC(bool isCapturing)
+    {
+        // 모든 클라이언트에서 산타의 포획 상태를 동일하게 설정
+        this.hasCapturedReindeer = isCapturing;
+    }
+
     private void CaptureReindeer(ReindeerController reindeer)
     {
         // 1. 모든 클라이언트에게 "내 보따리를 활성화해라" 라고 RPC로 명령
@@ -346,6 +392,9 @@ public class SantaController : MonoBehaviour, IPunObservable
 
         // 2. 순록에게 "나(산타)의 보따리에 잡혀라"고 나의 PhotonView ID를 알려줌
         reindeer.GetComponent<PhotonView>().RPC("GetCaptured", RpcTarget.All, this.photonView.ViewID);
+
+        // [수정] capturedReindeer 변수 대신, hasCapturedReindeer 상태를 동기화하도록 변경
+        photonView.RPC("SetCaptureStateRPC", RpcTarget.All, true);
 
         capturedReindeer = reindeer; // 잡은 순록 기록
     }

@@ -1,3 +1,4 @@
+// UIManager.cs
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -6,26 +7,11 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
 
-    [Header("UI Groups")]
-    public GameObject interactionUIGroup;
-
-    public GameObject recoveryUIGroup;
-    public GameObject gameStatusUIGroup;
-    public GameObject inventoryUIGroup;
-
-    [Header("UI Elements")]
-    public TextMeshProUGUI interactionPromptUI;
-    public TextMeshProUGUI useItemPromptUI;
-    public TextMeshProUGUI recoveryText; // <<< [추가] 회복 바 텍스트
-
-    public Slider interactionSlider;
-    public Slider recoverySlider;
-    public Image recoverySliderFill; // <<< [추가] 회복 바의 Fill 이미지
-
-
-    // --- [수정] --- InventoryUI를 외부에서 연결할 수 있도록 public 변수로 변경
-    [Header("UI Scripts")]
-    public InventoryUI inventoryUI;
+    [Header("역할별 UI 캔버스")]
+    [Tooltip("산타에게만 보일 UI 요소들의 부모 오브젝트")]
+    public GameObject santaCanvas;
+    [Tooltip("순록에게만 보일 UI 요소들의 부모 오브젝트")]
+    public GameObject reindeerCanvas;
 
     void Awake()
     {
@@ -37,27 +23,30 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        // --- [삭제] --- 더 이상 GetComponent로 찾을 필요가 없으므로 이 부분은 삭제합니다.
-        // inventoryUI = GetComponent<InventoryUI>(); 
-        // if (inventoryUI == null)
-        // {
-        //     Debug.LogWarning("UIManager 게임 오브젝트에 InventoryUI 스크립트가 없습니다!");
-        // }
     }
 
     /// <summary>
-    /// 플레이어의 인벤토리를 UI에 연결하는 함수입니다.
+    /// 플레이어 역할에 맞는 UI를 활성화하고, 필요한 컴포넌트 참조를 설정합니다.
     /// </summary>
-    public void SetInventory(Inventory targetInventory)
+    /// <param name="role">"Santa" 또는 "Reindeer"</param>
+    public void InitializeUIForRole(string role)
     {
-        if (inventoryUI != null)
+        if (role == "Santa")
         {
-            // 인스펙터에서 연결된 inventoryUI에게 목표 인벤토리를 알려줍니다.
-            inventoryUI.inventory = targetInventory;        }
-        else
+            if (santaCanvas != null) santaCanvas.SetActive(true);
+            if (reindeerCanvas != null) reindeerCanvas.SetActive(false);
+        }
+        else // Reindeer
         {
-            Debug.LogError("UIManager에 InventoryUI가 연결되지 않아 인벤토리를 설정할 수 없습니다!");
+            if (santaCanvas != null) santaCanvas.SetActive(false);
+            if (reindeerCanvas != null) reindeerCanvas.SetActive(true);
+        }
+    }
+    public void SetInventory(Inventory targetInventory, InventoryUI uiToUpdate)
+    {
+        if (uiToUpdate != null)
+        {
+            uiToUpdate.inventory = targetInventory;
         }
     }
 }

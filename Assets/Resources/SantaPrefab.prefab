@@ -842,7 +842,7 @@ Transform:
   m_GameObject: {fileID: 1735749441490394614}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.075, z: 0}
+  m_LocalPosition: {x: 0, y: 0.075, z: 0.126}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3099,21 +3099,17 @@ MonoBehaviour:
   jumpForce: 4
   jumpCooldown: 1.5
   punchCooldown: 2
-  maxStamina: 70
+  maxStamina: 100
   staminaUseRate: 20
   staminaRegenRate: 15
-  staminaRegenDelay: 2.5
+  staminaRegenDelay: 2
   jumpStaminaCost: 15
-  lookSensitivity: 15
+  lookSensitivity: 8
   groundCheck: {fileID: 1917666651062764518}
   groundDistance: 0.2
   groundMask:
     serializedVersion: 2
     m_Bits: 200
-  staminaBar: {fileID: 0}
-  interactionUIGroup: {fileID: 0}
-  interactionSlider: {fileID: 0}
-  interactionText: {fileID: 0}
   sleigh: {fileID: 3415050833218575573, guid: 4010b8eae2683f5418e309709f8c0b54, type: 3}
   sackPrefab: {fileID: 6014659699394296417}
 --- !u!95 &4891211927474294290

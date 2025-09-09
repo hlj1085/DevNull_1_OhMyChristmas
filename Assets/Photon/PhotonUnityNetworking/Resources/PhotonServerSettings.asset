@@ -74,6 +74,7 @@ MonoBehaviour:
   - RPC_PlayAnimation
   - SyncAttachment
   - SetSackActiveRPC
+  - SetCaptureStateRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
