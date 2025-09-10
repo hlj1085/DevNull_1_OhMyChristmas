@@ -14,7 +14,10 @@ public class InteractableBox : MonoBehaviour, IInteractable, IPunObservable
     private PhotonView photonView; // PhotonView 참조를 위한 변수 추가
 
     // --- IInteractable 인터페이스 구현 ---
-    public bool CanInteract => !isOpened;
+    public bool CanInteract(GameObject interactor)
+    {
+        return !isOpened;
+    }
     public InteractionType InteractionType => InteractionType.Hold;
 
     void Awake()

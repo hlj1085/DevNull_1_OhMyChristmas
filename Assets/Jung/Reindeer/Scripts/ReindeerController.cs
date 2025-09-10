@@ -487,7 +487,7 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
                 useItemPromptUI.gameObject.SetActive(false);
 
                 // 기존의 주변 상호작용 가능 여부를 체크하는 로직 실행
-                bool canInteract = (currentInteractable != null && currentInteractable.CanInteract);
+                bool canInteract = (currentInteractable != null && currentInteractable.CanInteract(this.gameObject));
                 interactionUIGroup.SetActive(canInteract);
 
                 if (canInteract)
@@ -557,17 +557,14 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     public InteractionType InteractionType => InteractionType.Hold;
 
     // 상호작용 가능 조건
-    public bool CanInteract
+    public bool CanInteract(GameObject interactor)
     {
-        get
-        {
-            if (currentState == PlayerState.Stunned || currentState == PlayerState.TiedToSleigh)
-                return true;    
-            // '구출 불가' 상태일 때는, 요정 가루를 가지고 있을 때만 상호작용 가능
-            if (currentState == PlayerState.PermanentlyTied)
-                return inventory.HasItem(fairyDustItemData);
-            return false;
-        }
+        if (currentState == PlayerState.Stunned || currentState == PlayerState.TiedToSleigh)
+            return true;    
+        // '구출 불가' 상태일 때는, 요정 가루를 가지고 있을 때만 상호작용 가능
+        if (currentState == PlayerState.PermanentlyTied)
+            return inventory.HasItem(fairyDustItemData);
+        return false;
     }
 
     public string GetInteractMessage(GameObject interactorObject)
@@ -929,7 +926,7 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     }
     private void HandleInteractionStart()
     {
-        if (currentInteractable == null || !currentInteractable.CanInteract || CurrentState != PlayerState.Normal) return;
+        if (currentInteractable == null || !currentInteractable.CanInteract(this.gameObject) || CurrentState != PlayerState.Normal) return;
 
         // 즉시 발동 아이템 (아이템 줍기 등)
         if (currentInteractable.InteractionType == InteractionType.Instant)

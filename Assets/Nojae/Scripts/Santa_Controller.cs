@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using System.Collections; // <<< 이 줄을 추가하세요.
 using UnityEngine.UI; // UI 요소를 사용하기 위해 꼭 추가해주세요!
 
+
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Animator))]
@@ -85,6 +86,22 @@ public class SantaController : MonoBehaviour, IPunObservable
     private readonly int jumpHash = Animator.StringToHash("Jump");
     private readonly int punchHash = Animator.StringToHash("isPunching_Right");
 
+        /// <summary>
+    /// 이 산타가 현재 순록을 포획한 상태인지 여부를 반환합니다.
+    /// </summary>
+    public bool HasCapturedReindeer()
+    {
+        return capturedReindeer != null;
+    }
+
+    /// <summary>
+    /// 현재 포획한 순록의 정보를 반환합니다.
+    /// </summary>
+    public ReindeerController GetCapturedReindeer()
+    {
+        return capturedReindeer;
+    }
+
     void Start()
     {
         if (!photonView.IsMine) return;
@@ -153,16 +170,18 @@ public class SantaController : MonoBehaviour, IPunObservable
 
     private void OnEnable()
     {
-        playerInput.Santa.Enable();
-        playerInput.Santa.Move.performed += OnMoveInput;
-        playerInput.Santa.Move.canceled += OnMoveInput;
-        playerInput.Santa.Look.performed += OnLookInput; // <<< [추가]
-        playerInput.Santa.Look.canceled += OnLookInput; // <<< [추가]
-        playerInput.Santa.Punch.performed += OnPunchInput;
-        playerInput.Santa.Jump.performed += OnJumpInput;
-        playerInput.Santa.Run.performed += OnRunInput;
-        playerInput.Santa.Run.canceled += OnRunInput;
-    }
+playerInput.Santa.Enable();
+playerInput.Santa.Move.performed += OnMoveInput;
+playerInput.Santa.Move.canceled += OnMoveInput;
+playerInput.Santa.Look.performed += OnLookInput; // <<< [추가]
+playerInput.Santa.Look.canceled += OnLookInput; // <<< [추가]
+playerInput.Santa.Punch.performed += OnPunchInput;
+playerInput.Santa.Jump.performed += OnJumpInput;
+playerInput.Santa.Run.performed += OnRunInput;
+playerInput.Santa.Run.canceled += OnRunInput;
+playerInput.Santa.Interact.started += HandleInteractionStart;
+playerInput.Santa.Interact.canceled += HandleInteractionCancel;
+}
 
     private void OnDisable()
     {
@@ -175,7 +194,9 @@ public class SantaController : MonoBehaviour, IPunObservable
         playerInput.Santa.Jump.performed -= OnJumpInput;
         playerInput.Santa.Run.performed -= OnRunInput;
         playerInput.Santa.Run.canceled -= OnRunInput;
-    }
+        playerInput.Santa.Interact.started -= HandleInteractionStart;
+        playerInput.Santa.Interact.canceled -= HandleInteractionCancel;
+}
 
     private void Update()
     {
@@ -183,16 +204,6 @@ public class SantaController : MonoBehaviour, IPunObservable
 
         CheckForInteractables(); // 주변 탐색
         UpdateInteractionUI();   // UI 업데이트
-        if (playerInput.Santa.Interact.WasPressedThisFrame()) // 키를 누르기 시작했을 때
-        {
-            HandleInteractionStart();
-            print("산타상호작용");
-        }
-        if (playerInput.Santa.Interact.WasReleasedThisFrame()) // 키를 뗐을 때
-        {
-            HandleInteractionCancel();
-            print("산타상호작용 종료 ------------");
-        }
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         animator.SetBool(isGroundHash, isGrounded);
@@ -215,26 +226,43 @@ public class SantaController : MonoBehaviour, IPunObservable
     }
 
 
-    // 주변 상호작용 대상을 찾는 함수 (새로 추가)
-    private void CheckForInteractables()
+// 주변 상호작용 대상을 찾는 함수 (새로 추가)
+
+private void CheckForInteractables()
+{
+currentInteractable = null;
+RaycastHit hit;
+
+if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, 5f))
+{
+    // --- [핵심 수정] ---
+    // 감지된 대상이 순록인지 먼저 확인
+    ReindeerController reindeer = hit.collider.GetComponent<ReindeerController>();
+    if (reindeer != null)
     {
-        currentInteractable = null;
-        RaycastHit hit;
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, 5f))
-        {
-            // ReindeerController가 IInteractable을 구현하므로 바로 가져올 수 있음
-            if (hit.collider.TryGetComponent<IInteractable>(out var interactable))
-            {
-                if (interactable.CanInteract)
+        // 순록이 상호작용 가능한 상태라면 대상으로 설정
+        if (reindeer.CanInteract(this.gameObject))
                 {
-                    currentInteractable = interactable;
-                }
-            }
+            currentInteractable = reindeer;
+            return; // 대상을 찾았으므로 함수 종료
         }
     }
 
-    // 상호작용 UI를 업데이트하는 함수 (새로 추가)
-    private void UpdateInteractionUI()
+    // 감지된 대상이 썰매인지 확인
+    Sleigh sleigh = hit.collider.GetComponent<Sleigh>();
+    if (sleigh != null)
+    {
+        // 썰매가 상호작용 가능한 상태라면 대상으로 설정
+        if (sleigh.CanInteract(this.gameObject))
+        {
+            currentInteractable = sleigh;
+            return; // 대상을 찾았으므로 함수 종료
+        }
+    }
+}
+}
+// 상호작용 UI를 업데이트하는 함수 (새로 추가)
+private void UpdateInteractionUI()
     {
         // 상호작용 대상이 있을 때만 UI 그룹을 활성화합니다.
         bool canInteract = (currentInteractable != null);
@@ -256,9 +284,8 @@ public class SantaController : MonoBehaviour, IPunObservable
     }
 
     // 상호작용을 시작하는 함수 (새로 추가)
-    private void HandleInteractionStart()
+    private void HandleInteractionStart(InputAction.CallbackContext context)
     {
-
         if (!hasCapturedReindeer)
         {
             if (currentInteractable == null) return;
@@ -276,7 +303,7 @@ public class SantaController : MonoBehaviour, IPunObservable
     }
 
     // 상호작용을 취소하는 함수 (새로 추가)
-    private void HandleInteractionCancel()
+    private void HandleInteractionCancel(InputAction.CallbackContext context)
     {
         if (interactionCoroutine != null)
         {

@@ -21,7 +21,10 @@ public class ItemObject : MonoBehaviour, IInteractable
     public InteractionType InteractionType => InteractionType.Instant;
 
     // 항상 상호작용 가능
-    public bool CanInteract => true;
+    public bool CanInteract(GameObject interactor)
+    {
+        return true;
+    }
 
     public string GetInteractMessage(GameObject interactorObject)
     {
