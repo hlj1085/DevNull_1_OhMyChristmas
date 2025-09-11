@@ -244,6 +244,7 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         // --- 내 캐릭터(로컬 플레이어)일 때만 실행되는 로직 ---
         if (!photonView.IsMine)
         {
+            print("Not my character, skipping Update.");
             // 내 캐릭터가 아니면 여기서 즉시 종료합니다.
             return;
         }
@@ -298,6 +299,8 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     [PunRPC]
     public void GetStunned()
     {
+
+        print("GetStunned called"); 
         if (equippedItem != null)
         {
             // 즉시 장착을 해제합니다. (맨손으로 만듦)

@@ -147,7 +147,8 @@ public class SantaController : MonoBehaviour, IPunObservable
             // --- 내 캐릭터가 아닐 경우 비활성화 ---
     if (!photonView.IsMine)
     {
-        if (cameraTransform != null) cameraTransform.gameObject.SetActive(false);
+        print("This is not my Santa. Disabling control script and camera.");
+            if (cameraTransform != null) cameraTransform.gameObject.SetActive(false);
         this.enabled = false;
         return; // return을 추가하여 아래 초기화 코드가 실행되지 않도록 합니다.
     }
@@ -170,18 +171,18 @@ public class SantaController : MonoBehaviour, IPunObservable
 
     private void OnEnable()
     {
-playerInput.Santa.Enable();
-playerInput.Santa.Move.performed += OnMoveInput;
-playerInput.Santa.Move.canceled += OnMoveInput;
-playerInput.Santa.Look.performed += OnLookInput; // <<< [추가]
-playerInput.Santa.Look.canceled += OnLookInput; // <<< [추가]
-playerInput.Santa.Punch.performed += OnPunchInput;
-playerInput.Santa.Jump.performed += OnJumpInput;
-playerInput.Santa.Run.performed += OnRunInput;
-playerInput.Santa.Run.canceled += OnRunInput;
-playerInput.Santa.Interact.started += HandleInteractionStart;
-playerInput.Santa.Interact.canceled += HandleInteractionCancel;
-}
+        playerInput.Santa.Enable();
+        playerInput.Santa.Move.performed += OnMoveInput;
+        playerInput.Santa.Move.canceled += OnMoveInput;
+        playerInput.Santa.Look.performed += OnLookInput; // <<< [추가]
+        playerInput.Santa.Look.canceled += OnLookInput; // <<< [추가]
+        playerInput.Santa.Punch.performed += OnPunchInput;
+        playerInput.Santa.Jump.performed += OnJumpInput;
+        playerInput.Santa.Run.performed += OnRunInput;
+        playerInput.Santa.Run.canceled += OnRunInput;
+        playerInput.Santa.Interact.started += HandleInteractionStart;
+        playerInput.Santa.Interact.canceled += HandleInteractionCancel;
+    }
 
     private void OnDisable()
     {
@@ -201,6 +202,7 @@ playerInput.Santa.Interact.canceled += HandleInteractionCancel;
     private void Update()
     {
         if (!photonView.IsMine) return;
+        HandleLook(); // 시점 처리
 
         CheckForInteractables(); // 주변 탐색
         UpdateInteractionUI();   // UI 업데이트
@@ -214,7 +216,6 @@ playerInput.Santa.Interact.canceled += HandleInteractionCancel;
 
         HandleStamina();
         HandleAnimation();
-        HandleLook();
         UpdateUI();
 
         // 상호작용 키(F) 입력 처리
@@ -362,6 +363,7 @@ private void UpdateInteractionUI()
                     ReindeerController reindeer = hit.collider.GetComponent<ReindeerController>();
                     if (reindeer != null && reindeer.CurrentState == ReindeerController.PlayerState.Stunned)
                     {
+                        print("기절한 순록을 발견했습니다!");
                         CaptureReindeer(reindeer);
                     }
                 }
@@ -391,6 +393,7 @@ private void UpdateInteractionUI()
                 {
                     // 맞은 순록에게 "기절하라"는 신호를 보냄
                     hitPhotonView.RPC("GetStunned", RpcTarget.All);
+                    print("펀치가 맞았습니다!");
                 }
             }
         }
@@ -414,6 +417,7 @@ private void UpdateInteractionUI()
 
     private void CaptureReindeer(ReindeerController reindeer)
     {
+        Debug.Log("순록을 포획합니다!");
         // 1. 모든 클라이언트에게 "내 보따리를 활성화해라" 라고 RPC로 명령
         photonView.RPC("SetSackActiveRPC", RpcTarget.All, true);
 
@@ -536,15 +540,11 @@ private void FixedUpdate()
     {
         if (stream.IsWriting)
         {
-            // 내 애니메이션 상태를 다른 사람에게 보냅니다.
-            stream.SendNext(animator.GetFloat(speedHash));
-            stream.SendNext(animator.GetBool(isGroundHash));
+            stream.SendNext(isRunning);
         }
         else
         {
-            // 다른 사람의 애니메이션 상태를 받아서 내 화면의 아바타에 적용합니다.
-            animator.SetFloat(speedHash, (float)stream.ReceiveNext());
-            animator.SetBool(isGroundHash, (bool)stream.ReceiveNext());
+            this.isRunning = (bool)stream.ReceiveNext();
         }
     }
 

@@ -25,6 +25,13 @@ public class InteractableBox : MonoBehaviour, IInteractable, IPunObservable
         // PhotonView 컴포넌트를 찾아서 저장
         photonView = GetComponent<PhotonView>();
     }
+    public interface IInteractable
+    {
+        InteractionType InteractionType { get; }
+        bool CanInteract(GameObject interactor);
+        string GetInteractMessage(GameObject interactor);
+        bool Interact(GameObject interactor);
+    }
 
     // Interact 함수의 반환 타입을 bool로 변경하고, true를 return
     public bool Interact(GameObject interactorObject)
