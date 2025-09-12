@@ -4,8 +4,6 @@ using System.Collections.Generic;
 
 public class InventoryUI : MonoBehaviour
 {
-    public Image[] slotSelectionBorders; // 선택 테두리 이미지 배열
-
     // inventory 변수를 private으로 바꾸고, 외부 접근을 위한 public 프로퍼티를 만듭니다.
     private Inventory _inventory;
     public Inventory inventory
@@ -33,52 +31,58 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    [Header("UI 요소")]
-    public GameObject inventoryPanel;
-    public Image[] itemSlots;
+    [Header("UI 슬롯 설정")]
+    [Tooltip("아이템 아이콘을 표시할 Image 컴포넌트 배열 (Item1/Item, Item2/Item, Item3/Item)")]
+    public Image[] itemIcons;
 
-    // OnEnable과 OnDisable은 이제 프로퍼티에서 모든 것을 처리하므로 필요 없습니다.
-    // void OnEnable() { ... }
-    // void OnDisable() { ... }
+    [Tooltip("선택 시 활성화될 테두리 GameObject 배열 (Item_Border1, Item_Border2, Item_Border3)")]
+    public GameObject[] selectionBorders;
 
     /// <summary>
     /// 인벤토리의 현재 상태를 기반으로 UI를 새로고침하는 함수입니다.
     /// </summary>
     void UpdateUI()
     {
-        // inventory 대신 _inventory를 사용합니다.
-        if (_inventory == null || itemSlots == null) return;
+        if (_inventory == null || itemIcons == null) return;
 
         List<ItemData> items = _inventory.GetItems();
 
-        for (int i = 0; i < itemSlots.Length; i++)
+        // 모든 아이콘 슬롯을 순회합니다.
+        for (int i = 0; i < itemIcons.Length; i++)
         {
-            if (i < items.Count && items[i] != null) // 아이템이 null이 아닌지도 확인
+            // 현재 슬롯(i)에 아이템이 존재하는 경우
+            if (i < items.Count && items[i] != null)
             {
-                itemSlots[i].sprite = items[i].itemIcon;
-                itemSlots[i].enabled = true;
+                // 아이콘 이미지(sprite)를 아이템 데이터의 아이콘으로 변경
+                itemIcons[i].sprite = items[i].itemIcon;
+                // 아이콘 게임 오브젝트를 활성화하여 화면에 보이게 함
+                itemIcons[i].gameObject.SetActive(true);
             }
+            // 현재 슬롯(i)이 비어있는 경우
             else
             {
-                itemSlots[i].sprite = null;
-                itemSlots[i].enabled = false;
+                // 아이콘 게임 오브젝트를 비활성화하여 화면에서 숨김
+                itemIcons[i].gameObject.SetActive(false);
             }
         }
     }
+
     /// <summary>
     /// 선택된 인벤토리 슬롯 테두리를 표시합니다.
     /// </summary>
     /// <param name="slotIndex">선택된 슬롯 번호. 선택 해제 시 -1.</param>
     public void UpdateSelection(int slotIndex)
     {
+        if (selectionBorders == null) return;
+
         // 모든 테두리를 순회합니다.
-        for (int i = 0; i < slotSelectionBorders.Length; i++)
+        for (int i = 0; i < selectionBorders.Length; i++)
         {
-            if (slotSelectionBorders[i] != null)
+            if (selectionBorders[i] != null)
             {
                 // 현재 순번(i)이 선택된 슬롯 번호(slotIndex)와 같으면 테두리를 켜고,
                 // 그렇지 않으면 끕니다.
-                slotSelectionBorders[i].gameObject.SetActive(i == slotIndex);
+                selectionBorders[i].SetActive(i == slotIndex);
             }
         }
     }

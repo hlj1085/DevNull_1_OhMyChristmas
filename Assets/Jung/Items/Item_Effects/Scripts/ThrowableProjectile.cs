@@ -54,7 +54,7 @@ public class ThrowableProjectile : MonoBehaviour, IPunInstantiateMagicCallback
                 {
                     // ³Ë¹é ¹æÇâ°ú ÈûÀ» RPC·Î Àü´Þ
                     Vector3 knockbackDir = (santa.transform.position - transform.position).normalized;
-                    santaPhotonView.RPC("ApplyKnockback", RpcTarget.All, knockbackDir, 10f); // 10f´Â ³Ë¹é Èû
+                    santaPhotonView.RPC("ApplyKnockback", RpcTarget.All, knockbackDir, 50f); // 10f´Â ³Ë¹é Èû
                 }
             }
             PhotonNetwork.Destroy(gameObject);

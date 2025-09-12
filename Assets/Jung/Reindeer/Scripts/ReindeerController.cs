@@ -101,13 +101,14 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     private GameObject inventoryUIGroup;
     private GameObject interactionUIGroup;
     private GameObject recoveryUIGroup;
+    private GameObject gameStatusUIGroup;
     private InventoryUI inventoryUI;
     private TextMeshProUGUI useItemPromptUI; // <<< [추가] 아이템 사용 안내 텍스트
     private TextMeshProUGUI interactionText;
     private Slider interactionSlider;
     private Slider recoverySlider;
     private TextMeshProUGUI recoveryText; // <<< [추가]
-    private Image recoverySliderFill;     // <<< [추가]
+    private Image recoverySliderFill;      // <<< [추가]
 
     // --- 내부 로직 변수 ---
     private int lastEquippedSlot = -1; // 마지막으로 장착한 아이템 슬롯 번호 (-1은 없음)
@@ -181,6 +182,7 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
             interactionUIGroup = canvasTransform.Find("Interaction_UI_Group")?.gameObject;
             recoveryUIGroup = canvasTransform.Find("Recovery_UI_Group")?.gameObject;
             inventoryUIGroup = canvasTransform.Find("Inventory_UI_Group")?.gameObject;
+            gameStatusUIGroup = canvasTransform.Find("GameStatus_UI_Group")?.gameObject;
 
             if (interactionUIGroup != null)
             {
@@ -212,11 +214,6 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
             if (interactionUIGroup != null) interactionUIGroup.SetActive(false);
             if (recoveryUIGroup != null) recoveryUIGroup.SetActive(false);
             if (useItemPromptUI != null) useItemPromptUI.gameObject.SetActive(false);
-            Debug.Log("UIManager를 통해 UI 요소들을 성공적으로 할당했습니다.");
-        }
-        else
-        {
-            Debug.LogError("씬에 UIManager가 없습니다!");
         }
     }
     private void OnEnable()
@@ -244,7 +241,6 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         // --- 내 캐릭터(로컬 플레이어)일 때만 실행되는 로직 ---
         if (!photonView.IsMine)
         {
-            print("Not my character, skipping Update.");
             // 내 캐릭터가 아니면 여기서 즉시 종료합니다.
             return;
         }
@@ -277,7 +273,11 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         ApplyBetterGravity();
     }
 
-
+    // --- [삭제] ---
+    // 아래의 요정가루 관련 함수들은 FairyManager가 전담하므로 삭제합니다.
+    // private void UpdateFairyDustUI() { ... }
+    // [PunRPC] private void SyncFairyDust(int amount) { ... }
+    // public void GiveFairyDust(int amount) { ... }
 
     private void HandleDebugInput()
     {
@@ -300,7 +300,7 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     public void GetStunned()
     {
 
-        print("GetStunned called"); 
+        print("GetStunned called");
         if (equippedItem != null)
         {
             // 즉시 장착을 해제합니다. (맨손으로 만듦)
@@ -315,7 +315,7 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
 
     [PunRPC]
     public void GetCaptured(int santaViewID)
-    {   
+    {
         if (currentState != PlayerState.Stunned) return;
 
         PhotonView santaPhotonView = PhotonView.Find(santaViewID);
@@ -430,10 +430,13 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
 
     private void UpdateAllUI()
     {
-        Debug.Log("UpdateAllUI called");
         // UI 컴포넌트가 없으면 즉시 종료 (안전장치)
-        //if (recoveryUIGroup == null || interactionUIGroup == null || useItemPromptUI == null) return;
-        Debug.Log("UI components are assigned");
+        if (recoveryUIGroup == null || interactionUIGroup == null || useItemPromptUI == null)
+        {
+            // Debug.LogWarning("Some UI components are not assigned in ReindeerController.");
+            return;
+        }
+
         // --- 1. 기절 또는 포획 상태일 때 ---
         if (currentState == PlayerState.Stunned || currentState == PlayerState.Captured)
         {
@@ -495,7 +498,6 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
 
                 if (canInteract)
                 {
-                    print("Can interact with: " + currentInteractable.GetType().Name);
                     // 세부 UI 설정 (텍스트, 홀드 슬라이더 등)
                     if (interactionText != null)
                         interactionText.text = currentInteractable.GetInteractMessage(this.gameObject);
@@ -562,11 +564,15 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     // 상호작용 가능 조건
     public bool CanInteract(GameObject interactor)
     {
+        // 상호작용하는 대상이 순록일 때만 구출/아이템 전달이 가능합니다.
+        if (!interactor.CompareTag("Reindeer")) return false;
+
         if (currentState == PlayerState.Stunned || currentState == PlayerState.TiedToSleigh)
-            return true;    
-        // '구출 불가' 상태일 때는, 요정 가루를 가지고 있을 때만 상호작용 가능
+            return true;
+
         if (currentState == PlayerState.PermanentlyTied)
-            return inventory.HasItem(fairyDustItemData);
+            return this.inventory.HasItem(fairyDustItemData);
+
         return false;
     }
 
@@ -613,7 +619,7 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
                         photonView.RPC("GetCaptured", RpcTarget.All, sackId);
                         return true; // 상호작용 성공
                     }
-            }
+                }
             }
         }
         // --- 상호작용한 대상이 다른 '순록'일 경우 ---
@@ -648,7 +654,7 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     }
 
     [PunRPC]
-    private void AddItemByNameRPC(string itemName)
+    public void AddItemByNameRPC(string itemName)
     {
         ItemData itemData = Resources.Load<ItemData>("Items/" + itemName);
         if (itemData != null)
@@ -658,7 +664,7 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     }
 
     [PunRPC]
-    private void RemoveItemByNameRPC(string itemName)
+    public void RemoveItemByNameRPC(string itemName)
     {
         ItemData itemData = Resources.Load<ItemData>("Items/" + itemName);
         if (itemData != null)
@@ -736,7 +742,7 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         inputActions.Player.Item1.performed += _ => EquipItemFromSlot(0); // 1번 키
         inputActions.Player.Item2.performed += _ => EquipItemFromSlot(1); // 2번 키
         inputActions.Player.Item3.performed += _ => EquipItemFromSlot(2); // 3번 키
-        inputActions.Player.UseItem.performed += _ => UseEquippedItem();   // 사용 키
+        inputActions.Player.UseItem.performed += _ => UseEquippedItem();  // 사용 키
 
     }
 
@@ -935,7 +941,7 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         if (currentInteractable.InteractionType == InteractionType.Instant)
         {
             // 상호작용을 시도하고, 그 결과를 'success' 변수에 저장
-            bool success = currentInteractable.Interact(this.gameObject); 
+            bool success = currentInteractable.Interact(this.gameObject);
             // [핵심] 상호작용에 성공했다면, 즉시 대상을 잊어버린다!
             if (success)
             {
@@ -993,4 +999,38 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
             lastGroundedTime = Time.time;
         }
     }
+
+    // ReindeerController.cs 파일의 맨 아래에 아래 함수를 추가해주세요.
+
+    /// <summary>
+    /// 게임 엔딩 시 호출되어 플레이어의 조작과 카메라를 비활성화합니다.
+    /// </summary>
+    public void DisableForEnding()
+    {
+        // 내가 조종하는 캐릭터라면 입력 시스템을 비활성화
+        if (photonView.IsMine && inputActions != null)
+        {
+            inputActions.Player.Disable();
+        }
+
+        // 플레이어 카메라 비활성화
+        if (playerCameraObject != null)
+        {
+            playerCameraObject.SetActive(false);
+        }
+
+        // 물리적 움직임 중지
+        if (rb != null)
+        {
+            rb.velocity = Vector3.zero;
+        }
+
+        // 애니메이션 정지 (Idle 상태로)
+        if (animator != null)
+        {
+            animator.SetFloat("Speed", 0f);
+        }
+    }
+
+
 }

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Throw_Projectile_Effect
   m_EditorClassIdentifier: 
   throwForce: 30
-  projectilePrefab: {fileID: 9167863618472538398, guid: a68cd9b8a31e0a64aa94a27f8aded0dd, type: 3}
+  projectilePrefab: {fileID: 6260451879661224406, guid: 7b55658020ba833409171f2ed0bbc87a, type: 3}

@@ -75,6 +75,14 @@ MonoBehaviour:
   - SyncAttachment
   - SetSackActiveRPC
   - SetCaptureStateRPC
+  - SyncFairyDust
+  - AddFairyDust
+  - EndGameRPC
+  - GoToRoleSelectSceneRPC
+  - PlaySoundRPC
+  - MarkAsOpenedRPC
+  - RequestItemFromMasterRPC
+  - SyncShuffledItemListRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

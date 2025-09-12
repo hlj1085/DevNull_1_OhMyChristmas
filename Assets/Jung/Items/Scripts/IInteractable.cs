@@ -11,6 +11,5 @@ public interface IInteractable
     InteractionType InteractionType { get; }
     bool CanInteract(GameObject interactor);
     string GetInteractMessage(GameObject interactorObject);
-    // void에서 bool로 변경
     bool Interact(GameObject interactorObject);
 }

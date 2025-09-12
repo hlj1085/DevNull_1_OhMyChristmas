@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxAnimator: {fileID: 6577427939347843483}
-  itemPrefabToSpawn: {fileID: 5488084261992699047, guid: e40f2775d0ea9bc46b4f91d4411fcace, type: 3}
+  itemPrefabToSpawn: {fileID: 1812415765141615628, guid: 8df0accf4954c6248aaaeda3c50534d1, type: 3}
   itemSpawnPoint: {fileID: 4027239221954341581}
   boxLid: {fileID: 2732306602129267361}
 --- !u!95 &6577427939347843483

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Speed_Item_Data
   m_EditorClassIdentifier: 
   itemName: Candy
-  itemIcon: {fileID: 21300000, guid: ff7bfa7addf40784d86f62b8e4a034a6, type: 3}
-  itemPrefab: {fileID: 2680965998807484490, guid: 7650013adf8ffe34dbebef976c32774f, type: 3}
+  itemIcon: {fileID: 21300000, guid: 66480c08ffa79cf42ac59382fe238109, type: 3}
+  itemPrefab: {fileID: 1812415765141615628, guid: ad220c2e17645924c961c0bd5f905951, type: 3}
   effects:
   - {fileID: 11400000, guid: a820b2cfd352f7144a6e6834ec86cd04, type: 2}

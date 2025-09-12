@@ -2625,7 +2625,7 @@ MonoBehaviour:
   jumpCooldownTime: 1
   coyoteTime: 0.15
   jumpBufferTime: 0.2
-  dashSpeed: 15
+  dashSpeed: 10
   dashDuration: 0.3
   dashCooldown: 2
   dashSlideDuration: 0.5

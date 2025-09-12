@@ -49,4 +49,36 @@ public class UIManager : MonoBehaviour
             uiToUpdate.inventory = targetInventory;
         }
     }
+    public void UpdateFairyDustUI(int totalDust)
+    {
+        string dustAmount = totalDust.ToString();
+
+        // 1. 산타 UI 갱신
+        if (santaCanvas != null)
+        {
+            // '?'를 사용하여 santaCanvas가 활성화 상태가 아니더라도 오류 없이 안전하게 실행됩니다.
+            var fairyDustText = santaCanvas.transform.Find("Game_Status_UI_Group/Icon_FairyDust/HowmanyDust")
+                                    ?.GetComponent<TMPro.TMP_Text>();
+
+            if (fairyDustText != null)
+            {
+                fairyDustText.text = dustAmount;
+                Debug.Log("[UIManager] 산타 UI 갱신: " + dustAmount);
+            }
+        }
+
+        // 2. 순록 UI 갱신 (이 부분이 추가되었습니다)
+        if (reindeerCanvas != null)
+        {
+            var fairyDustText = reindeerCanvas.transform.Find("Game_Status_UI_Group/Icon_FairyDust/HowmanyDust")
+                                    ?.GetComponent<TMPro.TMP_Text>();
+
+            if (fairyDustText != null)
+            {
+                fairyDustText.text = dustAmount;
+                Debug.Log("[UIManager] 순록 UI 갱신: " + dustAmount);
+            }
+        }
+    }
+
 }

@@ -147,8 +147,7 @@ public class SantaController : MonoBehaviour, IPunObservable
             // --- 내 캐릭터가 아닐 경우 비활성화 ---
     if (!photonView.IsMine)
     {
-        print("This is not my Santa. Disabling control script and camera.");
-            if (cameraTransform != null) cameraTransform.gameObject.SetActive(false);
+        if (cameraTransform != null) cameraTransform.gameObject.SetActive(false);
         this.enabled = false;
         return; // return을 추가하여 아래 초기화 코드가 실행되지 않도록 합니다.
     }
@@ -158,12 +157,6 @@ public class SantaController : MonoBehaviour, IPunObservable
 
         // 스태미나 초기화
         currentStamina = maxStamina;
-        // UI 슬라이더 초기 설정
-        if (staminaBar != null)
-        {
-            staminaBar.maxValue = maxStamina;
-            staminaBar.value = maxStamina;
-        }
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -174,14 +167,12 @@ public class SantaController : MonoBehaviour, IPunObservable
         playerInput.Santa.Enable();
         playerInput.Santa.Move.performed += OnMoveInput;
         playerInput.Santa.Move.canceled += OnMoveInput;
-        playerInput.Santa.Look.performed += OnLookInput; // <<< [추가]
-        playerInput.Santa.Look.canceled += OnLookInput; // <<< [추가]
         playerInput.Santa.Punch.performed += OnPunchInput;
         playerInput.Santa.Jump.performed += OnJumpInput;
         playerInput.Santa.Run.performed += OnRunInput;
         playerInput.Santa.Run.canceled += OnRunInput;
-        playerInput.Santa.Interact.started += HandleInteractionStart;
-        playerInput.Santa.Interact.canceled += HandleInteractionCancel;
+        playerInput.Santa.Interact.started += OnInteractionStart;
+        playerInput.Santa.Interact.canceled += OnInteractionCancel;
     }
 
     private void OnDisable()
@@ -189,14 +180,13 @@ public class SantaController : MonoBehaviour, IPunObservable
         playerInput.Santa.Disable();
         playerInput.Santa.Move.performed -= OnMoveInput;
         playerInput.Santa.Move.canceled -= OnMoveInput;
-        playerInput.Santa.Look.performed -= OnLookInput; // <<< [추가]
-        playerInput.Santa.Look.canceled -= OnLookInput; // <<< [추가]
+
         playerInput.Santa.Punch.performed -= OnPunchInput;
         playerInput.Santa.Jump.performed -= OnJumpInput;
         playerInput.Santa.Run.performed -= OnRunInput;
         playerInput.Santa.Run.canceled -= OnRunInput;
-        playerInput.Santa.Interact.started -= HandleInteractionStart;
-        playerInput.Santa.Interact.canceled -= HandleInteractionCancel;
+        playerInput.Santa.Interact.started -= OnInteractionStart;
+        playerInput.Santa.Interact.canceled -= OnInteractionCancel;
 }
 
     private void Update()
@@ -212,117 +202,113 @@ public class SantaController : MonoBehaviour, IPunObservable
 
         // '달리기' 상태를 스태미나와 입력을 조합하여 최종 결정
         isRunning = isTryingToRun && moveInput.magnitude > 0.1f && currentStamina > 0;
-        animator.SetBool(isGroundHash, isGrounded);
-
         HandleStamina();
         HandleAnimation();
         UpdateUI();
-
-        // 상호작용 키(F) 입력 처리
-        if (playerInput.Santa.Interact.triggered) // Input System 사용
-        {
-            HandleInteraction();
-        }
-        
     }
 
 
-// 주변 상호작용 대상을 찾는 함수 (새로 추가)
-
-private void CheckForInteractables()
-{
-currentInteractable = null;
-RaycastHit hit;
-
-if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, 5f))
-{
-    // --- [핵심 수정] ---
-    // 감지된 대상이 순록인지 먼저 확인
-    ReindeerController reindeer = hit.collider.GetComponent<ReindeerController>();
-    if (reindeer != null)
+    // 주변 상호작용 대상을 찾는 함수 (새로 추가)
+    private void CheckForInteractables()
     {
-        // 순록이 상호작용 가능한 상태라면 대상으로 설정
-        if (reindeer.CanInteract(this.gameObject))
+        currentInteractable = null;
+        // 우선순위 1: 잡은 순록이 있고 썰매가 보이면, 상호작용 대상은 썰매
+        if (capturedReindeer != null && sleigh != null)
+        {
+            if (Vector3.Distance(transform.position, sleigh.transform.position) <= 5f)
+            {
+                currentInteractable = sleigh;
+                return;
+            }
+        }
+
+        // 우선순위 2: 기절한 순록을 발견하면, 상호작용 대상은 순록
+        RaycastHit hit;
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, 5f))
+        {
+            if (hit.collider.CompareTag("Reindeer"))
+            {
+                print("Raycast hit a Reindeer!");
+                if (hit.collider.TryGetComponent<IInteractable>(out var interactable))
                 {
-            currentInteractable = reindeer;
-            return; // 대상을 찾았으므로 함수 종료
+                    if (interactable.CanInteract(this.gameObject))
+                    {
+                        currentInteractable = interactable;
+                    }
+                }
+            }
         }
     }
 
-    // 감지된 대상이 썰매인지 확인
-    Sleigh sleigh = hit.collider.GetComponent<Sleigh>();
-    if (sleigh != null)
+    private void UpdateInteractionUI()
     {
-        // 썰매가 상호작용 가능한 상태라면 대상으로 설정
-        if (sleigh.CanInteract(this.gameObject))
-        {
-            currentInteractable = sleigh;
-            return; // 대상을 찾았으므로 함수 종료
-        }
-    }
-}
-}
-// 상호작용 UI를 업데이트하는 함수 (새로 추가)
-private void UpdateInteractionUI()
-    {
-        // 상호작용 대상이 있을 때만 UI 그룹을 활성화합니다.
         bool canInteract = (currentInteractable != null);
-        if (interactionUIGroup != null)
-        {
-            interactionUIGroup.SetActive(canInteract);
-        }
+        if (interactionUIGroup != null) interactionUIGroup.SetActive(canInteract);
 
-        // 상호작용이 가능하다면, 세부 내용을 설정합니다.
         if (canInteract)
         {
-            if (interactionText != null)
-                interactionText.text = currentInteractable.GetInteractMessage(null);
-
+            interactionText.text = currentInteractable.GetInteractMessage(this.gameObject);
             bool isHoldType = currentInteractable.InteractionType == InteractionType.Hold;
-            if (interactionSlider != null)
-                interactionSlider.gameObject.SetActive(isHoldType && interactionCoroutine != null);
+            if (interactionSlider != null) interactionSlider.gameObject.SetActive(isHoldType && interactionCoroutine != null);
         }
     }
+
+
 
     // 상호작용을 시작하는 함수 (새로 추가)
-    private void HandleInteractionStart(InputAction.CallbackContext context)
+    private void OnInteractionStart(InputAction.CallbackContext context)
     {
-        if (!hasCapturedReindeer)
-        {
-            if (currentInteractable == null) return;
+        // HandleInteraction() 함수의 내용을 이곳으로 통합합니다.
 
-            if (currentInteractable.InteractionType == InteractionType.Hold)
+        // 우선순위 1: 잡은 순록이 있고, 썰매와 가까우면 -> 썰매에 묶기
+        if (capturedReindeer != null && sleigh != null && currentInteractable is Sleigh)
+        {
+            (currentInteractable as Sleigh).AttachReindeer(capturedReindeer);
+            photonView.RPC("SetSackActiveRPC", RpcTarget.All, false);
+            capturedReindeer = null;
+            currentInteractable = null; // 상호작용 완료 후 대상 초기화
+            return;
+        }
+
+        // 우선순위 2: 기절한 순록을 발견하면 -> 포획하기
+        if (capturedReindeer == null && currentInteractable is ReindeerController)
+        {
+            print("Interaction Start with Reindeer");
+            ReindeerController reindeer = currentInteractable as ReindeerController;
+            if (reindeer != null && reindeer.CurrentState == ReindeerController.PlayerState.Stunned)
             {
-                interactionCoroutine = StartCoroutine(HoldInteractionCoroutine());
-            }
-            else // Instant
-            {
-                currentInteractable.Interact(this.gameObject);
-                currentInteractable = null; // 즉시 실행 후 대상 초기화
+                // 홀드 상호작용 시작
+                if (interactionCoroutine == null)
+                    interactionCoroutine = StartCoroutine(HoldInteractionCoroutine(reindeer));
             }
         }
     }
 
-    // 상호작용을 취소하는 함수 (새로 추가)
-    private void HandleInteractionCancel(InputAction.CallbackContext context)
+    // 상호작용을 취소하는 함수 (이벤트 콜백)
+    private void OnInteractionCancel(InputAction.CallbackContext context)
     {
         if (interactionCoroutine != null)
         {
             StopCoroutine(interactionCoroutine);
             interactionCoroutine = null;
-            interactionSlider.gameObject.SetActive(false);
-            interactionSlider.value = 0;
+            if (interactionSlider != null)
+            {
+                interactionSlider.gameObject.SetActive(false);
+                interactionSlider.value = 0;
+            }
         }
     }
 
-    // 홀드 상호작용 코루틴 (새로 추가)
-    private IEnumerator HoldInteractionCoroutine()
+    // 홀드 상호작용 코루틴 (포획 전용)
+    private IEnumerator HoldInteractionCoroutine(ReindeerController targetReindeer)
     {
+        if (interactionSlider == null) yield break;
+
         interactionSlider.gameObject.SetActive(true);
         interactionSlider.value = 0;
         float timer = 0f;
 
-        while (timer < 2f) // 2초 홀드 (조절 가능)
+        while (timer < 2f) // 2초 홀드
         {
             timer += Time.deltaTime;
             interactionSlider.value = timer / 2f;
@@ -330,53 +316,24 @@ private void UpdateInteractionUI()
         }
 
         interactionSlider.gameObject.SetActive(false);
-        currentInteractable.Interact(this.gameObject);
-        currentInteractable = null; // 상호작용 완료 후 대상 초기화
+
+        // 홀드가 끝나도 여전히 상호작용 대상이 맞는지 한번 더 확인
+        print("Hold interaction complete. Current interactable: " + (currentInteractable != null ? currentInteractable.GetType().Name : "null"));
+        if ((object)currentInteractable == (object)targetReindeer)
+        {
+            print("Capturing Reindeer now.");
+            CaptureReindeer(targetReindeer);
+        }
+
+        currentInteractable = null;
         interactionCoroutine = null;
     }
-    // 상호작용 로직을 처리할 새로운 함수
-    private void HandleInteraction()
-    {
-        // 우선순위 1: 잡고 있는 순록이 있고, 썰매와 가까우면 -> 썰매에 묶기
-        if (capturedReindeer != null && sleigh != null)
-        {
-            float distanceToSleigh = Vector3.Distance(transform.position, sleigh.transform.position);
-            if (distanceToSleigh <= 5f) // 상호작용 거리
-            {
-                // [추가] 썰매에게 묶으라고 알리기 전, 보따리를 끈다는 신호를 모두에게 보냄
-                photonView.RPC("SetSackActiveRPC", RpcTarget.All, false);
 
-                sleigh.AttachReindeer(capturedReindeer);
-                capturedReindeer = null; // 썰매에 넘겼으므로 초기화
-                return;
-            }
-        }
-        // 우선순위 2: 기절한 순록을 발견하면 -> 포획하기
-        // [추가] 이미 다른 순록을 포획한 상태가 아닐 때만 실행
-        if (capturedReindeer == null)
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, 5f))
-            {
-                if (hit.collider.CompareTag("Reindeer"))
-                {
-                    ReindeerController reindeer = hit.collider.GetComponent<ReindeerController>();
-                    if (reindeer != null && reindeer.CurrentState == ReindeerController.PlayerState.Stunned)
-                    {
-                        print("기절한 순록을 발견했습니다!");
-                        CaptureReindeer(reindeer);
-                    }
-                }
-            }
-        }
-    }
 
 
     // 펀치 함수 (순록 기절시키기)
     private void OnPunchInput(InputAction.CallbackContext context)
     {
-        if (hasCapturedReindeer) return;
-        if (capturedReindeer != null) return;
         if (Time.time < nextPunchTime) return;
 
         if (Time.time >= nextPunchTime)
@@ -393,7 +350,6 @@ private void UpdateInteractionUI()
                 {
                     // 맞은 순록에게 "기절하라"는 신호를 보냄
                     hitPhotonView.RPC("GetStunned", RpcTarget.All);
-                    print("펀치가 맞았습니다!");
                 }
             }
         }
@@ -417,7 +373,6 @@ private void UpdateInteractionUI()
 
     private void CaptureReindeer(ReindeerController reindeer)
     {
-        Debug.Log("순록을 포획합니다!");
         // 1. 모든 클라이언트에게 "내 보따리를 활성화해라" 라고 RPC로 명령
         photonView.RPC("SetSackActiveRPC", RpcTarget.All, true);
 
@@ -437,11 +392,12 @@ private void UpdateInteractionUI()
         rb.AddForce(direction * force, ForceMode.Impulse);
     }
 
-private void FixedUpdate()
+    private void FixedUpdate()
     {
-        HandleMovement();
-    }
+        if (!photonView.IsMine) return;
 
+        HandleMovement(); // Rigidbody를 이용한 캐릭터 이동을 FixedUpdate에서 담당
+    }
     private void OnMoveInput(InputAction.CallbackContext context) => moveInput = context.ReadValue<Vector2>();
     private void OnLookInput(InputAction.CallbackContext context) => lookInput = context.ReadValue<Vector2>();
     private void OnRunInput(InputAction.CallbackContext context) => isTryingToRun = context.ReadValueAsButton();
@@ -502,21 +458,34 @@ private void FixedUpdate()
 
     private void HandleMovement()
     {
-        // isRunning이 true일 때만 달리기 속도 적용
         float currentMoveSpeed = isRunning ? runSpeed : walkSpeed;
+
+        // 캐릭터가 현재 바라보는 방향(마우스로 회전된 방향)을 기준으로 이동 벡터를 계산합니다.
         Vector3 moveDirection = transform.forward * moveInput.y + transform.right * moveInput.x;
+
+        // 물리력을 사용하여 이동합니다.
         rb.velocity = new Vector3(moveDirection.normalized.x * currentMoveSpeed, rb.velocity.y, moveDirection.normalized.z * currentMoveSpeed);
+
+        // <<<<< 캐릭터를 회전시키는 Slerp 로직을 여기서 완전히 제거했습니다. >>>>>
     }
 
     private void HandleLook()
     {
-        float mouseX = lookInput.x * lookSensitivity * Time.deltaTime;
-        float mouseY = lookInput.y * lookSensitivity * Time.deltaTime;
+        // 함수 안에서 직접 Look 액션의 현재 값을 읽어옵니다.
+        Vector2 currentLookInput = playerInput.Santa.Look.ReadValue<Vector2>();
 
+        // --- [수정된 부분] ---
+        // Time.deltaTime을 다시 곱해서 프레임에 관계없이 부드러운 속도를 보장합니다.
+        float mouseX = currentLookInput.x * lookSensitivity * Time.deltaTime;
+        float mouseY = currentLookInput.y * lookSensitivity * Time.deltaTime;
+        // --- [수정 끝] ---
+
+        // 위아래(Pitch) 시점 변환: 카메라만 회전시킵니다.
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -80f, 80f);
-
         cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+
+        // 좌우(Yaw) 시점 변환: 캐릭터 몸 전체를 회전시킵니다.
         transform.Rotate(Vector3.up * mouseX);
     }
 
