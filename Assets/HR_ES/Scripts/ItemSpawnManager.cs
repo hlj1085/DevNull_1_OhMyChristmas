@@ -13,7 +13,9 @@ public class ItemSpawnManager : MonoBehaviour
     [Tooltip("생성할 상자 프리팹")]
     public GameObject chestPrefab;
     [Tooltip("상자가 생성될 수 있는 모든 위치")]
-    public Transform[] spawnPoints;
+    public Transform spawnPointsParent; // <<< 이 변수를 새로 추가합니다.
+    public Transform[] spawnPoints; // <<< 이 변수는 그대로 두지만, HideInInspector를 추가합니다.
+
     [Tooltip("실제로 생성할 상자의 개수")]
     public int numberOfChestsToSpawn = 20;
 
@@ -27,7 +29,7 @@ public class ItemSpawnManager : MonoBehaviour
 
     private void Awake()
     {
-        // 싱글톤 패턴
+        // 싱글톤 패턴 (기존과 동일)
         if (instance == null)
         {
             instance = this;
@@ -35,7 +37,28 @@ public class ItemSpawnManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return; // 중복 인스턴스일 경우, 아래 코드가 실행되지 않도록 return 추가
         }
+
+        // --- [이 부분이 새로 추가됩니다] ---
+        // spawnPointsParent가 연결되어 있는지 확인합니다.
+        if (spawnPointsParent != null)
+        {
+            // 자식 오브젝트의 개수만큼 spawnPoints 배열의 크기를 설정합니다.
+            spawnPoints = new Transform[spawnPointsParent.childCount];
+
+            // 반복문을 통해 모든 자식 오브젝트의 Transform을 배열에 저장합니다.
+            for (int i = 0; i < spawnPointsParent.childCount; i++)
+            {
+                spawnPoints[i] = spawnPointsParent.GetChild(i);
+            }
+            Debug.Log($"{spawnPoints.Length}개의 스폰 포인트를 자동으로 불러왔습니다.");
+        }
+        else
+        {
+            Debug.LogError("ItemSpawnManager에 'Spawn Points Parent'가 연결되지 않았습니다!");
+        }
+        // --- [추가 끝] ---
     }
 
     void Start()
@@ -47,12 +70,10 @@ public class ItemSpawnManager : MonoBehaviour
             SetupChestsAndItems();
         }
     }
-
     void SetupChestsAndItems()
     {
-        // 1. 상자 위치 랜덤화
+        // 1. 상자 위치 랜덤화 (이 부분은 기존과 동일)
         List<Transform> availableSpawnPoints = spawnPoints.ToList();
-        // Fisher-Yates 셔플 알고리즘으로 스폰 위치를 무작위로 섞습니다.
         for (int i = 0; i < availableSpawnPoints.Count - 1; i++)
         {
             int rnd = Random.Range(i, availableSpawnPoints.Count);
@@ -61,41 +82,32 @@ public class ItemSpawnManager : MonoBehaviour
             availableSpawnPoints[i] = temp;
         }
 
-        // 섞인 위치 목록에서 정해진 개수만큼 상자를 네트워크상에 생성합니다.
         for (int i = 0; i < numberOfChestsToSpawn; i++)
         {
             if (i < availableSpawnPoints.Count)
             {
                 Transform spawnPoint = availableSpawnPoints[i];
-
-                // --- [추가된 부분] ---
-                // y축 기준으로 0도에서 360도 사이의 무작위 회전 각도를 정합니다.
                 float randomYRotation = Random.Range(0f, 360f);
-                // 이 회전값을 Quaternion 형태로 만듭니다.
                 Quaternion spawnRotation = Quaternion.Euler(0f, randomYRotation, 0f);
-                // --- [추가 끝] ---
-
-                // 생성 시 spawnPoint.rotation 대신 방금 만든 무작위 회전값을 사용합니다.
                 PhotonNetwork.Instantiate(chestPrefab.name, spawnPoint.position, spawnRotation);
             }
         }
 
-        // 2. 아이템 목록 랜덤화
-        List<string> itemNamesToShuffle = new List<string>();
-        foreach (var item in itemPool)
-        {
-            itemNamesToShuffle.Add(item.name);
-        }
-        // 아이템 목록도 무작위로 섞습니다.
-        for (int i = 0; i < itemNamesToShuffle.Count - 1; i++)
-        {
-            int rnd = Random.Range(i, itemNamesToShuffle.Count);
-            string temp = itemNamesToShuffle[rnd];
-            itemNamesToShuffle[rnd] = itemNamesToShuffle[i];
-            itemNamesToShuffle[i] = temp;
-        }
 
-        // 섞인 아이템 목록을 모든 플레이어에게 RPC로 전송하여 동기화합니다.
+        // 2. 아이템 목록 랜덤화 (이름 규칙을 사용하여 프리팹 이름 생성)
+        List<string> itemNamesToShuffle = new List<string>();
+        foreach (var itemData in itemPool)
+        {
+            // ItemData 에셋의 이름(예: "FairyDust_Data")을 가져옵니다.
+            string dataName = itemData.name;
+
+            // 이름의 "_Data" 부분을 "_Prefab"으로 교체하여 프리팹 이름을 만듭니다.
+            // 예: "FairyDust_Data" -> "FairyDust_Prefab"
+            string prefabName = dataName.Replace("_Data", "_Prefab");
+
+            // 변환된 프리팹 이름을 목록에 추가합니다.
+            itemNamesToShuffle.Add(prefabName);
+        }
         GetComponent<PhotonView>().RPC("SyncShuffledItemListRPC", RpcTarget.All, itemNamesToShuffle.ToArray());
     }
 
@@ -133,12 +145,35 @@ public class ItemSpawnManager : MonoBehaviour
             Debug.LogWarning("아이템 풀이 모두 소진되었습니다!");
         }
     }
+    // 기존 ChestOpenedByPlayer()와 RequestItemFromMasterRPC() 함수를 모두 지우고 아래 함수로 교체해주세요.
 
-    /// <summary>
-    /// 상자가 열렸을 때, 방장에게 아이템을 요청하는 함수
-    /// </summary>
-    public void ChestOpenedByPlayer(int openerViewID)
+    public void RequestItemSpawn(int chestViewID)
     {
-        GetComponent<PhotonView>().RPC("RequestItemFromMasterRPC", RpcTarget.MasterClient, openerViewID);
+        // 방장만 이 로직을 실행합니다.
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if (currentItemIndex < shuffledItemNames.Count)
+            {
+                string itemPrefabNameToSpawn = shuffledItemNames[currentItemIndex];
+                currentItemIndex++;
+
+                PhotonView chestView = PhotonView.Find(chestViewID);
+                if (chestView != null)
+                {
+                    // 소환할 프리팹의 전체 경로를 지정합니다. (Resources 폴더 기준)
+                    string prefabPath = $"Items/{itemPrefabNameToSpawn}";
+
+                    // 상자의 스폰 위치를 가져옵니다.
+                    Transform spawnPoint = chestView.GetComponent<Chest>().itemSpawnPoint;
+
+                    // 방장이 직접 '네트워크 아이템'으로 생성합니다.
+                    PhotonNetwork.Instantiate(prefabPath, spawnPoint.position, spawnPoint.rotation);
+                }
+            }
+            else
+            {
+                Debug.LogWarning("아이템 풀이 모두 소진되었습니다!");
+            }
+        }
     }
 }   

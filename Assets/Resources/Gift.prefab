@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chestLid: {fileID: 6982762192917065377}
+  itemSpawnPoint: {fileID: 8239889571267571132}
 --- !u!95 &5081547343240090005
 Animator:
   serializedVersion: 5

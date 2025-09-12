@@ -8,6 +8,7 @@ public class Chest : MonoBehaviour, IInteractable
     [Header("상자 구성요소")]
     [Tooltip("상자의 뚜껑 부분에 해당하는 게임 오브젝트")]
     public GameObject chestLid; // <<< 뚜껑 오브젝트를 연결할 변수 추가
+    public Transform itemSpawnPoint; // <<< 'Head' 위치에 해당하는 Transform 추가
 
     private bool isOpened = false;
     private PhotonView photonView;
@@ -17,7 +18,7 @@ public class Chest : MonoBehaviour, IInteractable
         photonView = GetComponent<PhotonView>();
     }
 
-    public InteractionType InteractionType => InteractionType.Instant;
+    public InteractionType InteractionType => InteractionType.Hold;
 
     public bool CanInteract(GameObject interactor)
     {
@@ -29,18 +30,21 @@ public class Chest : MonoBehaviour, IInteractable
         return "F - 상자 열기";
     }
 
+
     public bool Interact(GameObject interactorObject)
     {
         if (isOpened) return false;
 
-        // 모든 클라이언트에게 이 상자가 열렸다고 알립니다.
-        // 시각적인 변화는 MarkAsOpenedRPC 안에서 처리됩니다.
+        // 상자가 열렸다고 모두에게 알리고,
         photonView.RPC("MarkAsOpenedRPC", RpcTarget.AllBuffered);
 
-        int interactorViewID = interactorObject.GetComponent<PhotonView>().ViewID;
-        ItemSpawnManager.instance.ChestOpenedByPlayer(interactorViewID);
+        // 방장에게 "내 위치에 아이템 하나 생성해줘!" 라고 '요청'만 합니다.
+        ItemSpawnManager.instance.RequestItemSpawn(this.photonView.ViewID);
+
         return true;
     }
+
+
 
     [PunRPC]
     private void MarkAsOpenedRPC()
