@@ -79,6 +79,10 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
 
     [Header("상호작용 설정")]
     public float interactionHoldDuration = 3f;
+    [Tooltip("상호작용 대상을 탐지할 구체의 반지름입니다.")]
+    public float interactionRadius = 3f;
+    [Tooltip("상호작용이 가능한 오브젝트들의 레이어를 설정합니다.")]
+    public LayerMask interactableMask;
 
     [Header("랜덤 Idle 설정")]
     public float minIdleWaitTime = 3f;
@@ -137,6 +141,8 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     private float lastDashTime = -Mathf.Infinity;
     private Vector3 currentHorizontalVelocity;
     private Vector3 smoothDampVelocity;
+    private int capturingSantaViewID = 0;
+
 
     // --- 애니메이터 해시 ---
     private static readonly int hashSpeed = Animator.StringToHash("Speed");
@@ -237,6 +243,7 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         // --- 모든 클라이언트에서 공통으로 실행되어야 하는 로직 ---
         // 다른 사람의 기절/포획 상태와 타이머도 보여야 하므로 IsMine 체크 밖에 둡니다.
         UpdateRecoveryAndState();
+        CheckForInteractables();
 
         // --- 내 캐릭터(로컬 플레이어)일 때만 실행되는 로직 ---
         if (!photonView.IsMine)
@@ -331,8 +338,8 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         {
             currentSackTransform = santa.sackPrefab.transform;
         }
-        currentSackTransform = santaPhotonView.transform;
         currentState = PlayerState.Captured;
+        capturingSantaViewID = santaViewID; // 💥 나를 잡은 산타의 ID를 저장!
         currentRecoveryTimer = 0f;
         lastMashTime = -mashCooldown;
 
@@ -409,6 +416,9 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         }
     }
 
+
+
+
     // --- 상태 및 UI 업데이트 ---
 
     private void UpdateRecoveryAndState()
@@ -416,12 +426,22 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         if (currentState == PlayerState.Stunned || currentState == PlayerState.Captured)
         {
             currentRecoveryTimer += Time.deltaTime;
-
             if (currentRecoveryTimer >= recoveryTime)
             {
                 if (currentState == PlayerState.Captured)
                 {
+                    // 💥 시간이 다 되면 탈출!
+                 // 1. 나를 잡고 있던 산타를 찾는다.
+                    PhotonView santaPhotonView = PhotonView.Find(capturingSantaViewID);
+                    if (santaPhotonView != null)
+                    {
+                        // 2. 그 산타에게 나를 풀어달라는 RPC를 보낸다.
+                        santaPhotonView.RPC("RPC_ReleaseReindeer", RpcTarget.All);
+                    }
+
+                    // 3. 나 자신의 상태를 정상으로 되돌린다. (기존 로직)
                     photonView.RPC("ReleaseFromCapture", RpcTarget.All);
+                    currentState = PlayerState.Normal;
                 }
                 currentState = PlayerState.Normal;
             }
@@ -560,19 +580,32 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
 
     // 상호작용 타입은 항상 홀드
     public InteractionType InteractionType => InteractionType.Hold;
+    // ReindeerController.cs
 
-    // 상호작용 가능 조건
     public bool CanInteract(GameObject interactor)
     {
-        // 상호작용하는 대상이 순록일 때만 구출/아이템 전달이 가능합니다.
-        if (!interactor.CompareTag("Reindeer")) return false;
+        // ✅ 수정된 로직
 
-        if (currentState == PlayerState.Stunned || currentState == PlayerState.TiedToSleigh)
-            return true;
+        // 1. 상호작용하려는 대상이 '산타'일 경우
+        if (interactor.CompareTag("Santa"))
+        {
+            // 산타는 순록이 '기절' 상태일 때만 상호작용(포획)할 수 있습니다.
+            return currentState == PlayerState.Stunned;
+        }
 
-        if (currentState == PlayerState.PermanentlyTied)
-            return this.inventory.HasItem(fairyDustItemData);
+        // 2. 상호작용하려는 대상이 '순록'일 경우
+        if (interactor.CompareTag("Reindeer"))
+        {
+            // 순록은 다른 순록이 '기절' 또는 '썰매에 묶인' 상태일 때 상호작용(구출)할 수 있습니다.
+            if (currentState == PlayerState.Stunned || currentState == PlayerState.TiedToSleigh)
+                return true;
 
+            // 영구적으로 묶인 순록에게 아이템을 받는 조건
+            if (currentState == PlayerState.PermanentlyTied)
+                return this.inventory.HasItem(fairyDustItemData);
+        }
+
+        // 그 외의 경우는 상호작용 불가
         return false;
     }
 
@@ -656,6 +689,7 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
     [PunRPC]
     public void AddItemByNameRPC(string itemName)
     {
+        print("AddItemByNameRPC called with item: " + itemName);
         ItemData itemData = Resources.Load<ItemData>("Items/" + itemName);
         if (itemData != null)
         {
@@ -715,7 +749,11 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         {
             rb.isKinematic = true;
         }
-
+        PhotonRigidbodyView rbView = GetComponent<PhotonRigidbodyView>();
+        if (rbView != null)
+        {
+            rbView.enabled = false;
+        }
         // 부모 설정 및 위치 고정
         Transform attachPoint = sleigh.attachmentPoints[slotIndex];
         transform.SetParent(attachPoint);
@@ -918,21 +956,7 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
             PhotonNetwork.Instantiate(projectilePrefabName, spawnPosition, Quaternion.LookRotation(throwDirection), 0, instantiationData);
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.TryGetComponent<IInteractable>(out var interactable))
-        {
-            currentInteractable = interactable;
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.TryGetComponent<IInteractable>(out var interactable) && interactable == currentInteractable)
-        {
-            HandleInteractionCancel();
-            currentInteractable = null;
-        }
-    }
+
     private void HandleInteractionStart()
     {
         if (currentInteractable == null || !currentInteractable.CanInteract(this.gameObject) || CurrentState != PlayerState.Normal) return;
@@ -1032,5 +1056,42 @@ public class ReindeerController : MonoBehaviour, IPunObservable, IInteractable
         }
     }
 
+    /// <summary>
+    /// 매 프레임마다 주변의 상호작용 대상을 탐색하고 가장 가까운 대상을 설정합니다.
+    /// </summary>
+    private void CheckForInteractables()
+    {
+        // 상호작용은 Normal 상태에서만 가능
+        if (currentState != PlayerState.Normal)
+        {
+            currentInteractable = null;
+            return;
+        }
 
+        Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRadius, interactableMask);
+
+        IInteractable closestInteractable = null;
+        float closestDistance = float.MaxValue;
+
+        foreach (var col in colliders)
+        {
+            if (col.gameObject == this.gameObject) continue;
+
+            if (col.TryGetComponent<IInteractable>(out var interactable))
+            {
+                if (interactable.CanInteract(this.gameObject))
+                {
+                    float distance = Vector3.Distance(transform.position, col.transform.position);
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        closestInteractable = interactable;
+                    }
+                }
+            }
+        }
+        currentInteractable = closestInteractable;
+
+        print("Current Interactable: " + (currentInteractable != null ? currentInteractable.GetType().Name : "None"));
+    }
 }

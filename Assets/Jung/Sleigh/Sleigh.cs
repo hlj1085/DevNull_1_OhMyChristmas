@@ -15,6 +15,21 @@ public class Sleigh : MonoBehaviour, IInteractable
 
     // --- IInteractable 인터페이스 구현 ---
 
+    // 요청을 받아 처리할 RPC 함수를 새로 추가합니다.
+    [PunRPC]
+    public void RequestAttachReindeerRPC(int reindeerViewID)
+    {
+        // 이 RPC는 방장만 실행합니다.
+        if (!PhotonNetwork.IsMasterClient) return;
+
+        // ViewID로 순록을 찾습니다.
+        ReindeerController reindeer = PhotonView.Find(reindeerViewID)?.GetComponent<ReindeerController>();
+        if (reindeer != null)
+        {
+            // 기존의 묶는 로직을 실행합니다.
+            AttachReindeer(reindeer);
+        }
+    }
     public InteractionType InteractionType => InteractionType.Instant;
 
     public bool CanInteract(GameObject interactor)
@@ -32,20 +47,18 @@ public class Sleigh : MonoBehaviour, IInteractable
     public bool Interact(GameObject interactor)
     {
         SantaController santa = interactor.GetComponent<SantaController>();
-        if (santa != null)
+        if (santa != null && santa.HasCapturedReindeer())
         {
-            // 산타가 잡고 있는 순록 정보를 가져와서 묶기 로직을 실행
-            AttachReindeer(santa.GetCapturedReindeer());
+            // 직접 AttachReindeer를 호출하는 대신, 방장에게 RPC로 요청합니다.
+            // 순록의 ViewID를 함께 보내줍니다.
+            photonView.RPC("RequestAttachReindeerRPC", RpcTarget.MasterClient, santa.GetCapturedReindeer().GetComponent<PhotonView>().ViewID);
         }
         return true;
     }
-
     // --- 기존 썰매 로직 ---
 
-    public void AttachReindeer(ReindeerController reindeer)
+    private void AttachReindeer(ReindeerController reindeer)
     {
-        if (!PhotonNetwork.IsMasterClient || reindeer == null) return;
-
         int emptySlotIndex = -1;
         for (int i = 0; i < attachmentPoints.Length; i++)
         {

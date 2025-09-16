@@ -22,7 +22,7 @@ public class MultiManager : MonoBehaviour
         {
             role = roleObj as string;
         }
-        print($"Assigned Role: {role}");
+        print($"Assigned Role: {role}");    
 
         // --- [핵심] --- UIManager에게 내 역할을 알려 UI를 설정하도록 함
         if (UIManager.instance != null)

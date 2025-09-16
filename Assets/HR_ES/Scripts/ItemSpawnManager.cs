@@ -22,7 +22,8 @@ public class ItemSpawnManager : MonoBehaviour
     [Header("아이템 분배 설정")]
     [Tooltip("이번 게임에 나올 모든 아이템 목록을 여기에 채워주세요.")]
     public List<ItemData> itemPool;
-
+    [Tooltip("특별히 개수를 지정할 요정가루 아이템 데이터")]
+    public ItemData fairyDustItemData; // <<< 이 변수를 새로 추가하세요!
     // 네트워크로 동기화될 최종 아이템 목록
     private List<string> shuffledItemNames = new List<string>();
     private int currentItemIndex = 0; // 아이템 분배를 위한 인덱스
@@ -94,21 +95,64 @@ public class ItemSpawnManager : MonoBehaviour
         }
 
 
-        // 2. 아이템 목록 랜덤화 (이름 규칙을 사용하여 프리팹 이름 생성)
-        List<string> itemNamesToShuffle = new List<string>();
-        foreach (var itemData in itemPool)
+
+
+        // --- 2. 새로운 규칙에 따라 아이템 목록 생성 ---
+        List<string> itemNamesToGenerate = new List<string>();
+
+        // 규칙 1: 요정가루 8개 추가
+        string fairyDustPrefabName = fairyDustItemData.name.Replace("_Data", "_Prefab");
+        for (int i = 0; i < 8; i++)
         {
-            // ItemData 에셋의 이름(예: "FairyDust_Data")을 가져옵니다.
-            string dataName = itemData.name;
-
-            // 이름의 "_Data" 부분을 "_Prefab"으로 교체하여 프리팹 이름을 만듭니다.
-            // 예: "FairyDust_Data" -> "FairyDust_Prefab"
-            string prefabName = dataName.Replace("_Data", "_Prefab");
-
-            // 변환된 프리팹 이름을 목록에 추가합니다.
-            itemNamesToShuffle.Add(prefabName);
+            itemNamesToGenerate.Add(fairyDustPrefabName);
         }
-        GetComponent<PhotonView>().RPC("SyncShuffledItemListRPC", RpcTarget.All, itemNamesToShuffle.ToArray());
+
+        // 규칙 2: 나머지 아이템 찾기 (요정가루 제외)
+        List<ItemData> otherItems = new List<ItemData>();
+        foreach (var item in itemPool)
+        {
+            if (item != fairyDustItemData)
+            {
+                otherItems.Add(item);
+            }
+        }
+
+        // 규칙 3: 남은 공간을 나머지 아이템으로 반반 채우기
+        int remainingSlots = numberOfChestsToSpawn - 8;
+        if (remainingSlots > 0 && otherItems.Count > 0)
+        {
+            int slotsPerItem = remainingSlots / otherItems.Count;
+            int remainder = remainingSlots % otherItems.Count;
+
+            foreach (var item in otherItems)
+            {
+                string prefabName = item.name.Replace("_Data", "_Prefab");
+                int count = slotsPerItem;
+                if (remainder > 0) // 남은 개수는 앞의 아이템부터 하나씩 더 채워줌
+                {
+                    count++;
+                    remainder--;
+                }
+
+                for (int i = 0; i < count; i++)
+                {
+                    itemNamesToGenerate.Add(prefabName);
+                }
+            }
+        }
+
+        // --- 3. 생성된 목록을 무작위로 섞기 (Fisher-Yates Shuffle) ---
+        for (int i = itemNamesToGenerate.Count - 1; i > 0; i--)
+        {
+            int rnd = Random.Range(0, i + 1);
+            string temp = itemNamesToGenerate[i];
+            itemNamesToGenerate[i] = itemNamesToGenerate[rnd];
+            itemNamesToGenerate[rnd] = temp;
+        }
+
+        // --- 4. 최종 목록을 모든 클라이언트와 동기화 ---
+        GetComponent<PhotonView>().RPC("SyncShuffledItemListRPC", RpcTarget.All, itemNamesToGenerate.ToArray());
+
     }
 
     [PunRPC]
@@ -145,35 +189,40 @@ public class ItemSpawnManager : MonoBehaviour
             Debug.LogWarning("아이템 풀이 모두 소진되었습니다!");
         }
     }
-    // 기존 ChestOpenedByPlayer()와 RequestItemFromMasterRPC() 함수를 모두 지우고 아래 함수로 교체해주세요.
-
-    public void RequestItemSpawn(int chestViewID)
+    // Chest가 호출할 RPC 함수를 새로 만듭니다.
+    [PunRPC]
+    public void RequestItemSpawnRPC(int chestViewID)
     {
-        // 방장만 이 로직을 실행합니다.
+        // 이 RPC를 받은 사람이 방장일 경우에만 아이템을 생성합니다.
         if (PhotonNetwork.IsMasterClient)
         {
-            if (currentItemIndex < shuffledItemNames.Count)
-            {
-                string itemPrefabNameToSpawn = shuffledItemNames[currentItemIndex];
-                currentItemIndex++;
-
-                PhotonView chestView = PhotonView.Find(chestViewID);
-                if (chestView != null)
-                {
-                    // 소환할 프리팹의 전체 경로를 지정합니다. (Resources 폴더 기준)
-                    string prefabPath = $"Items/{itemPrefabNameToSpawn}";
-
-                    // 상자의 스폰 위치를 가져옵니다.
-                    Transform spawnPoint = chestView.GetComponent<Chest>().itemSpawnPoint;
-
-                    // 방장이 직접 '네트워크 아이템'으로 생성합니다.
-                    PhotonNetwork.Instantiate(prefabPath, spawnPoint.position, spawnPoint.rotation);
-                }
-            }
-            else
-            {
-                Debug.LogWarning("아이템 풀이 모두 소진되었습니다!");
-            }
+            RequestItemSpawn(chestViewID); // 기존 로직을 그대로 재사용
         }
     }
+    private void RequestItemSpawn(int chestViewID)
+    {
+        if (currentItemIndex < shuffledItemNames.Count)
+        {
+            string itemPrefabNameToSpawn = shuffledItemNames[currentItemIndex];
+            currentItemIndex++;
+
+            PhotonView chestView = PhotonView.Find(chestViewID);
+            if (chestView != null)
+            {
+                // 소환할 프리팹의 전체 경로를 지정합니다. (Resources 폴더 기준)
+                string prefabPath = $"Items/{itemPrefabNameToSpawn}";
+
+                // 상자의 스폰 위치를 가져옵니다.
+                Transform spawnPoint = chestView.GetComponent<Chest>().itemSpawnPoint;
+
+                // 방장이 직접 '네트워크 아이템'으로 생성합니다.
+                PhotonNetwork.Instantiate(prefabPath, spawnPoint.position, spawnPoint.rotation);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("아이템 풀이 모두 소진되었습니다!");
+        }
+    }
+
 }   

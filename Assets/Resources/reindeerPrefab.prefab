@@ -2630,10 +2630,14 @@ MonoBehaviour:
   dashCooldown: 2
   dashSlideDuration: 0.5
   interactionHoldDuration: 3
+  interactionRadius: 3
+  interactableMask:
+    serializedVersion: 2
+    m_Bits: 448
   minIdleWaitTime: 3
   maxIdleWaitTime: 7
   groundCheckRadius: 0.4
-  groundCheckDistance: 0.6
+  groundCheckDistance: 0.5
   gravityMultiplier: 2.5
   fallMultiplier: 5
   groundMask:

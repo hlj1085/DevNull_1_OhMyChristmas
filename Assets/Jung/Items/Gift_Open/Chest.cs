@@ -39,7 +39,7 @@ public class Chest : MonoBehaviour, IInteractable
         photonView.RPC("MarkAsOpenedRPC", RpcTarget.AllBuffered);
 
         // 방장에게 "내 위치에 아이템 하나 생성해줘!" 라고 '요청'만 합니다.
-        ItemSpawnManager.instance.RequestItemSpawn(this.photonView.ViewID);
+        ItemSpawnManager.instance.GetComponent<PhotonView>().RPC("RequestItemSpawnRPC", RpcTarget.MasterClient, this.photonView.ViewID);
 
         return true;
     }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -5802400592461396574}
   - component: {fileID: 4315880131606319049}
   - component: {fileID: 3029430015628373480}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Speed_Item_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}

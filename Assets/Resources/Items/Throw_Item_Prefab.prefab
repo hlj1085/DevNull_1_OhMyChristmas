@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -753302874069429480}
   - component: {fileID: -4467864060874753685}
   - component: {fileID: 4563952274852369276}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Throw_Item_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}

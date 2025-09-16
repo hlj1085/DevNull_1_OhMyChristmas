@@ -58,6 +58,7 @@ public class SantaController : MonoBehaviour, IPunObservable
 
     private ReindeerController capturedReindeer; // 내가 현재 포획한 순록
 
+    private IInteractable nearbyInteractable; // 💥 트리거로 감지된 상호작용 객체를 저장할 변수
 
     // --- 내부 변수들 ---
     private PhotonView photonView;
@@ -208,37 +209,76 @@ public class SantaController : MonoBehaviour, IPunObservable
     }
 
 
-    // 주변 상호작용 대상을 찾는 함수 (새로 추가)
+    /// <summary>
+    /// 매 프레임마다 주변의 상호작용 대상을 탐색하고 가장 가까운 대상을 설정합니다.
+    /// </summary>
     private void CheckForInteractables()
     {
-        currentInteractable = null;
-        // 우선순위 1: 잡은 순록이 있고 썰매가 보이면, 상호작용 대상은 썰매
-        if (capturedReindeer != null && sleigh != null)
-        {
-            if (Vector3.Distance(transform.position, sleigh.transform.position) <= 5f)
-            {
-                currentInteractable = sleigh;
-                return;
-            }
-        }
+        // 주변의 모든 콜라이더를 탐지합니다 (레이어 필터링 없음).
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 3.5f);
 
-        // 우선순위 2: 기절한 순록을 발견하면, 상호작용 대상은 순록
-        RaycastHit hit;
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, 5f))
+        IInteractable closestInteractable = null;
+        float closestDistance = float.MaxValue;
+
+        foreach (var col in colliders)
         {
-            if (hit.collider.CompareTag("Reindeer"))
+            // 자기 자신은 무시합니다.
+            if (col.gameObject == this.gameObject) continue;
+
+            // 💥 1. 태그를 먼저 확인하여 상호작용이 가능한 종류의 객체인지 필터링합니다.
+            if (col.CompareTag("Reindeer") || col.CompareTag("Sleigh")) // <<< 여기에 상호작용할 태그들을 추가하세요.
             {
-                print("Raycast hit a Reindeer!");
-                if (hit.collider.TryGetComponent<IInteractable>(out var interactable))
+                // 2. 태그가 일치하면 IInteractable 인터페이스가 있는지 확인합니다.
+                if (col.TryGetComponent<IInteractable>(out var interactable))
                 {
+                    // 3. 마지막으로 현재 상호작용이 가능한 상태인지 확인합니다.
                     if (interactable.CanInteract(this.gameObject))
                     {
-                        currentInteractable = interactable;
+                        float distance = Vector3.Distance(transform.position, col.transform.position);
+
+                        // 기존에 찾은 대상보다 더 가깝다면, 이 대상을 가장 가까운 대상으로 지정합니다.
+                        if (distance < closestDistance)
+                        {
+                            closestDistance = distance;
+                            closestInteractable = interactable;
+                        }
                     }
                 }
             }
+            else
+            {
+                print("Ignored object with tag: " + col.tag);
+            }
+        }
+        // 최종적으로 찾은 가장 가까운 대상을 현재 상호작용 타겟으로 설정합니다.
+        currentInteractable = closestInteractable;
+    }
+
+
+    // 💥 아래 두 함수를 SantaController.cs에 새로 추가하세요.
+    private void OnTriggerEnter(Collider other)
+    {
+        // 내 트리거 범위에 무언가 들어왔을 때
+        if (other.TryGetComponent<IInteractable>(out var interactable))
+        {
+            // 상호작용 가능한 대상이라면 변수에 저장
+            nearbyInteractable = interactable;
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        // 내 트리거 범위에서 무언가 나갔을 때
+        if (other.TryGetComponent<IInteractable>(out var interactable))
+        {
+            // 그 대상이 내가 기억하고 있던 대상과 같다면, 기억을 비움
+            if (nearbyInteractable == interactable)
+            {
+                nearbyInteractable = null;
+            }
+        }
+    }
+
 
     private void UpdateInteractionUI()
     {
@@ -263,9 +303,13 @@ public class SantaController : MonoBehaviour, IPunObservable
         // 우선순위 1: 잡은 순록이 있고, 썰매와 가까우면 -> 썰매에 묶기
         if (capturedReindeer != null && sleigh != null && currentInteractable is Sleigh)
         {
-            (currentInteractable as Sleigh).AttachReindeer(capturedReindeer);
+            // 썰매에게 순록을 묶으라고 명령합니다.
+            currentInteractable.Interact(this.gameObject);
+            // 💥 [추가] 썰매에게 순록을 넘겼으므로, 즉시 나의 보따리를 끄고
+            // 내가 잡고 있던 순록 정보(capturedReindeer)를 비웁니다.
             photonView.RPC("SetSackActiveRPC", RpcTarget.All, false);
             capturedReindeer = null;
+
             currentInteractable = null; // 상호작용 완료 후 대상 초기화
             return;
         }
@@ -284,6 +328,20 @@ public class SantaController : MonoBehaviour, IPunObservable
         }
     }
 
+    [PunRPC]
+    public void RPC_ReleaseReindeer()
+    {
+        // 순록이 스스로 탈출했다는 신호를 받으면
+        if (photonView.IsMine)
+        {
+            // 내가 잡고 있던 순록 정보를 비우고 보따리를 끈다.
+            capturedReindeer = null;
+        }
+
+        // 모든 클라이언트에서 보따리 비활성화 (IsMine 체크 불필요)
+        // 💥 주의: SetSackActiveRPC는 hasCapturedReindeer 상태가 아니라 직접 제어해야 함
+        SetSackActiveRPC(false);
+    }
     // 상호작용을 취소하는 함수 (이벤트 콜백)
     private void OnInteractionCancel(InputAction.CallbackContext context)
     {
@@ -341,26 +399,52 @@ public class SantaController : MonoBehaviour, IPunObservable
             nextPunchTime = Time.time + punchCooldown;
             animator.SetTrigger(punchHash);
 
-            // [수정] 펀치가 맞았는지 로컬에서 확인하고, 맞았다면 RPC로 모든 클라이언트에게 알림
-            RaycastHit hit;
-            if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, 3f)) // 3f는 펀치 사거리
+            // --- [변경] Raycast 대신 OverlapSphere로 펀치 판정 변경 ---
+
+            // 1. 펀치 판정이 적용될 중심 위치를 계산합니다. (산타 위치에서 정면으로 1.5m 앞)
+            Vector3 punchCenter = transform.position + transform.forward * 1.5f;
+            // 2. 펀치 판정의 반지름 크기를 정합니다.
+            float punchRadius = 1.5f;
+
+            // 3. 해당 위치 주변(punchCenter)을 반지름(punchRadius)만큼 스캔하여 닿은 모든 콜라이더를 가져옵니다.
+            Collider[] hitColliders = Physics.OverlapSphere(punchCenter, punchRadius);
+
+            // 4. 감지된 모든 콜라이더들을 하나씩 확인합니다.
+            foreach (var hitCollider in hitColliders)
             {
-                PhotonView hitPhotonView = hit.collider.GetComponent<PhotonView>();
-                if (hit.collider.CompareTag("Reindeer") && hitPhotonView != null)
+                // 5. 콜라이더의 태그가 "Reindeer"인지 확인합니다.
+                if (hitCollider.CompareTag("Reindeer"))
                 {
-                    // 맞은 순록에게 "기절하라"는 신호를 보냄
-                    hitPhotonView.RPC("GetStunned", RpcTarget.All);
+                    PhotonView hitPhotonView = hitCollider.GetComponent<PhotonView>();
+                    if (hitPhotonView != null)
+                    {
+                        // 6. 순록이 맞다면, "기절하라"는 신호를 보냅니다.
+                        //    (이제 범위 안의 모든 순록이 동시에 기절합니다)
+                        Debug.Log("펀치 성공! 맞은 순록: " + hitCollider.name); // 확인을 위한 디버그 로그
+                        hitPhotonView.RPC("GetStunned", RpcTarget.All);
+                    }
                 }
             }
         }
     }
 
+    // SantaController.cs
+    // 기존 RPC를 약간 수정하여, IsMine이 아니더라도 보따리 상태를 동기화하게 합니다.
     [PunRPC]
     private void SetSackActiveRPC(bool isActive)
     {
         if (sackPrefab != null)
         {
             sackPrefab.SetActive(isActive);
+        }
+        // 로컬 플레이어의 포획 상태도 여기서 갱신해주는 것이 좋습니다.
+        if (photonView.IsMine)
+        {
+            hasCapturedReindeer = isActive;
+            if (!isActive)
+            {
+                capturedReindeer = null; // 보따리가 꺼지면 잡은 순록 정보도 비워야 함
+            }
         }
     }
 

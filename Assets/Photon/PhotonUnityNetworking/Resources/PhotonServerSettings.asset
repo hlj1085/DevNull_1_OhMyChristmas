@@ -85,6 +85,9 @@ MonoBehaviour:
   - SyncShuffledItemListRPC
   - SpawnItemRPC
   - RequestPickupRPC
+  - RPC_ReleaseReindeer
+  - RequestItemSpawnRPC
+  - RequestAttachReindeerRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
